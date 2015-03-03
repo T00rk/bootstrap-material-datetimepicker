@@ -13,7 +13,7 @@ momentjs [http://momentjs.com/](http://momentjs.com/)
 
 ### Live Example
 
-	Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
+Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
 
 ### Usage
 
