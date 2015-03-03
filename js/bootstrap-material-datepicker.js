@@ -1,8 +1,7 @@
-(function($, globalMoment)
+(function($, moment)
 {
 	var pluginName = "bootstrapMaterialDatePicker";
   	var pluginDataName = "plugin_" + pluginName;
-  	var moment = new globalMoment();
 
 	function Plugin(element, options)
 	{
@@ -12,7 +11,7 @@
 		this.params = { date : true, time : false, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 1, linghTimeFormat : false };
 		this.params = $.fn.extend(this.params, options);
 
-		moment.locale(this.params.lang);
+		//moment.locale(this.params.lang);
 
 		this.init();
 	}
@@ -74,11 +73,11 @@
 				{
 					if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
 					{
-						this.params.currentDate = moment(this.params.currentDate, this.params.format);
+						this.params.currentDate = moment(this.params.currentDate, this.params.format).locale(this.params.lang);
 					}
 					else
 					{
-						this.params.currentDate = moment(this.params.currentDate);
+						this.params.currentDate = moment(this.params.currentDate).locale(this.params.lang);
 					}
 				}
 				else
@@ -86,7 +85,7 @@
 					if(typeof(this.params.currentDate.isValid) === 'undefined' || typeof(this.params.currentDate.isValid) !== 'function')
 					{
 						var x = this.params.currentDate.getTime();
-						this.params.currentDate = moment(x, "x");
+						this.params.currentDate = moment(x, "x").locale(this.params.lang);
 					}
 				}
 				this.$element.val(this.params.currentDate.format(this.params.format));
@@ -98,11 +97,11 @@
 				{
 					if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
 					{
-						this.params.minDate = moment(this.params.minDate, this.params.format);
+						this.params.minDate = moment(this.params.minDate, this.params.format).locale(this.params.lang);
 					}
 					else
 					{
-						this.params.minDate = moment(this.params.minDate);
+						this.params.minDate = moment(this.params.minDate).locale(this.params.lang);
 					}
 				}
 				else
@@ -110,7 +109,7 @@
 					if(typeof(this.params.minDate.isValid) === 'undefined' || typeof(this.params.minDate.isValid) !== 'function')
 					{
 						var x = this.params.minDate.getTime();
-						this.params.minDate = moment(x, "x");
+						this.params.minDate = moment(x, "x").locale(this.params.lang);
 					}
 				}
 			}
@@ -121,11 +120,11 @@
 				{
 					if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
 					{
-						this.params.maxDate = moment(this.params.maxDate, this.params.format);
+						this.params.maxDate = moment(this.params.maxDate, this.params.format).locale(this.params.lang);
 					}
 					else
 					{
-						this.params.maxDate = moment(this.params.maxDate);
+						this.params.maxDate = moment(this.params.maxDate).locale(this.params.lang);
 					}
 				}
 				else
@@ -133,7 +132,7 @@
 					if(typeof(this.params.maxDate.isValid) === 'undefined' || typeof(this.params.maxDate.isValid) !== 'function')
 					{
 						var x = this.params.maxDate.getTime();
-						this.params.maxDate = moment(x, "x");
+						this.params.maxDate = moment(x, "x").locale(this.params.lang);
 					}					
 				}
 			}
@@ -211,23 +210,23 @@
 			{
 				if(this.$element.val().length > 0)
 				{
-					_date = moment(this.$element.val(), this.params.format);
+					_date = moment(this.$element.val(), this.params.format).locale(this.params.lang);
 				}
 				else
 				{
 					if (typeof(this.params.currentDate) !== 'undefined' && this.params.currentDate !== null)
 					{
-						_date = moment(this.params.currentDate, this.params.format);
+						_date = moment(this.params.currentDate, this.params.format).locale(this.params.lang);
 					}
 					else
 					{
-						_date = moment();
+						_date = moment().locale(this.params.lang);
 					}
 				}
 
 				if(!_date.isValid())
 				{
-					_date = moment();
+					_date = moment().locale(this.params.lang);
 				}
 			}
 
@@ -246,7 +245,7 @@
 				_template += '<table class="table dtp-picker-days"><thead>';
 				for(var i = 0; i < _calendar.week.length; i++)
 				{
-					_template += '<th>' + moment(parseInt(_calendar.week[i]), "d").format("dd").substring(0, 1) + '</th>';
+					_template += '<th>' + moment(parseInt(_calendar.week[i]), "d").locale(this.params.lang).format("dd").substring(0, 1) + '</th>';
 				}
 				_template += '</thead>';
 				_template += '<tbody><tr>';
@@ -254,23 +253,23 @@
 				{
 					if(i % 7 == 0)
 						_template += '</tr><tr>';
-					_template += '<td data-date="' + moment(_calendar.days[i]).format("X") + '">';
+					_template += '<td data-date="' + moment(_calendar.days[i]).locale(this.params.lang).format("X") + '">';
 					if(_calendar.days[i] != 0)
 					{
-						if((typeof(this.params.minDate) !== 'undefined' && this.params.minDate !== null && moment(_calendar.days[i]).isBefore(moment(this.params.minDate))) || 
-						   (typeof(this.params.maxDate) !== 'undefined' && this.params.maxDate !== null) && moment(_calendar.days[i]).isAfter(moment(this.params.maxDate)))
+						if((typeof(this.params.minDate) !== 'undefined' && this.params.minDate !== null && moment(_calendar.days[i]).locale(this.params.lang).isBefore(moment(this.params.minDate).locale(this.params.lang))) || 
+						   (typeof(this.params.maxDate) !== 'undefined' && this.params.maxDate !== null) && moment(_calendar.days[i]).locale(this.params.lang).isAfter(moment(this.params.maxDate).locale(this.params.lang)))
 						{
-							_template += '<span class="dtp-select-day">' + moment(_calendar.days[i]).format("DD") + '</span>';
+							_template += '<span class="dtp-select-day">' + moment(_calendar.days[i]).locale(this.params.lang).format("DD") + '</span>';
 						}
 						else
 						{
-							if(moment(_calendar.days[i]).format("DD") === moment(_date).format("DD"))
+							if(moment(_calendar.days[i]).locale(this.params.lang).format("DD") === moment(_date).locale(this.params.lang).format("DD"))
 							{
-								_template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(_calendar.days[i]).format("DD") + '</a>';
+								_template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(_calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
 							}
 							else
 							{
-								_template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(_calendar.days[i]).format("DD") + '</a>';
+								_template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(_calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
 							}
 						}						
 
@@ -299,11 +298,11 @@
 			var el = this.$dtpElement.find('a.dtp-select-day.selected');
 			if(el && el.length > 0)
 			{
-				_date = moment(el.parent().data('date'), 'X');
+				_date = moment(el.parent().data('date'), 'X').locale(this.params.lang);
 			}
 			else
 			{
-				_date = moment()
+				_date = moment().locale(this.params.lang);
 			}
 
 			return _date;
@@ -312,7 +311,7 @@
 		{
 			if(date)
 			{
-				var _date = moment(date, "X");
+				var _date = moment(date, "X").locale(this.params.lang);
 
 				this.$dtpElement.find('.dtp-actual-day').html(_date.format('dddd'));
 				this.$dtpElement.find('.dtp-actual-month').html(_date.format('MMM').toUpperCase());
@@ -328,8 +327,8 @@
 
 			if(date !== null)
 			{
-				var startOfMonth = moment(date).startOf('month');
-				var endOfMonth = moment(date).endOf('month');
+				var startOfMonth = moment(date).locale(this.params.lang).startOf('month');
+				var endOfMonth = moment(date).locale(this.params.lang).endOf('month');
 
 				var iNumDay = startOfMonth.format('d');
 
@@ -349,7 +348,7 @@
 							}
 						}
 					}
-					_calendar.days.push(moment(startOfMonth).date(i));				
+					_calendar.days.push(moment(startOfMonth).locale(this.params.lang).date(i));				
 				}
 			}
 
@@ -359,8 +358,8 @@
 		{
 			if(date && date.isValid())
 			{
-				var startOfMonth = moment(date).startOf('month');
-				var endOfMonth = moment(date).endOf('month');
+				var startOfMonth = moment(date).locale(this.params.lang).startOf('month');
+				var endOfMonth = moment(date).locale(this.params.lang).endOf('month');
 
 				if(typeof(this.params.minDate) !== 'undefined' && this.params.minDate !== null && moment(this.params.minDate).isAfter(startOfMonth))
 				{
@@ -442,7 +441,7 @@
 			var date = this.constructDateFromHtml();
 			if(date.isValid())
 			{
-				this.currentDate = moment(date).subtract(1, 'months');
+				this.currentDate = moment(date).locale(this.params.lang).subtract(1, 'months');
 				this.initDate(this.currentDate);
 
 				this.toggleButtons(this.currentDate);
@@ -453,7 +452,7 @@
 			var date = this.constructDateFromHtml();
 			if(date.isValid())
 			{
-				this.currentDate = moment(date).add(1, 'months');
+				this.currentDate = moment(date).locale(this.params.lang).add(1, 'months');
 				this.initDate(this.currentDate);
 
 				this.toggleButtons(this.currentDate);
