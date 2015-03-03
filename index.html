@@ -11,18 +11,34 @@
     <script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
     <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap-material-datepicker.js"></script>
-    
+    <style>
+    #input h2 {
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    #input .inputs {
+      width: 80%;
+    }
+    #input .form-control-wrapper {
+      margin: 60px 0;
+    }
+  </style>
   </head>
   <body>
     <div class="container well">
       <div class="row">
         <div class="col-md-12">
-          <input type="text" id="beg-date" class="form-control floating-label" placeholder="Begin Date">
+          <div class="form-control-wrapper">
+            <input type="text" id="beg-date" class="form-control floating-label" placeholder="Begin Date">
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <input type="text" id="end-date" class="form-control floating-label" placeholder="End Date">
+          <div class="form-control-wrapper">
+            <input type="text" id="end-date" class="form-control floating-label" placeholder="End Date">
+          </div>
         </div>
       </div>
     </div>
