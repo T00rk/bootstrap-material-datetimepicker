@@ -38,9 +38,14 @@ momentjs [http://momentjs.com/](http://momentjs.com/)
 
 ### Methods
 
+        $('input').bootstrapMaterialDatePicker('setDate', moment());
+
 **setDate(String|Date|Moment)** : Set the initial date
 
 **setMinDate(String|Date|Moment)** : Set minimum selectable date
 
 **setMaxDate(String|Date|Moment)** : Set maximum selectable date
+
+**destroy()** : Destroy the datepicker. (for single page apps)
+
 	
