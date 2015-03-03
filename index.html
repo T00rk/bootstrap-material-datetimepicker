@@ -1,7 +1,8 @@
 <html>
   <head>
     <title>Bootstrap-Material DatePicker</title>
-    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/material.min.css" />
     <link rel="stylesheet" href="./css/bootstrap-material-datepicker.css" />
@@ -12,49 +13,122 @@
     <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap-material-datepicker.js"></script>
     <style>
-    #input h2 {
-      padding: 14px;
-      font-size: 16px;
-      font-weight: 400;
-    }
-    #input .inputs {
-      width: 80%;
-    }
-    #input .form-control-wrapper {
-      margin: 60px 0;
-    }
-  </style>
+      body { padding: 70px; }
+      h2 {
+        padding: 0 20px 10px 20px;
+        font-size: 20px;
+        font-weight: 400;
+      }
+      .form-control-wrapper {
+        margin: 10px 20px;
+      }
+      code { padding: 10px; background: #eee!important; display: block; color: #000; }
+      code > p { font-weight: bold; color: #000; font-size: 1.5em;}
+    </style>
   </head>
   <body>
     <div class="container well">
-      <h2>Initial</h2>
       <div class="row">
-        <div class="col-md-12">
-          <div class="form-control-wrapper">
-            <input type="text" id="beg-date" class="form-control floating-label" placeholder="Begin Date">
-          </div>
+        <div class="col-md-6">
+          <h1>Bootstrap Material DatePicker</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container well">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Initial</h2>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="form-control-wrapper">
-            <input type="text" id="end-date" class="form-control floating-label" placeholder="End Date">
+            <input type="text" id="date" class="form-control floating-label" placeholder="Date">
           </div>
         </div>
-      </div>
-      <h2>Custom Format</h2>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-control-wrapper">
-            <input type="text" id="beg-date-format" class="form-control floating-label" placeholder="Begin Date">
-          </div>
+        <div class="col-md-6">
+          <code>
+            <p>Code</p>
+            $('#date').bootstrapMaterialDatePicker({ weekStart : 0 });
+          </code>
         </div>
       </div>
-      <h2>Locales FR</h2>
+    </div>
+    <div class="container well">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+          <h2>Custom Format</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
           <div class="form-control-wrapper">
-            <input type="text" id="beg-date-fr" class="form-control floating-label" placeholder="Begin Date">
+            <input type="text" id="date-format" class="form-control floating-label" placeholder="Begin Date">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <code>
+            <p>Code</p>
+            $('#date-format').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY' });
+          </code>
+        </div>
+      </div>
+    </div>
+    <div class="container well">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>French Locales</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-control-wrapper">
+            <input type="text" id="date-fr" class="form-control floating-label" placeholder="Date de début">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <code>
+            <p>Code</p>
+            $('#date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY', lang : 'fr' });
+          </code>
+        </div>
+      </div>
+    </div>
+    <div class="container well">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Events</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-control-wrapper">
+                <input type="text" id="date-start" class="form-control floating-label" placeholder="Start Date">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-control-wrapper">
+                <input type="text" id="date-end" class="form-control floating-label" placeholder="End Date">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <code>
+                <p>Code</p>
+                $('#date-end').bootstrapMaterialDatePicker({ weekStart : 0 });<br />
+                $('#date-start').bootstrapMaterialDatePicker({ weekStart : 0 }).on('change', function(e, date)
+                {<br />
+                  $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);<br />
+                });
+              </code>
+            </div>
           </div>
         </div>
       </div>
@@ -62,14 +136,17 @@
     <script type="text/javascript">
       $(document).ready(function()
       {
-        $('#end-date').bootstrapMaterialDatePicker({ weekStart: 0 });
-        $('#beg-date').bootstrapMaterialDatePicker().on('change', function(e, date)
-        {
-          $('#end-date').bootstrapMaterialDatePicker('setMinDate', date);
-        });
-        $('#beg-date-format').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY' });
-        $('#beg-date-fr').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY', lang: 'fr', weekStart: 1 });
+        $('#date').bootstrapMaterialDatePicker({ weekStart : 0 });
+
+        $('#date-format').bootstrapMaterialDatePicker({ format: 'dddd DD MMMM YYYY' });
+        $('#date-fr').bootstrapMaterialDatePicker({ format: 'dddd DD MMMM YYYY', lang: 'fr', weekStart: 1 });
         
+        $('#date-end').bootstrapMaterialDatePicker({ weekStart : 0 });
+        $('#date-start').bootstrapMaterialDatePicker({ weekStart : 0 }).on('change', function(e, date)
+        {
+          $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+        });
+
         $.material.init()
       });
     </script>

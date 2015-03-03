@@ -11,8 +11,6 @@
 		this.params = { date : true, time : false, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 1, linghTimeFormat : false };
 		this.params = $.fn.extend(this.params, options);
 
-		//moment.locale(this.params.lang);
-
 		this.init();
 	}
 
