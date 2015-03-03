@@ -1,0 +1,23 @@
+/* DTP */
+.dtp .modal-dialog { width: 400px; }
+.dtp .modal-body { padding: 0!important; }
+
+.dtp header.dtp-header { background: #689F38; color: #fff; text-align: center; padding: 10px; }
+
+.dtp div.dtp-date { background: #8BC34A; text-align: center; color: #fff; padding: 10px; }
+.dtp div.dtp-date > div { padding: 0; margin: 0; }
+.dtp div.dtp-actual-month { font-size: 2.2em; }
+.dtp div.dtp-actual-num { font-size: 5em; line-height: 0.9; }
+.dtp div.dtp-actual-year { font-size: 2.2em; color: #DCEDC8; }
+.dtp div.dtp-picker { padding: 10px; text-align: center; }
+.dtp div.dtp-picker-month { font-weight: 500; text-align: center; font-size: 1.2em; padding-bottom: 10px; }
+.dtp table.dtp-picker-days { margin: 0; }
+.dtp table.dtp-picker-days, .dtp table.dtp-picker-days tr, .dtp table.dtp-picker-days tr > td { border: none; }
+.dtp table.dtp-picker-days tr > td { font-weight: 500; text-align: center; }
+.dtp table.dtp-picker-days tr > td > span.dtp-select-day { color: #BDBDBD!important; }
+.dtp table.dtp-picker-days tr > td > a { color: #212121; text-decoration: none; padding: 4px 5px; border-radius: 20px!important; }
+.dtp table.dtp-picker-days tr > td > a.selected { background: #8BC34A; color: #fff; }
+.dtp table.dtp-picker-days tr > th { color: #757575; text-align: center; font-weight: 700; }
+.dtp .dtp-buttons { padding: 0 10px 10px 10px; }
+.dtp .col-sm-2 { text-align: center; font-size: 1.5em; }
+.dtp .col-sm-2 > a { color: #212121; text-decoration: none; }
