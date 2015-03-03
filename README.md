@@ -21,34 +21,34 @@ Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
 	
 ### Parameters
 
-**format** : String  => MomentJS Format
-
-**minDate** : (String|Date|Moment) => Minimum selectable date
-
-**maxDate** : (String|Date|Moment) => Maximum selectable date
-
-**currentDate** : (String|Date|Moment) => Initial Date
+| Name        		| Type          			| Description             |
+| ----------------- | ------------------------- | ----------------------- |
+| **format**		| String					| MomentJS Format 		  |
+| **minDate**		| (String|Date|Moment)      | Minimum selectable date |
+| **maxDate**		| (String|Date|Moment)		| Maximum selectable date |
+| **currentDate**	| (String|Date|Moment)		| Initial Date 			  |
 
 
 ### Events
 
-**beforeChange** : OK button is clicked
-
-**change** : OK button is clicked and input value is changed
-
-**dateSelected** : New date is selected
+| Name        		| Parameters          		| Description             |
+| ----------------- | ------------------------- | ----------------------- |
+| **beforeChange**	| event, date				| OK button is clicked	  |
+| **change**		| event, date      			| OK button is clicked and input value is changed |
+| **dateSelected**	| event, date				| New date is selected |
 
 
 ### Methods
 
         $('input').bootstrapMaterialDatePicker('setDate', moment());
 
-**setDate(String|Date|Moment)** : Set the initial date
+| Name        		| Parameter       			| Description             	  |
+| ----------------- | ------------------------- | --------------------------- |
+| **setDate**		| (String|Date|Moment)		| Set initial date			  |
+| **setMinDate**	| (String|Date|Moment)      | Set minimum selectable date |
+| **setMaxDate**	| (String|Date|Moment)		| Set maximum selectable date |
+| **destroy**		| /							| Destroy the datepicker	  |
 
-**setMinDate(String|Date|Moment)** : Set minimum selectable date
 
-**setMaxDate(String|Date|Moment)** : Set maximum selectable date
-
-**destroy()** : Destroy the datepicker. (for single page apps)
 
 	
