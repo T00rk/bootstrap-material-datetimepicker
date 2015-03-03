@@ -26,16 +26,13 @@
 			}
 			else
 			{
-				if(typeof(p) !== 'undefined' && p !== null)
+				if(typeof($.data(this, pluginDataName)[options]) === 'function')
 				{
-					if(typeof($.data(this, pluginDataName)[options]) === 'function')
-					{
-						$.data(this, pluginDataName)[options](p);
-					}
-					if(options === 'destroy')
-					{
-						delete $.data(this, pluginDataName);
-					}
+					$.data(this, pluginDataName)[options](p);
+				}
+				if(options === 'destroy')
+				{
+					delete $.data(this, pluginDataName);
 				}
 			}
 		});
