@@ -154,11 +154,11 @@
 							                    '</div>' +
 							                    '<div class="dtp-picker">' +
 							                        '<div class="row">' +
-							                        	'<div class="col-sm-2">' +
+							                        	'<div class="col-sm-2 col-xs-2">' +
 							                        		'<a href="javascript:void(0);" class="dtp-select-date-before"><span class="mdi-navigation-chevron-left"></span></a>' +
 							                        	'</div>' +
-							                        	'<div class="col-sm-8 dtp-picker-month">Mars 2015</div>' +
-								                        '<div class="col-sm-2">' +
+							                        	'<div class="col-sm-8 col-xs-8 dtp-picker-month">Mars 2015</div>' +
+								                        '<div class="col-sm-2 col-xs-2">' +
 								                        	'<a href="javascript:void(0);" class="dtp-select-date-after"><span class="mdi-navigation-chevron-right"></span></a>' +
 								                        '</div>' +
 								                    '</div>' +
