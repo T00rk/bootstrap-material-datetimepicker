@@ -1,7 +1,8 @@
-(function($, moment)
+(function($, globalMoment)
 {
 	var pluginName = "bootstrapMaterialDatePicker";
   	var pluginDataName = "plugin_" + pluginName;
+  	var moment = globalMoment();
 
 	function Plugin(element, options)
 	{
