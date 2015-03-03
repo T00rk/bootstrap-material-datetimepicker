@@ -24,9 +24,9 @@ Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
 | Name        		| Type          			| Description             |
 | ----------------- | ------------------------- | ----------------------- |
 | **format**		| String					| MomentJS Format 		  |
-| **minDate**		| (String|Date|Moment)      | Minimum selectable date |
-| **maxDate**		| (String|Date|Moment)		| Maximum selectable date |
-| **currentDate**	| (String|Date|Moment)		| Initial Date 			  |
+| **minDate**		| (String\|Date\|Moment)      | Minimum selectable date |
+| **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date |
+| **currentDate**	| (String\|Date\|Moment)		| Initial Date 			  |
 
 
 ### Events
