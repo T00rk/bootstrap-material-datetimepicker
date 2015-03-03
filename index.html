@@ -27,6 +27,7 @@
   </head>
   <body>
     <div class="container well">
+      <h2>Initial</h2>
       <div class="row">
         <div class="col-md-12">
           <div class="form-control-wrapper">
@@ -41,15 +42,33 @@
           </div>
         </div>
       </div>
+      <h2>Custom Format</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-control-wrapper">
+            <input type="text" id="beg-date-format" class="form-control floating-label" placeholder="Begin Date">
+          </div>
+        </div>
+      </div>
+      <h2>Locales FR</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-control-wrapper">
+            <input type="text" id="beg-date-fr" class="form-control floating-label" placeholder="Begin Date">
+          </div>
+        </div>
+      </div>
     </div>
     <script type="text/javascript">
       $(document).ready(function()
       {
-        $('#end-date').bootstrapMaterialDatePicker();
+        $('#end-date').bootstrapMaterialDatePicker({ weekStart: 0 });
         $('#beg-date').bootstrapMaterialDatePicker().on('change', function(e, date)
         {
           $('#end-date').bootstrapMaterialDatePicker('setMinDate', date);
         });
+        $('#end-date-format').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY' });
+        $('#end-date-fr').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY', lang: 'fr', weekStart: 1 });
         
         $.material.init()
       });
