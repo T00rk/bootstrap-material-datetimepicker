@@ -14,7 +14,30 @@
     
   </head>
   <body>
-    <div class="container well"></div>
+    <div class="container well">
+      <div class="row">
+        <div class="col-md-12">
+          <input type="text" id="beg-date" class="form-control floating-label" placeholder="Begin Date">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <input type="text" id="end-date" class="form-control floating-label" placeholder="End Date">
+        </div>
+      </div>
+    </div>
+    
+    $(document).ready(function()
+    {
+      $('#end-date').bootstrapMaterialDatePicker();
+      $('#beg-date').bootstrapMaterialDatePicker().on('change', function(e, date)
+      {
+        $('#end-date').bootstrapMaterialDatePicker('setMinDate', date);
+      });
+      
+      $.material.init()
+    });
+    
   </body>
   
 </html>
