@@ -19,5 +19,8 @@
 .dtp table.dtp-picker-days tr > td > a.selected { background: #8BC34A; color: #fff; }
 .dtp table.dtp-picker-days tr > th { color: #757575; text-align: center; font-weight: 700; }
 .dtp .dtp-buttons { padding: 0 10px 10px 10px; }
-.dtp .col-sm-2 { text-align: center; font-size: 1.5em; }
-.dtp .col-sm-2 > a { color: #212121; text-decoration: none; }
+
+span[class^=mdi-], [class*=" mdi-"] { position: relative; top: 7px; }
+
+.dtp .col-sm-2 { text-align: center; font-size: 2.2em; }
+.dtp .col-sm-2 > a { color: #689F38; text-decoration: none; }

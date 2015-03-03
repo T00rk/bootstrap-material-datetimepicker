@@ -131,7 +131,7 @@
 					{
 						var x = this.params.maxDate.getTime();
 						this.params.maxDate = moment(x, "x").locale(this.params.lang);
-					}					
+					}
 				}
 			}
 		},
@@ -146,20 +146,28 @@
 							                        '<div class="dtp-actual-day">Lundi</div>' +
 							                    '</header>' +
 							                    '<div class="dtp-date">' +
-							                        '<div class="dtp-actual-month">MAR</div>' +
-							                        '<div class="dtp-actual-num">13</div>' +
-							                        '<div class="dtp-actual-year">2014</div>' +
-							                    '</div>' +
-							                    '<div class="dtp-picker">' +
-							                        '<div class="row">' +
+							                    	'<div class="row">' +
+							                    		'<div class="col-sm-2 col-xs-2">' +
+							                    			'<a href="javascript:void(0);" class="dtp-select-month-before"><span class="mdi-navigation-chevron-left"></span></a>' +
+							                        	'</div>' +							                        	
+							                        	'<div class="col-sm-8 col-xs-8 dtp-actual-month">MAR</div>' +
 							                        	'<div class="col-sm-2 col-xs-2">' +
-							                        		'<a href="javascript:void(0);" class="dtp-select-date-before"><span class="mdi-navigation-chevron-left"></span></a>' +
-							                        	'</div>' +
-							                        	'<div class="col-sm-8 col-xs-8 dtp-picker-month">Mars 2015</div>' +
-								                        '<div class="col-sm-2 col-xs-2">' +
-								                        	'<a href="javascript:void(0);" class="dtp-select-date-after"><span class="mdi-navigation-chevron-right"></span></a>' +
+								                        	'<a href="javascript:void(0);" class="dtp-select-month-after"><span class="mdi-navigation-chevron-right"></span></a>' +
 								                        '</div>' +
 								                    '</div>' +
+							                        '<div class="dtp-actual-num">13</div>' +
+							                        '<div class="row">' +
+							                    		'<div class="col-sm-2 col-xs-2">' +
+							                    			'<a href="javascript:void(0);" class="dtp-select-year-before"><span class="mdi-navigation-chevron-left"></span></a>' +
+							                        	'</div>' +							                        	
+							                        	'<div class="col-sm-8 col-xs-8 dtp-actual-year">2014</div>' +
+							                        	'<div class="col-sm-2 col-xs-2">' +
+								                        	'<a href="javascript:void(0);" class="dtp-select-year-after"><span class="mdi-navigation-chevron-right"></span></a>' +
+								                        '</div>' +
+								                    '</div>' +
+							                    '</div>' +
+							                    '<div class="dtp-picker">' +
+							                        '<div class="dtp-picker-month">Mars 2015</div>' +
 							                        '<div class="dtp-picker-calendar"></div>' +
 							                    '</div>' +
 							                    '<div class="dtp-buttons">' +
@@ -191,13 +199,21 @@
 			{
 				this.onOkClick();
 			}.bind(this));
-			this._attachEvent(this.$dtpElement.find('a.dtp-select-date-before'), 'click', function()
+			this._attachEvent(this.$dtpElement.find('a.dtp-select-month-before'), 'click', function()
 			{
-				this.onBeforeClick();
+				this.onMonthBeforeClick();
 			}.bind(this));
-			this._attachEvent(this.$dtpElement.find('a.dtp-select-date-after'), 'click', function()
+			this._attachEvent(this.$dtpElement.find('a.dtp-select-month-after'), 'click', function()
 			{
-				this.onAfterClick();
+				this.onMonthAfterClick();
+			}.bind(this));
+			this._attachEvent(this.$dtpElement.find('a.dtp-select-year-before'), 'click', function()
+			{
+				this.onYearBeforeClick();
+			}.bind(this));
+			this._attachEvent(this.$dtpElement.find('a.dtp-select-year-after'), 'click', function()
+			{
+				this.onYearAfterClick();
 			}.bind(this));
 		},
 		initDate: function(d)
@@ -228,11 +244,7 @@
 				}
 			}
 
-			this.$dtpElement.find('.dtp-actual-day').html(_date.format('dddd'));
-			this.$dtpElement.find('.dtp-actual-month').html(_date.format('MMM').toUpperCase());
-			this.$dtpElement.find('.dtp-actual-num').html(_date.format('DD'));
-			this.$dtpElement.find('.dtp-actual-year').html(_date.format('YYYY'));
-
+			this.showDate(_date);
 			this.$dtpElement.find('.dtp-picker-month').html(_date.format('MMMM YYYY'));
 
 			var _calendar = this.generateCalendar(_date);
@@ -287,6 +299,8 @@
 				{
 					this.onSelect(e);
 				}.bind(this));
+
+				this.toggleButtons(_date);
 			}
 		},
 		constructDateFromHtml: function()
@@ -310,13 +324,18 @@
 			if(date)
 			{
 				var _date = moment(date, "X").locale(this.params.lang);
-
-				this.$dtpElement.find('.dtp-actual-day').html(_date.format('dddd'));
-				this.$dtpElement.find('.dtp-actual-month').html(_date.format('MMM').toUpperCase());
-				this.$dtpElement.find('.dtp-actual-num').html(_date.format('DD'));
-				this.$dtpElement.find('.dtp-actual-year').html(_date.format('YYYY'));
-
+				this.showDate(_date);
 				this.$element.trigger('dateSelected', _date);
+			}
+		},
+		showDate: function(date)
+		{
+			if(date)
+			{
+				this.$dtpElement.find('.dtp-actual-day').html(date.format('dddd'));
+				this.$dtpElement.find('.dtp-actual-month').html(date.format('MMM').toUpperCase());
+				this.$dtpElement.find('.dtp-actual-num').html(date.format('DD'));
+				this.$dtpElement.find('.dtp-actual-year').html(date.format('YYYY'));
 			}
 		},
 		generateCalendar: function(date)
@@ -361,20 +380,24 @@
 
 				if(typeof(this.params.minDate) !== 'undefined' && this.params.minDate !== null && moment(this.params.minDate).isAfter(startOfMonth))
 				{
-					this.$dtpElement.find('a.dtp-select-date-before').addClass('hidden');
+					this.$dtpElement.find('a.dtp-select-month-before').addClass('hidden');
+					this.$dtpElement.find('a.dtp-select-year-before').addClass('hidden');
 				}
 				else
 				{
-					this.$dtpElement.find('a.dtp-select-date-before').removeClass('hidden');
+					this.$dtpElement.find('a.dtp-select-month-before').removeClass('hidden');
+					this.$dtpElement.find('a.dtp-select-year-before').removeClass('hidden');
 				}
 
 				if(typeof(this.params.maxDate) !== 'undefined' && this.params.maxDate !== null && moment(this.params.maxDate).isBefore(endOfMonth))
 				{
-					this.$dtpElement.find('a.dtp-select-date-after').addClass('hidden');
+					this.$dtpElement.find('a.dtp-select-month-after').addClass('hidden');
+					this.$dtpElement.find('a.dtp-select-year-after').addClass('hidden');
 				}
 				else
 				{
-					this.$dtpElement.find('a.dtp-select-date-after').removeClass('hidden');
+					this.$dtpElement.find('a.dtp-select-month-after').removeClass('hidden');
+					this.$dtpElement.find('a.dtp-select-year-after').removeClass('hidden');
 				}
 			}
 		},
@@ -434,26 +457,40 @@
 		{
 			$('#' + this.name).modal('hide');
 		},
-		onBeforeClick: function()
+		onMonthBeforeClick: function()
 		{
 			var date = this.constructDateFromHtml();
 			if(date.isValid())
 			{
 				this.currentDate = moment(date).locale(this.params.lang).subtract(1, 'months');
 				this.initDate(this.currentDate);
-
-				this.toggleButtons(this.currentDate);
 			}
 		},
-		onAfterClick: function()
+		onMonthAfterClick: function()
 		{
 			var date = this.constructDateFromHtml();
 			if(date.isValid())
 			{
 				this.currentDate = moment(date).locale(this.params.lang).add(1, 'months');
 				this.initDate(this.currentDate);
-
-				this.toggleButtons(this.currentDate);
+			}
+		},
+		onYearBeforeClick: function()
+		{
+			var date = this.constructDateFromHtml();
+			if(date.isValid())
+			{
+				this.currentDate = moment(date).locale(this.params.lang).subtract(1, 'years');
+				this.initDate(this.currentDate);
+			}
+		},
+		onYearAfterClick: function()
+		{
+			var date = this.constructDateFromHtml();
+			if(date.isValid())
+			{
+				this.currentDate = moment(date).locale(this.params.lang).add(1, 'years');
+				this.initDate(this.currentDate);
 			}
 		},
 		onSelect: function(e)
