@@ -26,18 +26,18 @@
         </div>
       </div>
     </div>
-    
-    $(document).ready(function()
-    {
-      $('#end-date').bootstrapMaterialDatePicker();
-      $('#beg-date').bootstrapMaterialDatePicker().on('change', function(e, date)
+    <script type="text/javascript">
+      $(document).ready(function()
       {
-        $('#end-date').bootstrapMaterialDatePicker('setMinDate', date);
+        $('#end-date').bootstrapMaterialDatePicker();
+        $('#beg-date').bootstrapMaterialDatePicker().on('change', function(e, date)
+        {
+          $('#end-date').bootstrapMaterialDatePicker('setMinDate', date);
+        });
+        
+        $.material.init()
       });
-      
-      $.material.init()
-    });
-    
+    </script>
   </body>
   
 </html>
