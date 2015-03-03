@@ -44,10 +44,10 @@ Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
 
 | Name        		| Parameter       			| Description             	  |
 | ----------------- | ------------------------- | --------------------------- |
-| **setDate**		| (String|Date|Moment)		| Set initial date			  |
-| **setMinDate**	| (String|Date|Moment)      | Set minimum selectable date |
-| **setMaxDate**	| (String|Date|Moment)		| Set maximum selectable date |
-| **destroy**		| /							| Destroy the datepicker	  |
+| **setDate**		| (String\|Date\|Moment)		| Set initial date			  |
+| **setMinDate**	| (String\|Date\|Moment)      | Set minimum selectable date |
+| **setMaxDate**	| (String\|Date\|Moment)		| Set maximum selectable date |
+| **destroy**		| NULL							| Destroy the datepicker	  |
 
 
 
