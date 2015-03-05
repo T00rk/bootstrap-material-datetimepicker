@@ -17,7 +17,7 @@
 		<style>
 			body 
 			{
-				padding: 70px;
+				padding-top: 70px;
 				font-family: 'Roboto', sans-serif;
 			}
 			h2 
@@ -43,9 +43,13 @@
 				color: #000;
 				font-size: 1.5em;
 			}
+			@media(max-width: 300px)
+			{
+				.well { margin : 0}
+			}
 		</style>
 		<script>
-			(function(i, s, o, g, r, a, m) {
+			/*(function(i, s, o, g, r, a, m) {
 				i['GoogleAnalyticsObject'] = r;
 				i[r] = i[r] || function() {
 					(i[r].q = i[r].q || []).push(arguments)
@@ -58,7 +62,7 @@
 			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
 			ga('create', 'UA-60343429-1', 'auto');
-			ga('send', 'pageview');
+			ga('send', 'pageview');*/
 		</script>
 	</head>
 	<body>

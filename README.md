@@ -1,6 +1,10 @@
 # bootstrap-material-datepicker
 DateTimePicker for bootstrap-material
 
+### Updates
+
+    2015-03-04 - Added Time picker
+
 ### Prerequisites
 
 Bootstrap 3 [http://getbootstrap.com/](http://getbootstrap.com/)
@@ -50,8 +54,4 @@ Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
 | **setMaxDate**	| (String\|Date\|Moment)	| Set maximum selectable date	|
 | **destroy**		| NULL						| Destroy the datepicker		|
 
-
-**UPDATE**
-
-2015-03-04 - Added Time picker
 	
