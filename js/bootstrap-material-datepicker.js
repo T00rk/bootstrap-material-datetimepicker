@@ -805,7 +805,7 @@
 		},
 		_onMonthBeforeClick: function()
 		{
-			this.currentDate = moment(date).subtract(1, 'months');
+			this.currentDate.subtract(1, 'months');
 			this.initDate(this.currentDate);
 		},
 		_onMonthAfterClick: function()
