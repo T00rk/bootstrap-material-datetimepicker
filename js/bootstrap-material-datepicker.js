@@ -273,13 +273,6 @@
 			this.$dtpElement.find('.dtp-picker-datetime').addClass('hidden');
 
 			var _date = ((typeof(this.currentDate) !== 'undefined' && this.currentDate !== null) ? this.currentDate : null);
-			if(this.$element.val().length > 0)
-			{
-				_date = moment(this.$element.val(), this.params.format).locale(this.params.lang);
-			}
-
-			this.showDate(_date);
-
 			var _calendar = this.generateCalendar(this.currentDate);
 
 			if(typeof(_calendar.week) !== 'undefined' && typeof(_calendar.days) !== 'undefined')
