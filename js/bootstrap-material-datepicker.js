@@ -2,6 +2,8 @@
 {
 	var pluginName = "bootstrapMaterialDatePicker";
   	var pluginDataName = "plugin_" + pluginName;
+  	
+  	moment.locale('en');
 
 	function Plugin(element, options)
 	{
@@ -291,6 +293,8 @@
 
 				this.toggleButtons(_date);
 			}
+			
+			this.showDate(_date);
 		},
 		initHours: function()
 		{
