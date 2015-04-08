@@ -590,7 +590,7 @@
 		{
 			var _template = "";
 
-			_template += '<div class="dtp-picker-month">' + date.format('MMMM YYYY') + '</div>';
+			_template += '<div class="dtp-picker-month">' + date.locale(this.params.lang).format('MMMM YYYY') + '</div>';
 			_template += '<table class="table dtp-picker-days"><thead>';
 			for(var i = 0; i < calendar.week.length; i++)
 			{
