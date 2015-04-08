@@ -3,6 +3,7 @@ DateTimePicker for bootstrap-material
 
 ### Updates
 
+    2015-04-08 - Fixed problem on locale switch
     2015-03-04 - Added Time picker
 
 ### Prerequisites
