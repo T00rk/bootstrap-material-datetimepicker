@@ -527,10 +527,10 @@
 		{
 			if(date)
 			{
-				this.$dtpElement.find('.dtp-actual-day').html(date.format('dddd'));
-				this.$dtpElement.find('.dtp-actual-month').html(date.format('MMM').toUpperCase());
-				this.$dtpElement.find('.dtp-actual-num').html(date.format('DD'));
-				this.$dtpElement.find('.dtp-actual-year').html(date.format('YYYY'));
+				this.$dtpElement.find('.dtp-actual-day').html(date.locale(this.params.lang).format('dddd'));
+				this.$dtpElement.find('.dtp-actual-month').html(date.locale(this.params.lang).format('MMM').toUpperCase());
+				this.$dtpElement.find('.dtp-actual-num').html(date.locale(this.params.lang).format('DD'));
+				this.$dtpElement.find('.dtp-actual-year').html(date.locale(this.params.lang).format('YYYY'));
 			}
 		},
 		showTime: function(date)
