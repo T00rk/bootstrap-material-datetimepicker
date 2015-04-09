@@ -1,0 +1,167 @@
+/* DTP */
+
+.dtp {
+	.modal-dialog {
+		width: 400px;
+	}
+	.modal-body {
+		padding: 0 !important;
+	}
+
+	header.dtp-header {
+		background: #689F38;
+		color: #fff;
+		text-align: center;
+		padding: 10px;
+	}
+
+	div.dtp-date {
+		background: #8BC34A;
+		text-align: center;
+		color: #fff;
+		padding: 10px;
+
+		> div {
+			padding: 0;
+			margin: 0;
+		}
+	}
+	div.dtp-actual-month {
+		font-size: 2.2em;
+	}
+	div.dtp-actual-num {
+		font-size: 5em;
+		line-height: 0.9;
+	}
+	div.dtp-actual-year {
+		font-size: 2.2em;
+		color: #DCEDC8;
+	}
+	div.dtp-picker {
+		padding: 10px;
+		text-align: center;
+	}
+	div.dtp-picker-month, .dtp div.dtp-actual-time {
+		font-weight: 500;
+		text-align: center;
+		font-size: 1.2em;
+		padding-bottom: 10px;
+	}
+	table.dtp-picker-days {
+		margin: 0;
+	}
+	table.dtp-picker-days, .dtp table.dtp-picker-days tr, .dtp table.dtp-picker-days tr > td {
+		border: none;
+	}
+	table.dtp-picker-days tr > td {
+		font-weight: 500;
+		text-align: center;
+	}
+	table.dtp-picker-days tr > td > span.dtp-select-day {
+		color: #BDBDBD !important;
+	}
+	table.dtp-picker-days tr > td > a, .dtp .dtp-picker-time > a {
+		color: #212121;
+		text-decoration: none;
+		padding: 4px 5px;
+		border-radius: 50% !important;
+	}
+	table.dtp-picker-days tr > td > a.selected {
+		background: #8BC34A;
+		color: #fff;
+	}
+	table.dtp-picker-days tr > th {
+		color: #757575;
+		text-align: center;
+		font-weight: 700;
+	}
+	div.dtp-picker-clock {
+		margin: 0 20px;
+		border-radius: 50% !important;
+		background: #eee;
+	}
+	.dtp-picker-time > a {
+		display: block;
+		width: 29px;
+		height: 29px;
+	}
+	.dtp-buttons {
+		padding: 0 10px 10px 10px;
+	}
+
+	span[class^=mdi-], [class*=" mdi-"] {
+		position: relative;
+		top: 7px;
+	}
+
+	.dtp-picker-time > a.dtp-select-hour.selected {
+		background: #689F38;
+		color: #fff;
+	}
+
+	.dtp-picker-time > a.dtp-select-hour.disabled, .dtp .dtp-picker-time > a.dtp-select-minute.disabled {
+		color: #757575;
+	}
+	.dtp-picker-time > a.dtp-select-minute.selected {
+		background: #8BC34A;
+		color: #fff;
+	}
+
+	.col-sm-2 {
+		text-align: center;
+		font-size: 2.2em;
+	}
+	.col-sm-2 > a {
+		color: #689F38;
+		text-decoration: none;
+	}
+
+	.dtp-actual-meridien a.selected {
+		background: #689F38;
+		color: #fff;
+	}
+	a.dtp-meridien-am, .dtp a.dtp-meridien-pm {
+		color: #212121;
+		font-weight: 500;
+		padding: 12px 10px;
+		border-radius: 50% !important;
+		text-decoration: none;
+		background: #eee;
+	}
+
+	.dtp-picker-time {
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		font-size: 1.2em;
+		line-height: 20px;
+		border-radius: 50%;
+		cursor: pointer;
+		font-weight: 500;
+		text-align: center !important;
+	}
+	.dtp-hand, .dtp .dtp-hour-hand {
+		position: absolute;
+		width: 4px; /* default width of hands/ hour hand */
+		margin-left: -2px; /* Account for hand width to center hand horizonally */
+		background: #BDBDBD;
+		-moz-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+		-moz-transform-origin: bottom; /* Set transform origin to center bottom */
+		-ms-transform-origin: bottom;
+		-webkit-transform-origin: bottom;
+		transform-origin: bottom;
+		z-index: 1;
+	}
+
+	.dtp-minute-hand {
+		width: 2px;
+		margin-left: -1px;
+	}
+	.dtp-hand.on {
+		background: #8BC34A;
+	}
+
+}
