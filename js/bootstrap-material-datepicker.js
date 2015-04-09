@@ -16,7 +16,7 @@
 		);
 	} else {
 		// browser global
-		window.Masonry = factory(
+		factory(
 			$,
 			moment
 		);
