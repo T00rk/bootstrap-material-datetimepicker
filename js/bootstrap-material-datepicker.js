@@ -1,9 +1,35 @@
-(function($, moment)
-{
+( function( window, factory ) {
+	'use strict';
+	// universal module definition
+	if ( typeof define === 'function' && define.amd ) {
+		// AMD
+		define( [
+				'jquery',
+				'moment'
+			],
+			factory );
+	} else if ( typeof exports === 'object' ) {
+		// CommonJS
+		module.exports = factory(
+			require('jquery'),
+			require('moment')
+		);
+	} else {
+		// browser global
+		window.Masonry = factory(
+			$,
+			moment
+		);
+	}
+
+}( window, function factory( $, moment ) {
+
+	'use strict';
+
 	var pluginName = "bootstrapMaterialDatePicker";
-  	var pluginDataName = "plugin_" + pluginName;
-  	
-  	moment.locale('en');
+	var pluginDataName = "plugin_" + pluginName;
+
+	moment.locale('en');
 
 	function Plugin(element, options)
 	{
@@ -50,12 +76,12 @@
 		return this;
 	};
 
-	Plugin.prototype = 
+	Plugin.prototype =
 	{
 		init: function()
 		{
 			this.initDays();
-			this.initDates();	
+			this.initDates();
 
 			this.initTemplate();
 
@@ -171,61 +197,61 @@
 		initTemplate: function()
 		{
 			this.template = '<div class="modal dtp fade" id="' + this.name + '" tabindex="-1" role="dialog" aria-hidden="true">' +
-								'<div class="modal-dialog modal-no-radius">' +
-									'<div class="modal-content">' +
-										'<div class="modal-body">' +
-											'<div class="dtp-date-view">' +
-												'<header class="dtp-header">' +
-													'<div class="dtp-actual-day">Lundi</div>' +
-												'</header>' +
-												'<div class="dtp-date">' +
-													'<div class="row">' +
-														'<div class="col-sm-2 col-xs-2">' +
-															'<a href="javascript:void(0);" class="dtp-select-month-before"><span class="mdi-navigation-chevron-left"></span></a>' +
-														'</div>' +
-														'<div class="col-sm-8 col-xs-8 dtp-actual-month">MAR</div>' +
-														'<div class="col-sm-2 col-xs-2">' +
-															'<a href="javascript:void(0);" class="dtp-select-month-after"><span class="mdi-navigation-chevron-right"></span></a>' +
-														'</div>' +
-													'</div>' +
-													'<div class="dtp-actual-num">13</div>' +
-													'<div class="row">' +
-														'<div class="col-sm-2 col-xs-2">' +
-															'<a href="javascript:void(0);" class="dtp-select-year-before"><span class="mdi-navigation-chevron-left"></span></a>' +
-														'</div>' +
-														'<div class="col-sm-8 col-xs-8 dtp-actual-year">2014</div>' +
-														'<div class="col-sm-2 col-xs-2">' +
-															'<a href="javascript:void(0);" class="dtp-select-year-after"><span class="mdi-navigation-chevron-right"></span></a>' +
-														'</div>' +
-													'</div>' +
-												'</div>' +
-												'<div class="dtp-picker">' +													
-													'<div class="dtp-picker-calendar"></div>' +
-													'<div class="dtp-picker-datetime hidden">' +
-														'<div class="dtp-actual-time"></div>' +
-														'<div class="dtp-picker-clock"></div>' +
-														'<div class="dtp-actual-meridien">' +
-															'<div class="row">' +
-																'<div class="col-sm-6 col-xs-6">' +
-																	'<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
-																'</div>' +
-																'<div class="col-sm-6 col-xs-6">' +
-																	'<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
-																'</div>' +
-															'</div>' +
-														'</div>' +
-													'</div>' +
-												'</div>' +
-											'</div>' +
-											'<div class="dtp-buttons">' +
-												'<button class="dtp-btn-ok pull-right btn btn-flat">OK</button>' +
-												'<button class="dtp-btn-cancel pull-right btn btn-flat">ANNULER</button>' +
-												'<div class="clearfix"></div>' +
-											'</div>' +
-										'</div>' +
-									'</div>' +
-								'</div>' +
-							'</div>';
+			'<div class="modal-dialog modal-no-radius">' +
+			'<div class="modal-content">' +
+			'<div class="modal-body">' +
+			'<div class="dtp-date-view">' +
+			'<header class="dtp-header">' +
+			'<div class="dtp-actual-day">Lundi</div>' +
+			'</header>' +
+			'<div class="dtp-date">' +
+			'<div class="row">' +
+			'<div class="col-sm-2 col-xs-2">' +
+			'<a href="javascript:void(0);" class="dtp-select-month-before"><span class="mdi-navigation-chevron-left"></span></a>' +
+			'</div>' +
+			'<div class="col-sm-8 col-xs-8 dtp-actual-month">MAR</div>' +
+			'<div class="col-sm-2 col-xs-2">' +
+			'<a href="javascript:void(0);" class="dtp-select-month-after"><span class="mdi-navigation-chevron-right"></span></a>' +
+			'</div>' +
+			'</div>' +
+			'<div class="dtp-actual-num">13</div>' +
+			'<div class="row">' +
+			'<div class="col-sm-2 col-xs-2">' +
+			'<a href="javascript:void(0);" class="dtp-select-year-before"><span class="mdi-navigation-chevron-left"></span></a>' +
+			'</div>' +
+			'<div class="col-sm-8 col-xs-8 dtp-actual-year">2014</div>' +
+			'<div class="col-sm-2 col-xs-2">' +
+			'<a href="javascript:void(0);" class="dtp-select-year-after"><span class="mdi-navigation-chevron-right"></span></a>' +
+			'</div>' +
+			'</div>' +
+			'</div>' +
+			'<div class="dtp-picker">' +
+			'<div class="dtp-picker-calendar"></div>' +
+			'<div class="dtp-picker-datetime hidden">' +
+			'<div class="dtp-actual-time"></div>' +
+			'<div class="dtp-picker-clock"></div>' +
+			'<div class="dtp-actual-meridien">' +
+			'<div class="row">' +
+			'<div class="col-sm-6 col-xs-6">' +
+			'<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
+			'</div>' +
+			'<div class="col-sm-6 col-xs-6">' +
+			'<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
+			'</div>' +
+			'</div>' +
+			'</div>' +
+			'</div>' +
+			'</div>' +
+			'</div>' +
+			'<div class="dtp-buttons">' +
+			'<button class="dtp-btn-ok pull-right btn btn-flat">OK</button>' +
+			'<button class="dtp-btn-cancel pull-right btn btn-flat">ANNULER</button>' +
+			'<div class="clearfix"></div>' +
+			'</div>' +
+			'</div>' +
+			'</div>' +
+			'</div>' +
+			'</div>';
 
 			if($('body').find("#" + this.name).length <= 0)
 			{
@@ -293,7 +319,7 @@
 
 				this.toggleButtons(_date);
 			}
-			
+
 			this.showDate(_date);
 		},
 		initHours: function()
@@ -325,29 +351,29 @@
 			{
 				var x = j * Math.sin(Math.PI * 2 * (h / 12));
 				var y = j * Math.cos(Math.PI * 2 * (h / 12));
-				
+
 				var hour = $('<div>', { class : 'dtp-picker-time' })
 					.css
-					({
-						marginLeft: (x + r - 15) + 'px',
-        				marginTop: (-y + r / 1.5 + 45) + 'px'
-					});
+				({
+					marginLeft: (x + r - 15) + 'px',
+					marginTop: (-y + r / 1.5 + 45) + 'px'
+				});
 				var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', h).text((h == 0 ? 12 : h));
-					if(h == parseInt(this.currentDate.format('h')))
-						hourLink.addClass('selected');
+				if(h == parseInt(this.currentDate.format('h')))
+					hourLink.addClass('selected');
 
 				hour.append(hourLink);
-      			hours.push(hour);
-    		}
+				hours.push(hour);
+			}
 
-    		this.$dtpElement.find('a.dtp-select-hour').off('click');
+			this.$dtpElement.find('a.dtp-select-hour').off('click');
 
-    		this.$dtpElement.find('.dtp-picker-clock').html(hours);
-    		this.toggleTime(true);
+			this.$dtpElement.find('.dtp-picker-clock').html(hours);
+			this.toggleTime(true);
 
-    		this.$dtpElement.find('.dtp-picker-clock').css('height', (r * 2) + 'px');    		
+			this.$dtpElement.find('.dtp-picker-clock').css('height', (r * 2) + 'px');
 
-    		this.initHands(true);
+			this.initHands(true);
 		},
 		initMinutes: function()
 		{
@@ -378,30 +404,30 @@
 			{
 				var x = j * Math.sin(Math.PI * 2 * (m / 60));
 				var y = j * Math.cos(Math.PI * 2 * (m / 60));
-				
+
 				var minute = $('<div>', { class : 'dtp-picker-time' })
 					.css
-					({
-						marginLeft: (x + r - 15) + 'px',
-        				marginTop: (-y + r / 1.5 + 45) + 'px'
-					});
+				({
+					marginLeft: (x + r - 15) + 'px',
+					marginTop: (-y + r / 1.5 + 45) + 'px'
+				});
 
 				var minuteLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-minute' }).data('minute', m).text(((m.toString().length == 2) ? m : '0' + m));
-					if(m == 5 * Math.round(this.currentDate.minute() / 5))
-						minuteLink.addClass('selected');
+				if(m == 5 * Math.round(this.currentDate.minute() / 5))
+					minuteLink.addClass('selected');
 
 				minute.append(minuteLink);
-      			minutes.push(minute);
-    		}
+				minutes.push(minute);
+			}
 
 			this.$dtpElement.find('a.dtp-select-minute').off('click');
 
-    		this.$dtpElement.find('.dtp-picker-clock').html(minutes);
-    		this.toggleTime(false);
+			this.$dtpElement.find('.dtp-picker-clock').html(minutes);
+			this.toggleTime(false);
 
-    		this.$dtpElement.find('.dtp-picker-clock').css('height', (r * 2) + 'px');
+			this.$dtpElement.find('.dtp-picker-clock').css('height', (r * 2) + 'px');
 
-    		this.initHands(false);
+			this.initHands(false);
 		},
 		initHands: function(t)
 		{
@@ -422,7 +448,7 @@
 				height: _hL + 'px',
 				marginTop: (r - _hL) + 'px'
 			}).addClass((t === true) ? 'on' : '');
-    		this.$dtpElement.find('.dtp-minute-hand').css
+			this.$dtpElement.find('.dtp-minute-hand').css
 			({
 				left: r + 30 + 'px',
 				height: _mL + 'px',
@@ -432,7 +458,7 @@
 			this.animateHands();
 		},
 		animateHands: function()
-		{	
+		{
 			var h = this.currentDate.hour();
 			var m = this.currentDate.minute();
 
@@ -518,7 +544,7 @@
 		rotateElement: function(el, deg)
 		{
 			$(el).css
-			({ 
+			({
 				WebkitTransform: 'rotate(' + deg + 'deg)',
 				'-moz-transform': 'rotate(' + deg + 'deg)'
 			});
@@ -542,7 +568,7 @@
 
 				this.$dtpElement.find('.dtp-actual-time').html(content);
 			}
-		},		
+		},
 		selectDate: function(date)
 		{
 			if(date)
@@ -596,7 +622,7 @@
 			{
 				_template += '<th>' + moment(parseInt(calendar.week[i]), "d").locale(this.params.lang).format("dd").substring(0, 1) + '</th>';
 			}
-			
+
 			_template += '</thead>';
 			_template += '<tbody><tr>';
 
@@ -621,7 +647,7 @@
 						{
 							_template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
 						}
-					}						
+					}
 
 					_template += '</td>';
 				}
@@ -726,7 +752,7 @@
 				{
 					var _minute = $(this).data('minute');
 
-					var _date = moment(_self.currentDate);					
+					var _date = moment(_self.currentDate);
 					_date.minute(_minute).second(0);
 
 					if(_self.isAfterMinDate(_date, true, true) === false || _self.isBeforeMaxDate(_date, true, true) === false)
@@ -777,9 +803,9 @@
 						$('#' + this.name).modal('hide');
 					}
 					break;
-				case 1: 
+				case 1:
 					this.initMinutes(); break;
-				case 2: 
+				case 2:
 					this.setElementValue();
 					$('#' + this.name).modal('hide'); break;
 			}
@@ -798,7 +824,7 @@
 			else
 			{
 				$('#' + this.name).modal('hide');
-			}			
+			}
 		},
 		_onMonthBeforeClick: function()
 		{
@@ -893,11 +919,11 @@
 		{
 			this.params.minDate = date;
 			this.initDates();
-		},		
+		},
 		setMaxDate: function(date)
 		{
 			this.params.maxDate = date;
 			this.initDates();
 		}
 	};
-})(jQuery, moment);
+}));
