@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-material-datepicker",
   "description": ".",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "css",
     "js",
@@ -14,7 +14,6 @@
   "main": [
     "js/bootstrap-material-datepicker.js",
     "css/bootstrap-material-datepicker.css"
-
   ],
   "ignore": [
     "/.*",
