@@ -1,9 +1,7 @@
 /* DTP */
 .dtp .modal-dialog { width: 400px; }
 .dtp .modal-body { padding: 0!important; }
-
 .dtp header.dtp-header { background: #689F38; color: #fff; text-align: center; padding: 10px; }
-
 .dtp div.dtp-date { background: #8BC34A; text-align: center; color: #fff; padding: 10px; }
 .dtp div.dtp-date > div { padding: 0; margin: 0; }
 .dtp div.dtp-actual-month { font-size: 2.2em; }
@@ -21,54 +19,16 @@
 .dtp div.dtp-picker-clock { margin: 0 20px; border-radius: 50%!important; background: #eee; }
 .dtp-picker-time > a { display: block; width: 29px; height: 29px; }
 .dtp .dtp-buttons { padding: 0 10px 10px 10px; }
-
 span[class^=mdi-], [class*=" mdi-"] { position: relative; top: 7px; }
-
 .dtp .dtp-picker-time > a.dtp-select-hour.selected { background: #689F38; color: #fff; }
-
 .dtp .dtp-picker-time > a.dtp-select-hour.disabled, .dtp .dtp-picker-time > a.dtp-select-minute.disabled { color: #757575; }
 .dtp .dtp-picker-time > a.dtp-select-minute.selected { background: #8BC34A; color: #fff; }
-
 .dtp .col-sm-2 { text-align: center; font-size: 2.2em; }
 .dtp .col-sm-2 > a { color: #689F38; text-decoration: none; }
-
 .dtp .dtp-actual-meridien a.selected { background: #689F38; color: #fff; }
 .dtp a.dtp-meridien-am, .dtp a.dtp-meridien-pm { color: #212121; font-weight: 500; padding: 12px 10px; border-radius: 50%!important;text-decoration: none; background: #eee; }
-
-.dtp .dtp-picker-time {
-    position: absolute;
-    width: 30px;
-    height: 30px;
- 	font-size: 1.2em;
-    line-height: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-weight: 500; 
-    text-align: center!important;
-}
-.dtp .dtp-hand, .dtp .dtp-hour-hand
-{
-	position: absolute;
-	width: 4px; /* default width of hands/ hour hand */
-	margin-left: -2px; /* Account for hand width to center hand horizonally */
-	background: #BDBDBD;
-	-moz-transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
-	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg);
-	-moz-transform-origin: bottom; /* Set transform origin to center bottom */
-	-ms-transform-origin: bottom;
-	-webkit-transform-origin: bottom;
-	transform-origin: bottom;
-	z-index: 1;
-}
-
-.dtp .dtp-minute-hand 
-{
-	width: 2px;
-	margin-left: -1px;
-}
-.dtp .dtp-hand.on
-{
-	background: #8BC34A;
-}
+.dtp .dtp-picker-time { position: absolute;width: 30px;height: 30px;font-size: 1.2em;line-height: 20px;border-radius: 50%;cursor: pointer;font-weight: 500;text-align: center!important; }
+.dtp .dtp-hand, .dtp .dtp-hour-hand { position: absolute; width: 4px; margin-left: -2px; background: #BDBDBD; -moz-transform: rotate(0deg); -ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); transform: rotate(0deg); -moz-transform-origin: bottom; -ms-transform-origin: bottom; -webkit-transform-origin: bottom; transform-origin: bottom; z-index: 1; }
+.dtp .dtp-minute-hand { width: 2px; margin-left: -1px; }
+.dtp .dtp-hand.on { background: #8BC34A; }
+.dtp-clock-center { width: 15px; height: 15px; background: #757575; border-radius: 50%; position: absolute; z-index: 50; }

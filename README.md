@@ -3,8 +3,13 @@ DateTimePicker for bootstrap-material
 
 ### Updates
 
-    2015-04-08 - Fixed problem on locale switch
-    2015-03-04 - Added Time picker
+| Date				| Author			| Description										|
+| ----------------- | ----------------- | ------------------------------------------------- |
+| 2015-04-10		| T00rk				| Little change in clock design						|
+| 2015-04-10		| Peterzen			| Added bower and requirejs support					|
+| 2015-04-08		| T00rk				| Fixed problem on locale switch					|
+| 2015-03-04		| T00rk				| Added Time picker									|
+
 
 ### Prerequisites
 

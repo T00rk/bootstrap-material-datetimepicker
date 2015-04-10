@@ -411,7 +411,8 @@
 			this.$dtpElement.find('.dtp-picker-clock').append
 			(
 				'<div class="dtp-hand dtp-hour-hand"></div>' +
-				'<div class="dtp-hand dtp-minute-hand"></div>'
+				'<div class="dtp-hand dtp-minute-hand"></div>' +
+				'<div class="dtp-clock-center"></div>'
 			);
 
 			var _hL = r / 1.8;
@@ -428,6 +429,11 @@
 				height: _mL + 'px',
 				marginTop: (r - _mL) + 'px'
 			}).addClass((t === false) ? 'on' : '');
+			this.$dtpElement.find('.dtp-clock-center').css
+			({
+				left: r + 23 + 'px',
+				marginTop: ((r + _mL) / 2) + 14 + 'px'
+			});
 
 			this.animateHands();
 		},
