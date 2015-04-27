@@ -102,7 +102,7 @@
 						this.currentDate = this.params.currentDate;
 					}
 				}
-				this.$element.val(this.params.currentDate.format(this.params.format));
+				this.$element.val(this.currentDate.format(this.params.format));
 			}
 
 			if(typeof(this.params.minDate) !== 'undefined' && this.params.minDate !== null)
