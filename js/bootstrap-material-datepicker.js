@@ -509,7 +509,7 @@
 				if(!checkMinute)
 				{
 					_date.minute(0);
-					_minDate.minute(0);
+					_maxDate.minute(0);
 
 					_return = (parseInt(_date.format("X")) <= parseInt(_maxDate.format("X")));
 				}
