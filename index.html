@@ -128,7 +128,7 @@
 				<div class="col-md-6">
 					<code>
 						<p>Code</p>
-						$('#date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'fr', weekStart : 1 });
+						$('#date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER' });
 						test
 					</code>
 				</div>
@@ -189,7 +189,8 @@
 			({
 				format: 'dddd DD MMMM YYYY - HH:mm',
 				lang: 'fr',
-				weekStart: 1
+				weekStart: 1, 
+				cancelText : 'ANNULER'
 			});
 
 			$('#date-end').bootstrapMaterialDatePicker
