@@ -18,7 +18,7 @@
 		this.element = element;
 		this.$element = $(element);
 
-		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0 };
+		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, 'cancelText' : 'Cancel', 'okText' : 'OK' };
 		this.params = $.fn.extend(this.params, options);
 
 		this.name = "dtp_" + this.setName();
@@ -218,8 +218,8 @@
 												'</div>' +
 											'</div>' +
 											'<div class="dtp-buttons">' +
-												'<button class="dtp-btn-ok pull-right btn btn-flat">OK</button>' +
-												'<button class="dtp-btn-cancel pull-right btn btn-flat">ANNULER</button>' +
+												'<button class="dtp-btn-ok pull-right btn btn-flat">' + this.params.okText + '</button>' +
+												'<button class="dtp-btn-cancel pull-right btn btn-flat">' + this.params.cancelText + '</button>' +
 												'<div class="clearfix"></div>' +
 											'</div>' +
 										'</div>' +

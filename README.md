@@ -5,6 +5,8 @@ DateTimePicker for bootstrap-material
 
 | Date				| Author			| Description										|
 | ----------------- | ----------------- | ------------------------------------------------- |
+| 2015-05-12		| T00rk				| Added parameters for button text					|
+| 2015-05-05		| Sovanna			| FIX undefined _minDate in isBeforeMaxDate func	|
 | 2015-04-10		| T00rk				| Little change in clock design						|
 | 2015-04-10		| Peterzen			| Added bower and requirejs support					|
 | 2015-04-08		| T00rk				| Fixed problem on locale switch					|
@@ -31,13 +33,15 @@ Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
 	
 ### Parameters
 
-| Name				| Type							| Description				|
-| ----------------- | ----------------------------- | ------------------------- |
-| **format**		| String						| MomentJS Format			|
-| **minDate**		| (String\|Date\|Moment)		| Minimum selectable date	|
-| **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date	|
-| **currentDate**	| (String\|Date\|Moment)		| Initial Date				|
-| **time**			| Boolean						| true => Has Timepicker	|
+| Name				| Type							| Description									|
+| ----------------- | ----------------------------- | --------------------------------------------- |
+| **format**		| String						| MomentJS Format								|
+| **minDate**		| (String\|Date\|Moment)		| Minimum selectable date						|
+| **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date						|
+| **currentDate**	| (String\|Date\|Moment)		| Initial Date									|
+| **time**			| Boolean						| true => Has Timepicker						|
+| **cancelText**	| String						| Text for the cancel button (default: Cancel)	|
+| **okText**		| String						| Text for the OK button (default: OK)			|
 
 
 ### Events
