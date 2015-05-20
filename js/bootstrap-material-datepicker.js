@@ -776,6 +776,7 @@
 					if(this.params.time === true)
 					{
 						this.initHours();
+						$('#' + this.name).modal('handleUpdate');
 					}
 					else
 					{
@@ -784,7 +785,7 @@
 					}
 					break;
 				case 1: 
-					this.initMinutes(); break;
+					this.initMinutes(); $('#' + this.name).modal('handleUpdate'); break;
 				case 2: 
 					this.setElementValue();
 					$('#' + this.name).modal('hide'); break;
@@ -797,8 +798,8 @@
 				switch(this.currentView)
 				{
 					case 0: $('#' + this.name).modal('hide'); break;
-					case 1: this.initDate(); break;
-					case 2: this.initHours(); break;
+					case 1: this.initDate(); $('#' + this.name).modal('handleUpdate'); break;
+					case 2: this.initHours(); $('#' + this.name).modal('handleUpdate'); break;
 				}
 			}
 			else
