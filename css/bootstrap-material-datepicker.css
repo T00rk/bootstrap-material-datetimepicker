@@ -32,4 +32,3 @@ span[class^=mdi-], [class*=" mdi-"] { position: relative; top: 7px; }
 .dtp .dtp-minute-hand { width: 2px; margin-left: -1px; }
 .dtp .dtp-hand.on { background: #8BC34A; }
 .dtp-clock-center { width: 15px; height: 15px; background: #757575; border-radius: 50%; position: absolute; z-index: 50; }
-.dtp .modal-backdrop.fade.in { min-height: 100% !important; }
