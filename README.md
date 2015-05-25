@@ -30,6 +30,10 @@ Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
 ### Usage
 
 	$('input').bootstrapMaterialDatePicker();
+
+### bower
+
+	bower install bootstrap-material-datetimepicker
 	
 ### Parameters
 

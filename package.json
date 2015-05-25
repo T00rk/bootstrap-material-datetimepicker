@@ -1,5 +1,5 @@
 {
-  "name": "bootstrap-material-datepicker",
+  "name": "bootstrap-material-datetimepicker",
   "description": ".",
   "version": "0.0.4",
   "keywords": [
@@ -10,7 +10,7 @@
     "front-end",
     "web"
   ],
-  "homepage": "https://github.com/peterzen/bootstrap-material-datepicker",
+  "homepage": "https://github.com/t00rk/bootstrap-material-datepicker",
   "main": [
     "js/bootstrap-material-datepicker.js",
     "css/bootstrap-material-datepicker.css"
@@ -33,6 +33,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/peterzen/bootstrap-material-datepicker"
+    "url": "https://github.com/t00rk/bootstrap-material-datepicker"
   }
 }
