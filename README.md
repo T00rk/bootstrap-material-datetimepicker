@@ -5,15 +5,19 @@ DateTimePicker for bootstrap-material
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
-| 2015-05-25		| T00rk 			| Changed repo name to bootstrap-material-datetimepicker |
+| 2015-05-25		| T00rk 			| Changed repo name to bootstrap-material-datetimepicker * |
 | 2015-05-12		| T00rk				| Added parameters for button text						 |
 | 2015-05-05		| Sovanna			| FIX undefined _minDate in isBeforeMaxDate func		 |
 | 2015-04-10		| T00rk				| Little change in clock design							 |
 | 2015-04-10		| Peterzen			| Added bower and requirejs support						 |
 | 2015-04-08		| T00rk				| Fixed problem on locale switch						 |
 | 2015-03-04		| T00rk				| Added Time picker										 |
+(\*) File names have been changed 
 
+bootstrap-material-datepicker.js => bootstrap-material-date**time**picker.js
 
+bootstrap-material-datepicker.css => bootstrap-material-date**time**picker.css
+	
 ### Prerequisites
 
 Bootstrap 3 [http://getbootstrap.com/](http://getbootstrap.com/)
