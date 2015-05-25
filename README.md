@@ -1,16 +1,17 @@
-# bootstrap-material-datepicker
+# bootstrap-material-datetimepicker
 DateTimePicker for bootstrap-material
 
 ### Updates
 
-| Date				| Author			| Description										|
-| ----------------- | ----------------- | ------------------------------------------------- |
-| 2015-05-12		| T00rk				| Added parameters for button text					|
-| 2015-05-05		| Sovanna			| FIX undefined _minDate in isBeforeMaxDate func	|
-| 2015-04-10		| T00rk				| Little change in clock design						|
-| 2015-04-10		| Peterzen			| Added bower and requirejs support					|
-| 2015-04-08		| T00rk				| Fixed problem on locale switch					|
-| 2015-03-04		| T00rk				| Added Time picker									|
+| Date				| Author			| Description											 |
+| ----------------- | ----------------- | ------------------------------------------------------ |
+| 2015-05-25		| T00rk 			| Changed repo name to bootstrap-material-datetimepicker |
+| 2015-05-12		| T00rk				| Added parameters for button text						 |
+| 2015-05-05		| Sovanna			| FIX undefined _minDate in isBeforeMaxDate func		 |
+| 2015-04-10		| T00rk				| Little change in clock design							 |
+| 2015-04-10		| Peterzen			| Added bower and requirejs support						 |
+| 2015-04-08		| T00rk				| Fixed problem on locale switch						 |
+| 2015-03-04		| T00rk				| Added Time picker										 |
 
 
 ### Prerequisites
@@ -25,7 +26,7 @@ momentjs [http://momentjs.com/](http://momentjs.com/)
 
 ### Live Example
 
-Click [here](http://t00rk.github.io/bootstrap-material-datepicker/) to see
+Click [here](http://t00rk.github.io/bootstrap-material-datetimepicker/) to see
 
 ### Usage
 

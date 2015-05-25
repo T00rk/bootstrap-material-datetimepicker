@@ -10,10 +10,10 @@
     "front-end",
     "web"
   ],
-  "homepage": "https://github.com/t00rk/bootstrap-material-datepicker",
+  "homepage": "https://github.com/t00rk/bootstrap-material-datetimepicker",
   "main": [
-    "js/bootstrap-material-datepicker.js",
-    "css/bootstrap-material-datepicker.css"
+    "js/bootstrap-material-datetimepicker.js",
+    "css/bootstrap-material-datetimepicker.css"
   ],
   "ignore": [
     "/.*",
@@ -33,6 +33,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/t00rk/bootstrap-material-datepicker"
+    "url": "https://github.com/t00rk/bootstrap-material-datetimepicker"
   }
 }
