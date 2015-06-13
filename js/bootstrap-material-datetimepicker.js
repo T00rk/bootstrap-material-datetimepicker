@@ -77,6 +77,21 @@
 		},
 		initDates: function()
 		{
+			if(typeof(this.$element.attr('value')) !== 'undefined' && this.$element.attr('value') !== null)
+			{
+				if(typeof(this.$element.attr('value')) === 'string')
+				{
+					if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
+					{
+						this.currentDate = moment(this.$element.attr('value'), this.params.format).locale(this.params.lang);
+					}
+					else
+					{
+						this.currentDate = moment(this.$element.attr('value')).locale(this.params.lang);
+					}
+				}
+			}
+
 			if(typeof(this.params.currentDate) !== 'undefined' && this.params.currentDate !== null)
 			{
 				if(typeof(this.params.currentDate) === 'string')

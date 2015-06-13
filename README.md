@@ -5,6 +5,7 @@ DateTimePicker for bootstrap-material
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2015-06-13		| T00rk 			| Fixed issue with HTML value tag 						 |
 | 2015-05-25		| T00rk 			| Changed repo name to bootstrap-material-datetimepicker * |
 | 2015-05-12		| T00rk				| Added parameters for button text						 |
 | 2015-05-05		| Sovanna			| FIX undefined _minDate in isBeforeMaxDate func		 |

@@ -122,14 +122,13 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-control-wrapper">
-						<input type="text" id="date-fr" class="form-control floating-label" placeholder="Date de début">
+						<input type="text" id="date-fr" class="form-control floating-label" value="18/03/2015 08:00" placeholder="Date de début">
 					</div>
 				</div>
 				<div class="col-md-6">
 					<code>
 						<p>Code</p>
 						$('#date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER' });
-						test
 					</code>
 				</div>
 			</div>
@@ -187,7 +186,7 @@
 			});
 			$('#date-fr').bootstrapMaterialDatePicker
 			({
-				format: 'dddd DD MMMM YYYY - HH:mm',
+				format: 'DD/MM/YYYY HH:mm',
 				lang: 'fr',
 				weekStart: 1, 
 				cancelText : 'ANNULER'
