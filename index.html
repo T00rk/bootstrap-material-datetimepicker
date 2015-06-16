@@ -96,6 +96,26 @@
 		<div class="container well">
 			<div class="row">
 				<div class="col-md-6">
+					<h2>Time Picker</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-control-wrapper">
+						<input type="text" id="time" class="form-control floating-label" placeholder="Time">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<code>
+						<p>Code</p>
+						$('#time').bootstrapMaterialDatePicker({ date: false });
+					</code>
+				</div>
+			</div>
+		</div>
+		<div class="container well">
+			<div class="row">
+				<div class="col-md-6">
 					<h2>Date Time Picker</h2>
 				</div>
 			</div>
@@ -178,6 +198,13 @@
 			$('#date').bootstrapMaterialDatePicker
 			({
 				time: false
+			});
+
+			$('#time').bootstrapMaterialDatePicker
+			({
+				date: false,
+				shortTime: true,
+				format: 'HH:mm'
 			});
 
 			$('#date-format').bootstrapMaterialDatePicker

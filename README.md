@@ -5,6 +5,7 @@ DateTimePicker for bootstrap-material
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2015-06-16		| T00rk 			| Use Timepicker alone / Display short time (12 hours)	 |
 | 2015-06-13		| T00rk 			| Fixed issue with HTML value tag 						 |
 | 2015-05-25		| T00rk 			| Changed repo name to bootstrap-material-datetimepicker * |
 | 2015-05-12		| T00rk				| Added parameters for button text						 |
@@ -46,9 +47,11 @@ Click [here](http://t00rk.github.io/bootstrap-material-datetimepicker/) to see
 | Name				| Type							| Description									|
 | ----------------- | ----------------------------- | --------------------------------------------- |
 | **format**		| String						| MomentJS Format								|
+| **shortTime**		| Boolean						| true => Display 12 hours AM|PM 				|
 | **minDate**		| (String\|Date\|Moment)		| Minimum selectable date						|
 | **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date						|
 | **currentDate**	| (String\|Date\|Moment)		| Initial Date									|
+| **date**			| Boolean						| true => Has Datepicker						|
 | **time**			| Boolean						| true => Has Timepicker						|
 | **cancelText**	| String						| Text for the cancel button (default: Cancel)	|
 | **okText**		| String						| Text for the OK button (default: OK)			|

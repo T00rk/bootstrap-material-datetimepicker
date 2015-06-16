@@ -18,7 +18,7 @@
 		this.element = element;
 		this.$element = $(element);
 
-		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, 'cancelText' : 'Cancel', 'okText' : 'OK' };
+		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, 'cancelText' : 'Cancel', 'okText' : 'OK' };
 		this.params = $.fn.extend(this.params, options);
 
 		this.name = "dtp_" + this.setName();
@@ -193,7 +193,7 @@
 												'<header class="dtp-header">' +
 													'<div class="dtp-actual-day">Lundi</div>' +
 												'</header>' +
-												'<div class="dtp-date">' +
+												'<div class="dtp-date hidden">' +
 													'<div class="row">' +
 														'<div class="col-sm-2 col-xs-2">' +
 															'<a href="javascript:void(0);" class="dtp-select-month-before"><span class="mdi-navigation-chevron-left"></span></a>' +
@@ -213,6 +213,9 @@
 															'<a href="javascript:void(0);" class="dtp-select-year-after"><span class="mdi-navigation-chevron-right"></span></a>' +
 														'</div>' +
 													'</div>' +
+												'</div>' +
+												'<div class="dtp-time hidden">' +
+													'<div class="dtp-actual-maxtime">23:55</div>' +
 												'</div>' +
 												'<div class="dtp-picker">' +													
 													'<div class="dtp-picker-calendar"></div>' +
@@ -245,6 +248,11 @@
 			if($('body').find("#" + this.name).length <= 0)
 			{
 				$('body').append(this.template);
+
+				if(typeof($.material) !== 'undefined')
+				{
+					$.material.init();
+				}
 
 				this.dtpElement = $('body').find("#" + this.name);
 				this.$dtpElement = $(this.dtpElement);
@@ -299,25 +307,36 @@
 				this.$dtpElement.find('a.dtp-select-day').off('click');
 				this.$dtpElement.find('.dtp-picker-calendar').html(_template);
 
-				if(typeof($.material) !== 'undefined')
-				{
-					$.material.init();
-				}
-
 				this.$dtpElement.find('a.dtp-select-day').on('click', this._onSelectDate.bind(this));
 
 				this.toggleButtons(_date);
 			}
-			
+
 			this.showDate(_date);
 		},
 		initHours: function()
 		{
 			this.currentView = 1;
 
+			if(!this.params.date)
+			{
+				var w = this.$dtpElement.find('.modal-dialog').innerWidth() - (this.$dtpElement.find('.modal-body').offset().left * 2);
+
+				var ml = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
+				var mr = this.$dtpElement.find('.dtp-picker-clock').css('marginRight').replace('px', '');
+
+				var pl = this.$dtpElement.find('.dtp-picker').css('paddingLeft').replace('px', '');
+				var pr = this.$dtpElement.find('.dtp-picker').css('paddingRight').replace('px', '');
+
+				this.$dtpElement.find('.dtp-picker-clock').width(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
+			}
+			
 			this.showTime(this.currentDate);
 
 			this.initMeridienButtons();
+
+			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
+			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
 
 			if(this.currentDate.hour() < 12)
 			{
@@ -327,9 +346,6 @@
 			{
 				this.$dtpElement.find('a.dtp-meridien-pm').click();
 			}
-
-			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
-			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
 
 			var r = this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2;
 			var j = r - 25;
@@ -559,9 +575,19 @@
 			if(date)
 			{
 				var minutes = (5 * Math.round(date.minute() / 5));
-				var content = date.format('HH') + ':' + ((minutes.toString().length == 2) ? minutes : '0' + minutes);
+				var content = ((this.params.shortTime) ? date.format('hh') : date.format('HH')) + ':' + ((minutes.toString().length == 2) ? minutes : '0' + minutes);
 
-				this.$dtpElement.find('.dtp-actual-time').html(content);
+				if(this.params.date)
+					this.$dtpElement.find('.dtp-actual-time').html(content);
+				else
+				{
+					if(this.params.shortTime)
+						this.$dtpElement.find('.dtp-actual-day').html(date.format('A'));
+					else
+						this.$dtpElement.find('.dtp-actual-day').html(' ');
+
+					this.$dtpElement.find('.dtp-actual-maxtime').html(content);
+				}
 			}
 		},		
 		selectDate: function(date)
@@ -779,7 +805,19 @@
 		{
 			this.clickCount = 0;
 
-			this.initDate();
+			if(this.params.date)
+			{
+				this.$dtpElement.find('.dtp-date').removeClass('hidden');
+				this.initDate();
+			}
+			else
+			{
+				if(this.params.time)
+				{
+					this.$dtpElement.find('.dtp-time').removeClass('hidden');
+					this.initHours();
+				}
+			}
 
 			$('#' + this.name).modal('show');
 		},
@@ -813,7 +851,16 @@
 				switch(this.currentView)
 				{
 					case 0: $('#' + this.name).modal('hide'); break;
-					case 1: this.initDate(); $('#' + this.name).modal('handleUpdate'); break;
+					case 1: 
+						if(this.params.date)
+						{
+							this.initDate(); $('#' + this.name).modal('handleUpdate'); 
+						}
+						else
+						{
+							$('#' + this.name).modal('hide');
+						}
+						break;
 					case 2: this.initHours(); $('#' + this.name).modal('handleUpdate'); break;
 				}
 			}
