@@ -320,7 +320,7 @@
 
 			if(!this.params.date)
 			{
-				var w = this.$dtpElement.find('.modal-dialog').innerWidth() - (this.$dtpElement.find('.modal-body').offset().left * 2);
+				var w = this.$dtpElement.find('.modal-dialog').innerWidth();
 
 				var ml = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
 				var mr = this.$dtpElement.find('.dtp-picker-clock').css('marginRight').replace('px', '');
@@ -347,6 +347,8 @@
 				this.$dtpElement.find('a.dtp-meridien-pm').click();
 			}
 
+			console.log(this.currentDate.format('h'));
+
 			var r = this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2;
 			var j = r - 25;
 
@@ -363,8 +365,9 @@
 						marginLeft: (x + r - 15) + 'px',
         				marginTop: (-y + r / 1.5 + 45) + 'px'
 					});
+				var cH = ((this.currentDate.format('h') == 12) ? 0 : this.currentDate.format('h'));
 				var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', h).text((h == 0 ? 12 : h));
-					if(h == parseInt(this.currentDate.format('h')))
+					if(h == parseInt(cH))
 						hourLink.addClass('selected');
 
 				hour.append(hourLink);
@@ -419,7 +422,10 @@
 
 				var minuteLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-minute' }).data('minute', m).text(((m.toString().length == 2) ? m : '0' + m));
 					if(m == 5 * Math.round(this.currentDate.minute() / 5))
+					{
 						minuteLink.addClass('selected');
+						this.currentDate.minute(m);
+					}
 
 				minute.append(minuteLink);
       			minutes.push(minute);
