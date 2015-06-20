@@ -1,5 +1,5 @@
 /* DTP */
-.dtp .modal-dialog { width: 400px; }
+.dtp .modal-dialog { width: 95%; max-width: 400px; min-width: 216px; }
 .dtp .modal-body { padding: 0!important; }
 .dtp header.dtp-header { background: #689F38; color: #fff; text-align: center; padding: 10px; }
 .dtp div.dtp-date, .dtp div.dtp-time { background: #8BC34A; text-align: center; color: #fff; padding: 10px; }
@@ -8,8 +8,8 @@
 .dtp div.dtp-actual-num { font-size: 5em; line-height: 0.9; }
 .dtp div.dtp-actual-maxtime { font-size: 5em; line-height: 0.9; }
 .dtp div.dtp-actual-year { font-size: 2.2em; color: #DCEDC8; }
-.dtp div.dtp-picker { padding: 10px; text-align: center; }
-.dtp div.dtp-picker-month, .dtp div.dtp-actual-time { font-weight: 500; text-align: center; font-size: 1.2em; padding-bottom: 10px; }
+.dtp div.dtp-picker { padding: 0.2em; text-align: center; }
+.dtp div.dtp-picker-month, .dtp div.dtp-actual-time { font-weight: 500; text-align: center; font-size: 1.2em; padding: 0.5em 0; }
 .dtp table.dtp-picker-days { margin: 0; }
 .dtp table.dtp-picker-days, .dtp table.dtp-picker-days tr, .dtp table.dtp-picker-days tr > td { border: none; }
 .dtp table.dtp-picker-days tr > td { font-weight: 500; text-align: center; }
@@ -24,8 +24,8 @@ span[class^=mdi-], [class*=" mdi-"] { position: relative; top: 7px; }
 .dtp .dtp-picker-time > a.dtp-select-hour.selected { background: #689F38; color: #fff; }
 .dtp .dtp-picker-time > a.dtp-select-hour.disabled, .dtp .dtp-picker-time > a.dtp-select-minute.disabled { color: #757575; }
 .dtp .dtp-picker-time > a.dtp-select-minute.selected { background: #8BC34A; color: #fff; }
-.dtp .col-sm-2 { text-align: center; font-size: 2.2em; }
-.dtp .col-sm-2 > a { color: #689F38; text-decoration: none; }
+.dtp .pc10 { text-align: center; font-size: 2.2em; }
+.dtp .pc10 > a { color: #689F38; text-decoration: none; }
 .dtp .dtp-actual-meridien a.selected { background: #689F38; color: #fff; }
 .dtp a.dtp-meridien-am, .dtp a.dtp-meridien-pm { color: #212121; font-weight: 500; padding: 12px 10px; border-radius: 50%!important;text-decoration: none; background: #eee; }
 .dtp .dtp-picker-time { position: absolute;width: 30px;height: 30px;font-size: 1.2em;line-height: 20px;border-radius: 50%;cursor: pointer;font-weight: 500;text-align: center!important; }
@@ -33,3 +33,36 @@ span[class^=mdi-], [class*=" mdi-"] { position: relative; top: 7px; }
 .dtp .dtp-minute-hand { width: 2px; margin-left: -1px; }
 .dtp .dtp-hand.on { background: #8BC34A; }
 .dtp-clock-center { width: 15px; height: 15px; background: #757575; border-radius: 50%; position: absolute; z-index: 50; }
+
+.dtp .fLeft { float: left; }
+.dtp .fRight { float: right; }
+.dtp .pc10 { width: 10%; padding: 3px 0 0 0; display: inline-block; text-align: center; }
+.dtp .pc80 { width: 80%; padding: 0 0 0 0; display: inline-block; text-align: center; }
+.dtp .clear { clear: both; }
+
+@media(max-width: 270px){
+	.dtp .modal-dialog { width: 100%; margin: 0; }
+}
+@media(max-width: 300px){
+	.dtp table.dtp-picker-days { padding: 0.05em; font-size: 0.8em; }
+	.dtp .dtp-buttons > button { font-size: 0.8em; }
+}
+@media(max-width: 350px){
+	.dtp header.dtp-header { padding: 5px; }
+	.dtp div.dtp-picker-clock { margin: 0 5px; border-radius: 50%!important; background: #eee; }	
+	.dtp table.dtp-picker-days { padding: 0.05em; font-size: 0.9em; }
+	.dtp table.dtp-picker-days > thead > tr > th { padding: 0.05em; }
+	.dtp table.dtp-picker-days > tbody > tr > td { padding: 5px 0; }
+	.dtp div.dtp-picker-month, .dtp div.dtp-actual-time { padding: 0.5em 0; }
+	.dtp div.dtp-picker { padding: 0.05em; }
+
+	.dtp div.dtp-actual-month { font-size: 1.5em; }
+	.dtp div.dtp-actual-num { font-size: 3em; line-height: 0.9; }
+	.dtp div.dtp-actual-maxtime { font-size: 3em; line-height: 0.9; }
+	.dtp div.dtp-actual-year { font-size: 1.5em; color: #DCEDC8; }
+
+	.dtp .dtp-buttons { padding: 5px; }
+	.dtp .dtp-buttons > button { padding: 6px 12px; margin: 0; font-size: 0.9em; }
+
+	span[class^=mdi-], [class*=" mdi-"] { top: 0; }
+}

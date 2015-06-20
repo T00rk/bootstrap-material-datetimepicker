@@ -195,23 +195,25 @@
 												'</header>' +
 												'<div class="dtp-date hidden">' +
 													'<div class="row">' +
-														'<div class="col-sm-2 col-xs-2">' +
+														'<div class="fLeft pc10">' +
 															'<a href="javascript:void(0);" class="dtp-select-month-before"><span class="mdi-navigation-chevron-left"></span></a>' +
 														'</div>' +
-														'<div class="col-sm-8 col-xs-8 dtp-actual-month">MAR</div>' +
-														'<div class="col-sm-2 col-xs-2">' +
+														'<div class="dtp-actual-month pc80">MAR</div>' +
+														'<div class="fRight pc10">' +
 															'<a href="javascript:void(0);" class="dtp-select-month-after"><span class="mdi-navigation-chevron-right"></span></a>' +
 														'</div>' +
+														'<div class="clear"></div>' +
 													'</div>' +
 													'<div class="dtp-actual-num">13</div>' +
 													'<div class="row">' +
-														'<div class="col-sm-2 col-xs-2">' +
+														'<div class="fLeft pc10">' +
 															'<a href="javascript:void(0);" class="dtp-select-year-before"><span class="mdi-navigation-chevron-left"></span></a>' +
 														'</div>' +
-														'<div class="col-sm-8 col-xs-8 dtp-actual-year">2014</div>' +
-														'<div class="col-sm-2 col-xs-2">' +
+														'<div class="dtp-actual-year pc80">2014</div>' +
+														'<div class="fRight pc10">' +
 															'<a href="javascript:void(0);" class="dtp-select-year-after"><span class="mdi-navigation-chevron-right"></span></a>' +
 														'</div>' +
+														'<div class="clear"></div>' +
 													'</div>' +
 												'</div>' +
 												'<div class="dtp-time hidden">' +
