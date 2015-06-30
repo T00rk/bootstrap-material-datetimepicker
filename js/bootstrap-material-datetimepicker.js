@@ -719,22 +719,43 @@
 				if(!this.isAfterMinDate(startOfMonth, false, false))
 				{
 					this.$dtpElement.find('a.dtp-select-month-before').addClass('hidden');
-					this.$dtpElement.find('a.dtp-select-year-before').addClass('hidden');
+					//this.$dtpElement.find('a.dtp-select-year-before').addClass('hidden');
 				}
 				else
 				{
 					this.$dtpElement.find('a.dtp-select-month-before').removeClass('hidden');
-					this.$dtpElement.find('a.dtp-select-year-before').removeClass('hidden');
+					//this.$dtpElement.find('a.dtp-select-year-before').removeClass('hidden');
 				}
 
 				if(!this.isBeforeMaxDate(endOfMonth, false, false))
 				{
 					this.$dtpElement.find('a.dtp-select-month-after').addClass('hidden');
-					this.$dtpElement.find('a.dtp-select-year-after').addClass('hidden');
+					//this.$dtpElement.find('a.dtp-select-year-after').addClass('hidden');
 				}
 				else
 				{
 					this.$dtpElement.find('a.dtp-select-month-after').removeClass('hidden');
+					//this.$dtpElement.find('a.dtp-select-year-after').removeClass('hidden');
+				}
+
+				var startOfYear = moment(date).locale(this.params.lang).startOf('year');
+				var endOfYear = moment(date).locale(this.params.lang).endOf('year');
+
+				if(!this.isAfterMinDate(startOfYear, false, false))
+				{
+					this.$dtpElement.find('a.dtp-select-year-before').addClass('hidden');
+				}
+				else
+				{
+					this.$dtpElement.find('a.dtp-select-year-before').removeClass('hidden');
+				}
+
+				if(!this.isBeforeMaxDate(endOfYear, false, false))
+				{
+					this.$dtpElement.find('a.dtp-select-year-after').addClass('hidden');
+				}
+				else
+				{
 					this.$dtpElement.find('a.dtp-select-year-after').removeClass('hidden');
 				}
 			}

@@ -5,6 +5,7 @@ DateTimePicker for bootstrap-material
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2015-06-30		| T00rk 			| Fixed year navigation when minDate is set				 |
 | 2015-06-18		| T00rk 			| Fixed Timepicker rendering bug						 |
 | 2015-06-16		| T00rk 			| Use Timepicker alone / Display short time (12 hours)	 |
 | 2015-06-13		| T00rk 			| Fixed issue with HTML value tag 						 |

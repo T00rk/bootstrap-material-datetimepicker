@@ -156,6 +156,26 @@
 		<div class="container well">
 			<div class="row">
 				<div class="col-md-6">
+					<h2>Min Date set</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-control-wrapper">
+						<input type="text" id="min-date" class="form-control floating-label" placeholder="Start Date">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<code>
+						<p>Code</p>
+						$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+					</code>
+				</div>
+			</div>
+		</div>
+		<div class="container well">
+			<div class="row">
+				<div class="col-md-6">
 					<h2>Events</h2>
 				</div>
 			</div>
@@ -230,6 +250,8 @@
 			{
 				$('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
 			});
+
+			$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
 
 			$.material.init()
 		});
