@@ -973,7 +973,7 @@
 		{
 			this.params.maxDate = date;
 			this.initDates();
-		}
+		},
 		destroy: function()
 		{
 			this._detachEvents();
