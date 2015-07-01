@@ -7,7 +7,6 @@
 
 	function Plugin(element, options)
 	{
-		this.currentDate = moment();
 		this.currentView = 0;
 
 		this.minDate;
@@ -53,7 +52,7 @@
 	Plugin.prototype = 
 	{
 		init: function()
-		{
+		{	
 			this.initDays();
 			this.initDates();	
 
@@ -61,7 +60,11 @@
 
 			this.initButtons();
 
-			this._attachEvent(this.$element, 'click', function(){ this._onClick(); }.bind(this));
+			this._attachEvent($(window), 'resize', this._centerBox(this));
+			this._attachEvent(this.$dtpElement.find('.dtp-content'), 'click', this._onElementClick.bind(this));
+			this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
+			this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
+			this._attachEvent(this.$element, 'click', this._onClick.bind(this));
 		},
 		initDays: function()
 		{
@@ -77,47 +80,65 @@
 		},
 		initDates: function()
 		{
-			if(typeof(this.$element.attr('value')) !== 'undefined' && this.$element.attr('value') !== null)
+			if(this.$element.val().length > 0)
 			{
-				if(typeof(this.$element.attr('value')) === 'string')
+				if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
 				{
-					if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
-					{
-						this.currentDate = moment(this.$element.attr('value'), this.params.format).locale(this.params.lang);
-					}
-					else
-					{
-						this.currentDate = moment(this.$element.attr('value')).locale(this.params.lang);
-					}
+					this.currentDate = moment(this.$element.val(), this.params.format).locale(this.params.lang);
+				}
+				else
+				{
+					this.currentDate = moment(this.$element.val()).locale(this.params.lang);
 				}
 			}
-
-			if(typeof(this.params.currentDate) !== 'undefined' && this.params.currentDate !== null)
+			else
 			{
-				if(typeof(this.params.currentDate) === 'string')
+				if(typeof(this.$element.attr('value')) !== 'undefined' && this.$element.attr('value') !== null)
 				{
-					if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
+					if(typeof(this.$element.attr('value')) === 'string')
 					{
-						this.currentDate = moment(this.params.currentDate, this.params.format).locale(this.params.lang);
-					}
-					else
-					{
-						this.currentDate = moment(this.params.currentDate).locale(this.params.lang);
+						if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
+						{
+							this.currentDate = moment(this.$element.attr('value'), this.params.format).locale(this.params.lang);
+						}
+						else
+						{
+							this.currentDate = moment(this.$element.attr('value')).locale(this.params.lang);
+						}
 					}
 				}
 				else
 				{
-					if(typeof(this.params.currentDate.isValid) === 'undefined' || typeof(this.params.currentDate.isValid) !== 'function')
+					if(typeof(this.params.currentDate) !== 'undefined' && this.params.currentDate !== null)
 					{
-						var x = this.params.currentDate.getTime();
-						this.currentDate = moment(x, "x").locale(this.params.lang);
+						if(typeof(this.params.currentDate) === 'string')
+						{
+							if(typeof(this.params.format) !== 'undefined' && this.params.format !== null)
+							{
+								this.currentDate = moment(this.params.currentDate, this.params.format).locale(this.params.lang);
+							}
+							else
+							{
+								this.currentDate = moment(this.params.currentDate).locale(this.params.lang);
+							}
+						}
+						else
+						{
+							if(typeof(this.params.currentDate.isValid) === 'undefined' || typeof(this.params.currentDate.isValid) !== 'function')
+							{
+								var x = this.params.currentDate.getTime();
+								this.currentDate = moment(x, "x").locale(this.params.lang);
+							}
+							else
+							{
+								this.currentDate = this.params.currentDate;
+							}
+						}
+						this.$element.val(this.currentDate.format(this.params.format));
 					}
 					else
-					{
-						this.currentDate = this.params.currentDate;
-					}
+						this.currentDate = moment();
 				}
-				this.$element.val(this.currentDate.format(this.params.format));
 			}
 
 			if(typeof(this.params.minDate) !== 'undefined' && this.params.minDate !== null)
@@ -185,62 +206,60 @@
 		},
 		initTemplate: function()
 		{
-			this.template = '<div class="modal dtp fade" id="' + this.name + '" tabindex="-1" role="dialog" aria-hidden="true">' +
-								'<div class="modal-dialog modal-no-radius">' +
-									'<div class="modal-content">' +
-										'<div class="modal-body">' +
-											'<div class="dtp-date-view">' +
-												'<header class="dtp-header">' +
-													'<div class="dtp-actual-day">Lundi</div>' +
-												'</header>' +
-												'<div class="dtp-date hidden">' +
-													'<div class="row">' +
-														'<div class="col-sm-2 col-xs-2">' +
-															'<a href="javascript:void(0);" class="dtp-select-month-before"><span class="mdi-navigation-chevron-left"></span></a>' +
-														'</div>' +
-														'<div class="col-sm-8 col-xs-8 dtp-actual-month">MAR</div>' +
-														'<div class="col-sm-2 col-xs-2">' +
-															'<a href="javascript:void(0);" class="dtp-select-month-after"><span class="mdi-navigation-chevron-right"></span></a>' +
-														'</div>' +
-													'</div>' +
-													'<div class="dtp-actual-num">13</div>' +
-													'<div class="row">' +
-														'<div class="col-sm-2 col-xs-2">' +
-															'<a href="javascript:void(0);" class="dtp-select-year-before"><span class="mdi-navigation-chevron-left"></span></a>' +
-														'</div>' +
-														'<div class="col-sm-8 col-xs-8 dtp-actual-year">2014</div>' +
-														'<div class="col-sm-2 col-xs-2">' +
-															'<a href="javascript:void(0);" class="dtp-select-year-after"><span class="mdi-navigation-chevron-right"></span></a>' +
-														'</div>' +
-													'</div>' +
+			this.template = '<div class="dtp hidden" id="' + this.name + '">' +
+								'<div class="dtp-content">' +
+									'<div class="dtp-date-view">' +
+										'<header class="dtp-header">' +
+											'<div class="dtp-actual-day">Lundi</div>' +
+											'<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></</div>' + 
+										'</header>' +
+										'<div class="dtp-date hidden">' +
+											'<div>' +
+												'<div class="left center p10">' +
+													'<a href="javascript:void(0);" class="dtp-select-month-before"><i class="material-icons">chevron_left</i></a>' +
 												'</div>' +
-												'<div class="dtp-time hidden">' +
-													'<div class="dtp-actual-maxtime">23:55</div>' +
+												'<div class="dtp-actual-month p80">MAR</div>' +
+												'<div class="right center p10">' +
+													'<a href="javascript:void(0);" class="dtp-select-month-after"><i class="material-icons">chevron_right</i></a>' +
 												'</div>' +
-												'<div class="dtp-picker">' +													
-													'<div class="dtp-picker-calendar"></div>' +
-													'<div class="dtp-picker-datetime hidden">' +
-														'<div class="dtp-actual-time"></div>' +
-														'<div class="dtp-picker-clock"></div>' +
-														'<div class="dtp-actual-meridien">' +
-															'<div class="row">' +
-																'<div class="col-sm-6 col-xs-6">' +
-																	'<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
-																'</div>' +
-																'<div class="col-sm-6 col-xs-6">' +
-																	'<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
-																'</div>' +
-															'</div>' +
-														'</div>' +
-													'</div>' +
-												'</div>' +
+												'<div class="clearfix"></div>' +
 											'</div>' +
-											'<div class="dtp-buttons">' +
-												'<button class="dtp-btn-ok pull-right btn btn-flat">' + this.params.okText + '</button>' +
-												'<button class="dtp-btn-cancel pull-right btn btn-flat">' + this.params.cancelText + '</button>' +
+											'<div class="dtp-actual-num">13</div>' +
+											'<div>' +
+												'<div class="left center p10">' +
+													'<a href="javascript:void(0);" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +
+												'</div>' +
+												'<div class="dtp-actual-year p80">2014</div>' +
+												'<div class="right center p10">' +
+													'<a href="javascript:void(0);" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +
+												'</div>' +
 												'<div class="clearfix"></div>' +
 											'</div>' +
 										'</div>' +
+										'<div class="dtp-time hidden">' +
+											'<div class="dtp-actual-maxtime">23:55</div>' +
+										'</div>' +
+										'<div class="dtp-picker">' +													
+											'<div class="dtp-picker-calendar"></div>' +
+											'<div class="dtp-picker-datetime hidden">' +
+												'<div class="dtp-actual-meridien">' +
+													'<div class="left p20">' +
+														'<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
+													'</div>' +
+													'<div class="dtp-actual-time p60"></div>' +
+													'<div class="right p20">' +
+														'<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
+													'</div>' +
+													'<div class="clearfix"></div>' +
+												'</div>' +
+												'<div class="dtp-picker-clock"></div>' +
+											'</div>' +
+										'</div>' +
+									'</div>' +
+									'<div class="dtp-buttons">' +
+										'<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
+										'<button class="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
+										'<div class="clearfix"></div>' +
 									'</div>' +
 								'</div>' +
 							'</div>';
@@ -249,41 +268,18 @@
 			{
 				$('body').append(this.template);
 
-				if(typeof($.material) !== 'undefined')
-				{
-					$.material.init();
-				}
-
 				this.dtpElement = $('body').find("#" + this.name);
 				this.$dtpElement = $(this.dtpElement);
 			}
 		},
 		initButtons: function()
 		{
-			this._attachEvent(this.$dtpElement.find('.dtp-btn-cancel'), 'click', function()
-			{
-				this._onCancelClick();
-			}.bind(this));
-			this._attachEvent(this.$dtpElement.find('.dtp-btn-ok'), 'click', function()
-			{
-				this._onOKClick();
-			}.bind(this));
-			this._attachEvent(this.$dtpElement.find('a.dtp-select-month-before'), 'click', function()
-			{
-				this._onMonthBeforeClick();
-			}.bind(this));
-			this._attachEvent(this.$dtpElement.find('a.dtp-select-month-after'), 'click', function()
-			{
-				this._onMonthAfterClick();
-			}.bind(this));
-			this._attachEvent(this.$dtpElement.find('a.dtp-select-year-before'), 'click', function()
-			{
-				this._onYearBeforeClick();
-			}.bind(this));
-			this._attachEvent(this.$dtpElement.find('a.dtp-select-year-after'), 'click', function()
-			{
-				this._onYearAfterClick();
-			}.bind(this));
+			this._attachEvent(this.$dtpElement.find('.dtp-btn-cancel'), 'click', this._onCancelClick.bind(this));
+			this._attachEvent(this.$dtpElement.find('.dtp-btn-ok'), 'click', this._onOKClick.bind(this));
+			this._attachEvent(this.$dtpElement.find('a.dtp-select-month-before'), 'click', this._onMonthBeforeClick.bind(this));
+			this._attachEvent(this.$dtpElement.find('a.dtp-select-month-after'), 'click', this._onMonthAfterClick.bind(this));
+			this._attachEvent(this.$dtpElement.find('a.dtp-select-year-before'), 'click', this._onYearBeforeClick.bind(this));
+			this._attachEvent(this.$dtpElement.find('a.dtp-select-year-after'), 'click', this._onYearAfterClick.bind(this));
 		},
 		initMeridienButtons: function()
 		{
@@ -312,6 +308,7 @@
 				this.toggleButtons(_date);
 			}
 
+			this._centerBox();
 			this.showDate(_date);
 		},
 		initHours: function()
@@ -320,7 +317,7 @@
 
 			if(!this.params.date)
 			{
-				var w = this.$dtpElement.find('.modal-dialog').innerWidth();
+				var w = this.$dtpElement.find('.dtp-content').width();
 
 				var ml = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
 				var mr = this.$dtpElement.find('.dtp-picker-clock').css('marginRight').replace('px', '');
@@ -328,11 +325,10 @@
 				var pl = this.$dtpElement.find('.dtp-picker').css('paddingLeft').replace('px', '');
 				var pr = this.$dtpElement.find('.dtp-picker').css('paddingRight').replace('px', '');
 
-				this.$dtpElement.find('.dtp-picker-clock').width(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
-			}
-			
-			this.showTime(this.currentDate);
+				this.$dtpElement.find('.dtp-picker-clock').innerWidth(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
+			}			
 
+			this.showTime(this.currentDate);
 			this.initMeridienButtons();
 
 			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
@@ -347,10 +343,13 @@
 				this.$dtpElement.find('a.dtp-meridien-pm').click();
 			}
 
-			console.log(this.currentDate.format('h'));
+			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
+			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
+			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
+			var mT = this.$dtpElement.find('.dtp-picker-clock').css('marginTop').replace('px', '');
 
-			var r = this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2;
-			var j = r - 25;
+			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
+			var j = r / 1.2;
 
 			var hours = [];
 
@@ -362,8 +361,8 @@
 				var hour = $('<div>', { class : 'dtp-picker-time' })
 					.css
 					({
-						marginLeft: (x + r - 15) + 'px',
-        				marginTop: (-y + r / 1.5 + 45) + 'px'
+						marginLeft: (r + x + parseInt(pL) / 2) - (parseInt(pL) + parseInt(mL)) + 'px',
+        				marginTop: (r - y - parseInt(mT) / 2) - (parseInt(pT) + parseInt(mT)) + 'px'
 					});
 				var cH = ((this.currentDate.format('h') == 12) ? 0 : this.currentDate.format('h'));
 				var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', h).text((h == 0 ? 12 : h));
@@ -379,7 +378,7 @@
     		this.$dtpElement.find('.dtp-picker-clock').html(hours);
     		this.toggleTime(true);
 
-    		this.$dtpElement.find('.dtp-picker-clock').css('height', (r * 2) + 'px');    		
+    		this.$dtpElement.find('.dtp-picker-clock').css('height', (this.$dtpElement.find('.dtp-picker-clock').width()) + (parseInt(pT) + parseInt(mT)) + 'px');    		
 
     		this.initHands(true);
 		},
@@ -403,8 +402,13 @@
 			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
 			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
 
-			var r = this.$dtpElement.find('.dtp-picker-clock').width() / 2;
-			var j = r - 25;
+			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
+			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
+			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
+			var mT = this.$dtpElement.find('.dtp-picker-clock').css('marginTop').replace('px', '');
+
+			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
+			var j = r / 1.2;
 
 			var minutes = [];
 
@@ -416,8 +420,8 @@
 				var minute = $('<div>', { class : 'dtp-picker-time' })
 					.css
 					({
-						marginLeft: (x + r - 15) + 'px',
-        				marginTop: (-y + r / 1.5 + 45) + 'px'
+						marginLeft: (r + x + parseInt(pL) / 2) - (parseInt(pL) + parseInt(mL)) + 'px',
+        				marginTop: (r - y - parseInt(mT) / 2) - (parseInt(pT) + parseInt(mT)) + 'px'
 					});
 
 				var minuteLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-minute' }).data('minute', m).text(((m.toString().length == 2) ? m : '0' + m));
@@ -436,43 +440,55 @@
     		this.$dtpElement.find('.dtp-picker-clock').html(minutes);
     		this.toggleTime(false);
 
-    		this.$dtpElement.find('.dtp-picker-clock').css('height', (r * 2) + 'px');
+    		this.$dtpElement.find('.dtp-picker-clock').css('height', (this.$dtpElement.find('.dtp-picker-clock').width()) + (parseInt(pT) + parseInt(mT)) + 'px');
 
     		this.initHands(false);
+
+    		this._centerBox();
 		},
 		initHands: function(t)
 		{
-			var oT = this.$dtpElement.find('.dtp-picker-clock').offset().top;
-			var r = this.$dtpElement.find('.dtp-picker-clock').width() / 2;
-
 			this.$dtpElement.find('.dtp-picker-clock').append
 			(
 				'<div class="dtp-hand dtp-hour-hand"></div>' +
 				'<div class="dtp-hand dtp-minute-hand"></div>' +
 				'<div class="dtp-clock-center"></div>'
 			);
+	
+			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
+			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
+			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
+			var mT = this.$dtpElement.find('.dtp-picker-clock').css('marginTop').replace('px', '');	
 
-			var _hL = r / 1.8;
-			var _mL = r - 45;
+			var w = this.$dtpElement.find('.dtp-clock-center').width() / 2;
+			var h = this.$dtpElement.find('.dtp-clock-center').height() / 2;
+
+			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
+			var j = r / 1.2;
+
+			var _hL = r / 1.7;
+			var _mL = r / 1.5;					
 
 			this.$dtpElement.find('.dtp-hour-hand').css({
-				left: r + 30 + 'px',
+				left: r + (parseInt(mL) * 1.5) + 'px',
 				height: _hL + 'px',
-				marginTop: (r - _hL) + 'px'
+				marginTop: (r - _hL - parseInt(pL)) + 'px'
 			}).addClass((t === true) ? 'on' : '');
-    		this.$dtpElement.find('.dtp-minute-hand').css
+     		this.$dtpElement.find('.dtp-minute-hand').css
 			({
-				left: r + 30 + 'px',
+				left: r + (parseInt(mL) * 1.5) + 'px',
 				height: _mL + 'px',
-				marginTop: (r - _mL) + 'px'
+				marginTop: (r - _mL - parseInt(pL)) + 'px'
 			}).addClass((t === false) ? 'on' : '');
 			this.$dtpElement.find('.dtp-clock-center').css
 			({
-				left: r + 23 + 'px',
-				marginTop: ((r + _mL) / 2) + 14 + 'px'
+				left: r + parseInt(pL) + parseInt(mL) - w + 'px',
+				marginTop: (r - (parseInt(mL) / 2)) - h + 'px'
 			});
 
 			this.animateHands();
+
+    		this._centerBox();
 		},
 		animateHands: function()
 		{	
@@ -718,24 +734,20 @@
 
 				if(!this.isAfterMinDate(startOfMonth, false, false))
 				{
-					this.$dtpElement.find('a.dtp-select-month-before').addClass('hidden');
-					//this.$dtpElement.find('a.dtp-select-year-before').addClass('hidden');
+					this.$dtpElement.find('a.dtp-select-month-before').addClass('invisible');
 				}
 				else
 				{
-					this.$dtpElement.find('a.dtp-select-month-before').removeClass('hidden');
-					//this.$dtpElement.find('a.dtp-select-year-before').removeClass('hidden');
+					this.$dtpElement.find('a.dtp-select-month-before').removeClass('invisible');
 				}
 
 				if(!this.isBeforeMaxDate(endOfMonth, false, false))
 				{
-					this.$dtpElement.find('a.dtp-select-month-after').addClass('hidden');
-					//this.$dtpElement.find('a.dtp-select-year-after').addClass('hidden');
+					this.$dtpElement.find('a.dtp-select-month-after').addClass('invisible');
 				}
 				else
 				{
-					this.$dtpElement.find('a.dtp-select-month-after').removeClass('hidden');
-					//this.$dtpElement.find('a.dtp-select-year-after').removeClass('hidden');
+					this.$dtpElement.find('a.dtp-select-month-after').removeClass('invisible');
 				}
 
 				var startOfYear = moment(date).locale(this.params.lang).startOf('year');
@@ -743,20 +755,20 @@
 
 				if(!this.isAfterMinDate(startOfYear, false, false))
 				{
-					this.$dtpElement.find('a.dtp-select-year-before').addClass('hidden');
+					this.$dtpElement.find('a.dtp-select-year-before').addClass('invisible');
 				}
 				else
 				{
-					this.$dtpElement.find('a.dtp-select-year-before').removeClass('hidden');
+					this.$dtpElement.find('a.dtp-select-year-before').removeClass('invisible');
 				}
 
 				if(!this.isBeforeMaxDate(endOfYear, false, false))
 				{
-					this.$dtpElement.find('a.dtp-select-year-after').addClass('hidden');
+					this.$dtpElement.find('a.dtp-select-year-after').addClass('invisible');
 				}
 				else
 				{
-					this.$dtpElement.find('a.dtp-select-year-after').removeClass('hidden');
+					this.$dtpElement.find('a.dtp-select-year-after').removeClass('invisible');
 				}
 			}
 		},
@@ -830,7 +842,12 @@
 		},
 		_onClick: function()
 		{
-			this.clickCount = 0;
+			this.currentView = 0;
+			this.$element.blur();
+
+			this.initDates();
+			
+			this.show();
 
 			if(this.params.date)
 			{
@@ -845,8 +862,19 @@
 					this.initHours();
 				}
 			}
-
-			$('#' + this.name).modal('show');
+		},
+		_onBackgroundClick: function(e)
+		{
+			e.stopPropagation();
+			this.hide();
+		},
+		_onElementClick: function(e)
+		{
+			e.stopPropagation();
+		},
+		_onCloseClick: function()
+		{
+			this.hide();
 		},
 		_onOKClick: function()
 		{
@@ -856,19 +884,20 @@
 					if(this.params.time === true)
 					{
 						this.initHours();
-						$('#' + this.name).modal('handleUpdate');
 					}
 					else
 					{
 						this.setElementValue();
-						$('#' + this.name).modal('hide');
+						this.hide();
 					}
 					break;
 				case 1: 
-					this.initMinutes(); $('#' + this.name).modal('handleUpdate'); break;
+					this.initMinutes(); 
+					break;
 				case 2: 
 					this.setElementValue();
-					$('#' + this.name).modal('hide'); break;
+					this.hide();
+					break;
 			}
 		},
 		_onCancelClick: function()
@@ -877,23 +906,27 @@
 			{
 				switch(this.currentView)
 				{
-					case 0: $('#' + this.name).modal('hide'); break;
+					case 0: 
+						this.hide();
+						break;
 					case 1: 
 						if(this.params.date)
 						{
-							this.initDate(); $('#' + this.name).modal('handleUpdate'); 
+							this.initDate();  
 						}
 						else
 						{
-							$('#' + this.name).modal('hide');
+							this.hide();
 						}
 						break;
-					case 2: this.initHours(); $('#' + this.name).modal('handleUpdate'); break;
+					case 2: 
+						this.initHours(); 
+						break;
 				}
 			}
 			else
 			{
-				$('#' + this.name).modal('hide');
+				this.hide();
 			}			
 		},
 		_onMonthBeforeClick: function()
@@ -999,6 +1032,25 @@
 		{
 			this._detachEvents();
 			this.$dtpElement.remove();
+		},
+		show: function()
+		{			
+			this.$dtpElement.removeClass('hidden');
+			this._centerBox();
+		},
+		hide: function()
+		{
+			this.$dtpElement.addClass('hidden');
+		},
+		resetDate: function()
+		{
+
+		},
+		_centerBox: function()
+		{
+			var h = (this.$dtpElement.height() - this.$dtpElement.find('.dtp-content').height()) / 2;
+			this.$dtpElement.find('.dtp-content').css('marginLeft', -(this.$dtpElement.find('.dtp-content').width() / 2) + 'px');
+			this.$dtpElement.find('.dtp-content').css('top', h + 'px');			
 		}
 	};
 })(jQuery, moment);
