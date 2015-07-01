@@ -1,12 +1,13 @@
 # bootstrap-material-datetimepicker
-DateTimePicker for bootstrap-material
+Material DateTimePicker 
+
+Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
 
 ### Updates
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
-| 2015-06-30		| T00rk 			| Fixed year navigation when minDate is set				 |
-| 2015-06-18		| T00rk 			| Fixed Timepicker rendering bug						 |
+| 2015-07-01		| T00rk 			| Redesigned element without using modal				 |
 | 2015-06-16		| T00rk 			| Use Timepicker alone / Display short time (12 hours)	 |
 | 2015-06-13		| T00rk 			| Fixed issue with HTML value tag 						 |
 | 2015-05-25		| T00rk 			| Changed repo name to bootstrap-material-datetimepicker * |
@@ -24,13 +25,12 @@ bootstrap-material-datepicker.css => bootstrap-material-date**time**picker.css
 	
 ### Prerequisites
 
-Bootstrap 3 [http://getbootstrap.com/](http://getbootstrap.com/)
-
-bootstrap-material-design [http://fezvrasta.github.io/bootstrap-material-design/](http://fezvrasta.github.io/bootstrap-material-design/)
-
 jquery [http://jquery.com/download/](http://jquery.com/download/)
 
 momentjs [http://momentjs.com/](http://momentjs.com/)
+
+Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">`
+
 
 ### Live Example
 
