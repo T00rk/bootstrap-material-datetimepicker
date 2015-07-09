@@ -93,7 +93,7 @@
 			}
 			else
 			{
-				if(typeof(this.$element.attr('value')) !== 'undefined' && this.$element.attr('value') !== null)
+				if(typeof(this.$element.attr('value')) !== 'undefined' && this.$element.attr('value') !== null && this.$element.attr('value') !== "")
 				{
 					if(typeof(this.$element.attr('value')) === 'string')
 					{
