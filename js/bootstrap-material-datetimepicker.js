@@ -17,7 +17,7 @@
 		this.element = element;
 		this.$element = $(element);
 
-		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, 'cancelText' : 'Cancel', 'okText' : 'OK' };
+		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, 'cancelText' : 'Cancel', 'okText' : 'OK', 'cleanText' : 'Clean' };
 		this.params = $.fn.extend(this.params, options);
 
 		this.name = "dtp_" + this.setName();
@@ -257,8 +257,9 @@
 										'</div>' +
 									'</div>' +
 									'<div class="dtp-buttons">' +
-										'<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
-										'<button class="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
+										'<button class="dtp-btn dtp-btn-clean btn btn-flat">' + this.params.cleanText + '</button>' +
+										'<button class="dtp-btn dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
+										'<button class="dtp-btn dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
 										'<div class="clearfix"></div>' +
 									'</div>' +
 								'</div>' +
@@ -274,6 +275,7 @@
 		},
 		initButtons: function()
 		{
+			this._attachEvent(this.$dtpElement.find('.dtp-btn-clean'), 'click', this._onCleanClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('.dtp-btn-cancel'), 'click', this._onCancelClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('.dtp-btn-ok'), 'click', this._onOKClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('a.dtp-select-month-before'), 'click', this._onMonthBeforeClick.bind(this));
@@ -928,6 +930,11 @@
 			{
 				this.hide();
 			}			
+		},
+		_onCleanClick: function()
+		{
+			this.hide();	
+			this.$element.val("").addClass("empty");
 		},
 		_onMonthBeforeClick: function()
 		{
