@@ -49,7 +49,7 @@
 
 .dtp .dtp-buttons { padding: 0 1rem 1rem 1rem; text-align: right; }
 
-.dtp .hidden { display: none; }
+.dtp.hidden, .dtp .hidden { display: none; }
 .dtp .invisible { visibility: hidden; }
 
 .dtp .left { float: left; }
