@@ -64,7 +64,7 @@
 			this._attachEvent(this.$dtpElement.find('.dtp-content'), 'click', this._onElementClick.bind(this));
 			this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
-			this._attachEvent(this.$element, 'focus', this._onClick.bind(this));
+			this._attachEvent(this.$element, 'focus', this._onFocus.bind(this));
 		},
 		initDays: function()
 		{
@@ -840,7 +840,7 @@
 				this._attachedEvents.splice(i,1);
 			}
 		},
-		_onClick: function()
+		_onFocus: function()
 		{
 			this.currentView = 0;
 			this.$element.blur();
