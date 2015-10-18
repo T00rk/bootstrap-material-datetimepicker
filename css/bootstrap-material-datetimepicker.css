@@ -48,6 +48,7 @@
 .dtp .dtp-hand.on { background: #8BC34A; }
 
 .dtp .dtp-buttons { padding: 0 1rem 1rem 1rem; text-align: right; }
+.dtp .dtp-btn { padding:5px 25px; }
 
 .dtp.hidden, .dtp .hidden { display: none; }
 .dtp .invisible { visibility: hidden; }
