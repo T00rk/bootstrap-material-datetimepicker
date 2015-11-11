@@ -12,7 +12,7 @@
     + '            <header class="dtp-header">'
     + '                <div class="dtp-actual-day">{{date.day}}</div>'
     + '                <div class="dtp-close text-right">'
-    + '                    <md-button ng-click="picker.hide()"><i class="material-icons">clear</i></md-button>'
+    + '                    <a href="#" ng-click="picker.hide()"><i class="material-icons">clear</i></a>'
     + '                </div>'
     + '            </header>'
     + '            <div class="dtp-date hidden">'
