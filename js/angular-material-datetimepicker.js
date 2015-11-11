@@ -1,19 +1,115 @@
-(function ($, moment) {
+(function (moment, $) {
   var pluginName = "bootstrapMaterialDatePicker";
+  var moduleName = "ngMaterialDatePicker";
   var pluginDataName = "plugin_" + pluginName;
 
   moment.locale('en');
 
-  function Plugin(element, options) {
+  var template = '<md-dialog class="dtp" layout="column" style="width: 300px;">'
+
+    + '    <md-dialog-content class="dtp-content">'
+    + '        <div class="dtp-date-view">'
+    + '            <header class="dtp-header">'
+    + '                <div class="dtp-actual-day">{{date.day}}</div>'
+    + '                <div class="dtp-close text-right">'
+    + '                    <md-button ng-click="picker.hide()"><i class="material-icons">clear</i></md-button>'
+    + '                </div>'
+    + '            </header>'
+    + '            <div class="dtp-date hidden">'
+    + '                <div>'
+    + '                    <div class="left center p10"><a href="#" class="dtp-select-month-before"'
+    + '                                                    ng-click="picker.selectMonthBefore()"><i class="material-icons">chevron_left</i></a>'
+    + '                    </div>'
+    + '                    <div class="dtp-actual-month p80">{{date.month}}</div>'
+    + '                    <div class="right center p10"><a href="#" class="dtp-select-month-after"'
+    + '                                                     ng-click="picker.selectMonthAfter()"><i class="material-icons">chevron_right</i></a>'
+    + '                    </div>'
+    + '                    <div class="clearfix"></div>'
+    + '                </div>'
+    + '                <div class="dtp-actual-num">{{date.date}}</div>'
+    + '                <div>'
+    + '                    <div class="left center p10"><a href="#" class="dtp-select-year-before"'
+    + '                                                    ng-click="picker.selectYearBefore()"><i class="material-icons">chevron_left</i></a>'
+    + '                    </div>'
+    + '                    <div class="dtp-actual-year p80">{{date.year}}</div>'
+    + '                    <div class="right center p10">' +
+    '                       <a href="#" ng-click="picker.selectYearAfter()" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>'
+    + '                    </div>'
+    + '                    <div class="clearfix"></div>'
+    + '                </div>'
+    + '            </div>'
+    + '            <div class="dtp-time hidden">'
+    + '                <div class="dtp-actual-maxtime">{{date.time24hr}}</div>'
+    + '            </div>'
+    + '            <div class="dtp-picker">'
+    + '                <div class="dtp-picker-calendar"></div>'
+    + '                <div class="dtp-picker-datetime hidden">'
+    + '                    <div class="dtp-actual-meridien">'
+    + '                        <div class="left p20">'
+    + '                            <a href="#" class="dtp-meridien-am" ng-click="picker.setMeridien(\'PM\')">AM</a>'
+    + '                        </div>'
+    + '                        <div class="dtp-actual-time p60"></div>'
+    + '                        <div class="right p20">'
+    + '                            <a href="#" class="dtp-meridien-pm" ng-click="picker.setMeridien(\'PM\')">PM</a>'
+    + '                        </div>'
+    + '                        <div class="clearfix"></div>'
+    + '                    </div>'
+    + '                    <div class="dtp-picker-clock"></div>'
+    + '                </div>'
+    + '            </div>'
+    + '        </div>'
+    + '    </md-dialog-content>'
+    + '    <md-dialog-actions class="dtp-buttons">'
+    + '            <md-button class="dtp-btn-cancel md-button" ng-click="picker.cancel()"> {{picker.params.cancelText}}</md-button>'
+    + '            <md-button class="dtp-btn-ok md-button" ng-click="picker.ok()"> {{picker.params.okText}}</md-button>'
+    + '      </md-dialog-actions>'
+
+    + '</md-dialog>';
+
+  angular.module(moduleName, ['ngMaterial'])
+    .directive('mdcDatetimePicker', ['$mdDialog',
+      function ($mdDialog) {
+
+        return {
+          restrict: 'A',
+          scope: {
+            currentDate: '=ngModel'
+          },
+          link: function (scope, element, attrs) {
+            var locals = {element: element, options: angular.extend({}, attrs, scope)};
+            //@TODO custom event to trigger input
+
+            element.focus(function (e) {
+              console.log('Current Date: ', scope.currentDate);
+              $mdDialog.show({
+                  template: template,
+                  controller: PluginController,
+                  controllerAs: 'picker',
+                  locals: locals,
+                  openFrom: element,
+                  parent: angular.element(document.body),
+                  bindToController: true
+                })
+                .then(function (v) {
+                  scope.currentDate = v;
+                })
+              ;
+            });
+          }
+        };
+      }])
+  ;
+
+  var PluginController = function ($mdDialog, $timeout) {
     this.currentView = 0;
+    this._dialog = $mdDialog;
 
     this.minDate;
     this.maxDate;
 
     this._attachedEvents = [];
 
-    this.element = element;
-    this.$element = $(element);
+    this.$element = $(this.element);
 
     this.params = {
       date: true,
@@ -28,46 +124,24 @@
       'cancelText': 'Cancel',
       'okText': 'OK'
     };
-    this.params = $.fn.extend(this.params, options);
 
-    this.name = "dtp_" + this.setName();
-    this.$element.attr("data-dtp", this.name);
+    this.params = angular.extend(this.params, this.options);
 
-    this.init();
-  }
-
-  $.fn[pluginName] = function (options, p) {
-    this.each(function () {
-      if (!$.data(this, pluginDataName)) {
-        $.data(this, pluginDataName, new Plugin(this, options));
-      }
-      else {
-        if (typeof($.data(this, pluginDataName)[options]) === 'function') {
-          $.data(this, pluginDataName)[options](p);
-        }
-        if (options === 'destroy') {
-          delete $.data(this, pluginDataName);
-        }
-      }
-    });
-    return this;
+    var picker = this;
+    $timeout(function () {
+      console.log('Initializing display');
+      picker.init();
+    }, 200);
+    //this.name = "dtp_" + this.setName();
+    //this.$element.attr("data-dtp", this.name);
   };
 
-  Plugin.prototype =
-  {
+  PluginController.prototype = {
     init: function () {
+      this.$dtpElement = angular.element('md-dialog:visible');
       this.initDays();
       this.initDates();
-
-      this.initTemplate();
-
-      this.initButtons();
-
-      this._attachEvent($(window), 'resize', this._centerBox(this));
-      this._attachEvent(this.$dtpElement.find('.dtp-content'), 'click', this._onElementClick.bind(this));
-      this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
-      this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
-      this._attachEvent(this.$element, 'focus', this._onFocus.bind(this));
+      this.start();
     },
     initDays: function () {
       this.days = [];
@@ -79,50 +153,28 @@
       }
     },
     initDates: function () {
-      if (this.$element.val().length > 0) {
-        if (typeof(this.params.format) !== 'undefined' && this.params.format !== null) {
-          this.currentDate = moment(this.$element.val(), this.params.format).locale(this.params.lang);
-        }
-        else {
-          this.currentDate = moment(this.$element.val()).locale(this.params.lang);
-        }
-      }
-      else {
-        if (typeof(this.$element.attr('value')) !== 'undefined' && this.$element.attr('value') !== null && this.$element.attr('value') !== "") {
-          if (typeof(this.$element.attr('value')) === 'string') {
-            if (typeof(this.params.format) !== 'undefined' && this.params.format !== null) {
-              this.currentDate = moment(this.$element.attr('value'), this.params.format).locale(this.params.lang);
-            }
-            else {
-              this.currentDate = moment(this.$element.attr('value')).locale(this.params.lang);
-            }
+      if (typeof(this.params.currentDate) !== 'undefined' && this.params.currentDate !== null) {
+        if (typeof(this.params.currentDate) === 'string') {
+          if (typeof(this.params.format) !== 'undefined' && this.params.format !== null) {
+            this.currentDate = moment(this.params.currentDate, this.params.format).locale(this.params.lang);
+          }
+          else {
+            this.currentDate = moment(this.params.currentDate).locale(this.params.lang);
           }
         }
         else {
-          if (typeof(this.params.currentDate) !== 'undefined' && this.params.currentDate !== null) {
-            if (typeof(this.params.currentDate) === 'string') {
-              if (typeof(this.params.format) !== 'undefined' && this.params.format !== null) {
-                this.currentDate = moment(this.params.currentDate, this.params.format).locale(this.params.lang);
-              }
-              else {
-                this.currentDate = moment(this.params.currentDate).locale(this.params.lang);
-              }
-            }
-            else {
-              if (typeof(this.params.currentDate.isValid) === 'undefined' || typeof(this.params.currentDate.isValid) !== 'function') {
-                var x = this.params.currentDate.getTime();
-                this.currentDate = moment(x, "x").locale(this.params.lang);
-              }
-              else {
-                this.currentDate = this.params.currentDate;
-              }
-            }
-            this.$element.val(this.currentDate.format(this.params.format));
+          if (typeof(this.params.currentDate.isValid) === 'undefined' || typeof(this.params.currentDate.isValid) !== 'function') {
+            var x = this.params.currentDate.getTime();
+            this.currentDate = moment(x, "x").locale(this.params.lang);
           }
-          else
-            this.currentDate = moment();
+          else {
+            this.currentDate = this.params.currentDate;
+          }
         }
+        this.$element.val(this.currentDate.format(this.params.format));
       }
+      else
+        this.currentDate = moment();
 
       if (typeof(this.params.minDate) !== 'undefined' && this.params.minDate !== null) {
         if (typeof(this.params.minDate) === 'string') {
@@ -170,80 +222,6 @@
       if (!this.isBeforeMaxDate(this.currentDate)) {
         this.currentDate = moment(this.maxDate);
       }
-    },
-    initTemplate: function () {
-      this.template = '<div class="dtp hidden" id="' + this.name + '">' +
-        '<div class="dtp-content">' +
-        '<div class="dtp-date-view">' +
-        '<header class="dtp-header">' +
-        '<div class="dtp-actual-day">Lundi</div>' +
-        '<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></</div>' +
-        '</header>' +
-        '<div class="dtp-date hidden">' +
-        '<div>' +
-        '<div class="left center p10">' +
-        '<a href="javascript:void(0);" class="dtp-select-month-before"><i class="material-icons">chevron_left</i></a>' +
-        '</div>' +
-        '<div class="dtp-actual-month p80">MAR</div>' +
-        '<div class="right center p10">' +
-        '<a href="javascript:void(0);" class="dtp-select-month-after"><i class="material-icons">chevron_right</i></a>' +
-        '</div>' +
-        '<div class="clearfix"></div>' +
-        '</div>' +
-        '<div class="dtp-actual-num">13</div>' +
-        '<div>' +
-        '<div class="left center p10">' +
-        '<a href="javascript:void(0);" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +
-        '</div>' +
-        '<div class="dtp-actual-year p80">2014</div>' +
-        '<div class="right center p10">' +
-        '<a href="javascript:void(0);" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +
-        '</div>' +
-        '<div class="clearfix"></div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="dtp-time hidden">' +
-        '<div class="dtp-actual-maxtime">23:55</div>' +
-        '</div>' +
-        '<div class="dtp-picker">' +
-        '<div class="dtp-picker-calendar"></div>' +
-        '<div class="dtp-picker-datetime hidden">' +
-        '<div class="dtp-actual-meridien">' +
-        '<div class="left p20">' +
-        '<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
-        '</div>' +
-        '<div class="dtp-actual-time p60"></div>' +
-        '<div class="right p20">' +
-        '<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
-        '</div>' +
-        '<div class="clearfix"></div>' +
-        '</div>' +
-        '<div class="dtp-picker-clock"></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="dtp-buttons">' +
-        '<button class="dtp-btn-cancel btn btn-flat md-button">' + this.params.cancelText + '</button>' +
-        '<button class="dtp-btn-ok btn btn-flat md-button">' + this.params.okText + '</button>' +
-        '<div class="clearfix"></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
-
-      if ($('body').find("#" + this.name).length <= 0) {
-        $('body').append(this.template);
-
-        this.dtpElement = $('body').find("#" + this.name);
-        this.$dtpElement = $(this.dtpElement);
-      }
-    },
-    initButtons: function () {
-      this._attachEvent(this.$dtpElement.find('.dtp-btn-cancel'), 'click', this._onCancelClick.bind(this));
-      this._attachEvent(this.$dtpElement.find('.dtp-btn-ok'), 'click', this._onOKClick.bind(this));
-      this._attachEvent(this.$dtpElement.find('a.dtp-select-month-before'), 'click', this._onMonthBeforeClick.bind(this));
-      this._attachEvent(this.$dtpElement.find('a.dtp-select-month-after'), 'click', this._onMonthAfterClick.bind(this));
-      this._attachEvent(this.$dtpElement.find('a.dtp-select-year-before'), 'click', this._onYearBeforeClick.bind(this));
-      this._attachEvent(this.$dtpElement.find('a.dtp-select-year-after'), 'click', this._onYearAfterClick.bind(this));
     },
     initMeridienButtons: function () {
       this.$dtpElement.find('a.dtp-meridien-am').off('click').on('click', this._onSelectAM.bind(this));
@@ -736,36 +714,24 @@
         this._attachedEvents.splice(i, 1);
       }
     },
-    _onFocus: function () {
+    start: function () {
       this.currentView = 0;
       this.$element.blur();
-
       this.initDates();
-
-      this.show();
-
       if (this.params.date) {
         this.$dtpElement.find('.dtp-date').removeClass('hidden');
         this.initDate();
-      }
-      else {
+      } else {
         if (this.params.time) {
           this.$dtpElement.find('.dtp-time').removeClass('hidden');
           this.initHours();
         }
       }
     },
-    _onBackgroundClick: function (e) {
-      e.stopPropagation();
-      this.hide();
-    },
     _onElementClick: function (e) {
       e.stopPropagation();
     },
-    _onCloseClick: function () {
-      this.hide();
-    },
-    _onOKClick: function () {
+    ok: function () {
       switch (this.currentView) {
         case 0:
           if (this.params.time === true) {
@@ -773,7 +739,7 @@
           }
           else {
             this.setElementValue();
-            this.hide();
+            this.hide(true);
           }
           break;
         case 1:
@@ -781,11 +747,11 @@
           break;
         case 2:
           this.setElementValue();
-          this.hide();
+          this.hide(true);
           break;
       }
     },
-    _onCancelClick: function () {
+    cancel: function () {
       if (this.params.time) {
         switch (this.currentView) {
           case 0:
@@ -808,19 +774,19 @@
         this.hide();
       }
     },
-    _onMonthBeforeClick: function () {
+    selectMonthBefore: function () {
       this.currentDate.subtract(1, 'months');
       this.initDate(this.currentDate);
     },
-    _onMonthAfterClick: function () {
+    selectMonthAfter: function () {
       this.currentDate.add(1, 'months');
       this.initDate(this.currentDate);
     },
-    _onYearBeforeClick: function () {
+    selectYearBefore: function () {
       this.currentDate.subtract(1, 'years');
       this.initDate(this.currentDate);
     },
-    _onYearAfterClick: function () {
+    selectYearAfter: function () {
       this.currentDate.add(1, 'years');
       this.initDate(this.currentDate);
     },
@@ -896,20 +862,20 @@
       this._detachEvents();
       this.$dtpElement.remove();
     },
-    show: function () {
-      this.$dtpElement.removeClass('hidden');
-      this._centerBox();
-    },
-    hide: function () {
-      this.$dtpElement.addClass('hidden');
+    hide: function (okBtn) {
+      if (okBtn) {
+        this._dialog.hide(this.currentDate);
+      } else {
+        this._dialog.cancel();
+      }
     },
     resetDate: function () {
 
     },
     _centerBox: function () {
-      var h = (this.$dtpElement.height() - this.$dtpElement.find('.dtp-content').height()) / 2;
-      this.$dtpElement.find('.dtp-content').css('marginLeft', -(this.$dtpElement.find('.dtp-content').width() / 2) + 'px');
-      this.$dtpElement.find('.dtp-content').css('top', h + 'px');
+      //var h = (this.$dtpElement.height() - this.$dtpElement.find('.dtp-content').height()) / 2;
+      //this.$dtpElement.find('.dtp-content').css('marginLeft', -(this.$dtpElement.find('.dtp-content').width() / 2) + 'px');
+      //this.$dtpElement.find('.dtp-content').css('top', h + 'px');
     }
   };
-})(jQuery, moment);
+})(moment, jQuery);
