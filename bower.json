@@ -19,7 +19,6 @@
     "css/bootstrap-material-datetimepicker.min.css"
   ],
   "ignore": [
-    "/.*",
     "_config.yml",
     "CNAME",
     "composer.json",

@@ -113,7 +113,8 @@
             }
 
             //@TODO custom event to trigger input
-            element.focus(function (e) {
+            element.on('focus', function (e) {
+              console.log('FOcused');
               var options = {};
               for (var i in attrs) {
                 if (scope.hasOwnProperty(i) && !angular.isUndefined(scope[i])) {

@@ -1,12 +1,14 @@
-# bootstrap-material-datetimepicker
-Material DateTimePicker 
+# Angular Material DateTimePicker
 
-Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
+Originally designed for Bootstrap Material, this has been modified to work with [Angular Material](https://material.angularjs.org/). This is an Android style date-time picker for Angular Material
 
-### Updates
+## Updates
+
+** I have kept this section of the document as an acknowledgement for all the work done on the original Bootstrap Material plugin **
 
 | Date				| Author			| Description											 |
-| ----------------- | ----------------- | ------------------------------------------------------ |
+| ----------------- | ----------------- | ----------- |
+| 2015-11-12		| logbon72		    | Adapted plugin for Angular Material |
 | 2015-10-19		| benletchford		| Fixed not being able to tab into input				 |
 | 2015-10-19		| drblue 			| Fixed erroneous package.json-file 					 |
 | 2015-10-19		| Perdona			| Fix auto resize when month has 6 weeks				 |
@@ -26,60 +28,51 @@ bootstrap-material-datepicker.js => bootstrap-material-date**time**picker.js
 
 bootstrap-material-datepicker.css => bootstrap-material-date**time**picker.css
 	
-### Prerequisites
+### Dependencies
 
-jquery [http://jquery.com/download/](http://jquery.com/download/)
+Depends on the following library:
 
-momentjs [http://momentjs.com/](http://momentjs.com/)
+- Angular Material & it's dependencies
+- MomentJS
 
-Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">`
+## Installing via Bower
+
+```
+bower install bootstrap-material-datetimepicker
+```
 
 
-### Live Example
+## Live Example
 
-Click [here](http://t00rk.github.io/bootstrap-material-datetimepicker/) to see
+Click [here](http://logbon72.github.io/angular-material-datetimepicker) to see live examples.
 
-### Usage
+## Usage
 
-	$('input').bootstrapMaterialDatePicker();
+Add the plugin module as a dependency to your AngularJS module:
 
-### bower
+```js
+    angular.module('myAwesomeModule', [
+      //other dependencies ignored
+      'ngMaterialDatePicker'
+    ]);
+```
 
-	bower install bootstrap-material-datetimepicker
-	
-### Parameters
+This plugin exposes a directive which should be used as an attribute for an input element. The directive is
+`mdc-datetime-picker`
+
+
+### Directive Attributes
+
+The directive accepts several attributes which are described below:
 
 | Name				| Type							| Description									|
 | ----------------- | ----------------------------- | --------------------------------------------- |
-| **format**		| String						| MomentJS Format								|
-| **shortTime**		| Boolean						| true => Display 12 hours AM|PM 				|
-| **minDate**		| (String\|Date\|Moment)		| Minimum selectable date						|
-| **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date						|
-| **currentDate**	| (String\|Date\|Moment)		| Initial Date									|
-| **date**			| Boolean						| true => Has Datepicker						|
-| **time**			| Boolean						| true => Has Timepicker						|
-| **cancelText**	| String						| Text for the cancel button (default: Cancel)	|
-| **okText**		| String						| Text for the OK button (default: OK)			|
-
-
-### Events
-
-| Name				| Parameters				| Description										|
-| ----------------- | ------------------------- | ------------------------------------------------- |
-| **beforeChange**	| event, date				| OK button is clicked								|
-| **change**		| event, date				| OK button is clicked and input value is changed	|
-| **dateSelected**	| event, date				| New date is selected								|
-
-
-### Methods
-
-        $('input').bootstrapMaterialDatePicker('setDate', moment());
-
-| Name				| Parameter					| Description					|
-| ----------------- | ------------------------- | ----------------------------- |
-| **setDate**		| (String\|Date\|Moment)	| Set initial date				|
-| **setMinDate**	| (String\|Date\|Moment)	| Set minimum selectable date	|
-| **setMaxDate**	| (String\|Date\|Moment)	| Set maximum selectable date	|
-| **destroy**		| NULL						| Destroy the datepicker		|
-
-	
+| **ng-model**	    | (String\|Date\|Moment)		| Initial Date or model to assign the date to|
+| **format**		| String						| [MomentJS Format](momentjs.com/docs/#/parsing/string-format/),defaults to `HH:mm` for time picker only, `YYYY-MM-DD` for date picker only and `YYYY-MM-DD HH:mm` for both timepicker and date picker |
+| **short-time**	| Boolean						| true => Display 12 hours AM\|PM 				|
+| **min-date**		| (String\|Date\|Moment)		| Minimum selectable date						|
+| **max-date**		| (String\|Date\|Moment)		| Maximum selectable date						|
+| **date**			| Boolean						| true => Has Datepicker (default: true)        |
+| **time**			| Boolean						| true => Has Timepicker (default: true)		|
+| **cancel-text**	| String						| Text for the cancel button (default: Cancel)	|
+| **ok-text**		| String						| Text for the OK button (default: OK)			|
