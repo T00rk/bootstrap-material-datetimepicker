@@ -89,20 +89,41 @@
             shortTime: '='
           },
           link: function (scope, element, attrs) {
-            var scopeCopy = {};
-            for (var i in attrs) {
-              if (scope.hasOwnProperty(i) && !angular.isUndefined(scope[i])) {
-                scopeCopy[i] = scope[i];
-              }
-
-              if (angular.isUndefined(attrs[i]) && scope.hasOwnProperty(i)) {
-                delete attrs[i];
+            if(!attrs.format){
+              if(scope.date && scope.time){
+                attrs.format = 'YYYY-MM-DD HH:mm:ss';
+              } else if(scope.date){
+                attrs.format = 'YYYY-MM-DD';
+              } else {
+                attrs.format = 'HH:mm';
               }
             }
 
-            var locals = {element: element, options: angular.extend({}, attrs, scopeCopy)};
+            var setInputVal = function(){
+              if(angular.isObject(scope.currentDate)){
+                var d = moment(scope.currentDate);
+                element.attr('value',d.format(attrs.format));
+
+              }
+            };
+
+            setInputVal();
+
             //@TODO custom event to trigger input
             element.focus(function (e) {
+              var scopeCopy = {};
+              for (var i in attrs) {
+                if (scope.hasOwnProperty(i) && !angular.isUndefined(scope[i])) {
+                  scopeCopy[i] = scope[i];
+                }
+                if (angular.isUndefined(attrs[i]) && scope.hasOwnProperty(i)) {
+                  delete attrs[i];
+                }
+              }
+
+              scopeCopy.currentDate = scope.currentDate;
+              var locals = {element: element, options: angular.extend({}, attrs, scopeCopy)};
+
               $mdDialog.show({
                   template: template,
                   controller: PluginController,
@@ -113,8 +134,8 @@
                   bindToController: true
                 })
                 .then(function (v) {
-                  //scope.currentDate = v ? v._d : v;
-                  scope.currentDate = v;
+                  scope.currentDate = v ? v._d : v;
+                  //scope.currentDate = v;
                 })
               ;
             });
@@ -123,7 +144,7 @@
       }])
   ;
 
-  var PluginController = function ($scope, $mdDialog, $timeout) {
+  var PluginController = function ($scope, $mdDialog) {
     this.currentView = VIEW_STATES.DATE;
     this._dialog = $mdDialog;
 
@@ -151,19 +172,7 @@
 
     this.meridien = 'AM';
     this.params = angular.extend(this.params, this.options);
-
-    var picker = this;
-    this.safeApply = function (fn) {
-      var phase = $scope.$root.$$phase;
-      if (phase !== '$apply' && phase !== '$digest') {
-        return $scope.$apply(fn);
-      }
-    };
-    //$timeout(function () {
-    //  console.log('Initializing display');
-    //
-    //}, 200);
-    picker.init();
+    this.init();
   };
 
   PluginController.prototype = {
@@ -179,21 +188,22 @@
       return moment(date).minutes(minutes);
     },
     initDates: function () {
+      var that = this;
       var _dateParam = function (input, fallback) {
         var ret = null;
         if (angular.isDefined(input) && input !== null) {
           if (angular.isString(input)) {
-            if (typeof(this.params.format) !== 'undefined' && this.params.format !== null) {
-              ret = moment(input, this.params.format).locale(this.params.lang);
+            if (typeof(that.params.format) !== 'undefined' && that.params.format !== null) {
+              ret = moment(input, that.params.format).locale(that.params.lang);
             }
             else {
-              ret = moment(input).locale(this.params.lang);
+              ret = moment(input).locale(that.params.lang);
             }
           }
           else {
             if (angular.isDate(input)) {
               var x = input.getTime();
-              ret = moment(x, "x").locale(this.params.lang);
+              ret = moment(x, "x").locale(that.params.lang);
             } else if (input._isAMomentObject) {
               ret = input;
             }
@@ -284,8 +294,6 @@
       }
 
       return _return;
-    },
-    showTime: function (date) {
     },
     selectDate: function (date) {
       if (date) {
@@ -436,15 +444,10 @@
     },
     convertHours: function (h) {
       var _return = h;
-
       if ((h < 12) && this.isPM())
         _return += 12;
 
       return _return;
-    },
-    setDate: function (date) {
-      this.params.currentDate = date;
-      this.initDates();
     },
     hide: function (okBtn) {
       if (okBtn) {
@@ -569,7 +572,7 @@
         var template = '<div class="dtp-picker-clock"><span ng-if="!points || points.length < 1">&nbsp;</span>'
           + '<div ng-repeat="point in points" class="dtp-picker-time" style="margin-left: {{point.left}}px; margin-top: {{point.top}}px;">'
           + '   <a href="#" ng-class="{selected: point.value===currentValue}" class="dtp-select-hour" ng-click="setTime(point.value)" ng-dblclick="setTime(point.value);picker.ok();" ng-if="pointAvailable(point)">{{point.display}}</a>'
-          + '   <a href="#" disabled="" class="dtp-select-hour" ng-if="!pointAvailable(point)">{{point.display}}</a>'
+          + '   <a href="#" class="disabled dtp-select-hour" ng-if="!pointAvailable(point)">{{point.display}}</a>'
           + '</div>'
           + '<div class="dtp-hand dtp-hour-hand"></div>'
           + '<div class="dtp-hand dtp-minute-hand"></div>'
@@ -695,9 +698,9 @@
             };
 
 
-            var unwatcher = scope.$watch(function(){
+            var unwatcher = scope.$watch(function () {
               return element.find('div').length;
-            }, function(){
+            }, function () {
               exec();
               unwatcher();
             });
@@ -706,5 +709,3 @@
       }])
   ;
 })(moment, jQuery);
-
-
