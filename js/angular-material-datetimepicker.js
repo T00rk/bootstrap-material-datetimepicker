@@ -62,7 +62,7 @@
     + '                        <div class="left p20">'
     + '                            <a href="#" class="dtp-meridien-am" ng-class="{selected: picker.meridien == \'AM\'}" ng-click="picker.selectAM()">AM</a>'
     + '                        </div>'
-    + '                        <div ng-show="false && !picker.timeMode" class="dtp-actual-time p60">{{picker.currentNearest5Minute().format(picker.params.shortTime ? "hh:mm" : "HH:mm")}}</div>'
+    + '                        <div ng-show="!picker.timeMode" class="dtp-actual-time p60">{{picker.currentNearest5Minute().format(picker.params.shortTime ? "hh:mm" : "HH:mm")}}</div>'
     + '                        <div class="right p20">'
     + '                            <a href="#" class="dtp-meridien-pm" ng-class="{selected: picker.meridien == \'PM\'}" ng-click="picker.selectPM()">PM</a>'
     + '                        </div>'
@@ -362,16 +362,6 @@
       _date.minute(minute).second(0);
       return this.isAfterMinDate(_date, true, true) && this.isBeforeMaxDate(_date, true, true);
     },
-    _attachEvent: function (el, ev, fn) {
-      el.on(ev, fn);
-      this._attachedEvents.push([el, ev, fn]);
-    },
-    _detachEvents: function () {
-      for (var i = this._attachedEvents.length - 1; i >= 0; i--) {
-        this._attachedEvents[i][0].off(this._attachedEvents[i][1], this._attachedEvents[i][2]);
-        this._attachedEvents.splice(i, 1);
-      }
-    },
     start: function () {
       this.currentView = VIEW_STATES.DATE;
       //this.initDates();
@@ -382,9 +372,6 @@
           this.initHours();
         }
       }
-    },
-    _onElementClick: function (e) {
-      e.stopPropagation();
     },
     ok: function () {
       switch (this.currentView) {
@@ -648,9 +635,9 @@
               //picker.initHands(true);
 
               var clockCenter = element[0].querySelector('.dtp-clock-center');
-              var centerWidth = clockCenter.offsetWidth / 2,
-                centerHeight = clockCenter.offsetHeight / 2;
-              var _hL = r / 1.7;
+              var centerWidth = (clockCenter.offsetWidth / 2) || 7.5,
+                centerHeight = (clockCenter.offsetHeight / 2) || 7.5;
+              var _hL = r / 1.8;
               var _mL = r / 1.5;
 
               angular.element(element[0].querySelector('.dtp-hour-hand')).css({
