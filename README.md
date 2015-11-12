@@ -1,6 +1,11 @@
 # Angular Material DateTimePicker
 
-Originally designed for Bootstrap Material, this has been modified to work with [Angular Material](https://material.angularjs.org/). This is an Android style date-time picker for Angular Material
+Originally designed for Bootstrap Material, this has been modified to work with [Angular Material](https://material.angularjs.org/). This is an Android style date-time picker for Angular Material. Some added features include:
+
+- Double click to select date or time
+- Swipe left to go to next month or Swipe right to go to previous month.
+
+
 
 ## Updates
 
@@ -33,6 +38,7 @@ bootstrap-material-datepicker.css => bootstrap-material-date**time**picker.css
 Depends on the following library:
 
 - Angular Material & it's dependencies
+- Angular Touch
 - MomentJS
 
 ## Installing via Bower
@@ -58,7 +64,18 @@ Add the plugin module as a dependency to your AngularJS module:
 ```
 
 This plugin exposes a directive which should be used as an attribute for an input element. The directive is
-`mdc-datetime-picker`
+`mdc-datetime-picker`. An example of this is given below:
+
+```html
+    <md-input-container flex-gt-md="30">
+        <label>Timepicker Only</label>
+        <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true"
+               placeholder="Time"
+               min-date="minDate"
+               format="hh:mm a"
+               ng-model="time">
+    </md-input-container>
+```
 
 
 ### Directive Attributes
