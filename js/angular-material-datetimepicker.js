@@ -1,7 +1,6 @@
-(function (moment, $) {
-  var pluginName = "bootstrapMaterialDatePicker";
+(function (moment) {
+  'use strict';
   var moduleName = "ngMaterialDatePicker";
-  var pluginDataName = "plugin_" + pluginName;
 
   var VIEW_STATES = {
     DATE: 0,
@@ -80,50 +79,49 @@
 
         return {
           restrict: 'A',
+          require: 'ngModel',
           scope: {
             currentDate: '=ngModel',
             time: '=',
             date: '=',
             minDate: '=',
             maxDate: '=',
-            shortTime: '='
+            shortTime: '=',
+            format: '@',
+            cancelText: '@',
+            okText: '@'
           },
-          link: function (scope, element, attrs) {
-            if(!attrs.format){
-              if(scope.date && scope.time){
-                attrs.format = 'YYYY-MM-DD HH:mm:ss';
-              } else if(scope.date){
-                attrs.format = 'YYYY-MM-DD';
+          link: function (scope, element, attrs, ngModel) {
+            if (!scope.format) {
+              if (scope.date && scope.time) {
+                scope.format = 'YYYY-MM-DD HH:mm:ss';
+              } else if (scope.date) {
+                scope.format = 'YYYY-MM-DD';
               } else {
-                attrs.format = 'HH:mm';
+                scope.format = 'HH:mm';
               }
             }
 
-            var setInputVal = function(){
-              if(angular.isObject(scope.currentDate)){
-                var d = moment(scope.currentDate);
-                element.attr('value',d.format(attrs.format));
+            if (angular.isString(scope.currentDate) && scope.currentDate !== '') {
+              scope.currentDate = moment(scope.currentDate, scope.format);
+            }
 
-              }
-            };
-
-            setInputVal();
+            if (ngModel) {
+              ngModel.$formatters.push(function (value) {
+                return moment(value).format(scope.format);
+              });
+            }
 
             //@TODO custom event to trigger input
             element.focus(function (e) {
-              var scopeCopy = {};
+              var options = {};
               for (var i in attrs) {
                 if (scope.hasOwnProperty(i) && !angular.isUndefined(scope[i])) {
-                  scopeCopy[i] = scope[i];
-                }
-                if (angular.isUndefined(attrs[i]) && scope.hasOwnProperty(i)) {
-                  delete attrs[i];
+                  options[i] = scope[i];
                 }
               }
-
-              scopeCopy.currentDate = scope.currentDate;
-              var locals = {element: element, options: angular.extend({}, attrs, scopeCopy)};
-
+              options.currentDate = scope.currentDate;
+              var locals = {element: element, options: options};
               $mdDialog.show({
                   template: template,
                   controller: PluginController,
@@ -153,7 +151,7 @@
 
     this._attachedEvents = [];
 
-    this.$element = $(this.element);
+    this.$element = angular.element(this.element);
     this.VIEWS = VIEW_STATES;
 
     this.params = {
@@ -185,13 +183,16 @@
     currentNearest5Minute: function () {
       var date = this.currentDate || moment();
       var minutes = (5 * Math.round(date.minute() / 5));
+      if (minutes >= 60) {
+        minutes = 55; //always push down
+      }
       return moment(date).minutes(minutes);
     },
     initDates: function () {
       var that = this;
       var _dateParam = function (input, fallback) {
         var ret = null;
-        if (angular.isDefined(input) && input !== null) {
+        if (angular.isDefined(input) && input !== null && input !== '') {
           if (angular.isString(input)) {
             if (typeof(that.params.format) !== 'undefined' && that.params.format !== null) {
               ret = moment(input, that.params.format).locale(that.params.lang);
@@ -297,7 +298,7 @@
     },
     selectDate: function (date) {
       if (date) {
-        this.currentDate = date;
+        this.currentDate = moment(date);
         if (!this.isAfterMinDate(this.currentDate)) {
           this.currentDate = moment(this.minDate);
         }
@@ -305,7 +306,7 @@
         if (!this.isBeforeMaxDate(this.currentDate)) {
           this.currentDate = moment(this.maxDate);
         }
-
+        this.currentDate.locale(this.params.lang);
         this.meridien = this.currentDate.hour() >= 12 ? 'PM' : 'AM';
       }
     },
@@ -321,14 +322,6 @@
     },
     isPM: function () {
       return this.meridien === 'PM';
-    },
-    setElementValue: function () {
-      this.$element.trigger('beforeChange', this.currentDate);
-      if (typeof($.material) !== 'undefined') {
-        this.$element.removeClass('empty');
-      }
-      this.$element.val(moment(this.currentDate).locale(this.params.lang).format(this.params.format));
-      this.$element.trigger('change', this.currentDate);
     },
     isPreviousMonthVisible: function () {
       return this.currentDate && this.isAfterMinDate(moment(this.currentDate).startOf('month'), false, false);
@@ -384,7 +377,6 @@
             this.initHours();
           }
           else {
-            this.setElementValue();
             this.hide(true);
           }
           break;
@@ -392,7 +384,6 @@
           this.initMinutes();
           break;
         case VIEW_STATES.MINUTE:
-          this.setElementValue();
           this.hide(true);
           break;
       }
@@ -489,7 +480,10 @@
               var generateCalendar = function (date) {
                 var _calendar = {};
                 if (date !== null) {
-                  var startOfMonth = moment(date).locale(picker.params.lang).startOf('month');
+                  var startOfMonth = moment(date).locale(picker.params.lang).startOf('month')
+                    .hour(date.hour())
+                    .minute(date.minute())
+                    ;
                   var endOfMonth = moment(date).locale(picker.params.lang).endOf('month');
 
                   var iNumDay = startOfMonth.format('d');
@@ -656,15 +650,16 @@
             };
 
             var animateHands = function () {
-              var h = picker.currentDate.hour();
-              var m = picker.currentDate.minute();
+              var _date = picker.currentNearest5Minute();
+              var h = _date.hour();
+              var m = _date.minute();
 
               rotateElement(element.find('.dtp-hour-hand'), (360 / 12) * h);
               rotateElement(element.find('.dtp-minute-hand'), ((360 / 60) * (5 * Math.round(m / 5))));
             };
 
             var rotateElement = function (el, deg) {
-              $(el).css({
+              angular.element(el).css({
                 WebkitTransform: 'rotate(' + deg + 'deg)',
                 '-moz-transform': 'rotate(' + deg + 'deg)'
               });
@@ -697,7 +692,6 @@
               return minuteMode ? picker.isMinuteAvailable(point.value) : picker.isHourAvailable(point.value);
             };
 
-
             var unwatcher = scope.$watch(function () {
               return element.find('div').length;
             }, function () {
@@ -708,4 +702,4 @@
         }
       }])
   ;
-})(moment, jQuery);
+})(moment);

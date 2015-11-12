@@ -5,97 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />-->
     <!--<link rel="stylesheet" href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/material.min.css" />-->
-    <link href='http://fonts.googleapis.com/css?family=RobotoDraft:400,500' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" rel="stylesheet">
     <link href="bower_components/angular-material/angular-material.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="./css/material-datetimepicker.css" type="text/css"/>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>-->
     <!--<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>-->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-material/angular-material.min.js"></script>
-    <script type="text/javascript" src="bower_components/momentjs/moment.js"></script>
-    <script type="text/javascript" src="./js/angular-material-datetimepicker.js"></script>
-    <script type="text/javascript" src="./js/demo.js"></script>
-
-    <!--<style>-->
-    <!--body-->
-    <!--{-->
-    <!--padding-top: 70px;-->
-    <!--font-family: 'Roboto', sans-serif;-->
-    <!--}-->
-    <!--h2-->
-    <!--{-->
-    <!--padding: 0 20px 10px 20px;-->
-    <!--font-size: 20px;-->
-    <!--font-weight: 400;-->
-    <!--}-->
-    <!--.form-control-wrapper-->
-    <!--{-->
-    <!--margin: 10px 20px;-->
-    <!--}-->
-    <!--code-->
-    <!--{-->
-    <!--padding: 10px;-->
-    <!--background: #eee!important;-->
-    <!--display: block;-->
-    <!--color: #000;-->
-    <!--}-->
-    <!--code > p-->
-    <!--{-->
-    <!--font-weight: bold;-->
-    <!--color: #000;-->
-    <!--font-size: 1.5em;-->
-    <!--}-->
-    <!--@media(max-width: 300px)-->
-    <!--{-->
-    <!--.well { margin : 0}-->
-    <!--}-->
-    <!--</style>-->
 </head>
 <body ng-controller="DemoCtrl" layout="column">
 <md-content class="md-padding">
     <div layout="column">
-        <h1>Bootstrap Material DatePicker</h1>
+        <h1>Angular Material DatePicker</h1>
     </div>
-    <div>
-        <h2>Date Picker</h2>
 
-        <div layout="column" flex="70">
-            <md-input-container>
-                <label>Date</label>
-                <input time="false" date="true" mdc-datetime-picker type="text" id="date"
-                       class="form-control floating-label"
-                       placeholder="Date"
-                       ng-model="date" min-date="minDate" max-date="maxDate">
-            </md-input-container>
+    <md-card layout="column">
+        <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span>Datetime Pickers</span>
+                </h2>
+            </div>
+        </md-toolbar>
+        <md-card-content class="md-padding">
+            <p>
+                You can double click / double tap to male selections.
+            </p>
 
-            <md-input-container>
-                <label>Time</label>
-                <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true"
-                       class="form-control floating-label"
-                       placeholder="Time"
-                       min-date="minDate"
-                       ng-model-options="{ updateOn: 'blur'}"
-                       ng-model="time">
-            </md-input-container>
+            <div layout="row" layout-align="center center" layout-sm="column">
+                <md-input-container flex="30">
+                    <label>Datepicker Only</label>
+                    <input time="false" date="true" mdc-datetime-picker type="text" id="date"
+                           placeholder="Date"
+                           ng-model="date" min-date="minDate" max-date="maxDate">
+                </md-input-container>
+                <div class="md-padding" flex="grow" ex-source-code target="input"></div>
+            </div>
 
-            <md-input-container>
-                <label>Date Time</label>
-                <input mdc-datetime-picker date="true" time="true" type="text" id="datetime"
-                       class="form-control floating-label"
-                       placeholder="Date"
-                       ng-model="dateTime">
-            </md-input-container>
+            <div layout="row" layout-align="center center" layout-sm="column">
+                <md-input-container flex="30">
+                    <label>Timepicker Only</label>
+                    <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true"
+                           placeholder="Time"
+                           min-date="minDate"
+                           format="hh:mm a"
+                           ng-model="time">
+                </md-input-container>
+                <div class="md-padding" flex="grow" ex-source-code target="input"></div>
+            </div>
 
-        </div>
-    </div>
+            <div layout="row" layout-align="center center" layout-sm="column">
+                <md-input-container flex="30">
+                    <label>Date/Time Picker</label>
+                    <input mdc-datetime-picker date="true" time="true" type="text" id="datetime"
+                           placeholder="Date"
+                           min-date="date"
+                           ng-model="dateTime">
+                </md-input-container>
+                <div class="md-padding" flex="grow" ex-source-code target="input"></div>
+            </div>
+
+            <div layout="row" layout-align="center center" layout-sm="column">
+                <div layout="column" flex="30" class="range">
+                    <md-input-container>
+                        <label>Start Date/Time</label>
+                        <input mdc-datetime-picker date="true" time="true" type="text"
+                               placeholder="Date"
+                               max-date="dateTimeEnd"
+                               ng-model="dateTimeStart"
+                        />
+                    </md-input-container>
+                    <md-input-container>
+                        <label>End Date/Time</label>
+                        <input mdc-datetime-picker date="true" time="true" type="text"
+                               placeholder="Date"
+                               min-date="dateTimeStart"
+                               ng-model="dateTimeEnd"
+                        />
+                    </md-input-container>
+                </div>
+
+                <div class="md-padding" flex="grow" ex-source-code target="div.range" title="DateRange Example"></div>
+            </div>
+
+        </md-card-content>
+
+    </md-card>
 </md-content>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+<script type="text/javascript" src="bower_components/momentjs/moment.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+<script type="text/javascript" src="./beautifier.js"></script>
+<script type="text/javascript" src="./js/angular-material-datetimepicker.js"></script>
+<script type="text/javascript" src="./js/demo.js"></script>
 
 </body>
 </html>

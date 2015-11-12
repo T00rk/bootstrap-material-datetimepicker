@@ -1,11 +1,11 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 md-dialog.dtp {
-    font-family: RobotoDraft, Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
     background-color: #fff;
 }
-
 
 .dtp table {
     border-spacing: 0;
