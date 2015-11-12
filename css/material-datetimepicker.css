@@ -5,6 +5,11 @@ md-dialog.dtp {
     line-height: 1.42857143;
     color: #333;
     background-color: #fff;
+    max-height: none;
+}
+
+.dtp *:focus {
+    outline: none !important;
 }
 
 .dtp table {
@@ -106,10 +111,9 @@ md-dialog.dtp {
 }
 
 .dtp table.dtp-picker-days tr > td {
-    font-weight: 700;
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
-    padding: 10px 3px;
+    padding: 5px 0;
 }
 
 .dtp table.dtp-picker-days tr > td > span.dtp-select-day {
@@ -119,7 +123,7 @@ md-dialog.dtp {
 .dtp table.dtp-picker-days tr > td > a, .dtp .dtp-picker-time > a {
     color: #212121;
     text-decoration: none;
-    padding: 4px 5px 5px 6px;
+    padding: 10px;
     border-radius: 50% !important;
 }
 
@@ -187,10 +191,9 @@ md-dialog.dtp {
     position: absolute;
     width: 30px;
     height: 30px;
-    font-size: 1em;
+    font-size: 1.1em;
     border-radius: 50%;
     cursor: pointer;
-    font-weight: 500;
     text-align: center !important;
 }
 
