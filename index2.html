@@ -69,7 +69,8 @@
         <div layout="column" flex="70">
             <md-input-container>
                 <label>Date</label>
-                <input time="false" date="true" mdc-datetime-picker type="text" id="date" class="form-control floating-label"
+                <input time="false" date="true" mdc-datetime-picker type="text" id="date"
+                       class="form-control floating-label"
                        placeholder="Date"
                        ng-model="date" min-date="minDate" max-date="maxDate">
             </md-input-container>
@@ -78,7 +79,8 @@
                 <label>Time</label>
                 <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true"
                        class="form-control floating-label"
-                       placeholder="Date"
+                       placeholder="Time"
+                       min-date="minDate"
                        ng-model="time">
             </md-input-container>
 
@@ -93,7 +95,6 @@
         </div>
     </div>
 </md-content>
-
 
 </body>
 </html>
