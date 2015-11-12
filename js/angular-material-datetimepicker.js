@@ -8,6 +8,14 @@
     MINUTE: 2
   };
 
+  var css = function (el, name) {
+    if ('jQuery' in window) {
+      return jQuery(el).css(name);
+    } else {
+      el = angular.element(el);
+      return ('getComputedStyle' in window) ? window.getComputedStyle(el[0])[name] : el.css(name);
+    }
+  };
   moment.locale('en');
 
   var template = '<md-dialog class="dtp" layout="column" style="width: 300px;">'
@@ -581,22 +589,27 @@
             var minuteMode = attrs.mode === 'minutes';
             var picker = scope.picker;
             //banking on the fact that there will only be one at a time
-            var componentRoot = angular.element('md-dialog.dtp');
+            var componentRoot = document.querySelector('md-dialog.dtp');
             var exec = function () {
-              var clock = element.find('.dtp-picker-clock'), pickerEl = componentRoot.find('.dtp-picker');
-              var w = componentRoot.find('.dtp-content').width();
-              var pl = pickerEl.css('paddingLeft').replace('px', '');
-              var pr = pickerEl.css('paddingRight').replace('px', '');
-              var ml = element.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
-              var mr = element.find('.dtp-picker-clock').css('marginRight').replace('px', '');
-              //set width
-              clock.innerWidth(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
-              var pL = parseInt(pickerEl.css('paddingLeft').replace('px', ''));
-              var pT = parseInt(pickerEl.css('paddingTop').replace('px', ''));
-              var mL = parseInt(clock.css('marginLeft').replace('px', ''));
-              var mT = parseInt(clock.css('marginTop').replace('px', ''));
+              var clock = angular.element(element[0].querySelector('.dtp-picker-clock')),
+                pickerEl = angular.element(componentRoot.querySelector('.dtp-picker'));
 
-              var r = (clock.innerWidth() / 2);
+              var w = componentRoot.querySelector('.dtp-content').offsetWidth;
+              var pl = parseInt(css(pickerEl, 'paddingLeft').replace('px', '')) || 0;
+              var pr = parseInt(css(pickerEl, 'paddingRight').replace('px', '')) || 0;
+              var ml = parseInt(css(clock, 'marginLeft').replace('px', '')) || 0;
+              var mr = parseInt(css(clock, 'marginRight').replace('px', '')) || 0;
+              //set width
+              var clockWidth = (w - (ml + mr + pl + pr));
+              clock.css('width', (clockWidth) + 'px');
+
+              console.log('CSS Width: ', [w, ml, mr, pl, pr]);
+              var pL = parseInt(css(pickerEl, 'paddingLeft').replace('px', '')) || 0;
+              var pT = parseInt(css(pickerEl, 'paddingTop').replace('px', '')) || 0;
+              var mL = parseInt(css(clock, 'marginLeft').replace('px', '')) || 0;
+              var mT = parseInt(css(clock, 'marginTop').replace('px', '')) || 0;
+
+              var r = (clockWidth / 2);
               var j = r / 1.2; //???
 
               var points = [];
@@ -622,28 +635,29 @@
 
               scope.points = points;
               setCurrentValue();
-              clock.css('height', (clock.width()) + (parseInt(pT) + parseInt(mT)) + 'px');
+              clock.css('height', clockWidth + 'px');
               //picker.initHands(true);
 
-              var centerWidth = element.find('.dtp-clock-center').width() / 2;
-              var centerHeight = element.find('.dtp-clock-center').height() / 2;
+              var clockCenter = element[0].querySelector('.dtp-clock-center');
+              var centerWidth = clockCenter.offsetWidth / 2,
+                centerHeight = clockCenter.offsetHeight / 2;
               var _hL = r / 1.7;
               var _mL = r / 1.5;
 
-              element.find('.dtp-hour-hand').css({
+              angular.element(element[0].querySelector('.dtp-hour-hand')).css({
                 left: r + (mL * 1.5) + 'px',
                 height: _hL + 'px',
                 marginTop: (r - _hL - pL) + 'px'
               }).addClass(!minuteMode ? 'on' : '');
 
-              element.find('.dtp-minute-hand').css
+              angular.element(element[0].querySelector('.dtp-minute-hand')).css
               ({
                 left: r + (mL * 1.5) + 'px',
                 height: _mL + 'px',
                 marginTop: (r - _mL - pL) + 'px'
               }).addClass(minuteMode ? 'on' : '');
 
-              element.find('.dtp-clock-center').css({
+              angular.element(clockCenter).css({
                 left: (r + pL + mL - centerWidth) + 'px',
                 marginTop: (r - (mL / 2)) - centerHeight + 'px'
               });
@@ -655,8 +669,9 @@
               var h = _date.hour();
               var m = _date.minute();
 
-              rotateElement(element.find('.dtp-hour-hand'), (360 / 12) * h);
-              rotateElement(element.find('.dtp-minute-hand'), ((360 / 60) * (5 * Math.round(m / 5))));
+              rotateElement(angular.element(element[0].querySelector('.dtp-hour-hand')), (360 / 12) * h);
+              var mdg = ((360 / 60) * (5 * Math.round(m / 5)));
+              rotateElement(angular.element(element[0].querySelector('.dtp-minute-hand')), mdg);
             };
 
             var rotateElement = function (el, deg) {
@@ -694,7 +709,7 @@
             };
 
             var unwatcher = scope.$watch(function () {
-              return element.find('div').length;
+              return element[0].querySelectorAll('div').length;
             }, function () {
               exec();
               unwatcher();
@@ -703,4 +718,6 @@
         }
       }])
   ;
+
+
 })(moment);

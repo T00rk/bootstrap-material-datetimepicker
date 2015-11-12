@@ -20,7 +20,7 @@
         template: '<h4>{{title}}</h4><pre  hljs class="html"><code>{{sourceCode}}</code></pre>',
         scope: {},
         link: function (scope, element, attrs) {
-          var tmp = element.parent().find(attrs.target || 'md-input-container');
+          var tmp = angular.element((element.parent()[0]).querySelector(attrs.target || 'md-input-container'));
           if (tmp.length) {
             scope.title = attrs.title || "Source Code";
             var sourceCode = tmp[0].outerHTML
@@ -43,7 +43,7 @@
       return {
         link: function (scope, element) {
           $timeout(function () {
-            hljs.highlightBlock(element.find('code')[0]);
+            hljs.highlightBlock(element[0].querySelector('code'));
           }, 100);
         }
       };
