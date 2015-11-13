@@ -29,34 +29,19 @@
     + '                </div>'
     + '            </header>'
     + '            <div class="dtp-date" ng-show="picker.params.date">'
-    + '                <div>'
-    + '                    <div class="left center p10"><a href="#" class="dtp-select-month-before" ng-click="picker.selectMonthBefore()" ng-class="{invisible: !picker.isPreviousMonthVisible()}"><i class="material-icons">chevron_left</i></a>'
-    + '                    </div>'
-    + '                    <div class="dtp-actual-month p80">{{picker.currentDate.format("MMM") | uppercase}}</div>'
-    + '                    <div class="right center p10">'
-    + '<a href="#" class="dtp-select-month-after" ng-click="picker.selectMonthAfter()" ng-class="{invisible: !picker.isNextMonthVisible()}"><i class="material-icons">chevron_right</i></a>'
-    + '                    </div>'
-    + '                    <div class="clearfix"></div>'
+    + '                <div layout="column">'
+    + '                    <div class="dtp-actual-month">{{picker.currentDate.format("MMM") | uppercase}}</div>'
     + '                </div>'
     + '                <div class="dtp-actual-num">{{picker.currentDate.format("DD")}}</div>'
-    + '                <div>'
-    + '                    <div class="left center p10">'
-    + '           <a href="#" ng-class="{invisible: !picker.isPreviousYearVisible()}" class="dtp-select-year-before" ng-click="picker.selectYearBefore()"><i class="material-icons">chevron_left</i></a>'
-    + '                    </div>'
-    + '                    <div class="dtp-actual-year p80">{{picker.currentDate.format("YYYY")}}</div>'
-    + '                    <div class="right center p10">' +
-    '                       <a href="#" ng-click="picker.selectYearAfter()" ng-class="{invisible: !picker.isNextYearVisible()}" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>'
-    + '                    </div>'
-    + '                    <div class="clearfix"></div>'
+    + '                <div layout="column">'
+    + '                    <div class="dtp-actual-year">{{picker.currentDate.format("YYYY")}}</div>'
     + '                </div>'
     + '            </div>'//start time
     + '            <div class="dtp-time" ng-show="picker.params.time && !picker.params.date">'
     + '                <div class="dtp-actual-maxtime">{{picker.currentNearest5Minute().format(picker.params.shortTime ? "hh:mm" : "HH:mm")}}</div>'
     + '            </div>'
     + '            <div class="dtp-picker">'
-    + '                <div ng-swipe-right="picker.isPreviousMonthVisible() && picker.selectMonthBefore()" ng-swipe-left="picker.isNextMonthVisible() && picker.selectMonthAfter()" mdc-datetime-picker-calendar date="picker.currentDate"' +
-    ' picker="picker"' +
-    ' class="dtp-picker-calendar" ng-show="picker.currentView === picker.VIEWS.DATE"></div>'
+    + '                <mdc-datetime-picker-calendar date="picker.currentDate" picker="picker" class="dtp-picker-calendar" ng-show="picker.currentView === picker.VIEWS.DATE"></mdc-datetime-picker-calendar>'
     + '                <div class="dtp-picker-datetime" ng-show="picker.currentView !== picker.VIEWS.DATE">'
     + '                    <div class="dtp-actual-meridien">'
     + '                        <div class="left p20">'
@@ -80,7 +65,7 @@
     + '      </md-dialog-actions>'
     + '</md-dialog>';
 
-  angular.module(moduleName, ['ngMaterial', 'ngTouch'])
+  angular.module(moduleName, ['ngMaterial'])
     .directive('mdcDatetimePicker', ['$mdDialog',
       function ($mdDialog) {
 
@@ -457,9 +442,24 @@
     .directive('mdcDatetimePickerCalendar', [
       function () {
 
+        var startDate = moment(),
+          YEAR_MIN = 1900,
+          YEAR_MAX = 2100,
+          MONTHS_IN_ALL = (YEAR_MAX - YEAR_MIN + 1) * 12,
+          ITEM_HEIGHT = 240,
+          MONTHS = [];
+        for (var i = 0; i < MONTHS_IN_ALL; i++) {
+          MONTHS.push(i);
+        }
+
+        var currentMonthIndex = function (date) {
+          var year = date.year();
+          var month = date.month();
+          return ((year - YEAR_MIN) * 12) + month - 1;
+        };
 
         return {
-          restrict: 'A',
+          restrict: 'E',
           scope: {
             picker: '=',
             date: '='
@@ -479,39 +479,54 @@
                 days.push(i.toString());
               }
 
+              calendar.week = days;
+              if (!picker.maxDate && !picker.minDate) {
+                calendar.months = MONTHS;
+              } else {
+                var low = picker.minDate ? currentMonthIndex(picker.minDate) : 0;
+                var high = picker.maxDate ? (currentMonthIndex(picker.maxDate) + 1) : MONTHS_IN_ALL;
+                calendar.months = MONTHS.slice(low, high);
+              }
 
-              var generateCalendar = function (date) {
-                var _calendar = {};
+
+              calendar.getItemAtIndex = function (index) {
+                var month = ((index + 1) % 12) || 12;
+                var year = YEAR_MIN + Math.floor(index / 12);
+                var monthObj = moment(picker.currentDate)
+                  .year(year)
+                  .month(month);
+                return generateMonthCalendar(monthObj);
+              };
+
+              calendar.topIndex = currentMonthIndex(picker.currentDate) - calendar.months[0];
+              var generateMonthCalendar = function (date) {
+                var month = {};
                 if (date !== null) {
+                  month.name = date.format('MMMM YYYY');
                   var startOfMonth = moment(date).locale(picker.params.lang).startOf('month')
                     .hour(date.hour())
                     .minute(date.minute())
                     ;
-                  var endOfMonth = moment(date).locale(picker.params.lang).endOf('month');
-
                   var iNumDay = startOfMonth.format('d');
-
-                  _calendar.week = days;
-                  _calendar.days = [];
-
-                  for (var i = startOfMonth.date(); i <= endOfMonth.date(); i++) {
+                  month.days = [];
+                  for (var i = startOfMonth.date(); i <= startOfMonth.daysInMonth(); i++) {
                     if (i === startOfMonth.date()) {
-                      var iWeek = _calendar.week.indexOf(iNumDay.toString());
+                      var iWeek = calendar.week.indexOf(iNumDay.toString());
                       if (iWeek > 0) {
                         for (var x = 0; x < iWeek; x++) {
-                          _calendar.days.push(0);
+                          month.days.push(0);
                         }
                       }
                     }
-                    _calendar.days.push(moment(startOfMonth).locale(picker.params.lang).date(i));
+                    month.days.push(moment(startOfMonth).locale(picker.params.lang).date(i));
                   }
 
-                  var daysInAWeek = 7, daysTmp = [], slices = Math.ceil(_calendar.days.length / daysInAWeek);
+                  var daysInAWeek = 7, daysTmp = [], slices = Math.ceil(month.days.length / daysInAWeek);
                   for (var j = 0; j < slices; j++) {
-                    daysTmp.push(_calendar.days.slice(j * daysInAWeek, (j + 1) * daysInAWeek));
+                    daysTmp.push(month.days.slice(j * daysInAWeek, (j + 1) * daysInAWeek));
                   }
-                  _calendar.days = daysTmp;
-                  calendar._calendar = _calendar;
+                  month.days = daysTmp;
+                  return month;
                 }
 
               };
@@ -528,41 +543,95 @@
                   && picker.isBeforeMaxDate(moment(date), false, false);
               };
 
-              calendar.isSelectedDay = function (m) {
-                return calendar.date.date() === m.date() && calendar.date.month() === m.month() && calendar.date.year() === m.year();
-              };
-              generateCalendar(picker.calendarStart);
-
-              $scope.$watch(function () {
-                return picker.calendarStart ? picker.calendarStart.format('MMMMYYYY') : false;
-              }, function () {
-                if (calendar.date) {
-                  generateCalendar(picker.calendarStart);
+              calendar.selectDate = function (date) {
+                if (date) {
+                  if (calendar.isSelectedDay(date)) {
+                    return picker.ok();
+                  }
+                  picker.selectDate(moment(date).hour(calendar.date.hour()).minute(calendar.date.minute()));
                 }
-              });
+              };
+
+              calendar.isSelectedDay = function (m) {
+                return m && calendar.date.date() === m.date() && calendar.date.month() === m.month() && calendar.date.year() === m.year();
+              };
 
             }
           ],
-          template: '<div class="dtp-picker-month">{{cal.picker.calendarStart.format("MMMM YYYY")}}</div>'
+          template: '<md-virtual-repeat-container class="months">' +
+          '<div md-virtual-repeat="idx in cal.months" md-start-index="cal.topIndex" md-item-size="' + ITEM_HEIGHT + '">' +
+          '     <div mdc-datetime-picker-calendar-month idx="idx"></div>' +
+          '</div>' +
+          '</md-virtual-repeat-container>'
+        };
+      }])
+    .directive('mdcDatetimePickerCalendarMonth', ['$compile',
+      function ($compile) {
+        var buildCalendarContent = function (element, scope) {
+          var tbody = angular.element(element[0].querySelector('tbody'));
+          var calendar = scope.cal, month = scope.month;
+          tbody.html('');
+          month.days.forEach(function (weekDays, i) {
+            var tr = angular.element('<tr></tr>');
+            weekDays.forEach(function (weekDay, j) {
+              var td = angular.element('<td> </td>');
+              if (weekDay) {
+                var aOrSpan;
+                if (calendar.isInRange(weekDay)) {
+                  //build a
+                  var scopeRef = 'month["days"][' + i + '][' + j + ']';
+                  aOrSpan = angular.element("<a href='#'></a>")
+                    .attr('ng-class', '{selected: cal.isSelectedDay(' + scopeRef + ')}')
+                    .attr('ng-click', 'cal.selectDate(' + scopeRef + ')')
+                  ;
+                } else {
+                  aOrSpan = angular.element('<span></span>')
+                }
+                aOrSpan
+                  .addClass('dtp-select-day')
+                  .html(weekDay.format('D'));
+                td.append(aOrSpan);
+              }
+              tr.append(td);
+            });
+            tbody.append(tr);
+          });
+          $compile(tbody)(scope);
+        };
+
+        return {
+          scope: {
+            idx: '='
+          },
+          require: '^mdcDatetimePickerCalendar',
+          restrict: 'AE',
+          template: '<div class="dtp-picker-month">{{month.name}}</div>'
           + '<table class="table dtp-picker-days">'
           + '    <thead>'
           + '    <tr>'
-          + '        <th ng-repeat="day in cal._calendar.week">{{cal.toDay(day)}}</th>'
+          + '        <th ng-repeat="day in cal.week">{{cal.toDay(day)}}</th>'
           + '    </tr>'
           + '    </thead>'
           + '    <tbody>'
-          + '    <tr ng-repeat="weekDays in cal._calendar.days">'
-          + '        <td data-date="{{weekDate ? weekDate.format(\'D\') : weekDate}}" ng-repeat="weekDate in weekDays track by $index">'
-          + '             <a href="#" ng-click="cal.picker.selectDate(weekDate)" ng-dblclick="cal.picker.selectDate(weekDate);cal.picker.ok();" class="dtp-select-day" ng-class="{selected: cal.isSelectedDay(weekDate)}" ng-if="weekDate && cal.isInRange(weekDate)">{{weekDate.format(\'DD\')}}</a>'
-          + '             <span class="dtp-select-day" ng-if="weekDate && !cal.isInRange(weekDate)">{{weekDate.format(\'DD\')}}</span>'
-          + '        </td>'
-          + '    </tr>'
           + '    </tbody>'
           + '</table>',
-          link: function (scope, element, attrs) {
+          link: function (scope, element, attrs, calendar) {
+            scope.cal = calendar;
+            scope.month = calendar.getItemAtIndex(parseInt(scope.idx));
+            buildCalendarContent(element, scope);
+            ;
+            scope.$watch(function () {
+              return scope.idx;
+            }, function (idx, oldIdx) {
+              if (idx != oldIdx) {
+                scope.month = calendar.getItemAtIndex(parseInt(scope.idx));
+                buildCalendarContent(element, scope);
+              }
+            });
           }
         };
-      }])
+      }
+    ])
   ;
 
   angular.module(moduleName)
@@ -571,7 +640,7 @@
 
         var template = '<div class="dtp-picker-clock"><span ng-if="!points || points.length < 1">&nbsp;</span>'
           + '<div ng-repeat="point in points" class="dtp-picker-time" style="margin-left: {{point.left}}px; margin-top: {{point.top}}px;">'
-          + '   <a href="#" ng-class="{selected: point.value===currentValue}" class="dtp-select-hour" ng-click="setTime(point.value)" ng-dblclick="setTime(point.value);picker.ok();" ng-if="pointAvailable(point)">{{point.display}}</a>'
+          + '   <a href="#" ng-class="{selected: point.value===currentValue}" class="dtp-select-hour" ng-click="setTime(point.value)" ng-if="pointAvailable(point)">{{point.display}}</a>'
           + '   <a href="#" class="disabled dtp-select-hour" ng-if="!pointAvailable(point)">{{point.display}}</a>'
           + '</div>'
           + '<div class="dtp-hand dtp-hour-hand"></div>'
@@ -692,6 +761,10 @@
             });
 
             scope.setTime = function (val) {
+              if (val === scope.currentValue) {
+                picker.ok();
+              }
+
               if (!minuteMode) {
                 picker.currentDate.hour(picker.isPM() ? (val + 12) : val);
               } else {
