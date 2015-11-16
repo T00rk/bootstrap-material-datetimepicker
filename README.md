@@ -44,7 +44,7 @@ Depends on the following library:
 ## Installing via Bower
 
 ```
-bower install bootstrap-material-datetimepicker
+bower install angular-material-datetimepicker
 ```
 
 
