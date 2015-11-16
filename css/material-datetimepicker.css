@@ -87,12 +87,14 @@ md-dialog.dtp {
 
 .dtp .dtp-close {
     position: absolute;
-    top: 0.5em;
-    right: 10px;
+    top: 0.25em;
+    right: 5px;
+    font-size: 16px;
 }
 
 .dtp .dtp-close > a {
     color: #fff;
+    text-decoration: none;
 }
 
 .dtp .dtp-close > a > i {

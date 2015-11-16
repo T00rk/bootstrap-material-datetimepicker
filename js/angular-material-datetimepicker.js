@@ -25,7 +25,7 @@
     + '                <div class="dtp-actual-day" ng-show="picker.dateMode">{{picker.currentDate.format("dddd")}}</div>'
     + '                <div class="dtp-actual-day" ng-show="picker.timeMode">{{picker.params.shortTime ? picker.currentDate.format("A") : " "}}</div>'
     + '                <div class="dtp-close text-right">'
-    + '                    <a href="#" ng-click="picker.hide()"><i class="material-icons">clear</i></a>'
+    + '                    <a href="#" ng-click="picker.hide()">&times;</a>'
     + '                </div>'
     + '            </header>'
     + '            <div class="dtp-date" ng-show="picker.params.date">'
