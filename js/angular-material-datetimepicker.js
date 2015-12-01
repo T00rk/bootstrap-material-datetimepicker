@@ -101,7 +101,8 @@
 
             if (ngModel) {
               ngModel.$formatters.push(function (value) {
-                return moment(value).format(scope.format);
+                var m = moment(value);
+                return m.isValid() ? m.format(scope.format) : '';
               });
             }
 
