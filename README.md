@@ -62,9 +62,11 @@ Click [here](http://t00rk.github.io/bootstrap-material-datetimepicker/) to see
 | **date**			| Boolean						| true => Has Datepicker						|
 | **time**			| Boolean						| true => Has Timepicker						|
 | **clearButton**	| Boolean						| true => Show Clear Button						|
+| **nowButton**		| Boolean						| true => Show Now Button						|
 | **cancelText**	| String						| Text for the cancel button (default: Cancel)	|
 | **okText**		| String						| Text for the OK button (default: OK)			|
 | **clearText**		| String						| Text for the Clear button (default: Clear)	|
+| **nowText**		| String						| Text for the Now button (default: Now)		|
 
 
 ### Events

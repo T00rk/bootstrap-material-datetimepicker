@@ -17,7 +17,7 @@
 		this.element = element;
 		this.$element = $(element);
 
-		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, clearButton : false, 'cancelText' : 'Cancel', 'okText' : 'OK', 'clearText' : 'Clear' };
+		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, clearButton : false, nowButton : false, 'cancelText' : 'Cancel', 'okText' : 'OK', 'clearText' : 'Clear', 'nowText' : 'Now' };
 		this.params = $.fn.extend(this.params, options);
 
 		this.name = "dtp_" + this.setName();
@@ -259,6 +259,7 @@
 										'</div>' +
 									'</div>' +
 									'<div class="dtp-buttons">' +
+										'<button class="dtp-btn-now btn btn-flat hidden">' + this.params.nowText + '</button>' +
 										'<button class="dtp-btn-clear btn btn-flat hidden">' + this.params.clearText + '</button>' +
 										'<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
 										'<button class="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
@@ -288,6 +289,12 @@
 			{
 				this._attachEvent(this.$dtpElement.find('.dtp-btn-clear'), 'click', this._onClearClick.bind(this));
 				this.$dtpElement.find('.dtp-btn-clear').removeClass('hidden');
+			}
+
+			if(this.params.nowButton === true)
+			{
+				this._attachEvent(this.$dtpElement.find('.dtp-btn-now'), 'click', this._onNowClick.bind(this));
+				this.$dtpElement.find('.dtp-btn-now').removeClass('hidden');
 			}
 		},
 		initMeridienButtons: function()
@@ -965,6 +972,16 @@
 		{
 			this.hide();
 			this.$element.val('');
+		},		
+		_onNowClick: function()
+		{
+			this.currentDate = moment();
+
+			this.showDate(this.currentDate);
+
+			this.showTime(this.currentDate);
+
+			this.animateHands();
 		},
 		_onOKClick: function()
 		{
