@@ -24,8 +24,6 @@
 		this.name = "dtp_" + this.setName();
 		this.$element.attr("data-dtp", this.name);
 
-		moment.locale(this.params.lang);
-
 		this.init();
 	}
 
