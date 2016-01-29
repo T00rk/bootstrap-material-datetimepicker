@@ -345,6 +345,9 @@
 				this.$dtpElement.find('a.dtp-meridien-pm').click();
 			}
 
+			var cW = this.$dtpElement.find('.dtp-picker-clock').width();
+			var oT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
+			var oL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
 			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
 			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
 			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
@@ -352,7 +355,7 @@
 
 			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
 			var j = r / 1.2;
-			var jj = r / 1.7;
+			var jj = r / 2.25;
 
 			var hours = [];
 
@@ -362,14 +365,14 @@
     		{
     			for(var h = 0; h < 12; ++h)
 				{
-					var x = jj * Math.sin(Math.PI * 2 * (h / 12));
-					var y = jj * Math.cos(Math.PI * 2 * (h / 12));
+					var x = (jj + (cW) / 2) * Math.sin(Math.PI * 2 * (h / 12));
+					var y = (jj + (cW) / 2) * Math.cos(Math.PI * 2 * (h / 12));
 					
 					var hour = $('<div>', { class : 'dtp-picker-time' })
 						.css
 						({
-							marginLeft: (r + x + parseInt(pL) / 2) - (parseInt(pL) + parseInt(mL)) + 'px',
-	        				marginTop: (r - y - parseInt(mT) / 2) - (parseInt(pT) + parseInt(mT)) + 'px'
+							marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
+    						marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
 						});
 					var cH = ((this.currentDate.format(cHFormat) == 12) ? 0 : this.currentDate.format(cHFormat));
 					var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', (h == 0 ? 12 : h)).text((h == 0 ? 12 : h));
@@ -382,14 +385,14 @@
 
 	    		for(var h = 0; h < 12; ++h)
 				{
-					var x = j * Math.sin(Math.PI * 2 * (h / 12));
-					var y = j * Math.cos(Math.PI * 2 * (h / 12));
+					var x = (j + (cW) / 2) * Math.sin(Math.PI * 2 * (h / 12));
+					var y = (j + (cW) / 2) * Math.cos(Math.PI * 2 * (h / 12));
 					
 					var hour = $('<div>', { class : 'dtp-picker-time' })
 						.css
 						({
-							marginLeft: (r + x + parseInt(pL) / 2) - (parseInt(pL) + parseInt(mL)) + 'px',
-	        				marginTop: (r - y - parseInt(mT) / 2) - (parseInt(pT) + parseInt(mT)) + 'px'
+							marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
+    						marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
 						});
 					var cH = ((this.currentDate.format(cHFormat) == 24) ? 0 : this.currentDate.format(cHFormat));
 					var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour sub-hour' }).data('hour', (h == 0 ? 0 : h + 12)).text((h == 0 ? 0 : h + 12));
@@ -405,25 +408,22 @@
 	    	}
 	    	else
 	    	{
-	    		for(var h = 0; h < 12; ++h)
-				{
-					var x = j * Math.sin(Math.PI * 2 * (h / 12));
-					var y = j * Math.cos(Math.PI * 2 * (h / 12));
-					
-					var hour = $('<div>', { class : 'dtp-picker-time' })
-						.css
-						({
-							marginLeft: (r + x + parseInt(pL) / 2) - (parseInt(pL) + parseInt(mL)) + 'px',
-	        				marginTop: (r - y - parseInt(mT) / 2) - (parseInt(pT) + parseInt(mT)) + 'px'
-						});
-					var cH = ((this.currentDate.format(cHFormat) == 12) ? 0 : this.currentDate.format(cHFormat));
-					var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', (h == 0 ? 12 : h)).text((h == 0 ? 12 : h));
-						if(h == parseInt(cH))
-							hourLink.addClass('selected');
+	    		var x = (j + (cW) / 2) * Math.sin(Math.PI * 2 * (h / 12));
+				var y = (j + (cW) / 2) * Math.cos(Math.PI * 2 * (h / 12));
+				
+				var hour = $('<div>', { class : 'dtp-picker-time' })
+					.css
+					({
+						marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
+						marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
+					});
+				var cH = ((this.currentDate.format(cHFormat) == 12) ? 0 : this.currentDate.format(cHFormat));
+				var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', (h == 0 ? 12 : h)).text((h == 0 ? 12 : h));
+					if(h == parseInt(cH))
+						hourLink.addClass('selected');
 
-					hour.append(hourLink);
-	      			hours.push(hour);
-	    		}
+				hour.append(hourLink);
+      			hours.push(hour);
 	    	}
 
     		this.$dtpElement.find('a.dtp-select-hour').off('click');
@@ -455,31 +455,32 @@
 			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
 			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
 
+			var cW = this.$dtpElement.find('.dtp-picker-clock').width();
+			var oT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
+			var oL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
 			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
 			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
 			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
 			var mT = this.$dtpElement.find('.dtp-picker-clock').css('marginTop').replace('px', '');
 
 			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
-			var j = r / 1.2;
+			var j = r / 1.1;
 
 			var minutes = [];
 
 			for(var m = 0; m < 60; m += 5)
 			{
-				var x = j * Math.sin(Math.PI * 2 * (m / 60));
-				var y = j * Math.cos(Math.PI * 2 * (m / 60));
+				var x = (j + (cW - pL * 2) / 2) * Math.sin(Math.PI * 2 * (m / 60));
+				var y = (j + (cW - pT * 2) / 2) * Math.cos(Math.PI * 2 * (m / 60));
 
-				var minute = $('<div>', { class : 'dtp-picker-time' })
-				.css
+				var minute = $('<div>', { class : 'dtp-picker-time' }).css
 				({
-					marginLeft: (r + x + parseInt(pL) / 2) - (parseInt(pL) + parseInt(mL)) + 'px',
-    				marginTop: (r - y - parseInt(mT) / 2) - (parseInt(pT) + parseInt(mT)) + 'px'
+					marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
+    				marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
 				});					
 
-				if(m%5 === 0)
+				if(m % 5 === 0)
 				{
-
 					var minuteLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-minute' }).data('minute', m).text(((m.toString().length == 2) ? m : '0' + m));
 						if(m == 5 * Math.round(this.currentDate.minute() / 5))
 						{
@@ -521,8 +522,12 @@
 				'<div class="dtp-clock-center"></div>'
 			);
 	
+			var cW = this.$dtpElement.find('.dtp-picker-clock').width();
+			var oT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
+			var oL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
 			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
 			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
+
 			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
 			var mT = this.$dtpElement.find('.dtp-picker-clock').css('marginTop').replace('px', '');	
 
@@ -536,20 +541,20 @@
 			var _mL = r / 1.5;					
 
 			this.$dtpElement.find('.dtp-hour-hand').css({
-				left: r + (parseInt(mL) * 1.5) + 'px',
+				left: ((parseInt(cW) + (parseInt(mL) * 2) + (parseInt(pL) * 2) + parseInt(oL)) / 2) + 8,
 				height: _hL + 'px',
 				marginTop: (r - _hL - parseInt(pL)) + 'px'
 			}).addClass((t === true) ? 'on' : '');
      		this.$dtpElement.find('.dtp-minute-hand').css
 			({
-				left: r + (parseInt(mL) * 1.5) + 'px',
+				left: ((parseInt(cW) + (parseInt(mL) * 2) + (parseInt(pL) * 2) + parseInt(oL)) / 2) + 8,
 				height: _mL + 'px',
 				marginTop: (r - _mL - parseInt(pL)) + 'px'
 			}).addClass((t === false) ? 'on' : '');
 			this.$dtpElement.find('.dtp-clock-center').css
 			({
-				left: r + parseInt(pL) + parseInt(mL) - w + 'px',
-				marginTop: (r - (parseInt(mL) / 2)) - h + 'px'
+				left: ((parseInt(cW) + (parseInt(mL) * 2) + (parseInt(pL) * 2) + parseInt(oL)) / 2),
+				marginTop: (0 - parseInt(pT)) + (parseInt(cW) + parseInt(pT)) / 2
 			});
 
 			this.animateHands();
