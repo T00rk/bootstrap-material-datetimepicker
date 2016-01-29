@@ -7,6 +7,7 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2016-01-29		| T00rk				| Added "clear button" (#48)		 					 |
 | 2016-01-29		| T00rk				| Replace rem by em (#26)			 					 |
 | 2016-01-29		| T00rk				| Display 24H clock (#54)			 					 |
 | 2016-01-29		| T00rk				| Close on "ESC" (#52)			 					 	 |
@@ -60,8 +61,10 @@ Click [here](http://t00rk.github.io/bootstrap-material-datetimepicker/) to see
 | **currentDate**	| (String\|Date\|Moment)		| Initial Date									|
 | **date**			| Boolean						| true => Has Datepicker						|
 | **time**			| Boolean						| true => Has Timepicker						|
+| **clearButton**	| Boolean						| true => Show Clear Button						|
 | **cancelText**	| String						| Text for the cancel button (default: Cancel)	|
 | **okText**		| String						| Text for the OK button (default: OK)			|
+| **clearText**		| String						| Text for the Clear button (default: Clear)	|
 
 
 ### Events
