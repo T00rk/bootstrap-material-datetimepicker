@@ -7,7 +7,8 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
-| 2015-10-19		| benletchford		| Fixed not being able to tab into input				 |
+| 2016-01-29		| T00rk				| Display 24H clock #54				 					 |
+| 2016-01-29		| T00rk				| Close on "ESC" 				 					 	 |
 | 2015-10-19		| drblue 			| Fixed erroneous package.json-file 					 |
 | 2015-10-19		| Perdona			| Fix auto resize when month has 6 weeks				 |
 | 2015-07-01		| T00rk 			| Redesigned element without using modal				 |
