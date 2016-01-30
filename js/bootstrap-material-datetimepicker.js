@@ -554,8 +554,8 @@
 			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
 			var j = r / 1.2;
 
-			var _hL = r / 1.7;
-			var _mL = r / 1.5;					
+			var _hL = ((this.params.shortTime === false) ? (r / 2.4) : (r / 1.8));
+			var _mL = ((this.params.shortTime === false) ? (r / 1.8) : (r / 1.4));					
 
 			this.$dtpElement.find('.dtp-hour-hand').css({
 				left: ((parseInt(cW) + (parseInt(mL) * 2) + (parseInt(pL) * 2) + parseInt(oL)) / 2) + 8,
