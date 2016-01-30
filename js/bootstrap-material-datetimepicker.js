@@ -422,22 +422,25 @@
 	    	}
 	    	else
 	    	{
-	    		var x = (j + (cW) / 2) * Math.sin(Math.PI * 2 * (h / 12));
-				var y = (j + (cW) / 2) * Math.cos(Math.PI * 2 * (h / 12));
-				
-				var hour = $('<div>', { class : 'dtp-picker-time' })
-					.css
-					({
-						marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
-						marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
-					});
-				var cH = ((this.currentDate.format(cHFormat) == 12) ? 0 : this.currentDate.format(cHFormat));
-				var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', (h == 0 ? 12 : h)).text((h == 0 ? 12 : h));
-					if(h == parseInt(cH))
-						hourLink.addClass('selected');
+	    		for(var h = 0; h < 12; ++h)
+				{
+					var x = (j + (cW) / 2) * Math.sin(Math.PI * 2 * (h / 12));
+					var y = (j + (cW) / 2) * Math.cos(Math.PI * 2 * (h / 12));
+					
+					var hour = $('<div>', { class : 'dtp-picker-time' })
+						.css
+						({
+							marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
+    						marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
+						});
+					var cH = ((this.currentDate.format(cHFormat) == 24) ? 0 : this.currentDate.format(cHFormat));
+					var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', (h == 0 ? 0 : h)).text((h == 0 ? 0 : h));
+						if(h == parseInt(cH))
+							hourLink.addClass('selected');
 
-				hour.append(hourLink);
-      			hours.push(hour);
+					hour.append(hourLink);
+	      			hours.push(hour);
+	    		}
 	    	}
 
     		this.$dtpElement.find('a.dtp-select-hour').off('click');
@@ -871,6 +874,7 @@
 				{
 					var _hour = $(this).data('hour');
 
+					console.log(_self.convertHours(_hour))
 					var _date = moment(_self.currentDate);
 					_date.hour(_self.convertHours(_hour)).minute(0).second(0);
 
@@ -1117,8 +1121,13 @@
 		{
 			var _return = h;
 
-			if((h < 12) && this.isPM())
-				_return += 12;
+			if(this.params.shortTime === true)
+			{
+				if((h < 12) && this.isPM())
+				{
+					_return += 12;
+				}
+			}
 
 			return _return;
 		},
