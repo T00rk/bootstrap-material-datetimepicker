@@ -33,8 +33,8 @@
 .dtp a.dtp-meridien-am, .dtp a.dtp-meridien-pm { position: relative; top: 10px; color: #212121; font-weight: 500; padding: 0.7em 0.5em; border-radius: 50%!important;text-decoration: none; background: #eee; font-size:1em; }
 .dtp .dtp-actual-meridien a.selected { background: #689F38; color: #fff; }
 
-.dtp .dtp-picker-time { z-index: 10; }
-.dtp .dtp-picker-time > a { display: block; line-height: 23px; padding: 0.3em 0.3em 0.3em 0.3em; }
+.dtp .dtp-picker-time { z-index: 10; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+.dtp .dtp-picker-time > a { display: block; line-height: 23px; padding: 0.3em 0.3em 0.3em 0.3em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 .dtp .dtp-picker-time > a.dtp-select-minute.sub-minute { display: block; padding: 0; }
 .dtp .dtp-picker-time { position: absolute;width: 30px;height: 30px;font-size: 1em;border-radius: 50%;cursor: pointer;font-weight: 500;text-align: center!important; }
 
@@ -44,7 +44,7 @@
 .dtp .dtp-picker-time > a.dtp-select-minute.selected { background: #8BC34A; color: #fff; }
 .dtp .dtp-picker-time > a.dtp-select-minute.sub-minute.selected { background: transparent; color: #8BC34A; font-weight:bold; }
 
-.dtp div.dtp-picker-clock { margin: 1em 1em 0 1em; padding: 1em; border-radius: 50%!important; background: #eee; }
+.dtp div.dtp-picker-clock { margin: 1em 1em 0 1em; padding: 1em; border-radius: 50%!important; background: #eee; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 .dtp-clock-center { width: 15px; height: 15px; background: #757575; border-radius: 50%; position: absolute; z-index: 50; }
 
 .dtp .dtp-hand, .dtp .dtp-hour-hand { z-index:8; position: absolute; width: 4px; margin-left: -2px; background: #BDBDBD; -moz-transform: rotate(0deg); -ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); transform: rotate(0deg); -moz-transform-origin: bottom; -ms-transform-origin: bottom; -webkit-transform-origin: bottom; transform-origin: bottom; z-index: 1; }
