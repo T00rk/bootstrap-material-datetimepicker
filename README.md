@@ -7,6 +7,7 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2016-01-30		| T00rk				| Switch view on click (#39, #47)	 					 |
 | 2016-01-29		| T00rk				| Added "clear button" (#48)		 					 |
 | 2016-01-29		| T00rk				| Replace rem by em (#26)			 					 |
 | 2016-01-29		| T00rk				| Display 24H clock (#54)			 					 |
@@ -40,7 +41,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 
 ### Live Example
 
-Click [here](http://t00rk.github.io/bootstrap-material-datetimepicker/) to see
+[Live example](http://t00rk.github.io/bootstrap-material-datetimepicker/)
 
 ### Usage
 
@@ -63,6 +64,7 @@ Click [here](http://t00rk.github.io/bootstrap-material-datetimepicker/) to see
 | **time**			| Boolean						| true => Has Timepicker						|
 | **clearButton**	| Boolean						| true => Show Clear Button						|
 | **nowButton**		| Boolean						| true => Show Now Button						|
+| **switchOnClick**	| Boolean						| true => Switch view on click (default: false) |
 | **cancelText**	| String						| Text for the cancel button (default: Cancel)	|
 | **okText**		| String						| Text for the OK button (default: OK)			|
 | **clearText**		| String						| Text for the Clear button (default: Clear)	|

@@ -17,7 +17,7 @@
 		this.element = element;
 		this.$element = $(element);
 
-		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, clearButton : false, nowButton : false, 'cancelText' : 'Cancel', 'okText' : 'OK', 'clearText' : 'Clear', 'nowText' : 'Now' };
+		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, clearButton : false, nowButton : false, cancelText : 'Cancel', okText : 'OK', clearText : 'Clear', nowText : 'Now', switchOnClick : false };
 		this.params = $.fn.extend(this.params, options);
 
 		this.name = "dtp_" + this.setName();
@@ -1066,6 +1066,9 @@
 			$(e.currentTarget).addClass('selected');
 
 			this.selectDate($(e.currentTarget).parent().data("date"));
+
+			if(this.params.switchOnClick === true && this.params.time === true)
+				setTimeout(this.initHours.bind(this), 200);
 		},
 		_onSelectHour: function(e)
 		{
@@ -1082,6 +1085,9 @@
 			this.showTime(this.currentDate);
 
 			this.animateHands();
+
+			if(this.params.switchOnClick === true)
+				setTimeout(this.initMinutes.bind(this), 200);
 		},
 		_onSelectMinute: function(e)
 		{
