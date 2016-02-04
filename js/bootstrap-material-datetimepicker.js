@@ -991,8 +991,14 @@
 			this.currentDate = moment();
 
 			this.showDate(this.currentDate);
-
 			this.showTime(this.currentDate);
+
+			switch(this.currentView)
+			{
+				case 0 : this.initDate(); break;
+				case 1 : this.initHours(); break;
+				case 2 : this.initMinutes(); break;
+			}
 
 			this.animateHands();
 		},
