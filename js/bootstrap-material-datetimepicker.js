@@ -296,6 +296,15 @@
 				this._attachEvent(this.$dtpElement.find('.dtp-btn-now'), 'click', this._onNowClick.bind(this));
 				this.$dtpElement.find('.dtp-btn-now').removeClass('hidden');
 			}
+
+			if ((this.params.nowButton === true) && (this.params.clearButton === true)) 
+			{
+				this.$dtpElement.find('.dtp-btn-clear, .dtp-btn-now, .dtp-btn-cancel, .dtp-btn-ok').addClass('btn-xs');
+			} 
+			else if ((this.params.nowButton === true) || (this.params.clearButton === true))
+			{
+				this.$dtpElement.find('.dtp-btn-clear, .dtp-btn-now, .dtp-btn-cancel, .dtp-btn-ok').addClass('btn-sm');
+			}
 		},
 		initMeridienButtons: function()
 		{
