@@ -16,7 +16,6 @@
       return ('getComputedStyle' in window) ? window.getComputedStyle(el[0])[name] : el.css(name);
     }
   };
-  moment.locale('en');
 
   var template = '<md-dialog class="dtp" layout="column" style="width: 300px;">'
     + '    <md-dialog-content class="dtp-content">'
@@ -66,6 +65,17 @@
     + '</md-dialog>';
 
   angular.module(moduleName, ['ngMaterial'])
+      .provider('mdcDatetimePickerDefaultLocale', function() {
+        this.locale = 'en';
+
+        this.$get = function() {
+          return this.locale;
+        };
+
+        this.setDefaultLocale = function(localeString) {
+          this.locale = localeString;
+        };
+      })
     .directive('mdcDatetimePicker', ['$mdDialog',
       function ($mdDialog) {
 
@@ -81,7 +91,8 @@
             shortTime: '=',
             format: '@',
             cancelText: '@',
-            okText: '@'
+            okText: '@',
+            lang: '@'
           },
           link: function (scope, element, attrs, ngModel) {
             var isOn = false;
@@ -146,7 +157,7 @@
       }])
   ;
 
-  var PluginController = function ($scope, $mdDialog) {
+  var PluginController = function ($scope, $mdDialog, mdcDatetimePickerDefaultLocale) {
     this.currentView = VIEW_STATES.DATE;
     this._dialog = $mdDialog;
 
@@ -163,7 +174,7 @@
       minDate: null,
       maxDate: null,
       currentDate: null,
-      lang: 'en',
+      lang: mdcDatetimePickerDefaultLocale,
       weekStart: 0,
       shortTime: false,
       cancelText: 'Cancel',
@@ -174,7 +185,7 @@
     this.params = angular.extend(this.params, this.options);
     this.init();
   };
-  PluginController.$inject = ['$scope', '$mdDialog'];
+  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDatetimePickerDefaultLocale'];
   PluginController.prototype = {
     init: function () {
       this.timeMode = this.params.time && !this.params.date;
