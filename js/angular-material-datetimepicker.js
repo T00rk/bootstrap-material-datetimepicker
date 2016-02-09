@@ -714,10 +714,11 @@
                 if (minuteMode) {
                   hour.display = hour.value < 10 ? ('0' + hour.value) : hour.value;
                 } else {
-                  hour.display = (h === 0) ? 12 : h;
 
-                  if(!picker.params.shortTime && picker.isPM()) {
-                    hour.display += 12;
+                  if(picker.params.shortTime ) {
+                    hour.display = (h === 0) ? 12 : h;
+                  } else {
+                    hour.display = picker.isPM() ? h + 12 : h;
                   }
                 }
 
