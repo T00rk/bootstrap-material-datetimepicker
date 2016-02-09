@@ -44,11 +44,11 @@
     + '                <div class="dtp-picker-datetime" ng-show="picker.currentView !== picker.VIEWS.DATE">'
     + '                    <div class="dtp-actual-meridien">'
     + '                        <div class="left p20">'
-    + '                            <a href="#" mdc-dtp-noclick class="dtp-meridien-am" ng-class="{selected: picker.meridien == \'AM\'}" ng-click="picker.selectAM()">AM</a>'
+    + '                            <a href="#" mdc-dtp-noclick class="dtp-meridien-am" ng-class="{selected: picker.meridien == \'AM\'}" ng-click="picker.selectAM()">{{picker.params.amText}}</a>'
     + '                        </div>'
     + '                        <div ng-show="!picker.timeMode" class="dtp-actual-time p60">{{picker.currentNearest5Minute().format(picker.params.shortTime ? "hh:mm" : "HH:mm")}}</div>'
     + '                        <div class="right p20">'
-    + '                            <a href="#" mdc-dtp-noclick class="dtp-meridien-pm" ng-class="{selected: picker.meridien == \'PM\'}" ng-click="picker.selectPM()">PM</a>'
+    + '                            <a href="#" mdc-dtp-noclick class="dtp-meridien-pm" ng-class="{selected: picker.meridien == \'PM\'}" ng-click="picker.selectPM()">{{picker.params.pmText}}</a>'
     + '                        </div>'
     + '                        <div class="clearfix"></div>'
     + '                    </div>'
@@ -92,7 +92,9 @@
             format: '@',
             cancelText: '@',
             okText: '@',
-            lang: '@'
+            lang: '@',
+            amText: '@',
+            pmText: '@'
           },
           link: function (scope, element, attrs, ngModel) {
             var isOn = false;
@@ -178,7 +180,9 @@
       weekStart: 0,
       shortTime: false,
       cancelText: 'Cancel',
-      okText: 'OK'
+      okText: 'OK',
+      amText: 'AM',
+      pmText: 'PM'
     };
 
     this.meridien = 'AM';
