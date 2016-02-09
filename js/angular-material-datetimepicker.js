@@ -715,7 +715,12 @@
                   hour.display = hour.value < 10 ? ('0' + hour.value) : hour.value;
                 } else {
                   hour.display = (h === 0) ? 12 : h;
+
+                  if(!picker.params.shortTime && picker.isPM()) {
+                    hour.display += 12;
+                  }
                 }
+
 
                 points.push(hour);
               }
@@ -781,6 +786,27 @@
               setCurrentValue();
               animateHands();
             });
+
+
+            var setDisplayPoints = function(isPM, points) {
+              for(var i = 0; i < points.length; i++) {
+                points[i].display = i;
+                if(isPM) {
+                  points[i].display += 12;
+                }
+              }
+              return points;
+            };
+
+            if(!picker.params.shortTime) {
+              scope.$watch('picker.meridien', function() {
+                if(!minuteMode) {
+                  var points = setDisplayPoints(picker.isPM(), angular.copy(scope.points));
+                  scope.points = points;
+                }
+              });
+            }
+
 
             scope.setTime = function (val) {
               if (val === scope.currentValue) {
