@@ -806,8 +806,10 @@
             if(!picker.params.shortTime) {
               scope.$watch('picker.meridien', function() {
                 if(!minuteMode) {
-                  var points = setDisplayPoints(picker.isPM(), angular.copy(scope.points));
-                  scope.points = points;
+                  if (scope.points) {
+                    var points = setDisplayPoints(picker.isPM(), angular.copy(scope.points));
+                    scope.points = points;
+                  }
                 }
               });
             }
