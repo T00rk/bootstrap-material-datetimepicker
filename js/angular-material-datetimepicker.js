@@ -428,13 +428,29 @@
       this.calendarStart.add(1, 'years');
     },
     selectAM: function () {
-      if (this.currentDate.hour() >= 12) {
-        this.selectDate(this.currentDate.subtract(12, 'hours'));
+      if(this.isHourAvailable(0) || this.isHourAvailable(12)) {
+        if (this.currentDate.hour() >= 12) {
+          this.selectDate(this.currentDate.subtract(12, 'hours'));
+        }
+        if(!this.isHourAvailable(this.currentDate.hour())) {
+          this.selectDate(this.currentDate.hour(this.minDate.hour()));
+        }
+        if(!this.isMinuteAvailable(this.currentDate.minute())) {
+          this.selectDate(this.currentDate.minute(this.minDate.minute()));
+        }
       }
     },
     selectPM: function () {
-      if (this.currentDate.hour() < 12) {
-        this.selectDate(this.currentDate.add(12, 'hours'));
+      if(this.isHourAvailable(13) || this.isHourAvailable(24)) {
+        if (this.currentDate.hour() < 12) {
+          this.selectDate(this.currentDate.add(12, 'hours'));
+        }
+        if(!this.isHourAvailable(this.currentDate.hour())) {
+          this.selectDate(this.currentDate.hour(this.maxDate.hour()));
+        }
+        if(!this.isMinuteAvailable(this.currentDate.minute())) {
+          this.selectDate(this.currentDate.minute(this.maxDate.minute()));
+        }
       }
     },
     convertHours: function (h) {
@@ -806,8 +822,10 @@
             if(!picker.params.shortTime) {
               scope.$watch('picker.meridien', function() {
                 if(!minuteMode) {
-                  var points = setDisplayPoints(picker.isPM(), angular.copy(scope.points));
-                  scope.points = points;
+                  if (scope.points) {
+                    var points = setDisplayPoints(picker.isPM(), angular.copy(scope.points));
+                    scope.points = points;
+                  }
                 }
               });
             }
