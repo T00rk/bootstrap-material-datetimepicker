@@ -62,7 +62,7 @@
 
 			this.initButtons();
 
-			this._attachEvent($(window), 'resize', this._centerBox(this));
+			this._attachEvent($(window), 'resize', this._centerBox.bind(this));
 			this._attachEvent(this.$dtpElement.find('.dtp-content'), 'click', this._onElementClick.bind(this));
 			this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
