@@ -16,29 +16,29 @@
 		<script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
 
 		<style>
-			body 
+			body
 			{
 				padding-top: 70px;
 				font-family: 'Roboto', sans-serif;
 			}
-			h2 
+			h2
 			{
 				padding: 0 20px 10px 20px;
 				font-size: 20px;
 				font-weight: 400;
 			}
-			.form-control-wrapper 
+			.form-control-wrapper
 			{
 				margin: 10px 20px;
 			}
-			code 
+			code
 			{
 				padding: 10px;
 				background: #eee!important;
 				display: block;
 				color: #000;
 			}
-			code > p 
+			code > p
 			{
 				font-weight: bold;
 				color: #000;
@@ -219,7 +219,8 @@
 			$('#date').bootstrapMaterialDatePicker
 			({
 				time: false,
-				clearButton: true
+				clearButton: true,
+				title: 'My Title'
 			});
 
 			$('#time').bootstrapMaterialDatePicker
@@ -237,7 +238,7 @@
 			({
 				format: 'DD/MM/YYYY HH:mm',
 				lang: 'fr',
-				weekStart: 1, 
+				weekStart: 1,
 				cancelText : 'ANNULER',
 				nowButton : true
 			});
