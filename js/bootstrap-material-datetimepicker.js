@@ -62,7 +62,7 @@
 
 			this.initButtons();
 
-			this._attachEvent($(window), 'resize', this._centerBox(this));
+			this._attachEvent($(window), 'resize', this._centerBox.bind(this));
 			this._attachEvent(this.$dtpElement.find('.dtp-content'), 'click', this._onElementClick.bind(this));
 			this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
@@ -694,7 +694,7 @@
 			if(date)
 			{
 				var minutes = (5 * Math.round(date.minute() / 5));
-				var content = ((this.params.shortTime) ? date.format('hh') : date.format('HH')) + ':' + ((minutes.toString().length == 2) ? minutes : '0' + minutes);
+				var content = ((this.params.shortTime) ? date.format('hh') : date.format('HH')) + ':' + ((minutes.toString().length == 2) ? minutes : '0' + minutes) + ((this.params.shortTime) ? ' ' + date.format('A') : '');
 
 				if(this.params.date)
 					this.$dtpElement.find('.dtp-actual-time').html(content);
