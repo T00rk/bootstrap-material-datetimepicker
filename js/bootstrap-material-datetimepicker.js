@@ -254,7 +254,8 @@
 													'</div>' +
 													'<div class="clearfix"></div>' +
 												'</div>' +
-												'<div class="dtp-picker-clock"></div>' +
+												'<div id="dtp-svg-clock">' +
+												'</div>' +
 											'</div>' +
 										'</div>' +
 									'</div>' +
@@ -271,6 +272,8 @@
 			if($('body').find("#" + this.name).length <= 0)
 			{
 				$('body').append(this.template);
+
+				if(this)
 
 				this.dtpElement = $('body').find("#" + this.name);
 				this.$dtpElement = $(this.dtpElement);
@@ -338,26 +341,10 @@
 		},
 		initHours: function()
 		{
-			this.currentView = 1;
-
-			if(!this.params.date)
-			{
-				var w = this.$dtpElement.find('.dtp-content').width();
-
-				var ml = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
-				var mr = this.$dtpElement.find('.dtp-picker-clock').css('marginRight').replace('px', '');
-
-				var pl = this.$dtpElement.find('.dtp-picker').css('paddingLeft').replace('px', '');
-				var pr = this.$dtpElement.find('.dtp-picker').css('paddingRight').replace('px', '');
-
-				this.$dtpElement.find('.dtp-picker-clock').innerWidth(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
-			}			
+			this.currentView = 1;			
 
 			this.showTime(this.currentDate);
 			this.initMeridienButtons();
-
-			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
-			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
 
 			if(this.currentDate.hour() < 12)
 			{
@@ -366,100 +353,80 @@
 			else
 			{
 				this.$dtpElement.find('a.dtp-meridien-pm').click();
+			}	
+
+			var hFormat = ((this.params.shortTime) ? 'h' : 'H');
+
+			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
+			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');		
+
+			var svgClockElement = this.createSVGClock(true);
+
+			for(var i = 0; i < 12; i++)
+			{
+				var x = -(162 * (Math.sin(-Math.PI * 2 * (i / 12))));
+				var y = -(162 * (Math.cos(-Math.PI * 2 * (i / 12))));
+
+				var fill = ((this.currentDate.format(hFormat) == i) ? "#8BC34A" : 'transparent');
+				var color = ((this.currentDate.format(hFormat) == i) ? "#fff" : '#000');
+
+				var svgHourCircle = this.createSVGElement("circle", { 'id' : 'h-' + i, 'class' : 'dtp-select-hour', 'style' : 'cursor:pointer', r : '30', cx : x, cy : y, fill : fill, 'data-hour' : i });
+
+				var svgHourText = this.createSVGElement("text", { 'id' : 'th-' + i, 'class' : 'dtp-select-hour-text', 'text-anchor' : 'middle', 'style' : 'cursor:pointer', 'font-weight' : 'bold', 'font-size' : '20', x : x, y : y + 7, fill : color, 'data-hour' : i });
+					svgHourText.innerHTML = ((i === 0) ? ((this.params.shortTime) ? 12 : i ) : i);
+
+				if(!this.toggleTime(i, true))
+				{
+					svgHourCircle.className += " disabled";
+					svgHourText.className += " disabled";
+					svgHourText.setAttribute('fill', '#bdbdbd');
+				}
+				else
+				{
+					svgHourCircle.addEventListener('click', this._onSelectHour.bind(this));
+					svgHourText.addEventListener('click', this._onSelectHour.bind(this));
+				}
+
+				svgClockElement.appendChild(svgHourCircle)
+				svgClockElement.appendChild(svgHourText)
 			}
 
-			var cW = this.$dtpElement.find('.dtp-picker-clock').width();
-			var oT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
-			var oL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
-			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
-			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
-			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
-			var mT = this.$dtpElement.find('.dtp-picker-clock').css('marginTop').replace('px', '');
-
-			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
-			var j = r / 1.2;
-			var jj = r / 2.25;
-
-			var hours = [];
-
-			var cHFormat = ((this.params.shortTime === false) ? 'H' : 'h');
-
-    		if(this.params.shortTime === false)
-    		{
-    			for(var h = 0; h < 12; ++h)
+			if(!this.params.shortTime)
+			{
+				for(var i = 0; i < 12; i++)
 				{
-					var x = (jj + (cW) / 2) * Math.sin(Math.PI * 2 * (h / 12));
-					var y = (jj + (cW) / 2) * Math.cos(Math.PI * 2 * (h / 12));
-					
-					var hour = $('<div>', { class : 'dtp-picker-time' })
-						.css
-						({
-							marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
-    						marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
-						});
-					var cH = ((this.currentDate.format(cHFormat) == 12) ? 0 : this.currentDate.format(cHFormat));
-					var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', (h == 0 ? 12 : h)).text((h == 0 ? 12 : h));
-						if(h == parseInt(cH))
-							hourLink.addClass('selected');
+					var x = -(110 * (Math.sin(-Math.PI * 2 * (i / 12))));
+					var y = -(110 * (Math.cos(-Math.PI * 2 * (i / 12))));
 
-					hour.append(hourLink);
-	      			hours.push(hour);
-	    		}
+					var fill = ((this.currentDate.format(hFormat) == (i + 12)) ? "#8BC34A" : 'transparent');
+					var color = ((this.currentDate.format(hFormat) == (i + 12)) ? "#fff" : '#000');
 
-	    		for(var h = 0; h < 12; ++h)
-				{
-					var x = (j + (cW) / 2) * Math.sin(Math.PI * 2 * (h / 12));
-					var y = (j + (cW) / 2) * Math.cos(Math.PI * 2 * (h / 12));
-					
-					var hour = $('<div>', { class : 'dtp-picker-time' })
-						.css
-						({
-							marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
-    						marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
-						});
-					var cH = ((this.currentDate.format(cHFormat) == 24) ? 0 : this.currentDate.format(cHFormat));
-					var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour sub-hour' }).data('hour', (h == 0 ? 0 : h + 12)).text((h == 0 ? 0 : h + 12));
-						if(h + 12 == parseInt(cH))
-							hourLink.addClass('selected');
+					var svgHourCircle = this.createSVGElement("circle", { 'id' : 'h-' + (i + 12), 'class' : 'dtp-select-hour', 'style' : 'cursor:pointer', r : '30', cx : x, cy : y, fill : fill, 'data-hour' : (i + 12) });
 
-					hour.append(hourLink);
-	      			hours.push(hour);
-	    		}
+					var svgHourText = this.createSVGElement("text", { 'id' : 'th-' + (i + 12), 'class' : 'dtp-select-hour-text', 'text-anchor' : 'middle', 'style' : 'cursor:pointer', 'font-weight' : 'bold', 'font-size' : '22', x : x, y : y + 7, fill : color, 'data-hour' : (i + 12) });
+						svgHourText.innerHTML = i + 12;
 
-	    		this.$dtpElement.find('a.dtp-meridien-am').addClass('hidden');
-	    		this.$dtpElement.find('a.dtp-meridien-pm').addClass('hidden');
-	    	}
-	    	else
-	    	{
-	    		for(var h = 0; h < 12; ++h)
-				{
-					var x = (j + (cW) / 2) * Math.sin(Math.PI * 2 * (h / 12));
-					var y = (j + (cW) / 2) * Math.cos(Math.PI * 2 * (h / 12));
-					
-					var hour = $('<div>', { class : 'dtp-picker-time' })
-						.css
-						({
-							marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
-    						marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
-						});
-					var cH = ((this.currentDate.format(cHFormat) == 24) ? 0 : this.currentDate.format(cHFormat));
-					var hourLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-hour' }).data('hour', (h == 0 ? 0 : h)).text((h == 0 ? 0 : h));
-						if(h == parseInt(cH))
-							hourLink.addClass('selected');
+					if(!this.toggleTime(i + 12, true))
+					{
+						svgHourCircle.className += " disabled";
+						svgHourText.className += " disabled";
+						svgHourText.setAttribute('fill', '#bdbdbd');
+					}
+					else
+					{
+						svgHourCircle.addEventListener('click', this._onSelectHour.bind(this));
+						svgHourText.addEventListener('click', this._onSelectHour.bind(this));
+					}
 
-					hour.append(hourLink);
-	      			hours.push(hour);
-	    		}
-	    	}
+					svgClockElement.appendChild(svgHourCircle)
+					svgClockElement.appendChild(svgHourText)
+				}
 
-    		this.$dtpElement.find('a.dtp-select-hour').off('click');
+				this.$dtpElement.find('a.dtp-meridien-am').addClass('hidden');
+	     		this.$dtpElement.find('a.dtp-meridien-pm').addClass('hidden');
+			}
 
-    		this.$dtpElement.find('.dtp-picker-clock').html(hours);
-    		this.toggleTime(true);
-
-    		this.$dtpElement.find('.dtp-picker-clock').css('height', (this.$dtpElement.find('.dtp-picker-clock').width()) + (parseInt(pT) + parseInt(mT)) + 'px');    		
-
-    		this.initHands(true);
+   			this._centerBox();
 		},
 		initMinutes: function()
 		{
@@ -481,119 +448,117 @@
 			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
 			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
 
-			var cW = this.$dtpElement.find('.dtp-picker-clock').width();
-			var oT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
-			var oL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
-			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
-			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
-			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
-			var mT = this.$dtpElement.find('.dtp-picker-clock').css('marginTop').replace('px', '');
+			var svgClockElement = this.createSVGClock(false);			
 
-			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
-			var j = r / 1.1;
-
-			var minutes = [];
-
-			for(var m = 0; m < 60; m += 5)
+			for(var i = 0; i < 60; i++)
 			{
-				var x = (j + (cW - pL * 2) / 2) * Math.sin(Math.PI * 2 * (m / 60));
-				var y = (j + (cW - pT * 2) / 2) * Math.cos(Math.PI * 2 * (m / 60));
+				var s = ((i % 5 === 0) ? 162 : 158);
+				var r = ((i % 5 === 0) ? 30 : 20);
 
-				var minute = $('<div>', { class : 'dtp-picker-time' }).css
-				({
-					marginLeft: ((r + x) / 2) + (parseInt(pL) + parseInt(mL)),
-    				marginTop: ((r - y) / 2) + (parseInt(pT) + parseInt(mT))
-				});					
+				var x = -(s * (Math.sin(-Math.PI * 2 * (i / 60))));
+				var y = -(s * (Math.cos(-Math.PI * 2 * (i / 60))));
 
-				if(m % 5 === 0)
+				var color = ((this.currentDate.format("m") == i) ? "#8BC34A" : 'transparent');
+
+				var svgMinuteCircle = this.createSVGElement("circle", { 'id' : 'm-' + i, 'class' : 'dtp-select-minute', 'style' : 'cursor:pointer', r : r, cx : x, cy : y, fill : color, 'data-minute' : i });
+					
+				if(!this.toggleTime(i, false))
 				{
-					var minuteLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-minute' }).data('minute', m).text(((m.toString().length == 2) ? m : '0' + m));
-						if(m == 5 * Math.round(this.currentDate.minute() / 5))
-						{
-							minuteLink.addClass('selected');
-							this.currentDate.minute(m);
-						}
+					svgMinuteCircle.className += " disabled";
 				}
 				else
 				{
-					// var minuteLink = $('<a>', { href : 'javascript:void(0);', class : 'dtp-select-minute sub-minute' }).data('minute', m).text(".");
-					// 	if(m == 5 * Math.round(this.currentDate.minute() / 5))
-					// 	{
-					// 		minuteLink.addClass('selected');
-					// 		this.currentDate.minute(m);
-					// 	}
+					svgMinuteCircle.addEventListener('click', this._onSelectMinute.bind(this));
 				}
 
-				minute.append(minuteLink);
-      			minutes.push(minute);
-    		}
+				svgClockElement.appendChild(svgMinuteCircle)
+			}
 
-			this.$dtpElement.find('a.dtp-select-minute').off('click');
+			for(var i = 0; i < 60; i++)
+			{
+				if((i % 5) === 0)
+				{
+					var x = -(162 * (Math.sin(-Math.PI * 2 * (i / 60))));
+					var y = -(162 * (Math.cos(-Math.PI * 2 * (i / 60))));
 
-    		this.$dtpElement.find('.dtp-picker-clock').html(minutes);
-    		this.toggleTime(false);
+					var color = ((this.currentDate.format("m") == i) ? "#fff" : '#000');
 
-    		this.$dtpElement.find('.dtp-picker-clock').css('height', (this.$dtpElement.find('.dtp-picker-clock').width()) + (parseInt(pT) + parseInt(mT)) + 'px');
+					var svgMinuteText = this.createSVGElement("text", { 'id' : 'tm-' + i, 'class' : 'dtp-select-minute-text', 'text-anchor' : 'middle', 'style' : 'cursor:pointer', 'font-weight' : 'bold', 'font-size' : '20', x : x, y : y + 7, fill : color, 'data-minute' : i });						svgMinuteText.innerHTML = i;
 
-    		this.initHands(false);
+					if(!this.toggleTime(i, false))
+					{
+						svgMinuteText.className += " disabled";
+						svgMinuteText.setAttribute('fill', '#bdbdbd');
+					}
+					else
+					{
+						svgMinuteText.addEventListener('click', this._onSelectMinute.bind(this));
+					}
 
-    		this._centerBox();
-		},
-		initHands: function(t)
-		{
-			this.$dtpElement.find('.dtp-picker-clock').append
-			(
-				'<div class="dtp-hand dtp-hour-hand"></div>' +
-				'<div class="dtp-hand dtp-minute-hand"></div>' +
-				'<div class="dtp-clock-center"></div>'
-			);
-	
-			var cW = this.$dtpElement.find('.dtp-picker-clock').width();
-			var oT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
-			var oL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
-			var pL = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingLeft').replace('px', '');
-			var pT = this.$dtpElement.find('.dtp-picker-clock').parent().parent().css('paddingTop').replace('px', '');
+					svgClockElement.appendChild(svgMinuteText)
+				}
+			}
 
-			var mL = this.$dtpElement.find('.dtp-picker-clock').css('marginLeft').replace('px', '');
-			var mT = this.$dtpElement.find('.dtp-picker-clock').css('marginTop').replace('px', '');	
-
-			var w = this.$dtpElement.find('.dtp-clock-center').width() / 2;
-			var h = this.$dtpElement.find('.dtp-clock-center').height() / 2;
-
-			var r = (this.$dtpElement.find('.dtp-picker-clock').innerWidth() / 2);
-			var j = r / 1.2;
-
-			var _hL = ((this.params.shortTime === false) ? (r / 2.4) : (r / 1.8));
-			var _mL = ((this.params.shortTime === false) ? (r / 1.8) : (r / 1.4));					
-
-			this.$dtpElement.find('.dtp-hour-hand').css({
-				left: ((parseInt(cW) + (parseInt(mL) * 2) + (parseInt(pL) * 2) + parseInt(oL)) / 2) + 8,
-				height: _hL + 'px',
-				marginTop: (r - _hL - parseInt(pL)) + 'px'
-			}).addClass((t === true) ? 'on' : '');
-     		this.$dtpElement.find('.dtp-minute-hand').css
-			({
-				left: ((parseInt(cW) + (parseInt(mL) * 2) + (parseInt(pL) * 2) + parseInt(oL)) / 2) + 8,
-				height: _mL + 'px',
-				marginTop: (r - _mL - parseInt(pL)) + 'px'
-			}).addClass((t === false) ? 'on' : '');
-			this.$dtpElement.find('.dtp-clock-center').css
-			({
-				left: ((parseInt(cW) + (parseInt(mL) * 2) + (parseInt(pL) * 2) + parseInt(oL)) / 2),
-				marginTop: (0 - parseInt(pT)) + (parseInt(cW) + parseInt(pT)) / 2
-			});
-
-			this.animateHands();
-
-    		this._centerBox();
+   			this._centerBox();
 		},
 		animateHands: function()
 		{	
-			var h = this.currentDate.hour();
-			var m = this.currentDate.minute();
+			var H = this.currentDate.hour();
+			var M = this.currentDate.minute();
 
-			this.rotateElement(this.$dtpElement.find('.dtp-hour-hand'), (360 / 12) * h);
-			this.rotateElement(this.$dtpElement.find('.dtp-minute-hand'), ((360 / 60) * (5 * Math.round(this.currentDate.minute() / 5))));
+			var hh = this.$dtpElement.find('.hour-hand');
+				hh[0].setAttribute('transform', "rotate(" + 360 * H / 12 + ")");
+
+			var mh = this.$dtpElement.find('.minute-hand');
+				mh[0].setAttribute('transform', "rotate(" + 360 * M / 60 + ")");
+		},
+		createSVGClock : function(isHour)
+		{
+			var hl = ((this.params.shortTime) ? -120 : -90 );
+
+			var svgElement = this.createSVGElement("svg", { class : 'svg-clock', viewBox : '0,0,400,400' });
+			var svgGElement = this.createSVGElement("g", { transform : 'translate(200,200) ' });
+			var svgClockFace = this.createSVGElement("circle", { r : '192', fill : '#eee', stroke : '#bdbdbd', 'stroke-width' : 2 });
+			var svgClockCenter = this.createSVGElement("circle", { r : '15', fill : '#757575' });
+			
+			svgGElement.appendChild(svgClockFace)
+
+			if(isHour)
+			{
+				var svgMinuteHand = this.createSVGElement("line", { class : 'minute-hand', x1 : 0, y1 : 0, x2 : 0, y2 : -150, stroke : '#bdbdbd', 'stroke-width' : 2 });
+				var svgHourHand = this.createSVGElement("line", { class : 'hour-hand', x1 : 0, y1 : 0, x2 : 0, y2 : hl, stroke : '#8BC34A', 'stroke-width' : 8 });
+				
+				svgGElement.appendChild(svgMinuteHand);
+				svgGElement.appendChild(svgHourHand);
+			}
+			else
+			{
+				var svgMinuteHand = this.createSVGElement("line", { class : 'minute-hand', x1 : 0, y1 : 0, x2 : 0, y2 : -150, stroke : '#8BC34A', 'stroke-width' : 2 });
+				var svgHourHand = this.createSVGElement("line", { class : 'hour-hand', x1 : 0, y1 : 0, x2 : 0, y2 : hl, stroke : '#bdbdbd', 'stroke-width' : 8 });
+				
+				svgGElement.appendChild(svgHourHand);
+				svgGElement.appendChild(svgMinuteHand);
+			}			
+			
+			svgGElement.appendChild(svgClockCenter)
+
+			svgElement.appendChild(svgGElement)
+
+			this.$dtpElement.find("#dtp-svg-clock").empty();
+			this.$dtpElement.find("#dtp-svg-clock")[0].appendChild(svgElement);
+
+			this.animateHands();
+
+			return svgGElement;
+		},
+		createSVGElement: function(tag, attrs)
+		{
+			var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+            for (var k in attrs)
+            {
+                el.setAttribute(k, attrs[k]);
+            }
+            return el;
 		},
 		isAfterMinDate: function(date, checkHour, checkMinute)
 		{
@@ -693,7 +658,7 @@
 		{
 			if(date)
 			{
-				var minutes = (5 * Math.round(date.minute() / 5));
+				var minutes = date.minute();
 				var content = ((this.params.shortTime) ? date.format('hh') : date.format('HH')) + ':' + ((minutes.toString().length == 2) ? minutes : '0' + minutes) + ((this.params.shortTime) ? ' ' + date.format('A') : '');
 
 				if(this.params.date)
@@ -869,61 +834,26 @@
 				}
 			}
 		},
-		toggleTime: function(isHours)
+		toggleTime: function(value, isHours)
 		{
+			var result = false;
+
 			if(isHours)
 			{
-				this.$dtpElement.find('a.dtp-select-hour').removeClass('disabled');
-				this.$dtpElement.find('a.dtp-select-hour').removeProp('disabled');
-				this.$dtpElement.find('a.dtp-select-hour').off('click');
+				var _date = moment(this.currentDate);
+			 		_date.hour(this.convertHours(value)).minute(0).second(0);
 
-				var _self = this;
-
-				this.$dtpElement.find('a.dtp-select-hour').each(function()
-				{
-					var _hour = $(this).data('hour');
-
-					console.log(_self.convertHours(_hour))
-					var _date = moment(_self.currentDate);
-					_date.hour(_self.convertHours(_hour)).minute(0).second(0);
-
-					if(_self.isAfterMinDate(_date, true, false) === false || _self.isBeforeMaxDate(_date, true, false) === false)
-					{
-						$(this).prop("disabled");
-						$(this).addClass("disabled");
-					}
-					else
-					{
-						$(this).on('click', _self._onSelectHour.bind(_self));
-					}
-				});
+		 		result = !(this.isAfterMinDate(_date, true, false) === false || this.isBeforeMaxDate(_date, true, false) === false);
 			}
 			else
 			{
-				this.$dtpElement.find('a.dtp-select-minute').removeClass('disabled');
-				this.$dtpElement.find('a.dtp-select-minute').removeProp('disabled');
-				this.$dtpElement.find('a.dtp-select-minute').off('click');
+				var _date = moment(this.currentDate);
+			 		_date.minute(value).second(0);
 
-				var _self = this;
-
-				this.$dtpElement.find('a.dtp-select-minute').each(function()
-				{
-					var _minute = $(this).data('minute');
-
-					var _date = moment(_self.currentDate);					
-					_date.minute(_minute).second(0);
-
-					if(_self.isAfterMinDate(_date, true, true) === false || _self.isBeforeMaxDate(_date, true, true) === false)
-					{
-						$(this).prop("disabled");
-						$(this).addClass("disabled");
-					}
-					else
-					{
-						$(this).on('click', _self._onSelectMinute.bind(_self));
-					}
-				});
+		 		result = !(this.isAfterMinDate(_date, true, true) === false || this.isBeforeMaxDate(_date, true, true) === false);
 			}
+
+			return result;
 		},
 		_attachEvent: function(el, ev, fn)
 		{
@@ -1087,32 +1017,65 @@
 		},
 		_onSelectHour: function(e)
 		{
-			this.$dtpElement.find('a.dtp-select-hour').removeClass('selected');
-			$(e.currentTarget).addClass('selected');
-
-			var dataHour = parseInt($(e.currentTarget).data('hour'));
-			if(this.params.shortTime === true && this.isPM())
+			if(!$(e.target).hasClass('disabled'))
 			{
-				dataHour += 12;
+				var value = $(e.target).data('hour');
+				var parent = $(e.target).parent();			
+
+				var h = parent.find('.dtp-select-hour');
+				for(var i = 0; i < h.length; i++)
+				{
+					$(h[i]).attr('fill', 'transparent');
+				}
+				var th = parent.find('.dtp-select-hour-text');
+				for(var i = 0; i < th.length; i++)
+				{
+					$(th[i]).attr('fill', '#000');
+				}
+
+				$(parent.find('#h-' + value)).attr('fill', '#8BC34A');
+				$(parent.find('#th-' + value)).attr('fill', '#fff');
+
+				this.currentDate.hour(parseInt(value));
+				this.showTime(this.currentDate);
+
+				this.animateHands();
+
+				if(this.params.shortTime === true && this.isPM())
+				{
+				 	dataHour += 12;
+				}
+
+				if(this.params.switchOnClick === true)
+					setTimeout(this.initMinutes.bind(this), 200);
 			}
-
-			this.currentDate.hour(dataHour);
-			this.showTime(this.currentDate);
-
-			this.animateHands();
-
-			if(this.params.switchOnClick === true)
-				setTimeout(this.initMinutes.bind(this), 200);
 		},
 		_onSelectMinute: function(e)
 		{
-			this.$dtpElement.find('a.dtp-select-minute').removeClass('selected');
-			$(e.currentTarget).addClass('selected');
+			if(!$(e.target).hasClass('disabled'))
+			{
+				var value = $(e.target).data('minute');
+				var parent = $(e.target).parent();			
 
-			this.currentDate.minute(parseInt($(e.currentTarget).data('minute')));
-			this.showTime(this.currentDate);
+				var m = parent.find('.dtp-select-minute');
+				for(var i = 0; i < m.length; i++)
+				{
+					$(m[i]).attr('fill', 'transparent');
+				}
+				var tm = parent.find('.dtp-select-minute-text');
+				for(var i = 0; i < tm.length; i++)
+				{
+					$(tm[i]).attr('fill', '#000');
+				}
 
-			this.animateHands();
+				$(parent.find('#m-' + value)).attr('fill', '#8BC34A');
+				$(parent.find('#tm-' + value)).attr('fill', '#fff');
+
+				this.currentDate.minute(parseInt(value));
+				this.showTime(this.currentDate);
+
+				this.animateHands();
+			}
 		},
 		_onSelectAM: function(e)
 		{
@@ -1182,10 +1145,6 @@
 		{
 			$(window).off('keydown', null, null, this._onKeydown.bind(this));
 			this.$dtpElement.addClass('hidden');
-		},
-		resetDate: function()
-		{
-
 		},
 		_centerBox: function()
 		{

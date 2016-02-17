@@ -7,6 +7,7 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2016-02-17		| T00rk				| Changed Clock to SVG	 					 	 		 |
 | 2016-02-04		| T00rk				| Added a "Now" button (#38)	 					 	 |
 | 2016-01-30		| T00rk				| Switch view on click (#39, #47)	 					 |
 | 2016-01-29		| T00rk				| Added "clear button" (#48)		 					 |
