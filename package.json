@@ -11,10 +11,7 @@
     "web"
   ],
   "homepage": "https://github.com/T00rk/bootstrap-material-datetimepicker",
-  "main": [
-    "js/bootstrap-material-datetimepicker.js",
-    "css/bootstrap-material-datetimepicker.css"
-  ],
+  "main": "js/bootstrap-material-datetimepicker.js",
   "ignore": [
     "/.*",
     "_config.yml",
