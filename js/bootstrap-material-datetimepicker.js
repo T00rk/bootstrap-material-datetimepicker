@@ -919,18 +919,29 @@
 		_onNowClick: function()
 		{
 			this.currentDate = moment();
-
-			this.showDate(this.currentDate);
-			this.showTime(this.currentDate);
-
-			switch(this.currentView)
+			
+			if(this.params.date === true)
 			{
-				case 0 : this.initDate(); break;
-				case 1 : this.initHours(); break;
-				case 2 : this.initMinutes(); break;
+				this.showDate(this.currentDate);
+				
+				if(this.currentView === 0)
+				{
+					this.initDate();
+				}
 			}
-
-			this.animateHands();
+			
+			if(this.params.time === true)
+			{
+				this.showTime(this.currentDate);
+				
+				switch(this.currentView)
+				{
+					case 1 : this.initHours(); break;
+					case 2 : this.initMinutes(); break;
+				}
+				
+				this.animateHands();
+			}
 		},
 		_onOKClick: function()
 		{
