@@ -114,6 +114,9 @@
 
             if (ngModel) {
               ngModel.$formatters.push(function (value) {
+                if(typeof value === 'undefined') {
+                    return;
+                }
                 var m = moment(value);
                 return m.isValid() ? m.format(scope.format) : '';
               });
