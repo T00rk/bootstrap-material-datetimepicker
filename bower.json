@@ -29,7 +29,6 @@
   ],
   "dependencies": {
     "momentjs": "~2.10.2",
-    "jquery": "~2.1.4",
     "angular-material": "1.0.0-rc3"
   }
 }
