@@ -913,8 +913,15 @@
 		},		
 		_onClearClick: function()
 		{
+			this.currentDate = null;
+			this.$element.trigger('beforeChange', this.currentDate);
 			this.hide();
+                        if(typeof($.material) !== 'undefined')
+                        {
+                                this.$element.addClass('empty');
+                        }
 			this.$element.val('');
+                        this.$element.trigger('change', this.currentDate);
 		},		
 		_onNowClick: function()
 		{
