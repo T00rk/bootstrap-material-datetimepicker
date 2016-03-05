@@ -2,7 +2,7 @@
 {
 	var pluginName = "bootstrapMaterialDatePicker";
   	var pluginDataName = "plugin_" + pluginName;
-  	
+
   	moment.locale('en');
 
 	function Plugin(element, options)
@@ -51,12 +51,12 @@
 		return this;
 	};
 
-	Plugin.prototype = 
+	Plugin.prototype =
 	{
 		init: function()
-		{	
+		{
 			this.initDays();
-			this.initDates();	
+			this.initDates();
 
 			this.initTemplate();
 
@@ -169,6 +169,10 @@
 					}
 				}
 			}
+			else if (this.params.minDate === null)
+			{
+				this.minDate = null;
+			}
 
 			if(typeof(this.params.maxDate) !== 'undefined' && this.params.maxDate !== null)
 			{
@@ -196,6 +200,10 @@
 					}
 				}
 			}
+			else if (this.params.maxDate === null)
+			{
+				this.maxDate = null;
+			}
 
 			if(!this.isAfterMinDate(this.currentDate))
 			{
@@ -213,7 +221,7 @@
 									'<div class="dtp-date-view">' +
 										'<header class="dtp-header">' +
 											'<div class="dtp-actual-day">Lundi</div>' +
-											'<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></</div>' + 
+											'<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></</div>' +
 										'</header>' +
 										'<div class="dtp-date hidden">' +
 											'<div>' +
@@ -241,7 +249,7 @@
 										'<div class="dtp-time hidden">' +
 											'<div class="dtp-actual-maxtime">23:55</div>' +
 										'</div>' +
-										'<div class="dtp-picker">' +													
+										'<div class="dtp-picker">' +
 											'<div class="dtp-picker-calendar"></div>' +
 											'<div class="dtp-picker-datetime hidden">' +
 												'<div class="dtp-actual-meridien">' +
@@ -300,10 +308,10 @@
 				this.$dtpElement.find('.dtp-btn-now').removeClass('hidden');
 			}
 
-			if ((this.params.nowButton === true) && (this.params.clearButton === true)) 
+			if ((this.params.nowButton === true) && (this.params.clearButton === true))
 			{
 				this.$dtpElement.find('.dtp-btn-clear, .dtp-btn-now, .dtp-btn-cancel, .dtp-btn-ok').addClass('btn-xs');
-			} 
+			}
 			else if ((this.params.nowButton === true) || (this.params.clearButton === true))
 			{
 				this.$dtpElement.find('.dtp-btn-clear, .dtp-btn-now, .dtp-btn-cancel, .dtp-btn-ok').addClass('btn-sm');
@@ -341,7 +349,7 @@
 		},
 		initHours: function()
 		{
-			this.currentView = 1;			
+			this.currentView = 1;
 
 			this.showTime(this.currentDate);
 			this.initMeridienButtons();
@@ -353,12 +361,12 @@
 			else
 			{
 				this.$dtpElement.find('a.dtp-meridien-pm').click();
-			}	
+			}
 
 			var hFormat = ((this.params.shortTime) ? 'h' : 'H');
 
 			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
-			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');		
+			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
 
 			var svgClockElement = this.createSVGClock(true);
 
@@ -448,7 +456,7 @@
 			this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
 			this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
 
-			var svgClockElement = this.createSVGClock(false);			
+			var svgClockElement = this.createSVGClock(false);
 
 			for(var i = 0; i < 60; i++)
 			{
@@ -461,7 +469,7 @@
 				var color = ((this.currentDate.format("m") == i) ? "#8BC34A" : 'transparent');
 
 				var svgMinuteCircle = this.createSVGElement("circle", { 'id' : 'm-' + i, 'class' : 'dtp-select-minute', 'style' : 'cursor:pointer', r : r, cx : x, cy : y, fill : color, 'data-minute' : i });
-					
+
 				if(!this.toggleTime(i, false))
 				{
 					svgMinuteCircle.className += " disabled";
@@ -502,7 +510,7 @@
    			this._centerBox();
 		},
 		animateHands: function()
-		{	
+		{
 			var H = this.currentDate.hour();
 			var M = this.currentDate.minute();
 
@@ -520,14 +528,14 @@
 			var svgGElement = this.createSVGElement("g", { transform : 'translate(200,200) ' });
 			var svgClockFace = this.createSVGElement("circle", { r : '192', fill : '#eee', stroke : '#bdbdbd', 'stroke-width' : 2 });
 			var svgClockCenter = this.createSVGElement("circle", { r : '15', fill : '#757575' });
-			
+
 			svgGElement.appendChild(svgClockFace)
 
 			if(isHour)
 			{
 				var svgMinuteHand = this.createSVGElement("line", { class : 'minute-hand', x1 : 0, y1 : 0, x2 : 0, y2 : -150, stroke : '#bdbdbd', 'stroke-width' : 2 });
 				var svgHourHand = this.createSVGElement("line", { class : 'hour-hand', x1 : 0, y1 : 0, x2 : 0, y2 : hl, stroke : '#8BC34A', 'stroke-width' : 8 });
-				
+
 				svgGElement.appendChild(svgMinuteHand);
 				svgGElement.appendChild(svgHourHand);
 			}
@@ -535,11 +543,11 @@
 			{
 				var svgMinuteHand = this.createSVGElement("line", { class : 'minute-hand', x1 : 0, y1 : 0, x2 : 0, y2 : -150, stroke : '#8BC34A', 'stroke-width' : 2 });
 				var svgHourHand = this.createSVGElement("line", { class : 'hour-hand', x1 : 0, y1 : 0, x2 : 0, y2 : hl, stroke : '#bdbdbd', 'stroke-width' : 8 });
-				
+
 				svgGElement.appendChild(svgHourHand);
 				svgGElement.appendChild(svgMinuteHand);
-			}			
-			
+			}
+
 			svgGElement.appendChild(svgClockCenter)
 
 			svgElement.appendChild(svgGElement)
@@ -639,7 +647,7 @@
 		rotateElement: function(el, deg)
 		{
 			$(el).css
-			({ 
+			({
 				WebkitTransform: 'rotate(' + deg + 'deg)',
 				'-moz-transform': 'rotate(' + deg + 'deg)'
 			});
@@ -673,7 +681,7 @@
 					this.$dtpElement.find('.dtp-actual-maxtime').html(content);
 				}
 			}
-		},		
+		},
 		selectDate: function(date)
 		{
 			if(date)
@@ -727,7 +735,7 @@
 			{
 				_template += '<th>' + moment(parseInt(calendar.week[i]), "d").locale(this.params.lang).format("dd").substring(0, 1) + '</th>';
 			}
-			
+
 			_template += '</thead>';
 			_template += '<tbody><tr>';
 
@@ -752,7 +760,7 @@
 						{
 							_template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
 						}
-					}						
+					}
 
 					_template += '</td>';
 				}
@@ -874,7 +882,7 @@
 			this.$element.blur();
 
 			this.initDates();
-			
+
 			this.show();
 
 			if(this.params.date)
@@ -910,7 +918,7 @@
 		_onCloseClick: function()
 		{
 			this.hide();
-		},		
+		},
 		_onClearClick: function()
 		{
 			this.currentDate = null;
@@ -922,31 +930,31 @@
                         }
 			this.$element.val('');
                         this.$element.trigger('change', this.currentDate);
-		},		
+		},
 		_onNowClick: function()
 		{
 			this.currentDate = moment();
-			
+
 			if(this.params.date === true)
 			{
 				this.showDate(this.currentDate);
-				
+
 				if(this.currentView === 0)
 				{
 					this.initDate();
 				}
 			}
-			
+
 			if(this.params.time === true)
 			{
 				this.showTime(this.currentDate);
-				
+
 				switch(this.currentView)
 				{
 					case 1 : this.initHours(); break;
 					case 2 : this.initMinutes(); break;
 				}
-				
+
 				this.animateHands();
 			}
 		},
@@ -965,10 +973,10 @@
 						this.hide();
 					}
 					break;
-				case 1: 
-					this.initMinutes(); 
+				case 1:
+					this.initMinutes();
 					break;
-				case 2: 
+				case 2:
 					this.setElementValue();
 					this.hide();
 					break;
@@ -980,28 +988,28 @@
 			{
 				switch(this.currentView)
 				{
-					case 0: 
+					case 0:
 						this.hide();
 						break;
-					case 1: 
+					case 1:
 						if(this.params.date)
 						{
-							this.initDate();  
+							this.initDate();
 						}
 						else
 						{
 							this.hide();
 						}
 						break;
-					case 2: 
-						this.initHours(); 
+					case 2:
+						this.initHours();
 						break;
 				}
 			}
 			else
 			{
 				this.hide();
-			}			
+			}
 		},
 		_onMonthBeforeClick: function()
 		{
@@ -1038,7 +1046,7 @@
 			if(!$(e.target).hasClass('disabled'))
 			{
 				var value = $(e.target).data('hour');
-				var parent = $(e.target).parent();			
+				var parent = $(e.target).parent();
 
 				var h = parent.find('.dtp-select-hour');
 				for(var i = 0; i < h.length; i++)
@@ -1073,7 +1081,7 @@
 			if(!$(e.target).hasClass('disabled'))
 			{
 				var value = $(e.target).data('minute');
-				var parent = $(e.target).parent();			
+				var parent = $(e.target).parent();
 
 				var m = parent.find('.dtp-select-minute');
 				for(var i = 0; i < m.length; i++)
@@ -1142,7 +1150,7 @@
 		{
 			this.params.minDate = date;
 			this.initDates();
-		},		
+		},
 		setMaxDate: function(date)
 		{
 			this.params.maxDate = date;
@@ -1154,7 +1162,7 @@
 			this.$dtpElement.remove();
 		},
 		show: function()
-		{			
+		{
 			this.$dtpElement.removeClass('hidden');
 			this._attachEvent($(window), 'keydown', this._onKeydown.bind(this));
 			this._centerBox();
@@ -1168,7 +1176,7 @@
 		{
 			var h = (this.$dtpElement.height() - this.$dtpElement.find('.dtp-content').height()) / 2;
 			this.$dtpElement.find('.dtp-content').css('marginLeft', -(this.$dtpElement.find('.dtp-content').width() / 2) + 'px');
-			this.$dtpElement.find('.dtp-content').css('top', h + 'px');			
+			this.$dtpElement.find('.dtp-content').css('top', h + 'px');
 		}
 	};
 })(jQuery, moment);
