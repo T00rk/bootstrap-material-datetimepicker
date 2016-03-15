@@ -1101,6 +1101,13 @@
 				this.showTime(this.currentDate);
 
 				this.animateHands();
+
+				if(this.params.switchOnClick === true)
+					setTimeout(function()
+					{
+						this.setElementValue();
+						this.hide();
+					}.bind(this), 200);
 			}
 		},
 		_onSelectAM: function(e)
