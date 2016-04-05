@@ -754,8 +754,8 @@
                 var top = (r - y - mT / 2) - (pT + mT);
 
                 var hour = {
-                  value: (minuteMode ? (h * 5) : h) //5 for minute 60/12
-                  style: {'margin-left': left, 'margin-top': top},
+                  value: (minuteMode ? (h * 5) : h), //5 for minute 60/12
+                  style: {'margin-left': left, 'margin-top': top}
                 };
 
                 if (minuteMode) {
