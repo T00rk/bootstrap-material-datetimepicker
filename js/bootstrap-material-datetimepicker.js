@@ -381,7 +381,7 @@
 				var svgHourCircle = this.createSVGElement("circle", { 'id' : 'h-' + i, 'class' : 'dtp-select-hour', 'style' : 'cursor:pointer', r : '30', cx : x, cy : y, fill : fill, 'data-hour' : i });
 
 				var svgHourText = this.createSVGElement("text", { 'id' : 'th-' + i, 'class' : 'dtp-select-hour-text', 'text-anchor' : 'middle', 'style' : 'cursor:pointer', 'font-weight' : 'bold', 'font-size' : '20', x : x, y : y + 7, fill : color, 'data-hour' : i });
-					svgHourText.innerHTML = ((i === 0) ? ((this.params.shortTime) ? 12 : i ) : i);
+					svgHourText.textContent = ((i === 0) ? ((this.params.shortTime) ? 12 : i ) : i);
 
 				if(!this.toggleTime(i, true))
 				{
@@ -412,7 +412,7 @@
 					var svgHourCircle = this.createSVGElement("circle", { 'id' : 'h-' + (i + 12), 'class' : 'dtp-select-hour', 'style' : 'cursor:pointer', r : '30', cx : x, cy : y, fill : fill, 'data-hour' : (i + 12) });
 
 					var svgHourText = this.createSVGElement("text", { 'id' : 'th-' + (i + 12), 'class' : 'dtp-select-hour-text', 'text-anchor' : 'middle', 'style' : 'cursor:pointer', 'font-weight' : 'bold', 'font-size' : '22', x : x, y : y + 7, fill : color, 'data-hour' : (i + 12) });
-						svgHourText.innerHTML = i + 12;
+						svgHourText.textContent = i + 12;
 
 					if(!this.toggleTime(i + 12, true))
 					{
@@ -491,7 +491,8 @@
 
 					var color = ((this.currentDate.format("m") == i) ? "#fff" : '#000');
 
-					var svgMinuteText = this.createSVGElement("text", { 'id' : 'tm-' + i, 'class' : 'dtp-select-minute-text', 'text-anchor' : 'middle', 'style' : 'cursor:pointer', 'font-weight' : 'bold', 'font-size' : '20', x : x, y : y + 7, fill : color, 'data-minute' : i });						svgMinuteText.innerHTML = i;
+					var svgMinuteText = this.createSVGElement("text", { 'id' : 'tm-' + i, 'class' : 'dtp-select-minute-text', 'text-anchor' : 'middle', 'style' : 'cursor:pointer', 'font-weight' : 'bold', 'font-size' : '20', x : x, y : y + 7, fill : color, 'data-minute' : i });
+						svgMinuteText.textContent = i;
 
 					if(!this.toggleTime(i, false))
 					{
