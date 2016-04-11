@@ -65,7 +65,6 @@
     + '            <md-button class="dtp-btn-ok md-button" ng-click="picker.ok()"> {{picker.params.okText}}</md-button>'
     + '      </md-dialog-actions>'
     + '</md-dialog>';
-  
 
   angular.module(moduleName, ['ngMaterial'])
     .provider('mdcDatetimePickerDefaultLocale', function () {
@@ -708,7 +707,7 @@
       function () {
 
         var template = '<div class="dtp-picker-clock"><span ng-if="!points || points.length < 1">&nbsp;</span>'
-          + '<div ng-repeat="point in points" class="dtp-picker-time" style="margin-left: {{point.left}}px; margin-top: {{point.top}}px;">'
+          + '<div ng-repeat="point in points" class="dtp-picker-time" ng-style="point.style">'
           + '   <a href="#" mdc-dtp-noclick ng-class="{selected: point.value===currentValue}" class="dtp-select-hour" ng-click="setTime(point.value)" ng-if="pointAvailable(point)">{{point.display}}</a>'
           + '   <a href="#" mdc-dtp-noclick class="disabled dtp-select-hour" ng-if="!pointAvailable(point)">{{point.display}}</a>'
           + '</div>'
@@ -751,11 +750,12 @@
               for (var h = 0; h < 12; ++h) {
                 var x = j * Math.sin(Math.PI * 2 * (h / 12));
                 var y = j * Math.cos(Math.PI * 2 * (h / 12));
+                var left = (r + x + pL / 2) - (pL + mL);
+                var top = (r - y - mT / 2) - (pT + mT);
 
                 var hour = {
-                  left: (r + x + pL / 2) - (pL + mL),
-                  top: (r - y - mT / 2) - (pT + mT),
-                  value: (minuteMode ? (h * 5) : h) //5 for minute 60/12
+                  value: (minuteMode ? (h * 5) : h), //5 for minute 60/12
+                  style: {'margin-left': left, 'margin-top': top}
                 };
 
                 if (minuteMode) {
@@ -817,7 +817,9 @@
             var rotateElement = function (el, deg) {
               angular.element(el).css({
                 WebkitTransform: 'rotate(' + deg + 'deg)',
-                '-moz-transform': 'rotate(' + deg + 'deg)'
+                '-moz-transform': 'rotate(' + deg + 'deg)',
+                '-ms-transform': 'rotate(' + deg + 'deg)',
+                'transform': 'rotate(' + deg + 'deg)'
               });
             };
 
