@@ -15,7 +15,7 @@
   ],
   "homepage": "https://logbon72.github.io/angular-material-datetimepicker",
   "main": [
-    "js/angular-material-datetimepicker.min.js",
+    "js/angular-material-datetimepicker.js",
     "css/material-datetimepicker.css"
   ],
   "ignore": [
