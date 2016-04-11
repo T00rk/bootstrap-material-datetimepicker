@@ -150,7 +150,8 @@
                   openFrom: element,
                   parent: angular.element(document.body),
                   bindToController: true,
-                  disableParentScroll: false
+                  disableParentScroll: false,
+                  skipHide: true
                 })
                 .then(function (v) {
                   scope.currentDate = v ? v._d : v;
