@@ -348,11 +348,11 @@
     },
     incrementYear: function (amount) {
       if (amount === 1 && this.isNextYearVisible()) {
-        this.selectDate(this.currentDate.add('year', amount));
+        this.selectDate(this.currentDate.add(amount, 'year'));
       }
 
       if (amount === -1 && this.isPreviousYearVisible()) {
-        this.selectDate(this.currentDate.add('year', amount));
+        this.selectDate(this.currentDate.add(amount, 'year'));
       }
     },
     isPreviousMonthVisible: function () {
@@ -551,7 +551,7 @@
               }, function (val2, val1) {
                 if (val2 != val1) {
                   var nDate = moment(val2, 'YYYY-MM');
-                  var index = currentMonthIndex(nDate);
+                  var index = currentMonthIndex(nDate) - calendar.months[0];
                   if (calendar.topIndex != index) {
                     calendar.topIndex = index;
                   }
