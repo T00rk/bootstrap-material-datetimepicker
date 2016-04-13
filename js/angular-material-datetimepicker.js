@@ -755,7 +755,7 @@
 
                 var hour = {
                   value: (minuteMode ? (h * 5) : h), //5 for minute 60/12
-                  style: {'margin-left': left, 'margin-top': top}
+                  style: {'margin-left': left+'px', 'margin-top': top+'px'}
                 };
 
                 if (minuteMode) {
