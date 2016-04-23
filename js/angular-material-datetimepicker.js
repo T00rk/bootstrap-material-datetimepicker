@@ -66,8 +66,9 @@
     + '      </md-dialog-actions>'
     + '</md-dialog>';
 
-  angular.module(moduleName, ['ngMaterial'])
-    .provider('mdcDatetimePickerDefaultLocale', function () {
+
+
+angular.module(moduleName, ['ngMaterial']).provider('mdcDatetimePickerDefaultLocale', function () {
       this.locale = 'en';
 
       this.$get = function () {
@@ -77,8 +78,26 @@
       this.setDefaultLocale = function (localeString) {
         this.locale = localeString;
       };
-    })
-    .directive('mdcDatetimePicker', ['$mdDialog',
+    });
+
+	angular.module(moduleName).factory('default_params', ['mdcDatetimePickerDefaultLocale', function(mdcDatetimePickerDefaultLocale) {
+		var default_params = {
+    	  date: true,
+	      time: true,
+    	  format: 'YYYY-MM-DD',
+	      minDate: null,
+    	  maxDate: null,
+	      currentDate: null,
+	      lang: mdcDatetimePickerDefaultLocale,
+	      weekStart: 0,
+	      shortTime: false,
+	      cancelText: 'Cancel',
+	      okText: 'OK',
+	      amText: 'AM',
+	      pmText: 'PM'
+    	};	
+		return default_params;
+	}]).directive('mdcDatetimePicker', ['$mdDialog',
       function ($mdDialog) {
 
         return {
@@ -153,18 +172,76 @@
                 })
                 .then(function (v) {
                   scope.currentDate = v ? v._d : v;
-                  isOn = false;
+                  //isOn = false;
                 }, function () {
-                  isOn = false;
+                  //isOn = false;
                 })
               ;
             });
           }
         };
       }])
+	/** Returns a service that opens a dialog when the attribute shown is called
+	The dialog serves to select a date/time/etc. depending on the options given to the function show
+
+	@param options extends default_params
+		{
+		  date: {boolean} =true,
+	      time: {boolean] =true,
+    	  format: {string} ='YYYY-MM-DD',
+	      minDate: {strign} =null,
+    	  maxDate: {string} =null,
+	      currentDate: {string} =null,
+	      lang: {string} =mdcDatetimePickerDefaultLocale,
+	      weekStart: {int} =0,
+	      shortTime: {boolean} =false,
+	      cancelText: {string} ='Cancel',
+	      okText: {string} ='OK',
+	      amText: {string} ='AM',
+	      pmText: {string} ='PM'
+		}
+	@return promise
+	 */
+	.factory('dateTimeDialog', ["$mdDialog", "$q", "default_params", function($mdDialog, $q, default_params) {
+			var accepted_options = ['time', 'date', 'minDate','maxDate','shortTime','format','cancelText','okText','lang','amText','pmText']
+		
+			var service = {
+				show : function (options) {
+					var deferred = $q.defer();
+					var params = default_params;
+					for(var i in options) {
+						if(accepted_options.indexOf[i] != -1) {
+							params = options[i];
+						}
+					}
+					var locals = {options: options};
+					$mdDialog.show({
+        	          template: template,
+                  	  controller: PluginController,
+                      controllerAs: 'picker',
+                      locals: locals,
+                      parent: angular.element(document.body),
+                      bindToController: true,
+					  clickOutsideToClose: true,
+                      disableParentScroll: false
+                    })
+                   .then(function (v) {
+                		var currentDate = v ? v._d : v;
+						deferred.resolve(v ? v._d : v);
+                		//isOn = false;
+                	}, function () {
+						deferred.reject();
+                		//isOn = false;
+                	})
+					return deferred.promise;
+				}
+			}
+			return service;
+
+	}] )
   ;
 
-  var PluginController = function ($scope, $mdDialog, mdcDatetimePickerDefaultLocale) {
+  var PluginController = function ($scope, $mdDialog, mdcDatetimePickerDefaultLocale, default_params) {
     this.currentView = VIEW_STATES.DATE;
     this._dialog = $mdDialog;
 
@@ -174,27 +251,12 @@
     this._attachedEvents = [];
     this.VIEWS = VIEW_STATES;
 
-    this.params = {
-      date: true,
-      time: true,
-      format: 'YYYY-MM-DD',
-      minDate: null,
-      maxDate: null,
-      currentDate: null,
-      lang: mdcDatetimePickerDefaultLocale,
-      weekStart: 0,
-      shortTime: false,
-      cancelText: 'Cancel',
-      okText: 'OK',
-      amText: 'AM',
-      pmText: 'PM'
-    };
-
+    this.params = default_params
     this.meridien = 'AM';
     this.params = angular.extend(this.params, this.options);
     this.init();
   };
-  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDatetimePickerDefaultLocale'];
+  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDatetimePickerDefaultLocale', 'default_params'];
   PluginController.prototype = {
     init: function () {
       this.timeMode = this.params.time && !this.params.date;
@@ -707,7 +769,7 @@
       function () {
 
         var template = '<div class="dtp-picker-clock"><span ng-if="!points || points.length < 1">&nbsp;</span>'
-          + '<div ng-repeat="point in points" class="dtp-picker-time" ng-style="point.style">'
+          + '<div ng-repeat="point in points" class="dtp-picker-time" style="margin-left: {{point.left}}px; margin-top: {{point.top}}px;">'
           + '   <a href="#" mdc-dtp-noclick ng-class="{selected: point.value===currentValue}" class="dtp-select-hour" ng-click="setTime(point.value)" ng-if="pointAvailable(point)">{{point.display}}</a>'
           + '   <a href="#" mdc-dtp-noclick class="disabled dtp-select-hour" ng-if="!pointAvailable(point)">{{point.display}}</a>'
           + '</div>'
@@ -750,12 +812,11 @@
               for (var h = 0; h < 12; ++h) {
                 var x = j * Math.sin(Math.PI * 2 * (h / 12));
                 var y = j * Math.cos(Math.PI * 2 * (h / 12));
-                var left = (r + x + pL / 2) - (pL + mL);
-                var top = (r - y - mT / 2) - (pT + mT);
 
                 var hour = {
-                  value: (minuteMode ? (h * 5) : h), //5 for minute 60/12
-                  style: {'margin-left': left, 'margin-top': top}
+                  left: (r + x + pL / 2) - (pL + mL),
+                  top: (r - y - mT / 2) - (pT + mT),
+                  value: (minuteMode ? (h * 5) : h) //5 for minute 60/12
                 };
 
                 if (minuteMode) {
@@ -817,9 +878,7 @@
             var rotateElement = function (el, deg) {
               angular.element(el).css({
                 WebkitTransform: 'rotate(' + deg + 'deg)',
-                '-moz-transform': 'rotate(' + deg + 'deg)',
-                '-ms-transform': 'rotate(' + deg + 'deg)',
-                'transform': 'rotate(' + deg + 'deg)'
+                '-moz-transform': 'rotate(' + deg + 'deg)'
               });
             };
 
