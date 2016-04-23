@@ -878,11 +878,11 @@
               return minuteMode ? picker.isMinuteAvailable(point.value) : picker.isHourAvailable(point.value);
             };
 
-            var unwatcher = scope.$watch(function () {
+            var unWatcher = scope.$watch(function () {
               return element[0].querySelectorAll('div').length;
             }, function () {
               exec();
-              unwatcher();
+              unWatcher();
             });
           }
         }
