@@ -489,8 +489,7 @@
     .directive('mdcDatetimePickerCalendar', [
       function () {
 
-        var startDate = moment(),
-          YEAR_MIN = 1900,
+        var YEAR_MIN = 1900,
           YEAR_MAX = 2100,
           MONTHS_IN_ALL = (YEAR_MAX - YEAR_MIN + 1) * 12,
           ITEM_HEIGHT = 240,
