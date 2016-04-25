@@ -78,14 +78,15 @@
         this.locale = localeString;
       };
     })
-    .directive('mdcDatetimePicker', ['$mdDialog',
-      function ($mdDialog) {
+    .directive('mdcDatetimePicker', ['$mdDialog', '$timeout',
+      function ($mdDialog, $timeout) {
 
         return {
           restrict: 'A',
           require: 'ngModel',
           scope: {
             currentDate: '=ngModel',
+            ngChange: '&',
             time: '=',
             date: '=',
             minDate: '=',
@@ -149,11 +150,17 @@
                   openFrom: element,
                   parent: angular.element(document.body),
                   bindToController: true,
-                  disableParentScroll: false
+                  disableParentScroll: false,
+                  skipHide: true
                 })
                 .then(function (v) {
                   scope.currentDate = v ? v._d : v;
                   isOn = false;
+                  
+                  if(!moment(scope.currentDate).isSame(options.currentDate)) {
+                     $timeout(scope.ngChange, 0);
+                  }
+                  
                 }, function () {
                   isOn = false;
                 })
@@ -755,7 +762,7 @@
 
                 var hour = {
                   value: (minuteMode ? (h * 5) : h), //5 for minute 60/12
-                  style: {'margin-left': left+'px', 'margin-top': top+'px'}
+                  style: {'margin-left': left + 'px', 'margin-top': top + 'px'}
                 };
 
                 if (minuteMode) {
