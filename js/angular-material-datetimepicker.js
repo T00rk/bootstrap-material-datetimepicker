@@ -97,7 +97,8 @@
             okText: '@',
             lang: '@',
             amText: '@',
-            pmText: '@'
+            pmText: '@',
+            showTodaysDate: '@',
           },
           link: function (scope, element, attrs, ngModel) {
             var isOn = false;
@@ -110,7 +111,11 @@
                 scope.format = 'HH:mm';
               }
             }
-
+            
+            var dateOfTheDay = null;
+            if(scope.showTodaysDate !== undefined && scope.showTodaysDate !== "false")
+              dateOfTheDay = moment();
+            
             if (angular.isString(scope.currentDate) && scope.currentDate !== '') {
               scope.currentDate = moment(scope.currentDate, scope.format);
             }
@@ -141,6 +146,8 @@
                 }
               }
               options.currentDate = scope.currentDate;
+              options.showTodaysDate = dateOfTheDay;
+              
               var locals = {options: options};
               $mdDialog.show({
                   template: template,
@@ -620,6 +627,14 @@
               calendar.isSelectedDay = function (m) {
                 return m && calendar.date.date() === m.date() && calendar.date.month() === m.month() && calendar.date.year() === m.year();
               };
+              
+              calendar.isDateOfTheDay = function (m) {
+                var today = calendar.picker.options.showTodaysDate;
+                if(today === null)
+                  return false;
+                  
+                return m && today.date() === m.date() && today.month() === m.month() && today.year() === m.year();
+              }
 
             }
           ],
@@ -646,7 +661,8 @@
                   //build a
                   var scopeRef = 'month["days"][' + i + '][' + j + ']';
                   aOrSpan = angular.element("<a href='#' mdc-dtp-noclick></a>")
-                    .attr('ng-class', '{selected: cal.isSelectedDay(' + scopeRef + ')}')
+                    .attr('ng-class', '{selected: cal.isSelectedDay(' + scopeRef + '), hilite: cal.isDateOfTheDay(' + scopeRef + ')}')
+                    //.attr('ng-class', '{selected: cal.isDateOfTheDay(' + scopeRef + ')}')                    
                     .attr('ng-click', 'cal.selectDate(' + scopeRef + ')')
                   ;
                 } else {
