@@ -163,6 +163,26 @@
           }
         };
       }])
+    .factory('mdcDatetimePickerService', ['$mdDialog',
+      function ($mdDialog) {
+        return {
+          showModal: function (options) {
+            return $mdDialog
+              .show({
+                template: template,
+                controller: PluginController,
+                controllerAs: 'picker',
+                locals: {
+                  options: options
+                },
+                parent: angular.element(document.body),
+                bindToController: true,
+                disableParentScroll: false
+              });
+          }
+        };
+      }
+    ])
   ;
 
   var PluginController = function ($scope, $mdDialog, mdcDatetimePickerDefaultLocale) {
