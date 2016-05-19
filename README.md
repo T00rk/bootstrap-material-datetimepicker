@@ -27,12 +27,12 @@ Originally designed for Bootstrap Material, this has been modified to work with 
 | 2015-04-10		| Peterzen			| Added bower and requirejs support						 |
 | 2015-04-08		| T00rk				| Fixed problem on locale switch						 |
 | 2015-03-04		| T00rk				| Added Time picker										 |
-(\*) File names have been changed 
+(\*) File names have been changed
 
 bootstrap-material-datepicker.js => bootstrap-material-date**time**picker.js
 
 bootstrap-material-datepicker.css => bootstrap-material-date**time**picker.css
-	
+
 ### Dependencies
 
 Depends on the following library:
@@ -92,4 +92,5 @@ The directive accepts several attributes which are described below:
 | **date**			| Boolean						| true => Has Datepicker (default: true)        |
 | **time**			| Boolean						| true => Has Timepicker (default: true)		|
 | **cancel-text**	| String						| Text for the cancel button (default: Cancel)	|
-| **ok-text**		| String						| Text for the OK button (default: OK)			|
+| **ok-text**   | String            | Text for the OK button (default: OK)      |
+| **week-start**		| Number						| First day of the week (default: 0 => Sunday)			|
