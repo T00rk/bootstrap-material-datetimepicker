@@ -157,6 +157,21 @@ md-dialog.dtp {
     color: #fff;
 }
 
+.dtp table.dtp-picker-days tr > td > a.selected.hilite {
+    padding: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    background: #8BC34A;
+    color: #fff;
+}
+
+.dtp table.dtp-picker-days tr > td > a.hilite:not(.selected) {
+    padding: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #8BC34A;
+}
+
 .dtp table.dtp-picker-days tr > td > a:hover:not(.selected) {
     background: #dddddd;
 }
@@ -309,4 +324,3 @@ md-dialog.dtp {
 .dtp .center {
     text-align: center;
 }
-
