@@ -1006,6 +1006,11 @@
 
                  if (this.params.switchOnClick === true && this.params.time === true)
                     setTimeout(this.initHours.bind(this), 200);
+                    
+                 if(this.params.switchOnClick === true && this.params.time === false) {
+                    setTimeout(this._onOKClick.bind(this), 200);
+                 }
+                 
               },
               _onSelectHour: function (e)
               {
