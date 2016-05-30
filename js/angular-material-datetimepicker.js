@@ -104,7 +104,7 @@
             var isOn = false;
             if (!scope.format) {
               if (scope.date && scope.time) {
-                scope.format = 'YYYY-MM-DD HH:mm:ss';
+                scope.format = 'YYYY-MM-DD HH:mm';
               } else if (scope.date) {
                 scope.format = 'YYYY-MM-DD';
               } else {
