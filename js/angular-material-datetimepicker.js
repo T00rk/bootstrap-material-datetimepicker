@@ -688,11 +688,11 @@
           },
           require: '^mdcDatetimePickerCalendar',
           restrict: 'AE',
-          template: '<div class="dtp-picker-month">{{::month.name}}</div>'
+          template: '<div class="dtp-picker-month">{{month.name}}</div>'
           + '<table class="table dtp-picker-days">'
           + '    <thead>'
           + '    <tr>'
-          + '        <th ng-repeat="day in ::cal.week track by $index">{{::cal.toDay(day)}}</th>'
+          + '        <th ng-repeat="day in cal.week track by $index">{{cal.toDay(day)}}</th>'
           + '    </tr>'
           + '    </thead>'
           + '    <tbody>'
