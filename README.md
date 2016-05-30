@@ -1,3 +1,6 @@
+### ATTENTION: 
+This version was forked to be compatible with IE9 as the Material Icons do not render in IE9. This version uses Glyphicons instead of Material Icons so you must have Bootstrap or Glyphicon font installed. 
+
 # bootstrap-material-datetimepicker
 Material DateTimePicker 
 
