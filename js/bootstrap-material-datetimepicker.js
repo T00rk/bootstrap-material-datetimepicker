@@ -66,7 +66,6 @@
                  this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
                  this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
                  this._attachEvent(this.$element, 'focus', this._onFocus.bind(this));
-
               },
               initDays: function ()
               {
@@ -281,7 +280,6 @@
                        this.dtpElement = $('body').find("#" + this.name);
                     this.$dtpElement = $(this.dtpElement);
                  }
-				 
               },
               initButtons: function ()
               {
@@ -343,7 +341,6 @@
 
                  this._centerBox();
                  this.showDate(_date);
-
               },
               initHours: function ()
               {
@@ -889,7 +886,6 @@
               _onElementClick: function (e)
               {
                  e.stopPropagation();
-
               },
               _onKeydown: function (e)
               {
@@ -1172,20 +1168,9 @@
               setLang: function (l)
               {
                  this.params.lang = l;
-				moment.locale(this.params.lang);
-
+ 		 moment.locale(this.params.lang);
                  this.initDates();
-				},
-              setOKAY: function (m)
-              {
-                 this.params.okText = m;
-                 this.init();
-				},
-              setCancel: function (m)
-              {
-                 this.params.cancelText = m;
-                 this.initDates();
-				},
+		},
               destroy: function ()
               {
                  this._detachEvents();
