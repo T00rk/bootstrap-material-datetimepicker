@@ -90,3 +90,7 @@
 	background-color: #689F38;
 	border-radius: 3px;
 }
+
+.dtp-select-day:hover{
+	background-color: rgba(139, 195, 74, .6);;
+}
