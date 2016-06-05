@@ -91,6 +91,10 @@
 	border-radius: 3px;
 }
 
+.dtp-select-day{
+	 transition: background-color 100ms linear;
+}
 .dtp-select-day:hover{
-	background-color: rgba(139, 195, 74, .6);;
+	background-color: rgba(139, 195, 74, .6);
+	 transition: background-color 250ms linear;
 }
