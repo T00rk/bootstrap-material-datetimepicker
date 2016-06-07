@@ -61,6 +61,7 @@
     + '        </div>'
     + '    </md-dialog-content>'
     + '    <md-dialog-actions class="dtp-buttons">'
+    + '            <md-button class="dtp-btn-ok md-button" ng-click="picker.today()"> {{picker.params.todayText}}</md-button>'
     + '            <md-button class="dtp-btn-cancel md-button" ng-click="picker.cancel()"> {{picker.params.cancelText}}</md-button>'
     + '            <md-button class="dtp-btn-ok md-button" ng-click="picker.ok()"> {{picker.params.okText}}</md-button>'
     + '      </md-dialog-actions>'
@@ -96,7 +97,8 @@
             okText: '@',
             lang: '@',
             amText: '@',
-            pmText: '@'
+            pmText: '@',
+            todayText: '@'
           },
           link: function (scope, element, attrs, ngModel) {
             var isOn = false;
@@ -188,7 +190,8 @@
       cancelText: 'Cancel',
       okText: 'OK',
       amText: 'AM',
-      pmText: 'PM'
+      pmText: 'PM',
+      todayText: 'Today'
     };
 
     this.meridien = 'AM';
@@ -388,6 +391,9 @@
           this.initHours();
         }
       }
+    },
+    today: function(){
+      this.selectDate(Date.now());
     },
     ok: function () {
       switch (this.currentView) {
