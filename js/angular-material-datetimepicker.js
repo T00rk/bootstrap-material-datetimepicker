@@ -78,14 +78,15 @@
         this.locale = localeString;
       };
     })
-    .directive('mdcDatetimePicker', ['$mdDialog',
-      function ($mdDialog) {
+    .directive('mdcDatetimePicker', ['$mdDialog', '$timeout',
+      function ($mdDialog, $timeout) {
 
         return {
           restrict: 'A',
           require: 'ngModel',
           scope: {
             currentDate: '=ngModel',
+            ngChange: '&',
             time: '=',
             date: '=',
             minDate: '=',
@@ -96,7 +97,8 @@
             okText: '@',
             lang: '@',
             amText: '@',
-            pmText: '@'
+            pmText: '@',
+            showTodaysDate: '@',
           },
           link: function (scope, element, attrs, ngModel) {
             var isOn = false;
@@ -109,7 +111,11 @@
                 scope.format = 'HH:mm';
               }
             }
-
+            
+            var dateOfTheDay = null;
+            if(scope.showTodaysDate !== undefined && scope.showTodaysDate !== "false")
+              dateOfTheDay = moment();
+            
             if (angular.isString(scope.currentDate) && scope.currentDate !== '') {
               scope.currentDate = moment(scope.currentDate, scope.format);
             }
@@ -140,6 +146,8 @@
                 }
               }
               options.currentDate = scope.currentDate;
+              options.showTodaysDate = dateOfTheDay;
+              
               var locals = {options: options};
               $mdDialog.show({
                   template: template,
@@ -155,6 +163,11 @@
                 .then(function (v) {
                   scope.currentDate = v ? v._d : v;
                   isOn = false;
+                  
+                  if(!moment(scope.currentDate).isSame(options.currentDate)) {
+                     $timeout(scope.ngChange, 0);
+                  }
+                  
                 }, function () {
                   isOn = false;
                 })
@@ -614,6 +627,14 @@
               calendar.isSelectedDay = function (m) {
                 return m && calendar.date.date() === m.date() && calendar.date.month() === m.month() && calendar.date.year() === m.year();
               };
+              
+              calendar.isDateOfTheDay = function (m) {
+                var today = calendar.picker.options.showTodaysDate;
+                if(today === null)
+                  return false;
+                  
+                return m && today.date() === m.date() && today.month() === m.month() && today.year() === m.year();
+              }
 
             }
           ],
@@ -640,7 +661,8 @@
                   //build a
                   var scopeRef = 'month["days"][' + i + '][' + j + ']';
                   aOrSpan = angular.element("<a href='#' mdc-dtp-noclick></a>")
-                    .attr('ng-class', '{selected: cal.isSelectedDay(' + scopeRef + ')}')
+                    .attr('ng-class', '{selected: cal.isSelectedDay(' + scopeRef + '), hilite: cal.isDateOfTheDay(' + scopeRef + ')}')
+                    //.attr('ng-class', '{selected: cal.isDateOfTheDay(' + scopeRef + ')}')                    
                     .attr('ng-click', 'cal.selectDate(' + scopeRef + ')')
                   ;
                 } else {
@@ -755,7 +777,7 @@
 
                 var hour = {
                   value: (minuteMode ? (h * 5) : h), //5 for minute 60/12
-                  style: {'margin-left': left+'px', 'margin-top': top+'px'}
+                  style: {'margin-left': left + 'px', 'margin-top': top + 'px'}
                 };
 
                 if (minuteMode) {
