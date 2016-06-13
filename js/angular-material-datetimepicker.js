@@ -144,8 +144,11 @@ angular.module(moduleName, ['ngMaterial'])
                   $timeout(scope.ngChange, 0);
                 }
 
+                element.blur()
+
               }, function () {
                 isOn = false;
+                element.blur()
               })
             ;
           });

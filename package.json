@@ -1,7 +1,7 @@
 {
-  "name": "angular-material-datetimepicker",
+  "name": "jw-angular-material-datetimepicker",
   "description": "A datetime picker for AngularJS Material",
-  "version": "1.4.1",
+  "version": "0.0.3",
   "keywords": [
     "css",
     "js",
