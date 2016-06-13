@@ -61,6 +61,7 @@
     + '        </div>'
     + '    </md-dialog-content>'
     + '    <md-dialog-actions class="dtp-buttons">'
+    + '            <md-button class="dtp-btn-ok md-button" ng-click="picker.today()"> {{picker.params.todayText}}</md-button>'
     + '            <md-button class="dtp-btn-cancel md-button" ng-click="picker.cancel()"> {{picker.params.cancelText}}</md-button>'
     + '            <md-button class="dtp-btn-ok md-button" ng-click="picker.ok()"> {{picker.params.okText}}</md-button>'
     + '      </md-dialog-actions>'
@@ -100,6 +101,7 @@
             amText: '@',
             pmText: '@',
             showTodaysDate: '@',
+            todayText: '@',
           },
           link: function (scope, element, attrs, ngModel) {
             var isOn = false;
@@ -112,11 +114,11 @@
                 scope.format = 'HH:mm';
               }
             }
-            
+
             var dateOfTheDay = null;
             if(scope.showTodaysDate !== undefined && scope.showTodaysDate !== "false")
               dateOfTheDay = moment();
-            
+
             if (angular.isString(scope.currentDate) && scope.currentDate !== '') {
               scope.currentDate = moment(scope.currentDate, scope.format);
             }
@@ -148,7 +150,7 @@
               }
               options.currentDate = scope.currentDate;
               options.showTodaysDate = dateOfTheDay;
-              
+
               var locals = {options: options};
               $mdDialog.show({
                   template: template,
@@ -165,11 +167,11 @@
                 .then(function (v) {
                   scope.currentDate = v ? v._d : v;
                   isOn = false;
-                  
+
                   if(!moment(scope.currentDate).isSame(options.currentDate)) {
                      $timeout(scope.ngChange, 0);
                   }
-                  
+
                 }, function () {
                   isOn = false;
                 })
@@ -203,7 +205,8 @@
       cancelText: 'Cancel',
       okText: 'OK',
       amText: 'AM',
-      pmText: 'PM'
+      pmText: 'PM',
+      todayText: 'Today',
     };
 
     this.meridien = 'AM';
@@ -403,6 +406,9 @@
           this.initHours();
         }
       }
+    },
+    today: function(){
+      this.selectDate(Date.now());
     },
     ok: function () {
       switch (this.currentView) {
@@ -629,12 +635,12 @@
               calendar.isSelectedDay = function (m) {
                 return m && calendar.date.date() === m.date() && calendar.date.month() === m.month() && calendar.date.year() === m.year();
               };
-              
+
               calendar.isDateOfTheDay = function (m) {
                 var today = calendar.picker.options.showTodaysDate;
                 if(today === null)
                   return false;
-                  
+
                 return m && today.date() === m.date() && today.month() === m.month() && today.year() === m.year();
               }
 
