@@ -43,7 +43,7 @@
     + '            </div>'
     + '            <div class="dtp-picker">'
     + '                <mdc-datetime-picker-calendar date="picker.currentDate" picker="picker" class="dtp-picker-calendar" ng-show="picker.currentView === picker.VIEWS.DATE"></mdc-datetime-picker-calendar>'
-    + '                <div class="dtp-picker-datetime" ng-show="picker.currentView !== picker.VIEWS.DATE">'
+    + '                <div class="dtp-picker-datetime" ng-cloak ng-if="picker.currentView !== picker.VIEWS.DATE">'
     + '                    <div class="dtp-actual-meridien">'
     + '                        <div class="left p20">'
     + '                            <a href="#" mdc-dtp-noclick class="dtp-meridien-am" ng-class="{selected: picker.meridien == \'AM\'}" ng-click="picker.selectAM()">{{picker.params.amText}}</a>'
@@ -105,7 +105,7 @@
             var isOn = false;
             if (!scope.format) {
               if (scope.date && scope.time) {
-                scope.format = 'YYYY-MM-DD HH:mm:ss';
+                scope.format = 'YYYY-MM-DD HH:mm';
               } else if (scope.date) {
                 scope.format = 'YYYY-MM-DD';
               } else {
@@ -159,6 +159,7 @@
                   parent: angular.element(document.body),
                   bindToController: true,
                   disableParentScroll: false,
+                  hasBackDrop: false,
                   skipHide: true
                 })
                 .then(function (v) {
@@ -503,8 +504,8 @@
     .directive('mdcDatetimePickerCalendar', [
       function () {
 
-        var YEAR_MIN = 1900,
-          YEAR_MAX = 2100,
+        var YEAR_MIN = 1920,
+          YEAR_MAX = new Date().getFullYear() + 30,
           MONTHS_IN_ALL = (YEAR_MAX - YEAR_MIN + 1) * 12,
           ITEM_HEIGHT = 240,
           MONTHS = [];
@@ -640,7 +641,7 @@
             }
           ],
           template: '<md-virtual-repeat-container md-top-index="cal.topIndex" class="months">' +
-          '<div md-virtual-repeat="idx in cal.months" md-start-index="cal.topIndex" md-item-size="' + ITEM_HEIGHT + '">' +
+          '<div md-virtual-repeat="idx in ::cal.months" md-auto-shrink md-item-size="' + ITEM_HEIGHT + '">' +
           '     <div mdc-datetime-picker-calendar-month idx="idx"></div>' +
           '</div>' +
           '</md-virtual-repeat-container>'
@@ -651,33 +652,34 @@
         var buildCalendarContent = function (element, scope) {
           var tbody = angular.element(element[0].querySelector('tbody'));
           var calendar = scope.cal, month = scope.month;
-          tbody.html('');
+
+          var tbodyHtml = [];
+
           month.days.forEach(function (weekDays, i) {
-            var tr = angular.element('<tr></tr>');
+              tbodyHtml.push('<tr>');
             weekDays.forEach(function (weekDay, j) {
-              var td = angular.element('<td> </td>');
+                tbodyHtml.push('<td>');
               if (weekDay) {
-                var aOrSpan;
                 if (calendar.isInRange(weekDay)) {
                   //build a
-                  var scopeRef = 'month["days"][' + i + '][' + j + ']';
-                  aOrSpan = angular.element("<a href='#' mdc-dtp-noclick></a>")
-                    .attr('ng-class', '{selected: cal.isSelectedDay(' + scopeRef + '), hilite: cal.isDateOfTheDay(' + scopeRef + ')}')
-                    //.attr('ng-class', '{selected: cal.isDateOfTheDay(' + scopeRef + ')}')                    
-                    .attr('ng-click', 'cal.selectDate(' + scopeRef + ')')
+                    var scopeRef = 'month[\'days\'][' + i + '][' + j + ']';
+
+                    tbodyHtml.push('<a href="#" mdc-dtp-noclick class="dtp-select-day" ng-class="{selected: cal.isSelectedDay(' + scopeRef + '), hilite: cal.isDateOfTheDay(' + scopeRef + ')}" ng-click="cal.selectDate(' + scopeRef + ')">');
+                    tbodyHtml.push(weekDay.format('D'));
+                    tbodyHtml.push('</a>');
                   ;
                 } else {
-                  aOrSpan = angular.element('<span></span>')
+                    tbodyHtml.push('<span class="dtp-select-day">');
+                    tbodyHtml.push(weekDay.format('D'));
+                    tbodyHtml.push('</span>');
                 }
-                aOrSpan
-                  .addClass('dtp-select-day')
-                  .html(weekDay.format('D'));
-                td.append(aOrSpan);
               }
-              tr.append(td);
+              tbodyHtml.push('</td>');
             });
-            tbody.append(tr);
+            tbodyHtml.push('</tr>');
           });
+
+          tbody.html(tbodyHtml.join(''));
           $compile(tbody)(scope);
         };
 
@@ -691,7 +693,7 @@
           + '<table class="table dtp-picker-days">'
           + '    <thead>'
           + '    <tr>'
-          + '        <th ng-repeat="day in cal.week">{{cal.toDay(day)}}</th>'
+          + '        <th ng-repeat="day in cal.week track by $index">{{cal.toDay(day)}}</th>'
           + '    </tr>'
           + '    </thead>'
           + '    <tbody>'
