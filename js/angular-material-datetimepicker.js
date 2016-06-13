@@ -79,6 +79,24 @@
         this.locale = localeString;
       };
     })
+    .factory('mdcDefaultParams', ['mdcDatetimePickerDefaultLocale', function(mdcDatetimePickerDefaultLocale) {
+      var default_params = {
+        date: true,
+        time: true,
+        format: 'YYYY-MM-DD',
+        minDate: null,
+        maxDate: null,
+        currentDate: null,
+        lang: mdcDatetimePickerDefaultLocale,
+        weekStart: 0,
+        shortTime: false,
+        cancelText: 'Cancel',
+        okText: 'OK',
+        amText: 'AM',
+        pmText: 'PM'
+      };
+      return default_params;
+    }])
     .directive('mdcDatetimePicker', ['$mdDialog', '$timeout',
       function ($mdDialog, $timeout) {
 
@@ -180,9 +198,67 @@
           }
         };
       }])
+	/** Returns a service that opens a dialog when the attribute shown is called
+	The dialog serves to select a date/time/etc. depending on the options given to the function show
+
+	@param options extends default_params
+		{
+		  date: {boolean} =true,
+	      time: {boolean] =true,
+    	  format: {string} ='YYYY-MM-DD',
+	      minDate: {strign} =null,
+    	  maxDate: {string} =null,
+	      currentDate: {string} =null,
+	      lang: {string} =mdcDatetimePickerDefaultLocale,
+	      weekStart: {int} =0,
+	      shortTime: {boolean} =false,
+	      cancelText: {string} ='Cancel',
+	      okText: {string} ='OK',
+	      amText: {string} ='AM',
+	      pmText: {string} ='PM'
+		}
+	@return promise
+	 */
+	.factory('dateTimeDialog', ["$mdDialog", "$q", "default_params", function($mdDialog, $q, default_params) {
+			var accepted_options = ['time', 'date', 'minDate','maxDate','shortTime','format','cancelText','okText','lang','amText','pmText']
+
+			var service = {
+				show : function (options) {
+					var deferred = $q.defer();
+					var params = default_params;
+					for(var i in options) {
+						if(accepted_options.indexOf[i] != -1) {
+							params = options[i];
+						}
+					}
+					var locals = {options: options};
+					$mdDialog.show({
+        	          template: template,
+                  	  controller: PluginController,
+                      controllerAs: 'picker',
+                      locals: locals,
+                      parent: angular.element(document.body),
+                      bindToController: true,
+					  clickOutsideToClose: true,
+                      disableParentScroll: false
+                    })
+                   .then(function (v) {
+                		var currentDate = v ? v._d : v;
+						deferred.resolve(v ? v._d : v);
+                		//isOn = false;
+                	}, function () {
+						deferred.reject();
+                		//isOn = false;
+                	})
+					return deferred.promise;
+				}
+			}
+			return service;
+
+	}] )
   ;
 
-  var PluginController = function ($scope, $mdDialog, mdcDatetimePickerDefaultLocale) {
+  var PluginController = function ($scope, $mdDialog, mdcDatetimePickerDefaultLocale, mdcDefaultParams) {
     this.currentView = VIEW_STATES.DATE;
     this._dialog = $mdDialog;
 
@@ -192,28 +268,12 @@
     this._attachedEvents = [];
     this.VIEWS = VIEW_STATES;
 
-    this.params = {
-      date: true,
-      time: true,
-      format: 'YYYY-MM-DD',
-      minDate: null,
-      maxDate: null,
-      currentDate: null,
-      lang: mdcDatetimePickerDefaultLocale,
-      weekStart: 0,
-      shortTime: false,
-      cancelText: 'Cancel',
-      okText: 'OK',
-      amText: 'AM',
-      pmText: 'PM',
-      todayText: 'Today',
-    };
-
+    this.params = mdcDefaultParams
     this.meridien = 'AM';
     this.params = angular.extend(this.params, this.options);
     this.init();
   };
-  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDatetimePickerDefaultLocale'];
+  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDatetimePickerDefaultLocale', 'mdcDefaultParams'];
   PluginController.prototype = {
     init: function () {
       this.timeMode = this.params.time && !this.params.date;
@@ -785,6 +845,8 @@
                 var top = (r - y - mT / 2) - (pT + mT);
 
                 var hour = {
+                  left: left,
+                  top: top,
                   value: (minuteMode ? (h * 5) : h), //5 for minute 60/12
                   style: {'margin-left': left + 'px', 'margin-top': top + 'px'}
                 };
