@@ -309,7 +309,7 @@ md-dialog.dtp {
 }
 
 .dtp .dtp-buttons {
-    padding: 0 10px 10px 10px;
+    padding-bottom: 10px;
     text-align: right;
 }
 
