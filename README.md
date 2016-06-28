@@ -68,7 +68,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **clearButton**	| Boolean						| true => Show Clear Button (default: false) 	|
 | **nowButton**		| Boolean						| true => Show Now Button (default: false) 		|
 | **switchOnClick**	| Boolean						| true => Switch view on click (default: false) |
-| **shortTime**	    | Boolean						| true => 12 hours AM|PM mode (default: false)  |
+| **shortTime**	    | Boolean						| true => 12 hours AM\|PM mode (default: false) |
 | **cancelText**	| String						| Text for the cancel button (default: Cancel)	|
 | **okText**		| String						| Text for the OK button (default: OK)			|
 | **clearText**		| String						| Text for the Clear button (default: Clear)	|
