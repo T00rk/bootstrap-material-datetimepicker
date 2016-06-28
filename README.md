@@ -59,20 +59,22 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 
 | Name				| Type							| Description									|
 | ----------------- | ----------------------------- | --------------------------------------------- |
-| **format**		| String						| MomentJS Format								|
-| **shortTime**		| Boolean						| true => Display 12 hours AM|PM 				|
-| **minDate**		| (String\|Date\|Moment)		| Minimum selectable date						|
-| **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date						|
-| **currentDate**	| (String\|Date\|Moment)		| Initial Date									|
-| **date**			| Boolean						| true => Has Datepicker						|
-| **time**			| Boolean						| true => Has Timepicker						|
-| **clearButton**	| Boolean						| true => Show Clear Button						|
-| **nowButton**		| Boolean						| true => Show Now Button						|
+| **format**		| String						| MomentJS Format (default: YYYY-MM-DD)		    |
+| **minDate**		| (String\|Date\|Moment)		| Minimum selectable date (default: null)		|
+| **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date (default: null)		|
+| **currentDate**	| (String\|Date\|Moment)		| Initial Date (default: null)					|
+| **date**			| Boolean						| true => Has Datepicker (default: true)		|
+| **time**			| Boolean						| true => Has Timepicker (default: true)        |
+| **clearButton**	| Boolean						| true => Show Clear Button (default: false) 	|
+| **nowButton**		| Boolean						| true => Show Now Button (default: false) 		|
 | **switchOnClick**	| Boolean						| true => Switch view on click (default: false) |
+| **shortTime**	    | Boolean						| true => 12 hours AM|PM mode (default: false)  |
 | **cancelText**	| String						| Text for the cancel button (default: Cancel)	|
 | **okText**		| String						| Text for the OK button (default: OK)			|
 | **clearText**		| String						| Text for the Clear button (default: Clear)	|
 | **nowText**		| String						| Text for the Now button (default: Now)		|
+| **lang**		    | String						| Moment.js locale (default: en)		        |
+| **weekStart**		| Integer						| Start of the week (default: 0)		        |
 
 
 ### Events
@@ -94,5 +96,3 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **setMinDate**	| (String\|Date\|Moment)	| Set minimum selectable date	|
 | **setMaxDate**	| (String\|Date\|Moment)	| Set maximum selectable date	|
 | **destroy**		| NULL						| Destroy the datepicker		|
-
-	
