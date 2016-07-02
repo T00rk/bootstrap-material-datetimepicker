@@ -67,11 +67,11 @@
     + '</md-dialog>';
 
   angular.module(moduleName, ['ngMaterial'])
-    .provider('mdcDatetimePickerDefaultLocale', function () {
+    .provider('mdcDatetimePicker', function () {
       this.locale = 'en';
 
       this.$get = function () {
-        return this.locale;
+        return this;
       };
 
       this.setDefaultLocale = function (localeString) {
@@ -165,7 +165,7 @@
       }])
   ;
 
-  var PluginController = function ($scope, $mdDialog, mdcDatetimePickerDefaultLocale) {
+  var PluginController = function ($scope, $mdDialog, mdcDatetimePicker) {
     this.currentView = VIEW_STATES.DATE;
     this._dialog = $mdDialog;
 
@@ -182,7 +182,7 @@
       minDate: null,
       maxDate: null,
       currentDate: null,
-      lang: mdcDatetimePickerDefaultLocale,
+      lang: mdcDatetimePicker.locale,
       weekStart: 0,
       shortTime: false,
       cancelText: 'Cancel',
@@ -195,7 +195,7 @@
     this.params = angular.extend(this.params, this.options);
     this.init();
   };
-  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDatetimePickerDefaultLocale'];
+  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDatetimePicker'];
   PluginController.prototype = {
     init: function () {
       this.timeMode = this.params.time && !this.params.date;
