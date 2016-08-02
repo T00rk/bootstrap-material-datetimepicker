@@ -1,5 +1,4 @@
 'use strict';
-let moment = require('moment')
 
 var moduleName = "ngMaterialDatePicker";
 
@@ -18,7 +17,55 @@ var css = function (el, name) {
   }
 };
 
-var template = getTpl()
+var template = '<md-dialog class="dtp" layout="column" style="width: 300px;">'
+  + '    <md-dialog-content class="dtp-content">'
+  + '        <div class="dtp-date-view">'
+  + '            <header class="dtp-header">'
+  + '                <div class="dtp-actual-day" ng-show="picker.dateMode">{{picker.currentDate.format("dddd")}}</div>'
+  + '                <div class="dtp-actual-day" ng-show="picker.timeMode">{{picker.params.shortTime ? picker.currentDate.format("A") : " "}}</div>'
+  + '                <div class="dtp-close text-right">'
+  + '                    <a href="#" mdc-dtp-noclick ng-click="picker.hide()">&times;</a>'
+  + '                </div>'
+  + '            </header>'
+  + '            <div class="dtp-date" ng-show="picker.params.date">'
+  + '                <div layout="column">'
+  + '                    <div class="dtp-actual-month">{{picker.currentDate.format("MMM") | uppercase}}</div>'
+  + '                </div>'
+  + '                <div class="dtp-actual-num">{{picker.currentDate.format("DD")}}</div>'
+  + '                <div layout="row">'
+  + ' <div ng-click="picker.incrementYear(-1)" class="dtp-year-btn dtp-year-btn-prev" flex="30"><span ng-if="picker.isPreviousYearVisible()" >&#x25B2;</span></div>'
+  + '                    <div class="dtp-actual-year" flex>{{picker.currentDate.format("YYYY")}}</div>'
+  + ' <div ng-click="picker.incrementYear(1)" class="dtp-year-btn dtp-year-btn-next" flex="30"><span ng-if="picker.isNextYearVisible()" >&#x25BC;</span></div>'
+  + '                </div>'
+  + '            </div>'//start time
+  + '            <div class="dtp-time" ng-show="picker.params.time && !picker.params.date">'
+  + '                <div class="dtp-actual-maxtime">{{picker.currentNearest5Minute().format(picker.params.shortTime ? "hh:mm" : "HH:mm")}}</div>'
+  + '            </div>'
+  + '            <div class="dtp-picker">'
+  + '                <mdc-datetime-picker-calendar date="picker.currentDate" picker="picker" class="dtp-picker-calendar" ng-show="picker.currentView === picker.VIEWS.DATE"></mdc-datetime-picker-calendar>'
+  + '                <div class="dtp-picker-datetime" ng-cloak ng-if="picker.currentView !== picker.VIEWS.DATE">'
+  + '                    <div class="dtp-actual-meridien">'
+  + '                        <div class="left p20">'
+  + '                            <a href="#" mdc-dtp-noclick class="dtp-meridien-am" ng-class="{selected: picker.meridien == \'AM\'}" ng-click="picker.selectAM()">{{picker.params.amText}}</a>'
+  + '                        </div>'
+  + '                        <div ng-show="!picker.timeMode" class="dtp-actual-time p60">{{picker.currentNearest5Minute().format(picker.params.shortTime ? "hh:mm" : "HH:mm")}}</div>'
+  + '                        <div class="right p20">'
+  + '                            <a href="#" mdc-dtp-noclick class="dtp-meridien-pm" ng-class="{selected: picker.meridien == \'PM\'}" ng-click="picker.selectPM()">{{picker.params.pmText}}</a>'
+  + '                        </div>'
+  + '                        <div class="clearfix"></div>'
+  + '                    </div>'
+  + '                    <mdc-datetime-picker-clock mode="hours" ng-if="picker.currentView === picker.VIEWS.HOUR"></mdc-datetime-picker-clock>'
+  + '                    <mdc-datetime-picker-clock mode="minutes" ng-if="picker.currentView === picker.VIEWS.MINUTE"></mdc-datetime-picker-clock>'
+  + '                </div>'
+  + '            </div>'
+  + '        </div>'
+  + '    </md-dialog-content>'
+  + '    <md-dialog-actions class="dtp-buttons">'
+  + '            <md-button class="dtp-btn-ok md-button" ng-click="picker.today()"> {{picker.params.todayText}}</md-button>'
+  + '            <md-button class="dtp-btn-cancel md-button" ng-click="picker.cancel()"> {{picker.params.cancelText}}</md-button>'
+  + '            <md-button class="dtp-btn-ok md-button" ng-click="picker.ok()"> {{picker.params.okText}}</md-button>'
+  + '      </md-dialog-actions>'
+  + '</md-dialog>';
 
 angular.module(moduleName, ['ngMaterial'])
   .provider('mdcDatetimePickerDefaultLocale', function () {
@@ -258,8 +305,9 @@ PluginController.prototype = {
           else {
             ret = moment(input).locale(that.params.lang);
           }
-        }
-        else {
+        } else if (typeof input === 'number') {
+          ret = moment(input).locale(that.params.lang);
+        } else {
           if (angular.isDate(input)) {
             var x = input.getTime();
             ret = moment(x, "x").locale(that.params.lang);
@@ -938,75 +986,3 @@ angular.module(moduleName)
     }]);
 
 
-function getTpl () {
-  return `
-    <md-dialog class="dtp" layout="column" style="width: 300px;">
-      <md-dialog-content class="dtp-content">
-        <div class="dtp-date-view">
-          <header class="dtp-header">
-            <div class="dtp-actual-day" ng-show="picker.dateMode">{{picker.currentDate.format("dddd")}}</div>
-            <div class="dtp-actual-day"
-                 ng-show="picker.timeMode">{{picker.params.shortTime ? picker.currentDate.format("A") : " "}}
-            </div>
-            <div class="dtp-close text-right">
-              <a href="#" mdc-dtp-noclick ng-click="picker.hide()">&times;</a>
-            </div>
-          </header>
-          <div class="dtp-date" ng-show="picker.params.date">
-            <div layout="column">
-              <div class="dtp-actual-month">{{picker.currentDate.format("MMM") | uppercase}}</div>
-            </div>
-            <div class="dtp-actual-num">{{picker.currentDate.format("DD")}}</div>
-            <div layout="row">
-              <div ng-click="picker.incrementYear(-1)" class="dtp-year-btn dtp-year-btn-prev" flex="30">
-                <span ng-if="picker.isPreviousYearVisible()">&#x25B2;</span></div>
-              <div class="dtp-actual-year" flex>{{picker.currentDate.format("YYYY")}}</div>
-              <div ng-click="picker.incrementYear(1)" class="dtp-year-btn dtp-year-btn-next" flex="30">
-                <span ng-if="picker.isNextYearVisible()">&#x25BC;</span></div>
-            </div>
-          </div>
-          <div class="dtp-time" ng-show="picker.params.time && !picker.params.date">
-            <div class="dtp-actual-maxtime">{{picker.currentNearest5Minute().format(picker.params.shortTime ? "hh:mm" : "HH:mm")}}</div>
-          </div>
-          <div class="dtp-picker">
-            <mdc-datetime-picker-calendar date="picker.currentDate"
-                                          picker="picker"
-                                          class="dtp-picker-calendar"
-                                          ng-show="picker.currentView === picker.VIEWS.DATE"></mdc-datetime-picker-calendar>
-            <div class="dtp-picker-datetime" ng-cloak ng-if="picker.currentView !== picker.VIEWS.DATE">
-              <div class="dtp-actual-meridien">
-                <div class="left p20">
-                  <a href="#"
-                     mdc-dtp-noclick
-                     class="dtp-meridien-am"
-                     ng-class="{selected: picker.meridien == 'AM'}"
-                     ng-click="picker.selectAM()">{{picker.params.amText}}</a>
-                </div>
-                <div ng-show="!picker.timeMode"
-                     class="dtp-actual-time p60">{{picker.currentNearest5Minute().format(picker.params.shortTime ? "hh:mm" : "HH:mm")}}
-                </div>
-                <div class="right p20">
-                  <a href="#"
-                     mdc-dtp-noclick
-                     class="dtp-meridien-pm"
-                     ng-class="{selected: picker.meridien == 'PM'}"
-                     ng-click="picker.selectPM()">{{picker.params.pmText}}</a>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <mdc-datetime-picker-clock mode="hours"
-                                         ng-if="picker.currentView === picker.VIEWS.HOUR"></mdc-datetime-picker-clock>
-              <mdc-datetime-picker-clock mode="minutes"
-                                         ng-if="picker.currentView === picker.VIEWS.MINUTE"></mdc-datetime-picker-clock>
-            </div>
-          </div>
-        </div>
-      </md-dialog-content>
-      <md-dialog-actions class="dtp-buttons">
-        <md-button class="dtp-btn-ok md-button" ng-click="picker.today()"> {{picker.params.todayText}}</md-button>
-        <md-button class="dtp-btn-cancel md-button" ng-click="picker.cancel()"> {{picker.params.cancelText}}</md-button>
-        <md-button class="dtp-btn-ok md-button" ng-click="picker.ok()"> {{picker.params.okText}}</md-button>
-      </md-dialog-actions>
-    </md-dialog>
-  `
-}

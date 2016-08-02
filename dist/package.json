@@ -1,7 +1,7 @@
 {
   "name": "jw-angular-material-datetimepicker",
   "description": "A datetime picker for AngularJS Material",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "keywords": [
     "css",
     "js",
@@ -14,7 +14,6 @@
     "web"
   ],
   "homepage": "http://logbon72.github.io/angular-material-datetimepicker/",
-  "main": "js/angular-material-datetimepicker.js",
   "ignore": [
     "/.*",
     "_config.yml",
@@ -36,6 +35,7 @@
     "type": "git",
     "url": "https://github.com/logbon72/angular-material-datetimepicker"
   },
+  "main": "index.js",
   "format": "cjs",
   "registry": "github",
   "peerDependencies": {
@@ -47,7 +47,7 @@
       "moment": "npm:moment@^2.13.0"
     },
     "meta": {
-      "md-data-table.js": {
+      "angular-material-datetimepicker.js": {
         "deps": [],
         "format": "global"
       }
