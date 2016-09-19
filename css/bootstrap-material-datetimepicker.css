@@ -20,7 +20,7 @@
 .dtp table.dtp-picker-days { margin: 0; min-height: 251px;}
 .dtp table.dtp-picker-days, .dtp table.dtp-picker-days tr, .dtp table.dtp-picker-days tr > td { border: none; }
 .dtp table.dtp-picker-days tr > td {  font-weight: 700; font-size: 0.8em; text-align: center; padding: 0.5em 0.3em; }
-.dtp table.dtp-picker-days tr > td > span.dtp-select-day { color: #BDBDBD!important; }
+.dtp table.dtp-picker-days tr > td > span.dtp-select-day { color: #BDBDBD!important; padding: 0.4em 0.5em 0.5em 0.6em;}
 .dtp table.dtp-picker-days tr > td > a, .dtp .dtp-picker-time > a { color: #212121; text-decoration: none; padding: 0.4em 0.5em 0.5em 0.6em; border-radius: 50%!important; }
 .dtp table.dtp-picker-days tr > td > a.selected{ background: #8BC34A; color: #fff; }
 .dtp table.dtp-picker-days tr > th { color: #757575; text-align: center; font-weight: 700; padding: 0.4em 0.3em; }
