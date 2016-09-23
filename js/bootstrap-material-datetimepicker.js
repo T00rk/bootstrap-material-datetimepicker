@@ -17,7 +17,7 @@
       this.element = element;
       this.$element = $(element);
 
-      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false};
+       this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, triggerEvent: 'focus'};
       this.params = $.fn.extend(this.params, options);
 
       this.name = "dtp_" + this.setName();
@@ -65,7 +65,7 @@
                  this._attachEvent(this.$dtpElement.find('.dtp-content'), 'click', this._onElementClick.bind(this));
                  this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
                  this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
-                 this._attachEvent(this.$element, 'focus', this._onFocus.bind(this));
+                 this._attachEvent(this.$element, this.params.triggerEvent, this._fireCalendar.bind(this));
               },
               initDays: function ()
               {
@@ -842,7 +842,7 @@
                     this._attachedEvents.splice(i, 1);
                  }
               },
-              _onFocus: function ()
+              _fireCalendar: function ()
               {
                  this.currentView = 0;
                  this.$element.blur();
@@ -1006,11 +1006,11 @@
 
                  if (this.params.switchOnClick === true && this.params.time === true)
                     setTimeout(this.initHours.bind(this), 200);
-                    
+
                  if(this.params.switchOnClick === true && this.params.time === false) {
                     setTimeout(this._onOKClick.bind(this), 200);
                  }
-                 
+
               },
               _onSelectHour: function (e)
               {
