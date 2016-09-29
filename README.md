@@ -74,7 +74,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **clearText**		| String						| Text for the Clear button (default: Clear)	|
 | **nowText**		| String						| Text for the Now button (default: Now)		|
 | **triggerEvent**		| String						| Event to fire the calendar (default: focus)
-| **changeMonth**		| String						| Select Month from list|
+| **changeMonth**		| Boolean						| Select Month from list|
 
 
 
