@@ -7,6 +7,7 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2010-10-07		|Rafael Pujol			| Add Pick Month pick Year 								 	 		 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
 | 2016-04-08		| FoxyCorndog		| Fix PM overwrite bug	 					 	 		 |
 | 2016-02-17		| T00rk				| Changed Clock to SVG	 					 	 		 |
