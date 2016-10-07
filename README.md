@@ -7,6 +7,7 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2016-10-07		|Rafael Pujol			| Add Pick Month pick Year 								 	 		 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
 | 2016-04-08		| FoxyCorndog		| Fix PM overwrite bug	 					 	 		 |
 | 2016-02-17		| T00rk				| Changed Clock to SVG	 					 	 		 |
@@ -73,7 +74,8 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **okText**		| String						| Text for the OK button (default: OK)			|
 | **clearText**		| String						| Text for the Clear button (default: Clear)	|
 | **nowText**		| String						| Text for the Now button (default: Now)		|
-| **triggerEvent**		| String						| Event to fire the calendar (default: focus)		|
+| **triggerEvent**		| String						| Event to fire the calendar (default: focus)
+| **changeMonth**		| Boolean						| Select Month from list|
 
 
 
