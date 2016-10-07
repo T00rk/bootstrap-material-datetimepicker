@@ -11,15 +11,16 @@
 
 		this.minDate;
 		this.maxDate;
-	    
+	
+
 		this._attachedEvents = [];
 
 		this.element = element;
 		this.$element = $(element);
 
-		this.params = {changeMonth: false, date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, clearButton : false, nowButton : false, cancelText : 'Cancel', okText : 'OK', clearText : 'Clear', nowText : 'Now', switchOnClick : false };
+		this.params = { date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, changeMonth: false};
 		this.params = $.fn.extend(this.params, options);
-
+        
 		this.name = "dtp_" + this.setName();
 		this.$element.attr("data-dtp", this.name);
 
@@ -223,13 +224,6 @@
 		    var d = new Date();
 		    var n = d.getFullYear();
 
-		    var yearPicker = "";
-		    //for (i = 1900; i < n + 10; i++) {
-		    for (i = 1950; i < n + 10; i++) {
-		        yearDiv = '<div id="'+i+'" class="year-picker-item" data-year="' + i + '">' + i + '</div>';
-		        yearPicker = yearPicker + yearDiv;
-		    }
-
 		    this.template = '<div class="dtp hidden" id="' + this.name + '">' +
 								'<div class="dtp-content">' +
 									'<div class="dtp-date-view">' +
@@ -263,7 +257,7 @@
 										'<div class="dtp-time hidden">' +
 											'<div class="dtp-actual-maxtime">23:55</div>' +
 										'</div>' +
-                                    '<div id="dtp-Pick-Year" class="hidden">' +
+                                    '<div class="dtp-Pick-Year" class="hidden">' +
                                     '<div>' +
                                     '<div class="left center p10">' +
                                       '<a href="javascript:void(0);" class="dtp-select-pick-year-before">'+
@@ -274,7 +268,7 @@
                                            '<i class="fa fa-chevron-right"></i></a>'+
                                    '</div><div class="clearfix"></div>' +
                                    '</div>' +
-                                   '<div id="dtp-Pick-Year-body"> ' +
+                                   '<div class="dtp-Pick-Year-body"> ' +
                                    '<div class="dtp-year-picker-item" data-year="2023">2023</div>' +
                                    '</div>' +
                                     '</div>' +
@@ -316,31 +310,8 @@
 				this.$dtpElement = $(this.dtpElement);
 			}
 
-			
-			if (this.params.changeMonth)
-			{
-			    
-			   // var m = moment().locale(this.params.lang).format('MMMM') // mes actual;
-			    var m = moment().locale(this.params.lang);
-			   var monthHtml = "<select >";
-			    for (month = 0; month < 12; month++) {
+		   
 
-			        monthHtml += "<option value='" + (parseInt(month+1)) + "'>" +
-			            //m.months(month).format('MMMM')
-			            m.months(month).format('MMM').toUpperCase()
-                        + "</option>";
-			        
-			    }
-			    monthHtml += "</select>";
-
-			    $("div.dtp-actual-month").html('');
-			    $("div.dtp-actual-month").html(monthHtml);
-
-			}
-
-	
-
-           
 
 		},
 		initButtons: function()
@@ -355,7 +326,7 @@
 			this._attachEvent(this.$dtpElement.find('div.dtp-actual-year'), 'click', this._onActualYearClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('a.dtp-select-pick-year-before'), 'click', this._onYearPickBeforeClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('a.dtp-select-pick-year-after'), 'click', this._onYearPickAfterClick.bind(this));
-			this._attachEvent(this.$dtpElement.find('#dtp-Pick-Year-body, .dtp-year-picker-item'), 'click', this._onYearPickItenClick.bind(this));
+			this._attachEvent(this.$dtpElement.find('.dtp-Pick-Year-body, .dtp-year-picker-item'), 'click', this._onYearPickItenClick.bind(this));
 			
 			if(this.params.clearButton === true)
 			{
@@ -377,6 +348,26 @@
 			{
 				this.$dtpElement.find('.dtp-btn-clear, .dtp-btn-now, .dtp-btn-cancel, .dtp-btn-ok').addClass('btn-sm');
 			}
+
+	
+            
+			if (this.params.changeMonth)
+			{   
+			    var m = moment().locale(this.params.lang);
+			    m.month(11);
+			    var monthHtml = "<select >";
+			    for (month = 0; month < 12; month++)
+			    {
+			        monthHtml += "<option value='" + (parseInt(month + 1)) + "'>" +
+                        m.add(1, 'months').format('MMM').toUpperCase();
+                        + "</option>";
+			    }
+			    monthHtml += "</select>";
+			    $(".dtp-actual-month").html('');
+			    $(".dtp-actual-month").html(monthHtml);
+			   
+			}
+
 		},
 		initMeridienButtons: function()
 		{
@@ -390,7 +381,7 @@
 			this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
 			this.$dtpElement.find('.dtp-picker-datetime').addClass('hidden');
 
-			this.$dtpElement.find('#dtp-Pick-Year').addClass('hidden');
+			this.$dtpElement.find('.dtp-Pick-Year').addClass('hidden');
 			$(".dtp-buttons").removeClass("hidden");
 			$(".dtp-select-year-before").removeClass("hidden");
 			$(".dtp-select-year-after").removeClass("hidden");
@@ -1119,11 +1110,11 @@
 
 		},
 	    _onActualYearClick: function() {
-
+	        
 	        //if ($(".dtp-picker-datetime").hasClass("hidden"))
 	        if(this.currentView == 0)
 	        {
-	            $("#dtp-Pick-Year").removeClass("hidden");
+	            $(".dtp-Pick-Year").removeClass("hidden");
 	            $(".dtp-picker-calendar").addClass("hidden");
 	            $(".dtp-buttons").addClass("hidden");
 	            $(".dtp-select-year-before").addClass("hidden");
@@ -1144,8 +1135,8 @@
 	            yearPicker = yearPicker + yearDiv;
 	        }
 
-	        $("#dtp-Pick-Year-body").html(yearPicker);
-	        $("#dtp-Pick-Year-body").find("div[data-year='" + this.currentDate.format('YYYY') + "']").addClass("selected");
+	        $(".dtp-Pick-Year-body").html(yearPicker);
+	        $(".dtp-Pick-Year-body").find("div[data-year='" + this.currentDate.format('YYYY') + "']").addClass("selected");
 
 	        $(".dtp-year-rank").html(year + "-" + nextYear);
 
@@ -1177,14 +1168,15 @@
 		        yearPicker = yearPicker + yearDiv;
 		    }
 
-		    $("#dtp-Pick-Year-body").html(yearPicker);
-		    $("#dtp-Pick-Year-body").find("div[data-year='" + this.currentDate.format('YYYY') + "']").addClass("selected");
+		    $(".dtp-Pick-Year-body").html(yearPicker);
+		    $(".dtp-Pick-Year-body").find("div[data-year='" + this.currentDate.format('YYYY') + "']").addClass("selected");
 
 		    $(".dtp-year-rank").html(year + "-" + nextYear);
 
 		  
 		},
 		_onYearPickAfterClick: function () {
+
 
 		    var year = $(".dtp-year-rank").html().substring(5, 9);
 		    var y = year.substring(3, 4);
@@ -1196,8 +1188,8 @@
 		        yearPicker = yearPicker + yearDiv;
 		    }
 
-		    $("#dtp-Pick-Year-body").html(yearPicker);
-		    $("#dtp-Pick-Year-body").find("div[data-year='" + this.currentDate.format('YYYY') + "']").addClass("selected");
+		    $(".dtp-Pick-Year-body").html(yearPicker);
+		    $(".dtp-Pick-Year-body").find("div[data-year='" + this.currentDate.format('YYYY') + "']").addClass("selected");
 		    $(".dtp-year-rank").html(year + "-" + nextYear);
 
 		},
@@ -1205,17 +1197,15 @@
 		{
 		    var s = event.target;
 		    var year = $(s).attr("data-year");
-		    $("#dtp-Pick-Year").addClass("hidden");
+		    $(".dtp-Pick-Year").addClass("hidden");
 		    $(".dtp-picker-calendar").removeClass("hidden");
 		    $(".dtp-buttons").removeClass("hidden");
 		    $(".dtp-select-year-before").removeClass("hidden");
 		    $(".dtp-select-year-after").removeClass("hidden");
-
-		    console.log(this.currentDate.format('MM'));
             
-		    var date = new Date(year , this.currentDate.format('MM')-1,  this.currentDate.format('DD'));
+		    var date = new Date(year, this.currentDate.format('MM') - 1, this.currentDate.format('DD'));
+		    
 		    date = moment(date).locale(this.params.lang);
-
 		    if ((date.isSameOrAfter(this.params.minDate) || this.params.minDate == null) && (date.isSameOrBefore(this.params.maxDate) || this.params.maxDate == null)) {
 		        this.currentDate = date;
 		    }
