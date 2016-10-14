@@ -7,6 +7,7 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2016-04-08		| donovansolms		| Disable specific days (#60 and #97)				 	 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
 | 2016-04-08		| FoxyCorndog		| Fix PM overwrite bug	 					 	 		 |
 | 2016-02-17		| T00rk				| Changed Clock to SVG	 					 	 		 |
@@ -65,7 +66,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date						|
 | **currentDate**	| (String\|Date\|Moment)		| Initial Date									|
 | **date**			| Boolean						| true => Has Datepicker						|
-| **allowWeekends**	| Boolean						| true => Allow picking of weekends				|
+| **disabledDays**	| Array							| Array containing day indices (1-7) to disable	|
 | **time**			| Boolean						| true => Has Timepicker						|
 | **clearButton**	| Boolean						| true => Show Clear Button						|
 | **nowButton**		| Boolean						| true => Show Now Button						|
@@ -74,7 +75,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **okText**		| String						| Text for the OK button (default: OK)			|
 | **clearText**		| String						| Text for the Clear button (default: Clear)	|
 | **nowText**		| String						| Text for the Now button (default: Now)		|
-| **triggerEvent**		| String						| Event to fire the calendar (default: focus)		|
+| **triggerEvent**	| String						| Event to fire the calendar (default: focus)	|
 
 
 
