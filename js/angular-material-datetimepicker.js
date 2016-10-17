@@ -17,7 +17,7 @@
     }
   };
 
-  var template = '<md-dialog class="dtp" layout="column" style="width: 300px;">'
+  var template = '<md-dialog class="dtp" layout="column">'
     + '    <md-dialog-content class="dtp-content">'
     + '        <div class="dtp-date-view">'
     + '            <header class="dtp-header">'

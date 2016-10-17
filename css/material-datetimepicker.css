@@ -4,6 +4,7 @@ md-dialog.dtp {
     color: #333;
     background-color: #fff;
     max-height: none;
+    min-width: 300px;
 }
 
 
