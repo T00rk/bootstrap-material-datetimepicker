@@ -17,7 +17,7 @@
       this.element = element;
       this.$element = $(element);
 
-       this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, triggerEvent: 'focus'};
+      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, triggerEvent: 'focus', monthPicker: false};
       this.params = $.fn.extend(this.params, options);
 
       this.name = "dtp_" + this.setName();
@@ -307,7 +307,10 @@
               {
                  this.currentView = 0;
 
-                 this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
+                 if (this.params.monthPicker === false)
+                 {
+                    this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
+                 }
                  this.$dtpElement.find('.dtp-picker-datetime').addClass('hidden');
 
                  var _date = ((typeof (this.currentDate) !== 'undefined' && this.currentDate !== null) ? this.currentDate : null);
@@ -1106,6 +1109,9 @@
                  }
                  this.toggleTime((this.currentView === 1));
               },
+              _hideCalendar: function() {
+                 this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
+              },
               convertHours: function (h)
               {
                  var _return = h;
@@ -1145,11 +1151,17 @@
                  this.$dtpElement.removeClass('hidden');
                  this._attachEvent($(window), 'keydown', this._onKeydown.bind(this));
                  this._centerBox();
+                 this.$element.trigger('open');
+                 if (this.params.monthPicker === true)
+                 {
+                    this._hideCalendar();
+                 }
               },
               hide: function ()
               {
                  $(window).off('keydown', null, null, this._onKeydown.bind(this));
                  this.$dtpElement.addClass('hidden');
+                 this.$element.trigger('close');
               },
               _centerBox: function ()
               {
