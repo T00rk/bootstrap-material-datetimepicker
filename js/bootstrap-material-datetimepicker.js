@@ -557,28 +557,19 @@
 
                     if (!checkHour && !checkMinute)
                     {
-                       _minDate.hour(0);
-                       _minDate.minute(0);
-
-                       _date.hour(0);
-                       _date.minute(0);
+                       _minDate.hour(0).minute(0);
+                       _date.hour(0).minute(0);
                     }
 
-                    _minDate.second(0);
-                    _date.second(0);
-                    _minDate.millisecond(0);
-                    _date.millisecond(0);
+                    _minDate.second(0).millisecond(0);
+                    _date.second(0).millisecond(0);
 
                     if (!checkMinute)
                     {
                        _date.minute(0);
                        _minDate.minute(0);
-
-                       _return = (parseInt(_date.format("X")) >= parseInt(_minDate.format("X")));
-                    } else
-                    {
-                       _return = (parseInt(_date.format("X")) >= parseInt(_minDate.format("X")));
                     }
+                    _return = _date.isSameOrAfter(_minDate);
                  }
 
                  return _return;
@@ -594,38 +585,30 @@
 
                     if (!checkTime && !checkMinute)
                     {
-                       _maxDate.hour(0);
-                       _maxDate.minute(0);
-
-                       _date.hour(0);
-                       _date.minute(0);
+                       _maxDate.hour(0).minute(0);
+                       _date.hour(0).minute(0);
                     }
 
-                    _maxDate.second(0);
-                    _date.second(0);
-                    _maxDate.millisecond(0);
-                    _date.millisecond(0);
+                    _maxDate.second(0).millisecond(0);
+                    _date.second(0).millisecond(0);
 
                     if (!checkMinute)
                     {
                        _date.minute(0);
                        _maxDate.minute(0);
-
-                       _return = (parseInt(_date.format("X")) <= parseInt(_maxDate.format("X")));
-                    } else
-                    {
-                       _return = (parseInt(_date.format("X")) <= parseInt(_maxDate.format("X")));
                     }
+                    _return = _date.isSameOrBefore(_maxDate);
                  }
 
                  return _return;
               },
               rotateElement: function (el, deg)
               {
+                 var val = 'rotate(' + deg + 'deg)';
                  $(el).css
                          ({
-                            WebkitTransform: 'rotate(' + deg + 'deg)',
-                            '-moz-transform': 'rotate(' + deg + 'deg)'
+                            WebkitTransform: val,
+                            '-moz-transform': val
                          });
               },
               showDate: function (date)
@@ -642,18 +625,13 @@
               {
                  if (date)
                  {
-                    var minutes = date.minute();
-                    var content = ((this.params.shortTime) ? date.format('hh') : date.format('HH')) + ':' + ((minutes.toString().length == 2) ? minutes : '0' + minutes) + ((this.params.shortTime) ? ' ' + date.format('A') : '');
+                    var content = date.format(this.params.shortTime ? 'hh:mm A' : 'HH:mm');
 
                     if (this.params.date)
                        this.$dtpElement.find('.dtp-actual-time').html(content);
                     else
                     {
-                       if (this.params.shortTime)
-                          this.$dtpElement.find('.dtp-actual-day').html(date.format('A'));
-                       else
-                          this.$dtpElement.find('.dtp-actual-day').html('&nbsp;');
-
+                       this.$dtpElement.find('.dtp-actual-day').html(this.params.shortTime ? date.format('A') : '&nbsp;');
                        this.$dtpElement.find('.dtp-actual-maxtime').html(content);
                     }
                  }
@@ -695,7 +673,7 @@
                              }
                           }
                        }
-                       _calendar.days.push(moment(startOfMonth).locale(this.params.lang).date(i));
+                       _calendar.days.push(startOfMonth.clone().locale(this.params.lang).date(i));
                     }
                  }
 
@@ -719,20 +697,21 @@
                  {
                     if (i % 7 == 0)
                        _template += '</tr><tr>';
-                    _template += '<td data-date="' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '">';
+                    var day = moment(calendar.days[i]).locale(this.params.lang).format("D");
+                    _template += '<td data-date="' + day + '">';
                     if (calendar.days[i] != 0)
                     {
                        if (this.isBeforeMaxDate(moment(calendar.days[i]), false, false) === false || this.isAfterMinDate(moment(calendar.days[i]), false, false) === false)
                        {
-                          _template += '<span class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '</span>';
+                          _template += '<span class="dtp-select-day">' + day + '</span>';
                        } else
                        {
-                          if (moment(calendar.days[i]).locale(this.params.lang).format("D") === moment(this.currentDate).locale(this.params.lang).format("D"))
+                          if (day === moment(this.currentDate).locale(this.params.lang).format("D"))
                           {
-                             _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '</a>';
+                             _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + day + '</a>';
                           } else
                           {
-                             _template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '</a>';
+                             _template += '<a href="javascript:void(0);" class="dtp-select-day">' + day + '</a>';
                           }
                        }
 
@@ -815,16 +794,15 @@
               toggleTime: function (value, isHours)
               {
                  var result = false;
+                 var _date = moment(this.currentDate);
 
                  if (isHours)
                  {
-                    var _date = moment(this.currentDate);
                     _date.hour(this.convertHours(value)).minute(0).second(0);
 
                     result = !(this.isAfterMinDate(_date, true, false) === false || this.isBeforeMaxDate(_date, true, false) === false);
                  } else
                  {
-                    var _date = moment(this.currentDate);
                     _date.minute(value).second(0);
 
                     result = !(this.isAfterMinDate(_date, true, true) === false || this.isBeforeMaxDate(_date, true, true) === false);
@@ -982,22 +960,22 @@
               },
               _onMonthBeforeClick: function ()
               {
-                 this.currentDate.subtract(1, 'months');
+                 this.currentDate.subtract(1, 'M');
                  this.initDate(this.currentDate);
               },
               _onMonthAfterClick: function ()
               {
-                 this.currentDate.add(1, 'months');
+                 this.currentDate.add(1, 'M');
                  this.initDate(this.currentDate);
               },
               _onYearBeforeClick: function ()
               {
-                 this.currentDate.subtract(1, 'years');
+                 this.currentDate.subtract(1, 'y');
                  this.initDate(this.currentDate);
               },
               _onYearAfterClick: function ()
               {
-                 this.currentDate.add(1, 'years');
+                 this.currentDate.add(1, 'y');
                  this.initDate(this.currentDate);
               },
               _onSelectDate: function (e)
@@ -1040,7 +1018,7 @@
 
                     if (this.params.shortTime === true && this.isPM())
                     {
-                       this.currentDate.add(12, 'hours');
+                       this.currentDate.add(12, 'h');
                     }
 
                     this.showTime(this.currentDate);
@@ -1092,7 +1070,7 @@
 
                  if (this.currentDate.hour() >= 12)
                  {
-                    if (this.currentDate.subtract(12, 'hours'))
+                    if (this.currentDate.subtract(12, 'h'))
                        this.showTime(this.currentDate);
                  }
                  this.toggleTime((this.currentView === 1));
@@ -1104,7 +1082,7 @@
 
                  if (this.currentDate.hour() < 12)
                  {
-                    if (this.currentDate.add(12, 'hours'))
+                    if (this.currentDate.add(12, 'h'))
                        this.showTime(this.currentDate);
                  }
                  this.toggleTime((this.currentView === 1));
