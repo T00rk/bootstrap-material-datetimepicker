@@ -552,17 +552,14 @@
 
                  if (typeof (this.minDate) !== 'undefined' && this.minDate !== null)
                  {
-                    var _minDate = moment(this.minDate);
-                    var _date = moment(date);
+                    var _minDate = moment(this.minDate).second(0).millisecond(0);
+                    var _date = moment(date).second(0).millisecond(0);
 
                     if (!checkHour && !checkMinute)
                     {
                        _minDate.hour(0).minute(0);
                        _date.hour(0).minute(0);
                     }
-
-                    _minDate.second(0).millisecond(0);
-                    _date.second(0).millisecond(0);
 
                     if (!checkMinute)
                     {
@@ -580,17 +577,14 @@
 
                  if (typeof (this.maxDate) !== 'undefined' && this.maxDate !== null)
                  {
-                    var _maxDate = moment(this.maxDate);
-                    var _date = moment(date);
+                    var _maxDate = moment(this.maxDate).second(0).millisecond(0);
+                    var _date = moment(date).second(0).millisecond(0);
 
                     if (!checkTime && !checkMinute)
                     {
                        _maxDate.hour(0).minute(0);
                        _date.hour(0).minute(0);
                     }
-
-                    _maxDate.second(0).millisecond(0);
-                    _date.second(0).millisecond(0);
 
                     if (!checkMinute)
                     {
