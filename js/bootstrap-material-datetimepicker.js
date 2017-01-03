@@ -634,7 +634,7 @@
                  {
                     this.$dtpElement.find('.dtp-actual-day').html(date.locale(this.params.lang).format('dddd'));
                     this.$dtpElement.find('.dtp-actual-month').html(date.locale(this.params.lang).format('MMM').toUpperCase());
-                    this.$dtpElement.find('.dtp-actual-num').html(date.locale(this.params.lang).format('DD'));
+                    this.$dtpElement.find('.dtp-actual-num').html(date.locale(this.params.lang).format('D'));
                     this.$dtpElement.find('.dtp-actual-year').html(date.locale(this.params.lang).format('YYYY'));
                  }
               },
@@ -724,15 +724,15 @@
                     {
                        if (this.isBeforeMaxDate(moment(calendar.days[i]), false, false) === false || this.isAfterMinDate(moment(calendar.days[i]), false, false) === false)
                        {
-                          _template += '<span class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</span>';
+                          _template += '<span class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '</span>';
                        } else
                        {
-                          if (moment(calendar.days[i]).locale(this.params.lang).format("DD") === moment(this.currentDate).locale(this.params.lang).format("DD"))
+                          if (moment(calendar.days[i]).locale(this.params.lang).format("D") === moment(this.currentDate).locale(this.params.lang).format("D"))
                           {
-                             _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                             _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '</a>';
                           } else
                           {
-                             _template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                             _template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '</a>';
                           }
                        }
 
