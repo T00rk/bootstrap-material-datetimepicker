@@ -11,6 +11,7 @@ Originally designed for Bootstrap Material, this has been modified to work with 
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2017-01-30		| hexadecy			| Add support only for angular 1.5.x - 1.6.x ($onInit)	 |
 | 2015-11-12		| logbon72			| Adapted plugin for Angular Material 					 |
 | 2015-10-19		| benletchford		| Fixed not being able to tab into input				 |
 | 2015-10-19		| drblue 			| Fixed erroneous package.json-file 					 |

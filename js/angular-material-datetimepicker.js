@@ -599,8 +599,8 @@ angular.module(moduleName)
         },
         bindToController: true,
         controllerAs: 'cal',
-        controller: ['$scope',
-          function ($scope) {
+        controller: ['$scope', function ($scope) {
+          this.$onInit = function() {
             var calendar = this,
               picker = this.picker,
               days = [];
@@ -709,9 +709,8 @@ angular.module(moduleName)
 
               return m && today.date() === m.date() && today.month() === m.month() && today.year() === m.year();
             }
-
           }
-        ],
+        }],
         template: '<md-virtual-repeat-container md-top-index="cal.topIndex" class="months">' +
         '<div md-virtual-repeat="idx in ::cal.months" md-auto-shrink md-item-size="' + ITEM_HEIGHT + '">' +
         '     <div mdc-datetime-picker-calendar-month idx="idx"></div>' +
