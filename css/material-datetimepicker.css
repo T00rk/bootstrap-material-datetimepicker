@@ -98,8 +98,6 @@ md-dialog.dtp {
 
     /* Prevent dialog resizing when switcing between date/time */
     overflow: hidden;
-    width: 295px;
-    height: 300px;
 }
 
 .dtp div.dtp-picker-month, .dtp div.dtp-actual-time {

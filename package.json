@@ -1,7 +1,7 @@
 {
-  "name": "jw-angular-material-datetimepicker",
+  "name": "angular-material-datetimepicker",
   "description": "A datetime picker for AngularJS Material",
-  "version": "0.0.6",
+  "version": "1.5.0",
   "keywords": [
     "css",
     "js",
@@ -15,42 +15,15 @@
   ],
   "homepage": "http://logbon72.github.io/angular-material-datetimepicker/",
   "main": "js/angular-material-datetimepicker.js",
-  "ignore": [
-    "/.*",
-    "_config.yml",
-    "CNAME",
-    "composer.json",
-    "CONTRIBUTING.md",
-    "docs",
-    "js/tests",
-    "test-infra"
-  ],
   "dependencies": {
-    "angular": "^1.5.6",
-    "angular-animate": "^1.5.6",
-    "angular-aria": "^1.5.6",
-    "angular-material": "^1.0.9",
-    "moment": "^2.14.1"
+    "angular": "^1.5.10",
+    "angular-animate": "^1.5.10",
+    "angular-aria": "^1.5.10",
+    "angular-material": "^1.1.1",
+    "moment": "^2.17.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/logbon72/angular-material-datetimepicker"
-  },
-  "format": "cjs",
-  "registry": "github",
-  "peerDependencies": {
-    "angular": "*"
-  },
-  "jspm": {
-    "dependencies": {
-      "angular": "github:angular/bower-angular@^1.5.8",
-      "moment": "npm:moment@^2.13.0"
-    },
-    "meta": {
-      "md-data-table.js": {
-        "deps": [],
-        "format": "global"
-      }
-    }
+    "url": "https://github.com/hexadecy/angular-material-datetimepicker"
   }
 }

@@ -5,15 +5,13 @@ Originally designed for Bootstrap Material, this has been modified to work with 
 - Double click to select date or time
 - Swipe left to go to next month or Swipe right to go to previous month.
 
-
-
 ## Updates
 
 ** I have kept this section of the document as an acknowledgement for all the work done on the original Bootstrap Material plugin **
 
 | Date				| Author			| Description											 |
-| ----------------- | ----------------- | ----------- |
-| 2015-11-12		| logbon72		    | Adapted plugin for Angular Material |
+| ----------------- | ----------------- | ------------------------------------------------------ |
+| 2015-11-12		| logbon72			| Adapted plugin for Angular Material 					 |
 | 2015-10-19		| benletchford		| Fixed not being able to tab into input				 |
 | 2015-10-19		| drblue 			| Fixed erroneous package.json-file 					 |
 | 2015-10-19		| Perdona			| Fix auto resize when month has 6 weeks				 |
@@ -38,13 +36,12 @@ bootstrap-material-datepicker.css => bootstrap-material-date**time**picker.css
 Depends on the following library:
 
 - Angular Material & it's dependencies
-- Angular Touch
 - MomentJS
 
-## Installing via Bower
+## Installing via yarn
 
 ```
-bower install angular-material-datetimepicker
+yarn add github.com/hexadecy/angular-material-datetimepicker
 ```
 
 
@@ -84,7 +81,7 @@ The directive accepts several attributes which are described below:
 
 | Name				| Type							| Description									|
 | ----------------- | ----------------------------- | --------------------------------------------- |
-| **ng-model**	    | (String\|Date\|Moment)		| Initial Date or model to assign the date to|
+| **ng-model**	    | (String\|Date\|Moment)		| Initial Date or model to assign the date to 	|
 | **format**		| String						| [MomentJS Format](momentjs.com/docs/#/parsing/string-format/),defaults to `HH:mm` for time picker only, `YYYY-MM-DD` for date picker only and `YYYY-MM-DD HH:mm` for both timepicker and date picker |
 | **short-time**	| Boolean						| true => Display 12 hours AM\|PM 				|
 | **min-date**		| (String\|Date\|Moment)		| Minimum selectable date						|
@@ -92,5 +89,6 @@ The directive accepts several attributes which are described below:
 | **date**			| Boolean						| true => Has Datepicker (default: true)        |
 | **time**			| Boolean						| true => Has Timepicker (default: true)		|
 | **cancel-text**	| String						| Text for the cancel button (default: Cancel)	|
-| **ok-text**   | String            | Text for the OK button (default: OK)      |
-| **week-start**		| Number						| First day of the week (default: 0 => Sunday)			|
+| **today-text**	| String						| Text for the tofay button (default: Today)	|
+| **ok-text** 		| String						| Text for the OK button (default: OK)			|
+| **week-start**	| Number						| First day of the week (default: 0 => Sunday)	|

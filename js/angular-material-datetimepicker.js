@@ -217,6 +217,7 @@ angular.module(moduleName, ['ngMaterial'])
        weekStart: {int} =0,
        shortTime: {boolean} =false,
        cancelText: {string} ='Cancel',
+       todayText: {string} ='Today',
        okText: {string} ='OK',
        amText: {string} ='AM',
        pmText: {string} ='PM'
@@ -224,7 +225,7 @@ angular.module(moduleName, ['ngMaterial'])
  @return promise
   */
   .factory('dateTimeDialog', ["$mdDialog", "$q", "mdcDefaultParams", function ($mdDialog, $q, mdcDefaultParams) {
-    var accepted_options = ['time', 'date', 'minDate', 'maxDate', 'shortTime', 'format', 'cancelText', 'okText', 'lang', 'amText', 'pmText']
+    var accepted_options = ['time', 'date', 'minDate', 'maxDate', 'shortTime', 'format', 'cancelText', 'todayText', 'okText', 'lang', 'amText', 'pmText']
 
     var service = {
       show: function (options) {
