@@ -90,6 +90,6 @@ The directive accepts several attributes which are described below:
 | **date**			| Boolean						| true => Has Datepicker (default: true)        |
 | **time**			| Boolean						| true => Has Timepicker (default: true)		|
 | **cancel-text**	| String						| Text for the cancel button (default: Cancel)	|
-| **today-text**	| String						| Text for the tofay button (default: Today)	|
+| **today-text**	| String						| Text for the today button (default: Today)	|
 | **ok-text** 		| String						| Text for the OK button (default: OK)			|
 | **week-start**	| Number						| First day of the week (default: 0 => Sunday)	|
