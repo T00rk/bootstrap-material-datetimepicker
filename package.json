@@ -25,5 +25,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/hexadecy/angular-material-datetimepicker"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-uglify": "^2.0.1",
+    "pump": "^1.0.2",
+    "run-sequence": "^1.2.2"
   }
 }
