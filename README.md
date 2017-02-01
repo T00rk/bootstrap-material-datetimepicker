@@ -42,7 +42,7 @@ Depends on the following library:
 ## Installing via yarn
 
 ```
-yarn add github.com/hexadecy/angular-material-datetimepicker
+yarn add github.com/beenote/angular-material-datetimepicker
 ```
 
 
