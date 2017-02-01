@@ -26,23 +26,19 @@ Originally designed for Bootstrap Material, this has been modified to work with 
 | 2015-04-10		| Peterzen			| Added bower and requirejs support						 |
 | 2015-04-08		| T00rk				| Fixed problem on locale switch						 |
 | 2015-03-04		| T00rk				| Added Time picker										 |
-(\*) File names have been changed
-
-bootstrap-material-datepicker.js => bootstrap-material-date**time**picker.js
-
-bootstrap-material-datepicker.css => bootstrap-material-date**time**picker.css
 
 ### Dependencies
 
 Depends on the following library:
 
 - Angular Material & it's dependencies
-- MomentJS
+- Moment
 
-## Installing via yarn
+## Installing via yarn or npm
 
 ```
 yarn add github.com/beenote/angular-material-datetimepicker
+npm install github.com/beenote/angular-material-datetimepicker --save
 ```
 
 
