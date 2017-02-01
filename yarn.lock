@@ -26,7 +26,7 @@ angular-aria@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/angular-aria/-/angular-aria-1.6.1.tgz#0fcbf1152b4c26e8671daddea7443a1b983434b9"
 
-angular-material@^1.1.1:
+angular-material@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/angular-material/-/angular-material-1.1.2.tgz#7a5aeebaa350bba8e97c68804b994cfd60c3d125"
 
