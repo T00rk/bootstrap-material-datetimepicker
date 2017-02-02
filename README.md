@@ -31,14 +31,17 @@ Originally designed for Bootstrap Material, this has been modified to work with 
 
 Depends on the following library:
 
-- Angular Material & it's dependencies
+- AngularJS Material
+- AngularJS Animate
+- AngularJS Aria
+- AngularJS
 - Moment
 
 ## Installing via yarn or npm
 
 ```
-yarn add github.com/beenote/angular-material-datetimepicker
-npm install github.com/beenote/angular-material-datetimepicker --save
+yarn add ng-material-datetimepicker
+npm i ng-material-datetimepicker
 ```
 
 
@@ -64,9 +67,11 @@ This plugin exposes a directive which should be used as an attribute for an inpu
     <md-input-container flex-gt-md="30">
         <label>Timepicker Only</label>
         <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true"
+               show-todays-date
                placeholder="Time"
                min-date="minDate"
                format="hh:mm a"
+               ng-change="vm.saveChange()"
                ng-model="time">
     </md-input-container>
 ```
