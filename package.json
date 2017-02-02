@@ -13,7 +13,7 @@
     "front-end",
     "web"
   ],
-  "homepage": "http://logbon72.github.io/angular-material-datetimepicker/",
+  "homepage": "https://beenote.github.io/angular-material-datetimepicker/",
   "main": "js/angular-material-datetimepicker.js",
   "dependencies": {
     "angular": "^1.5.10",
