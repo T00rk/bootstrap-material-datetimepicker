@@ -96,6 +96,7 @@
         amText: 'AM',
         pmText: 'PM',
         todayText: 'Today',
+        disableDates: []
       };
       return default_params;
     }])
@@ -112,6 +113,7 @@
             date: '=',
             minDate: '=',
             maxDate: '=',
+            disableDates: '=',
             weekStart: '=',
             shortTime: '=',
             weekStart: '=',
@@ -271,10 +273,10 @@
 
     this.minDate;
     this.maxDate;
+    this.disableDates;
 
     this._attachedEvents = [];
     this.VIEWS = VIEW_STATES;
-
     this.params = mdcDefaultParams
     this.meridien = 'AM';
     this.params = angular.extend(this.params, this.options);
@@ -328,6 +330,9 @@
       this.currentDate = _dateParam(this.params.currentDate, moment());
       this.minDate = _dateParam(this.params.minDate);
       this.maxDate = _dateParam(this.params.maxDate);
+      this.disableDates = this.params.disableDates.map(function(x) {
+        return moment(x).format('MMMM Do YYYY')
+      });
       this.selectDate(this.currentDate);
     },
     initDate: function (d) {
@@ -404,6 +409,13 @@
       }
 
       return _return;
+    },
+    isInDisableDates: function (date) {
+      var dut = date.format('MMMM Do YYYY')
+      if(this.disableDates.indexOf(dut) > -1) {
+        return false;
+      }
+      return true;
     },
     selectDate: function (date) {
       if (date) {
@@ -690,7 +702,8 @@
 
               calendar.isInRange = function (date) {
                 return picker.isAfterMinDate(moment(date), false, false)
-                  && picker.isBeforeMaxDate(moment(date), false, false);
+                  && picker.isBeforeMaxDate(moment(date), false, false)
+                  && picker.isInDisableDates(moment(date));
               };
 
               calendar.selectDate = function (date) {

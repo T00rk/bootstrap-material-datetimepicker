@@ -94,3 +94,4 @@ The directive accepts several attributes which are described below:
 | **today-text**	| String						| Text for the today button (default: Today)	|
 | **ok-text** 		| String						| Text for the OK button (default: OK)			|
 | **week-start**	| Number						| First day of the week (default: 0 => Sunday)	|
+
