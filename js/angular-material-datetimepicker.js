@@ -9,12 +9,8 @@
   };
 
   var css = function (el, name) {
-    if (typeof window !== undefined && window.hasOwnProperty('jQuery')) {
-      return window.jQuery(el).css(name);
-    } else {
-      el = angular.element(el);
-      return ('getComputedStyle' in window) ? window.getComputedStyle(el[0])[name] : el.css(name);
-    }
+    el = angular.element(el);
+    return ('getComputedStyle' in window) ? window.getComputedStyle(el[0])[name] : el.css(name);
   };
 
   var template = '<md-dialog class="dtp" layout="column" style="width: 300px;">'
@@ -138,8 +134,9 @@
             }
 
             var dateOfTheDay = null;
-            if (scope.showTodaysDate !== undefined && scope.showTodaysDate !== "false")
+            if (scope.showTodaysDate !== undefined && scope.showTodaysDate !== "false") {
               dateOfTheDay = moment();
+            }
 
             if (angular.isString(scope.currentDate) && scope.currentDate !== '') {
               scope.currentDate = moment(scope.currentDate, scope.format);
@@ -229,11 +226,11 @@
     */
     .factory('mdcDateTimeDialog', ["$mdDialog", "$q", "mdcDefaultParams", function ($mdDialog, $q, mdcDefaultParams) {
       var accepted_options = Object.keys(mdcDefaultParams);
-
+      console.log(accepted_options);
       var service = {
         show: function (options) {
           var deferred = $q.defer();
-          var params = mdcDefaultParams;
+          var params = angular.copy(mdcDefaultParams);
           for (var i in options) {
             if (accepted_options.indexOf[i] != -1 && options.hasOwnProperty(i)) {
               params = options[i];
@@ -716,7 +713,7 @@
 
               calendar.isDateOfTheDay = function (m) {
                 var today = calendar.picker.options.showTodaysDate;
-                if (today === null) {
+                if (!today) {
                   return false;
                 }
 
