@@ -66,7 +66,7 @@
 
   angular.module(moduleName, ['ngMaterial'])
     .provider('mdcDatetimePickerDefaultLocale', function () {
-      this.locale = 'en';
+      this.locale = window.navigator.userLanguage || window.navigator.language || 'en';
 
       this.$get = function () {
         return this;
