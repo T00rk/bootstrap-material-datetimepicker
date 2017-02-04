@@ -112,6 +112,7 @@
             date: '=',
             minDate: '=',
             maxDate: '=',
+            weekStart: '=',
             shortTime: '=',
             weekStart: '=',
             format: '@',
