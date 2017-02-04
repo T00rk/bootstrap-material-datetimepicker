@@ -245,7 +245,8 @@
             parent: angular.element(document.body),
             bindToController: true,
             clickOutsideToClose: true,
-            disableParentScroll: false
+            disableParentScroll: false,
+            skipHide: true
           })
             .then(function (v) {
               var currentDate = v ? v._d : v;

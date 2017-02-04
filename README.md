@@ -95,3 +95,6 @@ The directive accepts several attributes which are described below:
 | **ok-text** 		| String						| Text for the OK button (default: OK)			|
 | **week-start**	| Number						| First day of the week (default: 0 => Sunday)	|
 
+### Important Note on Using Locales
+
+Please see this [issue](https://github.com/logbon72/angular-material-datetimepicker/issues/51). To use a locale with your date time picker dialog, you'll have to include the moment.js locale file.
