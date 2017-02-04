@@ -9,8 +9,8 @@
   };
 
   var css = function (el, name) {
-    if ('jQuery' in window) {
-      return jQuery(el).css(name);
+    if (typeof window !== undefined && window.hasOwnProperty('jQuery')) {
+      return window.jQuery(el).css(name);
     } else {
       el = angular.element(el);
       return ('getComputedStyle' in window) ? window.getComputedStyle(el[0])[name] : el.css(name);
@@ -69,7 +69,7 @@
 
 
   angular.module(moduleName, ['material.components.dialog'])
-    .provider('mdcDatetimePicker', function () {
+    .provider('mdcDatetimePickerDefaultLocale', function () {
       this.locale = 'en';
 
       this.$get = function () {
@@ -88,7 +88,7 @@
         minDate: null,
         maxDate: null,
         currentDate: null,
-        lang: mdcDatetimePickerDefaultLocale,
+        lang: mdcDatetimePickerDefaultLocale.locale,
         weekStart: 0,
         shortTime: false,
         cancelText: 'Cancel',
@@ -114,7 +114,6 @@
             minDate: '=',
             maxDate: '=',
             disableDates: '=',
-            weekStart: '=',
             shortTime: '=',
             weekStart: '=',
             format: '@',
@@ -124,7 +123,7 @@
             amText: '@',
             pmText: '@',
             showTodaysDate: '@',
-            todayText: '@',
+            todayText: '@'
           },
           link: function (scope, element, attrs, ngModel) {
             var isOn = false;
@@ -167,7 +166,7 @@
               isOn = true;
               var options = {};
               for (var i in attrs) {
-                if (scope.hasOwnProperty(i) && !angular.isUndefined(scope[i])) {
+                if (attrs.hasOwnProperty(i) && scope.hasOwnProperty(i) && !angular.isUndefined(scope[i])) {
                   options[i] = scope[i];
                 }
               }
@@ -228,15 +227,15 @@
      }
    @return promise
     */
-    .factory('dateTimeDialog', ["$mdDialog", "$q", "mdcDefaultParams", function ($mdDialog, $q, mdcDefaultParams) {
-      var accepted_options = ['time', 'date', 'minDate', 'maxDate', 'shortTime', 'format', 'cancelText', 'todayText', 'okText', 'lang', 'amText', 'pmText']
+    .factory('mdcDateTimeDialog', ["$mdDialog", "$q", "mdcDefaultParams", function ($mdDialog, $q, mdcDefaultParams) {
+      var accepted_options = Object.keys(mdcDefaultParams);
 
       var service = {
         show: function (options) {
           var deferred = $q.defer();
           var params = mdcDefaultParams;
           for (var i in options) {
-            if (accepted_options.indexOf[i] != -1) {
+            if (accepted_options.indexOf[i] != -1 && options.hasOwnProperty(i)) {
               params = options[i];
             }
           }
@@ -254,35 +253,31 @@
             .then(function (v) {
               var currentDate = v ? v._d : v;
               deferred.resolve(v ? v._d : v);
-              //isOn = false;
             }, function () {
               deferred.reject();
-              //isOn = false;
-            })
+            });
           return deferred.promise;
         }
-      }
-      return service;
+      };
 
+      return service;
     }])
   ;
 
-  var PluginController = function ($scope, $mdDialog, mdcDatetimePicker, mdcDefaultParams) {
+  var PluginController = function ($scope, $mdDialog, mdcDefaultParams) {
     this.currentView = VIEW_STATES.DATE;
     this._dialog = $mdDialog;
 
-    this.minDate;
-    this.maxDate;
-    this.disableDates;
-
     this._attachedEvents = [];
     this.VIEWS = VIEW_STATES;
-    this.params = mdcDefaultParams
+    this.params = mdcDefaultParams;
     this.meridien = 'AM';
     this.params = angular.extend(this.params, this.options);
+    console.log(this.params);
     this.init();
   };
-  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDatetimePicker', 'mdcDefaultParams'];
+
+  PluginController.$inject = ['$scope', '$mdDialog', 'mdcDefaultParams'];
   PluginController.prototype = {
     init: function () {
       this.timeMode = this.params.time && !this.params.date;
@@ -330,12 +325,12 @@
       this.currentDate = _dateParam(this.params.currentDate, moment());
       this.minDate = _dateParam(this.params.minDate);
       this.maxDate = _dateParam(this.params.maxDate);
-      this.disableDates = this.params.disableDates.map(function(x) {
+      this.disableDates = this.params.disableDates.map(function (x) {
         return moment(x).format('MMMM Do YYYY')
       });
       this.selectDate(this.currentDate);
     },
-    initDate: function (d) {
+    initDate: function () {
       this.currentView = VIEW_STATES.DATE;
     },
     initHours: function () {
@@ -412,7 +407,7 @@
     },
     isInDisableDates: function (date) {
       var dut = date.format('MMMM Do YYYY')
-      if(this.disableDates.indexOf(dut) > -1) {
+      if (this.disableDates.indexOf(dut) > -1) {
         return false;
       }
       return true;
@@ -755,7 +750,6 @@
                   tbodyHtml.push('<a href="#" mdc-dtp-noclick class="dtp-select-day" ng-class="{selected: cal.isSelectedDay(' + scopeRef + '), hilite: cal.isDateOfTheDay(' + scopeRef + ')}" ng-click="cal.selectDate(' + scopeRef + ')">');
                   tbodyHtml.push(weekDay.format('D'));
                   tbodyHtml.push('</a>');
-                  ;
                 } else {
                   tbodyHtml.push('<span class="dtp-select-day">');
                   tbodyHtml.push(weekDay.format('D'));
@@ -947,7 +941,7 @@
             scope.$watch(function () {
               var tmp = picker.currentNearest5Minute();
               return tmp ? tmp.format('HH:mm') : '';
-            }, function (newVal) {
+            }, function () {
               setCurrentValue();
               animateHands();
             });
