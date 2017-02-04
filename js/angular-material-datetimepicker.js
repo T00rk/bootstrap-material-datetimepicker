@@ -68,7 +68,7 @@
     + '</md-dialog>';
 
 
-  angular.module(moduleName, ['material.components.dialog'])
+  angular.module(moduleName, ['ngMaterial'])
     .provider('mdcDatetimePickerDefaultLocale', function () {
       this.locale = 'en';
 
@@ -166,7 +166,7 @@
               isOn = true;
               var options = {};
               for (var i in attrs) {
-                if (attrs.hasOwnProperty(i) && scope.hasOwnProperty(i) && !angular.isUndefined(scope[i])) {
+                if (scope.hasOwnProperty(i) && !angular.isUndefined(scope[i])) {
                   options[i] = scope[i];
                 }
               }
@@ -273,7 +273,7 @@
     this.params = mdcDefaultParams;
     this.meridien = 'AM';
     this.params = angular.extend(this.params, this.options);
-    console.log(this.params);
+
     this.init();
   };
 
@@ -716,8 +716,9 @@
 
               calendar.isDateOfTheDay = function (m) {
                 var today = calendar.picker.options.showTodaysDate;
-                if (today === null)
+                if (today === null) {
                   return false;
+                }
 
                 return m && today.date() === m.date() && today.month() === m.month() && today.year() === m.year();
               }
