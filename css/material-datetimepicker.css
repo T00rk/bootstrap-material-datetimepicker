@@ -4,6 +4,7 @@ md-dialog.dtp {
     color: #333;
     background-color: #fff;
     max-height: none;
+    min-width: 300px;
 }
 
 
@@ -98,8 +99,6 @@ md-dialog.dtp {
 
     /* Prevent dialog resizing when switcing between date/time */
     overflow: hidden;
-    width: 295px;
-    height: 300px;
 }
 
 .dtp div.dtp-picker-month, .dtp div.dtp-actual-time {
@@ -309,7 +308,7 @@ md-dialog.dtp {
 }
 
 .dtp .dtp-buttons {
-    padding: 0 10px 10px 10px;
+    padding-bottom: 10px;
     text-align: right;
 }
 
