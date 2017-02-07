@@ -307,7 +307,10 @@
               {
                  this.currentView = 0;
 
-                 this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
+                 if (this.params.monthPicker === false)
+                 {
+                    this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
+                 }
                  this.$dtpElement.find('.dtp-picker-datetime').addClass('hidden');
 
                  var _date = ((typeof (this.currentDate) !== 'undefined' && this.currentDate !== null) ? this.currentDate : null);
@@ -1108,6 +1111,9 @@
                  }
                  this.toggleTime((this.currentView === 1));
               },
+              _hideCalendar: function() {
+                 this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
+              },
               convertHours: function (h)
               {
                  var _return = h;
@@ -1147,11 +1153,17 @@
                  this.$dtpElement.removeClass('hidden');
                  this._attachEvent($(window), 'keydown', this._onKeydown.bind(this));
                  this._centerBox();
+                 this.$element.trigger('open');
+                 if (this.params.monthPicker === true)
+                 {
+                    this._hideCalendar();
+                 }
               },
               hide: function ()
               {
                  $(window).off('keydown', null, null, this._onKeydown.bind(this));
                  this.$dtpElement.addClass('hidden');
+                 this.$element.trigger('close');
               },
               _centerBox: function ()
               {

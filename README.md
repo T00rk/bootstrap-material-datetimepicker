@@ -75,7 +75,8 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **okText**		| String						| Text for the OK button (default: OK)			|
 | **clearText**		| String						| Text for the Clear button (default: Clear)	|
 | **nowText**		| String						| Text for the Now button (default: Now)		|
-| **triggerEvent**	| String						| Event to fire the calendar (default: focus)	|
+| **triggerEvent**		| String						| Event to fire the calendar (default: focus)		|
+| **monthPicker**	| Boolean						| true => Act as monthpicker (hide calendar) (default: false) |
 
 
 
@@ -86,6 +87,8 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **beforeChange**	| event, date				| OK button is clicked								|
 | **change**		| event, date				| OK button is clicked and input value is changed	|
 | **dateSelected**	| event, date				| New date is selected								|
+| **open**	        | event				        | datepicker is opened								|
+| **close**	        | event				        | datepicker is closed								|
 
 
 ### Methods
