@@ -64,6 +64,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **minDate**		| (String\|Date\|Moment)		| Minimum selectable date						|
 | **maxDate**		| (String\|Date\|Moment)		| Maximum selectable date						|
 | **currentDate**	| (String\|Date\|Moment)		| Initial Date									|
+| **year**			| Boolean						| true => Has Yearpicker						|
 | **date**			| Boolean						| true => Has Datepicker						|
 | **time**			| Boolean						| true => Has Timepicker						|
 | **clearButton**	| Boolean						| true => Show Clear Button						|
@@ -84,6 +85,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | ----------------- | ------------------------- | ------------------------------------------------- |
 | **beforeChange**	| event, date				| OK button is clicked								|
 | **change**		| event, date				| OK button is clicked and input value is changed	|
+| **yearSelected**	        | event, date			        | New year is selected								|
 | **dateSelected**	| event, date				| New date is selected								|
 | **open**	        | event				        | datepicker is opened								|
 | **close**	        | event				        | datepicker is closed								|
