@@ -47,3 +47,54 @@
 .dtp .clearfix { clear: both; }
 
 .dtp .center { text-align: center; }
+
+.dtp-year-picker {
+  display:none;
+  overflow: auto;
+  margin-bottom: 10px;
+  max-height:466px; 
+ }
+ 
+ .dtp-content {
+    height: 520px;
+}
+
+.dtp-buttons {
+    overflow: hidden;
+}
+
+.year-picker-item{
+	text-align: center;
+	padding-top: 5px;
+	font-size: x-large;
+}
+
+.year-picker-item:hover{
+	color:#689F38;
+	font-weight: bold;
+}
+
+.dtp-year-picker::-webkit-scrollbar-track
+{
+	background-color: #FFFFFF;
+}
+
+.dtp-year-picker::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #FFFFFF;
+}
+
+.dtp-year-picker::-webkit-scrollbar-thumb
+{
+	background-color: #689F38;
+	border-radius: 3px;
+}
+
+.dtp-select-day{
+	 transition: background-color 100ms linear;
+}
+.dtp-select-day:hover{
+	background-color: rgba(139, 195, 74, .6);
+	 transition: background-color 250ms linear;
+}
