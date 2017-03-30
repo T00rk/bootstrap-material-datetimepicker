@@ -18,7 +18,7 @@
       this.$element = $(element);
 
 
-      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, disabledDays: [], shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, triggerEvent: 'focus', monthPicker: false, year:true};
+      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, disabledDays: [], disabledHours: [], shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, triggerEvent: 'focus', monthPicker: false, year:true};
       this.params = $.fn.extend(this.params, options);
 
       this.name = "dtp_" + this.setName();
@@ -839,7 +839,9 @@
               toggleTime: function (value, isHours)
               {
                  var result = false;
-
+                 if (this.params.disabledHours.indexOf(value) != -1) {
+                   return false;
+                 }
                  if (isHours)
                  {
                     var _date = moment(this.currentDate);
