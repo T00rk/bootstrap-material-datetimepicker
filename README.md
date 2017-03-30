@@ -68,6 +68,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **year**			| Boolean						| true => Has Yearpicker						|
 | **date**			| Boolean						| true => Has Datepicker						|
 | **disabledDays**	| Array							| Array containing day indices (1-7) to disable	|
+| **disabledHours**	| Array						| Array containing hours indices (0-23) to disable |
 | **time**			| Boolean						| true => Has Timepicker						|
 | **clearButton**	| Boolean						| true => Show Clear Button						|
 | **nowButton**		| Boolean						| true => Show Now Button						|
