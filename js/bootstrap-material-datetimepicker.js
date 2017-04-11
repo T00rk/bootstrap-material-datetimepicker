@@ -44,7 +44,7 @@
             }
             if (options === 'destroy')
             {
-               delete $.data(this, pluginDataName);
+              $(this).removeData(pluginDataName);
             }
          }
       });
