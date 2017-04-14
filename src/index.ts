@@ -1,7 +1,7 @@
 import { SimpleChanges, Directive, ElementRef, AfterViewChecked, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import * as moment from 'moment/moment';
-import 'jquery/dist/jquery.min';
+import * as $ from 'jquery/dist/jquery.min';
 import 'bootstrap-material-design/dist/js/ripples.min';
 import 'bootstrap-material-design/dist/js/material.min.js';
 import 'bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js';

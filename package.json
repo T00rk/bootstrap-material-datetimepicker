@@ -2,24 +2,24 @@
   "_args": [
     [
       {
-        "raw": "bootstrap-material-datetimepicker@^2.7.1",
+        "raw": "bootstrap-material-datetimepicker@^2.7.2",
         "scope": null,
         "escapedName": "bootstrap-material-datetimepicker",
         "name": "bootstrap-material-datetimepicker",
-        "rawSpec": "^2.7.1",
+        "rawSpec": "^2.7.2",
         "spec": ">=2.7.1 <3.0.0",
         "type": "range"
       }
     ]
   ],
-  "_from": "bootstrap-material-datetimepicker@>=2.7.1 <3.0.0",
-  "_id": "bootstrap-material-datetimepicker@2.7.1",
+  "_from": "bootstrap-material-datetimepicker@>=2.7.2 <3.0.0",
+  "_id": "bootstrap-material-datetimepicker@2.7.2",
   "_inCache": true,
   "_location": "/bootstrap-material-datetimepicker",
   "_nodeVersion": "6.9.2",
   "_npmOperationalInternal": {
     "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/bootstrap-material-datetimepicker-2.7.1.tgz_1488444499043_0.9645025101490319"
+    "tmp": "tmp/bootstrap-material-datetimepicker-2.7.2.tgz_1488444499043_0.9645025101490319"
   },
   "_npmUser": {
     "name": "alexandrdp",
@@ -30,12 +30,12 @@
     "bootstrap": "3.3.7"
   },
   "_requested": {
-    "raw": "bootstrap-material-datetimepicker@^2.7.1",
+    "raw": "bootstrap-material-datetimepicker@^2.7.2",
     "scope": null,
     "escapedName": "bootstrap-material-datetimepicker",
     "name": "bootstrap-material-datetimepicker",
-    "rawSpec": "^2.7.1",
-    "spec": ">=2.7.1 <3.0.0",
+    "rawSpec": "^2.7.2",
+    "spec": ">=2.7.2 <3.0.0",
     "type": "range"
   },
   "_requiredBy": [
@@ -44,7 +44,7 @@
   "_resolved": "https://registry.npmjs.org/bootstrap-material-datetimepicker/-/bootstrap-material-datetimepicker-2.7.1.tgz",
   "_shasum": "f8c28e3c299a00f7071165b481153aab3e71f955",
   "_shrinkwrap": null,
-  "_spec": "bootstrap-material-datetimepicker@^2.7.1",
+  "_spec": "bootstrap-material-datetimepicker@^2.7.2",
   "_where": "C:\\Work\\MyHome.Core\\MyHome.Core",
   "author": "",
   "bugs": {
@@ -71,7 +71,7 @@
   "directories": {},
   "dist": {
     "shasum": "f8c28e3c299a00f7071165b481153aab3e71f955",
-    "tarball": "https://registry.npmjs.org/bootstrap-material-datetimepicker/-/bootstrap-material-datetimepicker-2.7.1.tgz"
+    "tarball": "https://registry.npmjs.org/bootstrap-material-datetimepicker/-/bootstrap-material-datetimepicker-2.7.2.tgz"
   },
   "gitHead": "4ad430b9110398d988f7ff91e6bd159a721b3688",
   "homepage": "https://github.com/AlexandrM/bootstrap-material-datetimepicker.git",
@@ -117,5 +117,5 @@
     "prepublish": "npm run build && npm run lint"
   },
   "typings": "./dist/index.d.ts",
-  "version": "2.7.1"
+  "version": "2.7.2"
 }

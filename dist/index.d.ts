@@ -1,5 +1,4 @@
 import { ElementRef, EventEmitter } from '@angular/core';
-import 'jquery/dist/jquery.min';
 import 'bootstrap-material-design/dist/js/ripples.min';
 import 'bootstrap-material-design/dist/js/material.min.js';
 import 'bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js';
