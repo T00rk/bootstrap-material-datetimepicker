@@ -1,7 +1,7 @@
 import { SimpleChanges, Directive, ElementRef, AfterViewChecked, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import * as moment from 'moment/moment';
-import * as $ from 'jquery/dist/jquery.min';
+import * as jquery from 'jquery/dist/jquery';
 import 'bootstrap-material-design/dist/js/ripples.min';
 import 'bootstrap-material-design/dist/js/material.min.js';
 import 'bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js';
@@ -60,7 +60,7 @@ export class DatePickerDirective {
     dateChange: EventEmitter<any> = new EventEmitter()
     
     ngOnInit() {
-        let $element = $(this.elementRef.nativeElement);
+        let $element = jquery(this.elementRef.nativeElement);
         $element.bootstrapMaterialDatePicker({
             date: this.dtpDate,
             time: this.dtpTime,

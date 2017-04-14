@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var moment = require("moment/moment");
-var $ = require("jquery/dist/jquery.min");
+var jquery = require("jquery/dist/jquery");
 require("bootstrap-material-design/dist/js/ripples.min");
 require("bootstrap-material-design/dist/js/material.min.js");
 require("bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js");
@@ -63,7 +63,7 @@ var DatePickerDirective = (function () {
     });
     DatePickerDirective.prototype.ngOnInit = function () {
         var _this = this;
-        var $element = $(this.elementRef.nativeElement);
+        var $element = jquery(this.elementRef.nativeElement);
         $element.bootstrapMaterialDatePicker({
             date: this.dtpDate,
             time: this.dtpTime,
