@@ -797,10 +797,10 @@
               {
                  if (date && date.isValid())
                  {
-                    var startOfMonth = moment(date).locale(this.params.lang).startOf('month');
-                    var endOfMonth = moment(date).locale(this.params.lang).endOf('month');
+                    var endOfLastMonth = moment(date).locale(this.params.lang).subtract(1,'month').endOf('month');
+                    var startOfNextMonth = moment(date).locale(this.params.lang).add(1,'month').startOf('month');
 
-                    if (!this.isAfterMinDate(startOfMonth, false, false))
+                    if (!this.isAfterMinDate(endOfLastMonth, false, false))
                     {
                        this.$dtpElement.find('a.dtp-select-month-before').addClass('invisible');
                     } else
@@ -808,7 +808,7 @@
                        this.$dtpElement.find('a.dtp-select-month-before').removeClass('invisible');
                     }
 
-                    if (!this.isBeforeMaxDate(endOfMonth, false, false))
+                    if (!this.isBeforeMaxDate(startOfNextMonth, false, false))
                     {
                        this.$dtpElement.find('a.dtp-select-month-after').addClass('invisible');
                     } else
@@ -816,10 +816,10 @@
                        this.$dtpElement.find('a.dtp-select-month-after').removeClass('invisible');
                     }
 
-                    var startOfYear = moment(date).locale(this.params.lang).startOf('year');
-                    var endOfYear = moment(date).locale(this.params.lang).endOf('year');
+                    var endOfLastYear = moment(date).locale(this.params.lang).subtract(1,'year').endOf('year');
+                    var startOfNextYear = moment(date).locale(this.params.lang).add(1,'year').startOf('year');
 
-                    if (!this.isAfterMinDate(startOfYear, false, false))
+                    if (!this.isAfterMinDate(endOfLastYear, false, false))
                     {
                        this.$dtpElement.find('a.dtp-select-year-before').addClass('invisible');
                     } else
@@ -827,7 +827,7 @@
                        this.$dtpElement.find('a.dtp-select-year-before').removeClass('invisible');
                     }
 
-                    if (!this.isBeforeMaxDate(endOfYear, false, false))
+                    if (!this.isBeforeMaxDate(startOfNextYear, false, false))
                     {
                        this.$dtpElement.find('a.dtp-select-year-after').addClass('invisible');
                     } else
