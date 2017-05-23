@@ -23,7 +23,7 @@ Download make the dependencies
  
 ## Implementation
 ```
-<ng-datetimepicker ng-model="htmlEditor"></ng-datetimepicker>
+<ng-datetimepicker ng-model="dataModel"></ng-datetimepicker>
 ```
 
 ## Parameters
