@@ -16,7 +16,7 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
 </p>
 
 <h3>Live Demo</h3>
-[/Material-DateTimePicker/app](https://miamarti.github.io/Material-DateTimePicker/app)
+["/Material-DateTimePicker/app"](https://miamarti.github.io/Material-DateTimePicker/app)
 
 <h3>Dependencies</h3>
 Download make the dependencies
