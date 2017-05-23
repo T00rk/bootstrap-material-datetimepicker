@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Bootstrap-Material DateTimePicker</title>
+		<title>Material DateTimePicker</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
@@ -54,28 +54,12 @@
 				.well { margin : 0}
 			}
 		</style>
-		<script>
-			(function(i, s, o, g, r, a, m) {
-				i['GoogleAnalyticsObject'] = r;
-				i[r] = i[r] || function() {
-					(i[r].q = i[r].q || []).push(arguments)
-				}, i[r].l = 1 * new Date();
-				a = s.createElement(o),
-					m = s.getElementsByTagName(o)[0];
-				a.async = 1;
-				a.src = g;
-				m.parentNode.insertBefore(a, m)
-			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-			ga('create', 'UA-60343429-1', 'auto');
-			ga('send', 'pageview');
-		</script>
 	</head>
 	<body>
 		<div class="container well">
 			<div class="row">
 				<div class="col-md-6">
-					<h1>Bootstrap Material DatePicker</h1>
+					<h1>Material DateTimePicker</h1>
 				</div>
 			</div>
 		</div>
@@ -219,48 +203,46 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		$(document).ready(function()
-		{
-			$('#date').bootstrapMaterialDatePicker({
-				time: false,
-				clearButton: true
-			});
+            $(document).ready(function() {
+                $('#date').bootstrapMaterialDatePicker({
+                    time: false,
+                    clearButton: true
+                });
 
-			$('#time').bootstrapMaterialDatePicker({
-				date: false,
-				shortTime: false,
-				format: 'HH:mm'
-			});
+                $('#time').bootstrapMaterialDatePicker({
+                    date: false,
+                    format: 'HH:mm'
+                });
 
-			$('#date-format').bootstrapMaterialDatePicker({
-				format: 'dddd DD MMMM YYYY - HH:mm',
-                cancelText: 'Descartar',
-                clearText: 'Limpar'
-			});
-            
-			$('#date-fr').bootstrapMaterialDatePicker({
-				format: 'DD/MM/YYYY HH:mm',
-				lang: 'fr',
-				weekStart: 1, 
-				cancelText : 'ANNULER',
-				nowButton : true,
-				switchOnClick : true
-			});
+                $('#date-format').bootstrapMaterialDatePicker({
+                    format: 'dddd DD MMMM YYYY - HH:mm',
+                    cancelText: 'Descartar',
+                    clearText: 'Limpar'
+                });
 
-			$('#date-end').bootstrapMaterialDatePicker({
-				weekStart: 0, format: 'DD/MM/YYYY HH:mm'
-			});
-            
-			$('#date-start').bootstrapMaterialDatePicker({
-				weekStart: 0, format: 'DD/MM/YYYY HH:mm', shortTime : true
-			}).on('change', function(e, date) {
-				$('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
-			});
+                $('#date-fr').bootstrapMaterialDatePicker({
+                    format: 'DD/MM/YYYY HH:mm',
+                    lang: 'fr',
+                    weekStart: 1, 
+                    cancelText : 'ANNULER',
+                    nowButton : true,
+                    switchOnClick : true
+                });
 
-			$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+                $('#date-end').bootstrapMaterialDatePicker({
+                    weekStart: 0, format: 'DD/MM/YYYY HH:mm'
+                });
 
-			$.material.init()
-		});
+                $('#date-start').bootstrapMaterialDatePicker({
+                    weekStart: 0, format: 'DD/MM/YYYY HH:mm', shortTime : true
+                }).on('change', function(e, date) {
+                    $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+                });
+
+                $('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+
+                $.material.init();
+            });
 		</script>
 	</body>
 </html>
