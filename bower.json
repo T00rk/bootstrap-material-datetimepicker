@@ -35,9 +35,7 @@
         "screenshot.png"
     ],
     "dependencies": {
-        "momentjs": "~2.10.2",
-        "bootstrap": "~3.3.4",
-        "jquery": "1.12.3"
+        "momentjs": "*"
     },
     "authors": [
         {
