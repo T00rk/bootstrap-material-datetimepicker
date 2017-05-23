@@ -34,7 +34,7 @@ Download make the dependencies
 
 ## Bower install de dependency
 ```
-$ bower install ng.datetimepicker --save
+$ bower install ng-datetimepicker-material --save
 ```
 
 ## Module AngularJS include
