@@ -1,33 +1,129 @@
 {
-  "name": "bootstrap-material-datetimepicker",
-  "description": ".",
-  "version": "3.7.1",
-  "keywords": [
-    "css",
-    "js",
-    "mobile-first",
-    "responsive",
-    "front-end",
-    "web"
-  ],
-  "homepage": "https://github.com/t00rk/bootstrap-material-datetimepicker",
-  "main": [
-    "dist/js/bootstrap-material-datetimepicker.js",
-    "dist/css/bootstrap-material-datetimepicker.css"
-  ],
-  "ignore": [
-    "/.*",
-    "_config.yml",
-    "CNAME",
-    "composer.json",
-    "CONTRIBUTING.md",
-    "docs",
-    "js/tests",
-    "test-infra"
-  ],
-  "dependencies": {
-    "momentjs": "~2.10.2",
-    "bootstrap": "~3.3.4",
-    "jquery": "1.12.3"
-  }
+    "name": "bootstrap-material-datetimepicker",
+    "description": ".",
+    "version": "3.7.1",
+    "keywords": [
+        "css",
+        "js",
+        "mobile-first",
+        "responsive",
+        "front-end",
+        "web"
+    ],
+    "homepage": "https://github.com/t00rk/bootstrap-material-datetimepicker",
+    "main": [
+        "dist/js/bootstrap-material-datetimepicker.js",
+        "dist/css/bootstrap-material-datetimepicker.css"
+    ],
+    "ignore": [
+        "/.*",
+        "_config.yml",
+        "CNAME",
+        "composer.json",
+        "CONTRIBUTING.md",
+        "docs",
+        "js/tests",
+        "test-infra",
+        "bower_components",
+        "node_modules",
+        "spec",
+        "src",
+        "vendor",
+        "Gruntfile.js",
+        "karma.conf.coffee",
+        "package.json",
+        "screenshot.png"
+    ],
+    "dependencies": {
+        "momentjs": "~2.10.2",
+        "bootstrap": "~3.3.4",
+        "jquery": "1.12.3"
+    },
+    "authors": [
+        {
+            "name": "T00rk",
+            "email": "",
+            "homepage": "https://github.com/T00rk"
+        }, {
+            "name": "peterzen",
+            "email": "",
+            "homepage": "https://github.com/peterzen"
+        }, {
+            "name": "donovansolms",
+            "email": "",
+            "homepage": "https://github.com/donovansolms"
+        }, {
+            "name": "cristen",
+            "email": "",
+            "homepage": "https://github.com/cristen"
+        }, {
+            "name": "darrylemoonman",
+            "email": "",
+            "homepage": "https://github.com/darrylemoonman"
+        }, {
+            "name": "BrunoSpy",
+            "email": "",
+            "homepage": "https://github.com/BrunoSpy"
+        }, {
+            "name": "wI2L",
+            "email": "",
+            "homepage": "https://github.com/wI2L"
+        }, {
+            "name": "perdona",
+            "email": "",
+            "homepage": "https://github.com/perdona"
+        }, {
+            "name": "drblue",
+            "email": "",
+            "homepage": "https://github.com/drblue"
+        }, {
+            "name": "BSteffaniak",
+            "email": "braden@novex.tech",
+            "homepage": "https://github.com/BSteffaniak"
+        }, {
+            "name": "darit",
+            "email": "",
+            "homepage": "https://github.com/darit"
+        }, {
+            "name": "thewisenerd",
+            "email": "",
+            "homepage": "https://github.com/thewisenerd"
+        }, {
+            "name": "sovanna",
+            "email": "sovanna.hing@gmail.com",
+            "homepage": "https://github.com/sovanna"
+        }, {
+            "name": "Gabrielr47",
+            "email": "gabrielr47@gmail.com",
+            "homepage": "https://github.com/Gabrielr47"
+        }, {
+            "name": "tontonAurel",
+            "email": "aurelien.ruaro@gmail.com",
+            "homepage": "https://github.com/tontonAurel"
+        }, {
+            "name": "mathroc",
+            "email": "mathieu@rochette.cc",
+            "homepage": "https://github.com/mathroc"
+        }, {
+            "name": "westy92",
+            "email": "",
+            "homepage": "https://github.com/westy92"
+        }, {
+            "name": "e-frank",
+            "email": "elmar.frank@efrank.at",
+            "homepage": "https://github.com/e-frank"
+        }, {
+            "name": "inDream",
+            "email": "",
+            "homepage": "https://github.com/inDream"
+        }, {
+            "name": "Miller Augusto S. Martins",
+            "email": "miller.augusto@gmail.com",
+            "homepage": "http://br.linkedin.com/pub/miller-augusto/2a/38b/832/"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:miamarti/ngcalendar.git"
+    }
 }
