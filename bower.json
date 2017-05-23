@@ -1,6 +1,6 @@
 {
     "name": "bootstrap-material-datetimepicker",
-    "description": ".",
+    "description": "Material DateTimePicker",
     "version": "3.7.1",
     "keywords": [
         "css",
@@ -12,8 +12,8 @@
     ],
     "homepage": "https://github.com/t00rk/bootstrap-material-datetimepicker",
     "main": [
-        "dist/js/bootstrap-material-datetimepicker.js",
-        "dist/css/bootstrap-material-datetimepicker.css"
+        "dist/js/ng-datetimepicker.js",
+        "dist/css/materialDateTimePicker.css"
     ],
     "ignore": [
         "/.*",
