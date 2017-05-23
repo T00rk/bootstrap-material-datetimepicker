@@ -1,7 +1,7 @@
 (function ($, moment) {
     var pluginName = "bootstrapMaterialDatePicker";
     var pluginDataName = "plugin_" + pluginName;
-    moment.locale('pt-br');
+    moment.locale('en');
 
     function Plugin(element, options) {
         this.currentView = 0;
@@ -17,7 +17,7 @@
             minDate: null,
             maxDate: null,
             currentDate: null,
-            lang: 'pt-br',
+            lang: 'en',
             weekStart: 0,
             disabledDays: [],
             shortTime: true,

@@ -78,7 +78,10 @@
 				<div class="col-md-6">
 					<code>
 						<p>Code</p>
-						$('#date').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+						$('#date').bootstrapMaterialDatePicker({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;time: false,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;clearButton: true<br>
+                        });
 					</code>
 				</div>
 			</div>
@@ -98,7 +101,10 @@
 				<div class="col-md-6">
 					<code>
 						<p>Code</p>
-						$('#time').bootstrapMaterialDatePicker({ date: false });
+						$('#time').bootstrapMaterialDatePicker({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;date: false,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;format: 'HH:mm'<br>
+                        });
 					</code>
 				</div>
 			</div>
@@ -118,7 +124,12 @@
 				<div class="col-md-6">
 					<code>
 						<p>Code</p>
-						$('#date-format').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm' });
+						$('#date-format').bootstrapMaterialDatePicker({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;format: 'dddd DD MMMM YYYY - HH:mm',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cancelText: 'Descartar',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;clearText: 'Limpar'<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;lang: 'pt-br'<br>
+                        });
 					</code>
 				</div>
 			</div>
@@ -138,7 +149,14 @@
 				<div class="col-md-6">
 					<code>
 						<p>Code</p>
-						$('#date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER' });
+						$('#date-fr').bootstrapMaterialDatePicker({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;format: 'DD/MM/YYYY HH:mm',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;lang: 'fr',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;weekStart: 1, <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cancelText : 'ANNULER',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;nowButton : true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;switchOnClick : true<br>
+                        });
 					</code>
 				</div>
 			</div>
@@ -158,7 +176,10 @@
 				<div class="col-md-6">
 					<code>
 						<p>Code</p>
-						$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+                        $('#min-date').bootstrapMaterialDatePicker({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;format : 'DD/MM/YYYY HH:mm',<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;minDate : new Date()<br>
+                        });
 					</code>
 				</div>
 			</div>
@@ -191,11 +212,15 @@
 						<div class="col-md-12">
 							<code>
 								<p>Code</p>
-								$('#date-end').bootstrapMaterialDatePicker({ weekStart : 0 });<br />
-								$('#date-start').bootstrapMaterialDatePicker({ weekStart : 0 }).on('change', function(e, date)<br />
-								{<br />
-									$('#date-end').bootstrapMaterialDatePicker('setMinDate', date);<br />
-								});
+								$('#date-end').bootstrapMaterialDatePicker({<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;weekStart: 0, format: 'DD/MM/YYYY HH:mm'<br>
+                                });<br><br>
+
+                                $('#date-start').bootstrapMaterialDatePicker({<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;weekStart: 0, format: 'DD/MM/YYYY HH:mm', shortTime : true<br>
+                                }).on('change', function(e, date) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;$('#date-end').bootstrapMaterialDatePicker('setMinDate', date);<br>
+                                });
 							</code>
 						</div>
 					</div>
@@ -217,7 +242,8 @@
                 $('#date-format').bootstrapMaterialDatePicker({
                     format: 'dddd DD MMMM YYYY - HH:mm',
                     cancelText: 'Descartar',
-                    clearText: 'Limpar'
+                    clearText: 'Limpar',
+                    lang: 'pt-br'
                 });
 
                 $('#date-fr').bootstrapMaterialDatePicker({
@@ -239,7 +265,10 @@
                     $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
                 });
 
-                $('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+                $('#min-date').bootstrapMaterialDatePicker({
+                    format : 'DD/MM/YYYY HH:mm',
+                    minDate : new Date()
+                });
 
                 $.material.init();
             });
