@@ -19,7 +19,8 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
 [/Material-DateTimePicker/app](https://miamarti.github.io/Material-DateTimePicker/app)
 
 <h3>Dependencies</h3>
-Download make the dependencies
+Download make the dependencies:
+
 * momentJS
 * jquery
 
