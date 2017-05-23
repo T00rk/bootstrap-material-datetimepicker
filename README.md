@@ -22,7 +22,7 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
 Download make the dependencies:
 
 * momentJS
-* jquery
+* jQuery
 
 # AngularJS
 This component is compatible with AngularJS 2. *
