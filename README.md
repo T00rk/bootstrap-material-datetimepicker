@@ -7,8 +7,8 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
   <a href="https://gitter.im/miamarti/bootstrap-material-datetimepicker?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img src="https://badges.gitter.im/Join%20Chat.svg"></a>
   <a href="https://gitlab.com/miamarti/bootstrap-material-datetimepicker" target="_blank"><img src="https://img.shields.io/badge/gitlab-materialDatetimepicker-yellow.svg"></a>
   <img src="https://img.shields.io/badge/materialDatetimepicker-release-green.svg">
-  <img src="https://img.shields.io/badge/version-3.7.1-blue.svg">
-  <img src="https://img.shields.io/bower/v/bootstrap.svg"> 
+  <img src="https://img.shields.io/badge/version-3.9.1-blue.svg">
+  <img src="https://img.shields.io/bower/v/bootstrap.svg">
   <img src="https://img.shields.io/github/license/mashape/apistatus.svg">
   <a href="http://waffle.io/miamarti/bootstrap-material-datetimepicker"><img alt='Stories in Ready' src='https://badge.waffle.io/miamarti/bootstrap-material-datetimepicker.svg?label=ready&title=Ready' height="21" /></a>
 </p>
@@ -20,7 +20,10 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
 Download make the dependencies
 * momentJS
 * jquery
- 
+
+# AngularJS
+This component is compatible with AngularJS 2. *
+
 ## Implementation
 ```
 <ng-datetimepicker ng-model="dataModel"></ng-datetimepicker>
@@ -39,8 +42,11 @@ $ bower install ng-datetimepicker-material --save
 
 ## Module AngularJS include
 ```
-angular.module('example', ["ng.datetimepicker"]);
+angular.module('example', ["ngDatetimepicker"]);
 ```
+
+# JQuery
+This component is compatible with JQuery
 
 ### Events on jQquery
 
@@ -52,7 +58,6 @@ angular.module('example', ["ng.datetimepicker"]);
 | dateSelected	| event, date				| New date is selected								|
 | open	        | event				        | datepicker is opened								|
 | close	        | event				        | datepicker is closed								|
-
 
 ### Methods on jQquery
 ```
@@ -66,6 +71,7 @@ $('input').bootstrapMaterialDatePicker('setDate', moment());
 | **setMaxDate**	| (String\|Date\|Moment)	| Set maximum selectable date	|
 | **destroy**		| NULL						| Destroy the datepicker		|
 
+------------------------------------------------------------------------
 
 ## Metrics
 

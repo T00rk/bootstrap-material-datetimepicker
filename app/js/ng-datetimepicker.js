@@ -6,7 +6,7 @@
 
 (function (window, document, $, moment) {
     "use strict";
-    
+
     var pluginName = "bootstrapMaterialDatePicker";
     var pluginDataName = "plugin_" + pluginName;
     moment.locale('en');
@@ -64,7 +64,7 @@
     };
 
     Plugin.prototype = {
-        
+
         init: function () {
             this.initDays();
             this.initDates();
@@ -76,7 +76,7 @@
             this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
             this._attachEvent(this.$element, this.params.triggerEvent, this._fireCalendar.bind(this));
         },
-        
+
         initDays: function () {
             this.days = [];
             for (var i = this.params.weekStart; this.days.length < 7; i++) {
@@ -86,9 +86,9 @@
                 this.days.push(i.toString());
             }
         },
-        
+
         initDates: function () {
-            
+
             if (this.$element.val().length > 0) {
                 if (typeof (this.params.format) !== 'undefined' && this.params.format !== null) {
                     this.currentDate = moment(this.$element.val(), this.params.format).locale(this.params.lang);
@@ -168,28 +168,28 @@
             if (!this.isAfterMinDate(this.currentDate)) {
                 this.currentDate = moment(this.minDate);
             }
-            
+
             if (!this.isBeforeMaxDate(this.currentDate)) {
                 this.currentDate = moment(this.maxDate);
             }
         },
-        
+
         initTemplate: function () {
-            
+
             var yearPicker = "";
             var y = this.currentDate.year();
             for (var i = y - 3; i < y + 4; i++) {
                 yearPicker += '<div class="year-picker-item" data-year="' + i + '">' + i + '</div>';
             }
             this.midYear = y;
-            var yearHtml = '' + 
+            var yearHtml = '' +
                 '<div class="dtp-picker-year hidden" >' +
                     '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range before" style="margin: 0;"><i class="material-icons">keyboard_arrow_up</i></a></div>' +
                     yearPicker +
                     '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range after" style="margin: 0;"><i class="material-icons">keyboard_arrow_down</i></a></div>' +
                 '</div>';
-            
-            this.template = '' + 
+
+            this.template = '' +
                 '<div class="dtp hidden" id="' + this.name + '">' +
                     '<div class="dtp-content">' +
                         '<div class="dtp-date-view">' +
@@ -210,7 +210,7 @@
                                 '</div>' +
                                 '<div class="dtp-actual-num">13</div>' +
                                 '<div>' +
-                                    '<img class="dtp-btn-calendar-ico" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAYAAAAGAB4TKWmAAAAe0lEQVRIx+1SwQ2AIBDrGceQhdjDuDewR/1IQhBiCILB0Gcf7fVa4DcgqUka1sOQ1F5XAgMLYHvpXiciKk5Akkwkq+KX1q8f3yAsmTVCN2ER6ZJgzTnHyUp5j/FLnit6xFzR9wZhBxaAyq2pkHepBPtlUgsL4Gj9mX44AS9ro3738HcBAAAAAElFTkSuQmCC">' + 
+                                    '<img class="dtp-btn-calendar-ico" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAYAAAAGAB4TKWmAAAAe0lEQVRIx+1SwQ2AIBDrGceQhdjDuDewR/1IQhBiCILB0Gcf7fVa4DcgqUka1sOQ1F5XAgMLYHvpXiciKk5Akkwkq+KX1q8f3yAsmTVCN2ER6ZJgzTnHyUp5j/FLnit6xFzR9wZhBxaAyq2pkHepBPtlUgsL4Gj9mX44AS9ro3738HcBAAAAAElFTkSuQmCC">' +
                                     '<div class="left center p10">' +
                                         '<a href="javascript:void(0);" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +
                                     '</div>' +
@@ -218,7 +218,7 @@
                                     '<div class="right center p10">' +
                                         '<a href="javascript:void(0);" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +
                                     '</div>' +
-                                    '<img class="dtp-btn-clock-ico" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAYAAAAGAB4TKWmAAABVklEQVRIx9WVvUoDQRDH/3shARHE1sI0lqkUHyGFlckF8wC2sTCPYCem8QnSaS1i6UMomC6ptNAnECLIz2YWN0fuSy9FBo6Bnf/H3rC7I617uKwi0JDUkRRL2pe0a6U3SU+S7iTdO+e+SjsDPWBKfkyBXhnhGjAKBCbAOdACNu1r2dokwI2AWhEDLz4HzoAoAxsZZu5N8sTjQLxd4q/bgUmcBqoDMwMNUjAAlym1gdVnQH0ZoG+Al7Re5hjUjAvQ9+thf7uWx86576Lt8WGccUJrweDQ8mNZ8SA812stGOxYfv2Hged6LUV/EDkCWkXBocG75WYG/ljSlqRn4BrYTtSbCa3fAG7sBAyzdgRsABfAJ/ABnAa1oWncLiOe5B3TBH4PePBiacc0JORetBSjhuXsi2agzsqeigB8tbLHLiB5k+qf68AormLgFB2ZXUkHqnJkrk38AMR9KFTxyLc2AAAAAElFTkSuQmCC">' + 
+                                    '<img class="dtp-btn-clock-ico" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAYAAAAGAB4TKWmAAABVklEQVRIx9WVvUoDQRDH/3shARHE1sI0lqkUHyGFlckF8wC2sTCPYCem8QnSaS1i6UMomC6ptNAnECLIz2YWN0fuSy9FBo6Bnf/H3rC7I617uKwi0JDUkRRL2pe0a6U3SU+S7iTdO+e+SjsDPWBKfkyBXhnhGjAKBCbAOdACNu1r2dokwI2AWhEDLz4HzoAoAxsZZu5N8sTjQLxd4q/bgUmcBqoDMwMNUjAAlym1gdVnQH0ZoG+Al7Re5hjUjAvQ9+thf7uWx86576Lt8WGccUJrweDQ8mNZ8SA812stGOxYfv2Hged6LUV/EDkCWkXBocG75WYG/ljSlqRn4BrYTtSbCa3fAG7sBAyzdgRsABfAJ/ABnAa1oWncLiOe5B3TBH4PePBiacc0JORetBSjhuXsi2agzsqeigB8tbLHLiB5k+qf68AormLgFB2ZXUkHqnJkrk38AMR9KFTxyLc2AAAAAElFTkSuQmCC">' +
                                     '<div class="clearfix"></div>' +
                                 '</div>' +
                                 '</div>' +
@@ -262,7 +262,7 @@
                 this.$dtpElement = $(this.dtpElement);
             }
         },
-        
+
         initButtons: function () {
             this._attachEvent(this.$dtpElement.find('.dtp-btn-cancel'), 'click', this._onCancelClick.bind(this));
             this._attachEvent(this.$dtpElement.find('.dtp-btn-calendar-ico'), 'click', function () {
@@ -301,12 +301,12 @@
                 this.$dtpElement.find('.dtp-btn-clear, .dtp-btn-now, .dtp-btn-cancel, .dtp-btn-ok').addClass('btn-sm');
             }
         },
-        
+
         initMeridienButtons: function () {
             this.$dtpElement.find('a.dtp-meridien-am').off('click').on('click', this._onSelectAM.bind(this));
             this.$dtpElement.find('a.dtp-meridien-pm').off('click').on('click', this._onSelectPM.bind(this));
         },
-        
+
         initDate: function (d) {
             this.currentView = 0;
             if (this.params.monthPicker === false) {
@@ -330,7 +330,7 @@
             this._centerBox();
             this.showDate(_date);
         },
-        
+
         initHours: function () {
             this.currentView = 1;
             this.showTime(this.currentDate);
@@ -446,7 +446,7 @@
 
             this._centerBox();
         },
-        
+
         initMinutes: function () {
             this.currentView = 2;
             this.showTime(this.currentDate);
@@ -522,18 +522,18 @@
 
             this._centerBox();
         },
-        
+
         animateHands: function () {
             var H = this.currentDate.hour();
             var M = this.currentDate.minute();
-            
+
             var hh = this.$dtpElement.find('.hour-hand');
             hh[0].setAttribute('transform', "rotate(" + 360 * H / 12 + ")");
-            
+
             var mh = this.$dtpElement.find('.minute-hand');
             mh[0].setAttribute('transform', "rotate(" + 360 * M / 60 + ")");
         },
-        
+
         createSVGClock: function (isHour) {
             var hl = ((this.params.shortTime) ? -120 : -90);
             var svgElement = this.createSVGElement("svg", {
@@ -611,7 +611,7 @@
 
             return svgGElement;
         },
-        
+
         createSVGElement: function (tag, attrs) {
             var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
             for (var k in attrs) {
@@ -619,7 +619,7 @@
             }
             return el;
         },
-        
+
         isAfterMinDate: function (date, checkHour, checkMinute) {
             var _return = true;
 
@@ -652,7 +652,7 @@
 
             return _return;
         },
-        
+
         isBeforeMaxDate: function (date, checkTime, checkMinute) {
             var _return = true;
 
@@ -685,14 +685,14 @@
 
             return _return;
         },
-        
+
         rotateElement: function (el, deg) {
             $(el).css({
                 WebkitTransform: 'rotate(' + deg + 'deg)',
                 '-moz-transform': 'rotate(' + deg + 'deg)'
             });
         },
-        
+
         showDate: function (date) {
             if (date) {
                 this.$dtpElement.find('.dtp-actual-day').html(date.locale(this.params.lang).format('dddd'));
@@ -701,7 +701,7 @@
                 this.$dtpElement.find('.dtp-actual-year').html(date.locale(this.params.lang).format('YYYY'));
             }
         },
-        
+
         showTime: function (date) {
             if (date) {
                 var minutes = date.minute();
@@ -719,7 +719,7 @@
                 }
             }
         },
-        
+
         selectDate: function (date) {
             if (date) {
                 this.currentDate.date(date);
@@ -728,7 +728,7 @@
                 this.$element.trigger('dateSelected', this.currentDate);
             }
         },
-        
+
         generateCalendar: function (date) {
             var _calendar = {};
 
@@ -756,7 +756,7 @@
 
             return _calendar;
         },
-        
+
         constructHTMLCalendar: function (date, calendar) {
             var _template = "";
 
@@ -793,7 +793,7 @@
 
             return _template;
         },
-        
+
         setName: function () {
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -804,11 +804,11 @@
 
             return text;
         },
-        
+
         isPM: function () {
             return this.$dtpElement.find('a.dtp-meridien-pm').hasClass('selected');
         },
-        
+
         setElementValue: function () {
             this.$element.trigger('beforeChange', this.currentDate);
             if (typeof ($.material) !== 'undefined') {
@@ -817,7 +817,7 @@
             this.$element.val(moment(this.currentDate).locale(this.params.lang).format(this.params.format));
             this.$element.trigger('change', this.currentDate);
         },
-        
+
         toggleButtons: function (date) {
             if (date && date.isValid()) {
                 var startOfMonth = moment(date).locale(this.params.lang).startOf('month');
@@ -851,7 +851,7 @@
                 }
             }
         },
-        
+
         toggleTime: function (value, isHours) {
             var result = false;
 
@@ -869,19 +869,19 @@
 
             return result;
         },
-        
+
         _attachEvent: function (el, ev, fn) {
             el.on(ev, null, null, fn);
             this._attachedEvents.push([el, ev, fn]);
         },
-        
+
         _detachEvents: function () {
             for (var i = this._attachedEvents.length - 1; i >= 0; i--) {
                 this._attachedEvents[i][0].off(this._attachedEvents[i][1], this._attachedEvents[i][2]);
                 this._attachedEvents.splice(i, 1);
             }
         },
-        
+
         _fireCalendar: function () {
             this.currentView = 0;
             this.$element.blur();
@@ -900,26 +900,26 @@
                 }
             }
         },
-        
+
         _onBackgroundClick: function (e) {
             e.stopPropagation();
             this.hide();
         },
-        
+
         _onElementClick: function (e) {
             e.stopPropagation();
         },
-        
+
         _onKeydown: function (e) {
             if (e.which === 27) {
                 this.hide();
             }
         },
-        
+
         _onCloseClick: function () {
             this.hide();
         },
-        
+
         _onClearClick: function () {
             this.currentDate = null;
             this.$element.trigger('beforeChange', this.currentDate);
@@ -930,7 +930,7 @@
             this.$element.val('');
             this.$element.trigger('change', this.currentDate);
         },
-        
+
         _onNowClick: function () {
             this.currentDate = moment();
 
@@ -957,7 +957,7 @@
                 this.animateHands();
             }
         },
-        
+
         _onOKClick: function () {
             switch (this.currentView) {
                 case 0:
@@ -977,7 +977,7 @@
                     break;
             }
         },
-        
+
         _onCancelClick: function () {
             if (this.params.time) {
                 switch (this.currentView) {
@@ -999,31 +999,31 @@
                 this.hide();
             }
         },
-        
+
         _onMonthBeforeClick: function () {
             this.currentDate.subtract(1, 'months');
             this.initDate(this.currentDate);
             this._closeYearPicker();
         },
-        
+
         _onMonthAfterClick: function () {
             this.currentDate.add(1, 'months');
             this.initDate(this.currentDate);
             this._closeYearPicker();
         },
-        
+
         _onYearBeforeClick: function () {
             this.currentDate.subtract(1, 'years');
             this.initDate(this.currentDate);
             this._closeYearPicker();
         },
-        
+
         _onYearAfterClick: function () {
             this.currentDate.add(1, 'years');
             this.initDate(this.currentDate);
             this._closeYearPicker();
         },
-        
+
         refreshYearItems: function () {
             var curYear = this.currentDate.year(),
                 midYear = this.midYear;
@@ -1059,7 +1059,7 @@
 
             this.$dtpElement.find(".dtp-select-year-range").data("mid", midYear);
         },
-        
+
         _onActualYearClick: function () {
             if (this.params.year) {
                 if (this.$dtpElement.find('.dtp-picker-year.hidden').length > 0) {
@@ -1073,17 +1073,17 @@
                 }
             }
         },
-        
+
         _onYearRangeBeforeClick: function () {
             this.midYear -= 7;
             this.refreshYearItems();
         },
-        
+
         _onYearRangeAfterClick: function () {
             this.midYear += 7;
             this.refreshYearItems();
         },
-        
+
         _onYearItemClick: function (e) {
             var newYear = $(e.currentTarget).data('year');
             var oldYear = this.currentDate.year();
@@ -1093,23 +1093,23 @@
             this._closeYearPicker();
             this.$element.trigger("yearSelected", this.currentDate);
         },
-        
+
         _closeYearPicker: function () {
             this.$dtpElement.find('.dtp-picker-calendar').removeClass("hidden");
             this.$dtpElement.find('.dtp-picker-year').addClass("hidden");
         },
-        
+
         enableYearPicker: function () {
             this.params.year = true;
             this.$dtpElement.find(".dtp-actual-year").reomveClass("disabled");
         },
-        
+
         disableYearPicker: function () {
             this.params.year = false;
             this.$dtpElement.find(".dtp-actual-year").addClass("disabled");
             this._closeYearPicker();
         },
-        
+
         _onSelectDate: function (e) {
             this.$dtpElement.find('a.dtp-select-day').removeClass('selected');
             $(e.currentTarget).addClass('selected');
@@ -1124,7 +1124,7 @@
             }
 
         },
-        
+
         _onSelectHour: function (e) {
             if (!$(e.target).hasClass('disabled')) {
                 var value = $(e.target).data('hour');
@@ -1155,7 +1155,7 @@
                     setTimeout(this.initMinutes.bind(this), 200);
             }
         },
-        
+
         _onSelectMinute: function (e) {
             if (!$(e.target).hasClass('disabled')) {
                 var value = $(e.target).data('minute');
@@ -1184,7 +1184,7 @@
                     }.bind(this), 200);
             }
         },
-        
+
         _onSelectAM: function (e) {
             $('.dtp-actual-meridien').find('a').removeClass('selected');
             $(e.currentTarget).addClass('selected');
@@ -1195,7 +1195,7 @@
             }
             this.toggleTime((this.currentView === 1));
         },
-        
+
         _onSelectPM: function (e) {
             $('.dtp-actual-meridien').find('a').removeClass('selected');
             $(e.currentTarget).addClass('selected');
@@ -1206,11 +1206,11 @@
             }
             this.toggleTime((this.currentView === 1));
         },
-        
+
         _hideCalendar: function () {
             this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
         },
-        
+
         convertHours: function (h) {
             var _return = h;
 
@@ -1222,27 +1222,27 @@
 
             return _return;
         },
-        
+
         setDate: function (date) {
             this.params.currentDate = date;
             this.initDates();
         },
-        
+
         setMinDate: function (date) {
             this.params.minDate = date;
             this.initDates();
         },
-        
+
         setMaxDate: function (date) {
             this.params.maxDate = date;
             this.initDates();
         },
-        
+
         destroy: function () {
             this._detachEvents();
             this.$dtpElement.remove();
         },
-        
+
         show: function () {
             this.$dtpElement.removeClass('hidden');
             this._attachEvent($(window), 'keydown', this._onKeydown.bind(this));
@@ -1252,19 +1252,19 @@
                 this._hideCalendar();
             }
         },
-        
+
         hide: function () {
             $(window).off('keydown', null, null, this._onKeydown.bind(this));
             this.$dtpElement.addClass('hidden');
             this.$element.trigger('close');
         },
-        
+
         _centerBox: function () {
             var h = (this.$dtpElement.height() - this.$dtpElement.find('.dtp-content').height()) / 2;
             this.$dtpElement.find('.dtp-content').css('marginLeft', -(this.$dtpElement.find('.dtp-content').width() / 2) + 'px');
             this.$dtpElement.find('.dtp-content').css('top', h + 'px');
         },
-        
+
         enableDays: function () {
             var enableDays = this.params.enableDays;
             if (enableDays) {
@@ -1280,9 +1280,9 @@
             }
         }
     };
-    
+
     if (angular && angular.module) {
-        (angular.module('ng.datetimepicker', ['ng'])).directive('ngDatetimepicker', [function () {
+        (angular.module('ngDatetimepicker', ['ng'])).directive('ngDatetimepicker', [function () {
             var container = function ($scope, elem) {
                 var $this = {
                     component: $(elem).find('.datepicker').bootstrapMaterialDatePicker({
