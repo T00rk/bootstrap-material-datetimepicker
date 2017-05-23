@@ -5,8 +5,8 @@
 
     function Plugin(element, options) {
         this.currentView = 0;
-        this.minDate;
-        this.maxDate;
+        this.minDate = undefined;
+        this.maxDate = undefined;
         this._attachedEvents = [];
         this.element = element;
         this.$element = $(element);
@@ -47,9 +47,9 @@
                 if (typeof ($.data(this, pluginDataName)[options]) === 'function') {
                     $.data(this, pluginDataName)[options](p);
                 }
-                if (options === 'destroy') {
-                    delete $.data(this, pluginDataName);
-                }
+                //if (options === 'destroy') {
+                    //delete $.data(this, pluginDataName);
+                //}
             }
         });
         return this;
