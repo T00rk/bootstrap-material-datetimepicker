@@ -1,6 +1,7 @@
 Material DateTimePicker
 ===========
 Compatible with JQuery and AngularJS =)
+
 Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
 Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including layout adjustments and adapting to use within AngularJS.
 
