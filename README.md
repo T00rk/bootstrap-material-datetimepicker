@@ -13,6 +13,9 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
   <a href="http://waffle.io/miamarti/bootstrap-material-datetimepicker"><img alt='Stories in Ready' src='https://badge.waffle.io/miamarti/bootstrap-material-datetimepicker.svg?label=ready&title=Ready' height="21" /></a>
 </p>
 
+<h3>Live Demo</h3>
+https://miamarti.github.io/Material-DateTimePicker/app
+
 <h3>Dependencies</h3>
 Download make the dependencies
 * momentJS
