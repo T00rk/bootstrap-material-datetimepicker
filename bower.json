@@ -35,7 +35,7 @@
         "screenshot.png"
     ],
     "dependencies": {
-        "momentjs": "*",
+        "moment": "*",
         "moment-timezone": "*"
     },
     "authors": [
