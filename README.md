@@ -12,7 +12,7 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
   <img src="https://img.shields.io/badge/version-3.10.1-blue.svg">
   <img src="https://img.shields.io/bower/v/bootstrap.svg">
   <img src="https://img.shields.io/github/license/mashape/apistatus.svg">
-  <a href="http://waffle.io/miamarti/bootstrap-material-datetimepicker"><img alt='Stories in Ready' src='https://badge.waffle.io/miamarti/bootstrap-material-datetimepicker.svg?label=ready&title=Ready' height="21" /></a>
+  <a href="http://waffle.io/miamarti/Material-DateTimePicker"><img alt='Stories in Ready' src='https://badge.waffle.io/miamarti/bootstrap-material-datetimepicker.svg?label=ready&title=Ready' height="21" /></a>
 </p>
 
 <img src="https://miamarti.github.io/Material-DateTimePicker/app/img/ezgif-1-4d306cc5b0.gif">
@@ -31,14 +31,18 @@ This component is compatible with AngularJS 2. *
 
 ## Implementation
 ```
-<ng-datetimepicker ng-model="dataModel"></ng-datetimepicker>
+<ng-datetimepicker ng-model="dataModel" ng-open="noKadete"></ng-datetimepicker>
+
+<!-- Click the icon below -->
+<i class="fa fa-bell" ng-click="noKadete()"></i>
 ```
 
 ## Parameters
 
-| Name         | Type    | Dinamic | Mandatory | Description                                                  |
-| ------------ | ------- | ------- | --------- | ------------------------------------------------------------ |
-| ng-model     | String  | true    | true      | Scope of the attribute that will be the model                |
+| Name         | Type     | Dinamic | Mandatory | Description                                                  |
+| ------------ | -------  | ------- | --------- | ------------------------------------------------------------ |
+| ng-model     | String   | true    | true      | Scope of the attribute that will be the model                |
+| ng-open      | Function | true    | true      | Function pointer that opens the component                    |
 
 ## Bower install de dependency
 ```
