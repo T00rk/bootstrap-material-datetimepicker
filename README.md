@@ -15,6 +15,8 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
   <a href="http://waffle.io/miamarti/bootstrap-material-datetimepicker"><img alt='Stories in Ready' src='https://badge.waffle.io/miamarti/bootstrap-material-datetimepicker.svg?label=ready&title=Ready' height="21" /></a>
 </p>
 
+<img src="https://miamarti.github.io/Material-DateTimePicker/app/img/ezgif-1-4d306cc5b0.gif">
+
 <h3>Live Demo</h3>
 [/Material-DateTimePicker/app](https://miamarti.github.io/Material-DateTimePicker/app)
 
