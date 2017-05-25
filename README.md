@@ -26,6 +26,13 @@ Download make the dependencies:
 * momentJS
 * jQuery
 
+# Bower install de dependency
+```
+$ bower install ng-datetimepicker-material --save
+```
+
+------------------------------------------------------------------------------
+
 # AngularJS
 This component is compatible with AngularJS 1.*
 ## Implementation
@@ -42,16 +49,14 @@ This component is compatible with AngularJS 1.*
 | ------------ | -------  | ------- | --------- | ------------------------------------------------------------ |
 | ng-model     | String   | true    | true      | Scope of the attribute that will be the model                |
 | ng-open      | Function | true    | true      | Function pointer that opens the component                    |
-
-## Bower install de dependency
-```
-$ bower install ng-datetimepicker-material --save
-```
+| ng-mindate   | Date     | true    | true      | Lowest possible date                                         |
 
 ## Module AngularJS include
 ```
 angular.module('example', ["ngDatetimepicker"]);
 ```
+
+------------------------------------------------------------------------------
 
 # JQuery
 This component is compatible with JQuery
@@ -79,7 +84,8 @@ $('input').bootstrapMaterialDatePicker('setDate', moment());
 | **setMaxDate**	| (String\|Date\|Moment)	| Set maximum selectable date	|
 | **destroy**		| NULL						| Destroy the datepicker		|
 
-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
 
 ## Metrics
 
