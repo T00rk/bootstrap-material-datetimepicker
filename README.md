@@ -42,6 +42,7 @@ This component is compatible with AngularJS 1.*
 | ------------ | -------  | ------- | --------- | ------------------------------------------------------------ |
 | ng-model     | String   | true    | true      | Scope of the attribute that will be the model                |
 | ng-open      | Function | true    | true      | Function pointer that opens the component                    |
+| ng-mindate   | Date     | true    | true      | Lowest possible date                                         |
 
 ## Bower install de dependency
 ```
