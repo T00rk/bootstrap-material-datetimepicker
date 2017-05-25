@@ -769,7 +769,7 @@
             _template += '<div class="dtp-picker-month">' + date.locale(this.params.lang).format('MMMM YYYY') + '</div>';
             _template += '<table class="table dtp-picker-days"><thead>';
             for (var i = 0; i < calendar.week.length; i++) {
-                _template += '<th>' + moment(parseInt(calendar.week[i]), "d").locale(this.params.lang).format("dd").substring(0, 1) + '</th>';
+                _template += '<th>' + moment(parseInt(calendar.week[i]), "d").locale(this.params.lang).format("ddd").substring(0, 1) + '</th>';
             }
 
             _template += '</thead>';
