@@ -2,18 +2,20 @@ Material DateTimePicker
 ===========
 Compatible with JQuery and AngularJS =)
 
-Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
+Originaly designed for Bootstrap Material, the V3.* is now completely standalone and responsive.
 Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including layout adjustments and adapting to use within AngularJS.
 
 <p>
   <a href="https://gitter.im/miamarti/bootstrap-material-datetimepicker?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img src="https://badges.gitter.im/Join%20Chat.svg"></a>
   <a href="https://gitlab.com/miamarti/bootstrap-material-datetimepicker" target="_blank"><img src="https://img.shields.io/badge/gitlab-materialDatetimepicker-yellow.svg"></a>
   <img src="https://img.shields.io/badge/materialDatetimepicker-release-green.svg">
-  <img src="https://img.shields.io/badge/version-3.10.1-blue.svg">
+  <img src="https://img.shields.io/badge/version-3.10.3-blue.svg">
   <img src="https://img.shields.io/bower/v/bootstrap.svg">
   <img src="https://img.shields.io/github/license/mashape/apistatus.svg">
-  <a href="http://waffle.io/miamarti/bootstrap-material-datetimepicker"><img alt='Stories in Ready' src='https://badge.waffle.io/miamarti/bootstrap-material-datetimepicker.svg?label=ready&title=Ready' height="21" /></a>
+  <a href="http://waffle.io/miamarti/Material-DateTimePicker"><img alt='Stories in Ready' src='https://badge.waffle.io/miamarti/bootstrap-material-datetimepicker.svg?label=ready&title=Ready' height="21" /></a>
 </p>
+
+<img src="https://miamarti.github.io/Material-DateTimePicker/app/img/ezgif-1-4d306cc5b0.gif">
 
 <h3>Live Demo</h3>
 [/Material-DateTimePicker/app](https://miamarti.github.io/Material-DateTimePicker/app)
@@ -25,18 +27,21 @@ Download make the dependencies:
 * jQuery
 
 # AngularJS
-This component is compatible with AngularJS 2. *
-
+This component is compatible with AngularJS 1.*
 ## Implementation
 ```
-<ng-datetimepicker ng-model="dataModel"></ng-datetimepicker>
+<ng-datetimepicker ng-model="dataModel" ng-open="noKadete"></ng-datetimepicker>
+
+<!-- Click the icon below -->
+<i class="fa fa-bell" ng-click="noKadete()"></i>
 ```
 
 ## Parameters
 
-| Name         | Type    | Dinamic | Mandatory | Description                                                  |
-| ------------ | ------- | ------- | --------- | ------------------------------------------------------------ |
-| ng-model     | String  | true    | true      | Scope of the attribute that will be the model                |
+| Name         | Type     | Dinamic | Mandatory | Description                                                  |
+| ------------ | -------  | ------- | --------- | ------------------------------------------------------------ |
+| ng-model     | String   | true    | true      | Scope of the attribute that will be the model                |
+| ng-open      | Function | true    | true      | Function pointer that opens the component                    |
 
 ## Bower install de dependency
 ```
