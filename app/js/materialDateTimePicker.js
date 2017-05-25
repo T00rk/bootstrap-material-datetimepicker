@@ -383,8 +383,10 @@
                 svgHourText.textContent = ((i === 0) ? ((this.params.shortTime) ? 12 : i) : i);
 
                 if (!this.toggleTime(i, true)) {
-                    svgHourCircle.className += " disabled";
-                    svgHourText.className += " disabled";
+                    try {
+                        svgHourCircle.className += " disabled";
+                        svgHourText.className += " disabled";
+                    } catch (e) {}
                     svgHourText.setAttribute('fill', '#bdbdbd');
                 } else {
                     svgHourCircle.addEventListener('click', this._onSelectHour.bind(this));
@@ -481,7 +483,9 @@
                 });
 
                 if (!this.toggleTime(i, false)) {
-                    svgMinuteCircle.className += " disabled";
+                    try {
+                        svgMinuteCircle.className += " disabled";
+                    } catch (e) {}
                 } else {
                     svgMinuteCircle.addEventListener('click', this._onSelectMinute.bind(this));
                 }
@@ -510,8 +514,10 @@
                     svgMinuteText.textContent = i;
 
                     if (!this.toggleTime(i, false)) {
-                        svgMinuteText.className += " disabled";
-                        svgMinuteText.setAttribute('fill', '#bdbdbd');
+                        try {
+                            svgMinuteText.className += " disabled";
+                        } catch (e) {}
+                            svgMinuteText.setAttribute('fill', '#bdbdbd');
                     } else {
                         svgMinuteText.addEventListener('click', this._onSelectMinute.bind(this));
                     }
@@ -1298,15 +1304,22 @@
                         setTimeout(function() {
                             $(elem).find('.datepicker').trigger('click');
                         }, 100);
+                    },
+                    setMinDate: function (date) {
+                        if (date && $(elem).find('.datepicker').bootstrapMaterialDatePicker) {
+                            $(elem).find('.datepicker').bootstrapMaterialDatePicker('setMinDate', date);
+                        }
                     }
                 };
                 $scope.ngOpen = $this.ngOpen.bind($this);
+                $scope.$watch('ngMindate', $this.setMinDate);
             };
             return {
                 restrict: 'E',
                 scope: {
                     ngModel: '=ngModel',
-                    ngOpen: '=ngOpen'
+                    ngOpen: '=ngOpen',
+                    ngMindate: '=ngMindate'
                 },
                 link: container,
                 template: '<input type="hidden" class="datepicker hide">'
