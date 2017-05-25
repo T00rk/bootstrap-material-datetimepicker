@@ -55,9 +55,9 @@
                 if (typeof ($.data(this, pluginDataName)[options]) === 'function') {
                     $.data(this, pluginDataName)[options](p);
                 }
-                //if (options === 'destroy') {
-                    //delete $.data(this, pluginDataName);
-                //}
+                if (options === 'destroy') {
+                    $(this).removeData(pluginDataName);
+                }
             }
         });
         return this;
