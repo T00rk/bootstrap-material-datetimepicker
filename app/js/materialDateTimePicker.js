@@ -1293,10 +1293,10 @@
                 var $this = {
                     component: $(elem).find('.datepicker').bootstrapMaterialDatePicker({
                         format: 'dddd DD MMMM YYYY - HH:mm',
-                        cancelText: $scope.ngCancelLabel != null ?  $scope.ngCancelLabel: 'Cancel',
-                        clearText:  $scope.ngCleanLabel != null ?  $scope.ngCleanLabel: 'Clean',
-                        okText : $scope.ngOkLabel != null ?  $scope.ngOkLabel: 'OK',
-                        lang : $scope.ngLang != null ? $scope.ngLang : 'en'                         
+                        cancelText: $scope.ngCancelLabel ?  $scope.ngCancelLabel: 'Cancel',
+                        clearText:  $scope.ngCleanLabel ?  $scope.ngCleanLabel: 'Clean',
+                        okText : $scope.ngOkLabel ?  $scope.ngOkLabel: 'OK',
+                        lang : $scope.ngLang ? $scope.ngLang : 'en'                         
                     }).on('change', function(e, date) {
                         $scope.$apply(function () {
                             $scope.ngModel = date && date.toDate ? date.toDate() : undefined;
