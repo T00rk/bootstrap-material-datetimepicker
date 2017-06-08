@@ -1,7 +1,7 @@
 {
-  "name": "ng-datetimepicker",
+  "name": "materialDateTimePicker",
   "description": "Material DateTimePicker",
-  "version": "3.11.6",
+  "version": "3.11.7",
   "keywords": [
     "css",
     "js",
@@ -11,7 +11,7 @@
     "web"
   ],
   "homepage": "https://miamarti.github.io/Material-DateTimePicker/",
-  "main": "dist/js/ng-datetimepicker.js",
+  "main": "dist/js/materialDateTimePicker.js",
   "ignore": [
     "/.*",
     "_config.yml",
