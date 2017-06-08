@@ -9,7 +9,7 @@ Project based on "T00rk/bootstrap-material-datetimepicker" initiative, including
   <a href="https://gitter.im/miamarti/bootstrap-material-datetimepicker?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img src="https://badges.gitter.im/Join%20Chat.svg"></a>
   <a href="https://gitlab.com/miamarti/bootstrap-material-datetimepicker" target="_blank"><img src="https://img.shields.io/badge/gitlab-materialDatetimepicker-yellow.svg"></a>
   <img src="https://img.shields.io/badge/materialDatetimepicker-release-green.svg">
-  <img src="https://img.shields.io/badge/version-3.11.6-blue.svg">
+  <img src="https://img.shields.io/badge/version-3.11.7-blue.svg">
   <img src="https://img.shields.io/bower/v/bootstrap.svg">
   <img src="https://img.shields.io/github/license/mashape/apistatus.svg">
   <a href="http://waffle.io/miamarti/Material-DateTimePicker"><img alt='Stories in Ready' src='https://badge.waffle.io/miamarti/bootstrap-material-datetimepicker.svg?label=ready&title=Ready' height="21" /></a>
