@@ -26,6 +26,12 @@ Download make the dependencies:
 * momentJS
 * jQuery
 
+# NPM install
+```
+$ npm i material-datetimepicker --save
+```
+
+
 # Bower install de dependency
 ```
 $ bower install ng-datetimepicker-material --save
