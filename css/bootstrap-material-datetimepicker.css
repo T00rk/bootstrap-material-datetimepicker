@@ -80,3 +80,10 @@
     text-align: center;
     width: 100%;
 }
+
+.dtp .dtp-select-day.dtp-today{
+    color: #689F38;
+}
+.dtp .dtp-select-day.selected.dtp-today{
+    color: #fff;
+}

@@ -736,27 +736,34 @@
 
                  _template += '</thead>';
                  _template += '<tbody><tr>';
-
+                 var foundToday = false;
                  for (var i = 0; i < calendar.days.length; i++)
                  {
                     if (i % 7 == 0)
                        _template += '</tr><tr>';
                     _template += '<td data-date="' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '">';
                     if (calendar.days[i] != 0)
-                    {
+                    {   
+                        var todayClass = "";
+                        if(!foundToday && moment(calendar.days[i]).locale(this.params.lang).format("YYYYMMDD") === moment().format("YYYYMMDD")){
+                            todayClass = " dtp-today";
+                            foundToday = true;
+                        } else {
+                             todayClass = "";
+                        }
                         if (this.isBeforeMaxDate(moment(calendar.days[i]), false, false) === false
                             || this.isAfterMinDate(moment(calendar.days[i]), false, false) === false
                             || this.params.disabledDays.indexOf(calendar.days[i].isoWeekday()) !== -1)
                         {
-                            _template += '<span class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</span>';
+                            _template += '<span class="dtp-select-day' + todayClass + '"' + '>' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</span>';
                         } else
                         {
                             if (moment(calendar.days[i]).locale(this.params.lang).format("DD") === moment(this.currentDate).locale(this.params.lang).format("DD"))
                             {
-                                _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                                _template += '<a href="javascript:void(0);" class="dtp-select-day selected' + todayClass + '"' + '>' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
                             } else
                             {
-                                _template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                                _template += '<a href="javascript:void(0);" class="dtp-select-day' + todayClass + '"' + '>' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
                             }
                         }
 
