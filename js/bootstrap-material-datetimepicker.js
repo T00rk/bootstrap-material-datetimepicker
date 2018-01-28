@@ -1136,7 +1136,13 @@
                     var th = parent.find('.dtp-select-hour-text');
                     for (var i = 0; i < th.length; i++)
                     {
-                       $(th[i]).attr('fill', '#000');
+                       if (!this.toggleTime(i, true)) 
+                       {
+                         $(th[i]).attr('fill', '#bdbdbd');
+                       } else
+                       {
+                         $(th[i]).attr('fill', '#000');
+                       }
                     }
 
                     $(parent.find('#h-' + value)).attr('fill', '#8BC34A');
@@ -1172,7 +1178,13 @@
                     var tm = parent.find('.dtp-select-minute-text');
                     for (var i = 0; i < tm.length; i++)
                     {
-                       $(tm[i]).attr('fill', '#000');
+                       if (!this.toggleTime(i*5, false))
+                       {
+                         $(tm[i]).attr('fill', '#bdbdbd');
+                       } else
+                       {
+                         $(tm[i]).attr('fill', '#000');
+                       }
                     }
 
                     $(parent.find('#m-' + value)).attr('fill', '#8BC34A');
