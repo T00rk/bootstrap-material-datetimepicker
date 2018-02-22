@@ -82,7 +82,7 @@
               },
               initDates: function ()
               {
-                 if (this.$element.val().length > 0)
+                 if (this.$element.val().length > 0 && (typeof (this.params.currentDate) === 'undefined' || this.params.currentDate === null))
                  {
                     if (typeof (this.params.format) !== 'undefined' && this.params.format !== null)
                     {
