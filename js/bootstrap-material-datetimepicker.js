@@ -18,7 +18,7 @@
       this.$element = $(element);
 
 
-      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, disabledDays: [], shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, triggerEvent: 'focus', monthPicker: false, year:true};
+      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, disabledDays: [], shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, triggerEvent: 'focus', monthPicker: false, year:true, container: 'body'};
       this.params = $.fn.extend(this.params, options);
 
       this.name = "dtp_" + this.setName();
@@ -277,7 +277,7 @@
 
                  if ($('body').find("#" + this.name).length <= 0)
                  {
-                    $('body').append(this.template);
+                    $(this.params.container).append(this.template);
 
                     if (this)
                        this.dtpElement = $('body').find("#" + this.name);
