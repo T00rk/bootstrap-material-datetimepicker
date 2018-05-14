@@ -2,7 +2,7 @@
 Material DateTimePicker
 
 Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
-In the css and js folder, you'll find a different version of the files for Bootstrap 4.1.
+<br>In the css and js folder, you'll find a different version of the files for Bootstrap 4.1.
 
 ### Updates
 
