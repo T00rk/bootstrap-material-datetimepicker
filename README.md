@@ -1,8 +1,9 @@
 # bootstrap-material-datetimepicker
 Material DateTimePicker
 
-Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
-<br>In the css and js folder, you'll find a different version of the files for Bootstrap 4.1.
+<p>Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.</p>
+<p>In the css and js folder, you'll find a different version of the files for Bootstrap 4.1.<br>
+Regular version is built for Bootstrap 3.</p>
 
 ### Updates
 
