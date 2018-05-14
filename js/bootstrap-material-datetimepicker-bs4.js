@@ -273,10 +273,10 @@
                          '</div>' +
                          '</div>' +
                          '<div class="dtp-buttons">' +
-                         '<button class="dtp-btn-now btn btn-sm btn-outline-secondary d-none">' + this.params.nowText + '</button>' +
-                         '<button class="dtp-btn-clear btn btn-sm btn-outline-secondary d-none">' + this.params.clearText + '</button>' +
-                         '<button class="dtp-btn-cancel btn btn-sm btn-outline-secondary">' + this.params.cancelText + '</button>' +
-                         '<button class="dtp-btn-ok btn btn-sm btn-outline-secondary">' + this.params.okText + '</button>' +
+                         '<button class="dtp-btn-now btn btn-sm btn-outline-primary d-none">' + this.params.nowText + '</button>' +
+                         '<button class="dtp-btn-clear btn btn-sm btn-outline-primary d-none">' + this.params.clearText + '</button>' +
+                         '<button class="dtp-btn-cancel btn btn-sm btn-outline-primary">' + this.params.cancelText + '</button>' +
+                         '<button class="dtp-btn-ok btn btn-sm btn-outline-primary">' + this.params.okText + '</button>' +
                          '<div class="clearfix"></div>' +
                          '</div>' +
                          '</div>' +
