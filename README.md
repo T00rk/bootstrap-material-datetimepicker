@@ -7,6 +7,7 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2018-05-14		| djibe				| Bootstrap 4 compatibility, universal theming with CSS variables
 | 2016-04-08		| donovansolms		| Disable specific days (#60 and #97)				 	 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
 | 2016-04-08		| FoxyCorndog		| Fix PM overwrite bug	 					 	 		 |
