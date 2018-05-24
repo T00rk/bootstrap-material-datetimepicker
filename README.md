@@ -9,6 +9,7 @@ Regular version is built for Bootstrap 3.</p>
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2018-05-24		| djibe				| Bug fixes for Bootstrap 4
 | 2018-05-14		| djibe				| Bootstrap 4 compatibility, universal theming with CSS variables
 | 2016-04-08		| donovansolms		| Disable specific days (#60 and #97)				 	 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
@@ -49,7 +50,9 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 
 ### Live Example
 
-[Live example](http://t00rk.github.io/bootstrap-material-datetimepicker/)
+Bootstrap 3 : [Live example](http://t00rk.github.io/bootstrap-material-datetimepicker/)
+
+Bootstrap 4 : [Live example](https://jsfiddle.net/djibe89/t5sqqw8L/)
 
 ### Usage
 
@@ -81,6 +84,8 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **nowText**		| String						| Text for the Now button (default: Now)		|
 | **triggerEvent**		| String						| Event to fire the calendar (default: focus)		|
 | **monthPicker**	| Boolean						| true => Act as monthpicker (hide calendar) (default: false) |
+| **weekStart**	| Integer (0 -> 6)						| 1 => Set monday as first day of week (default: 0, sunday) |
+| **lang**	| String						| 'fr' => Set language of calendar to french (default: 'en', english. Any available language included in Moment.js) |
 
 
 
