@@ -2,14 +2,14 @@
 Material DateTimePicker
 
 <p>Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.</p>
-<p>In the css and js folder, you'll find a different version of the files for Bootstrap 4.1.<br>
+<p>In the css and js folder, you'll find a different version of the files for Bootstrap 4 -ending with -bs4) and for Bootstrap 4 with Daemonite material UI (recommended, ending with -bs4daemonite).<br>
 Regular version is built for Bootstrap 3.</p>
 
 ### Updates
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
-| 2018-05-24		| djibe				| Bug fixes for Bootstrap 4
+| 2018-05-25		| djibe				| Bug fixes for Bootstrap 4
 | 2018-05-14		| djibe				| Bootstrap 4 compatibility, universal theming with CSS variables
 | 2016-04-08		| donovansolms		| Disable specific days (#60 and #97)				 	 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
@@ -52,7 +52,9 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 
 Bootstrap 3 : [Live example](http://t00rk.github.io/bootstrap-material-datetimepicker/)
 
-Bootstrap 4 : [Live example](https://jsfiddle.net/djibe89/t5sqqw8L/)
+Bootstrap 4 : [Live example]()
+
+Bootstrap 4 with Daemonite material UI : [Live example](https://jsfiddle.net/djibe89/t5sqqw8L/)
 
 ### Usage
 
