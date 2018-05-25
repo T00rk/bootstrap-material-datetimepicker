@@ -1,7 +1,7 @@
 /*** 
     Bootstrap Material Datetimepicker https://github.com/T00rk/bootstrap-material-datetimepicker
     modified by jnoelEFL : https://github.com/jnoelEFL/bootstrap-material-datetimepicker
-    and by djibe for Bootstrap 4.1 integration.
+    and by djibe for Bootstrap 4.1 + Daemonite material UI integration
 	Using CSS variables for ready-to-use integration in your project
 ***/
 
@@ -386,7 +386,7 @@
                     var x = -(162 * (Math.sin(-Math.PI * 2 * (i / 12))));
                     var y = -(162 * (Math.cos(-Math.PI * 2 * (i / 12))));
 					
-					var fill = ((this.currentDate.format(hFormat) == i) ? "var(--primary)" : 'transparent');
+					var fill = ((this.currentDate.format(hFormat) == i) ? "var(--primary-light)" : 'transparent');
                     var color = ((this.currentDate.format(hFormat) == i) ? "#fff" : '#000');
 
                     var svgHourCircle = this.createSVGElement("circle", {'id': 'h-' + i, 'class': 'dtp-select-hour', 'style': 'cursor:pointer', r: '30', cx: x, cy: y, fill: fill, 'data-hour': i});
@@ -416,7 +416,7 @@
                        var x = -(110 * (Math.sin(-Math.PI * 2 * (i / 12))));
                        var y = -(110 * (Math.cos(-Math.PI * 2 * (i / 12))));
 
-                       var fill = ((this.currentDate.format(hFormat) == (i + 12)) ? "var(--primary)" : 'transparent');
+                       var fill = ((this.currentDate.format(hFormat) == (i + 12)) ? "var(--primary-light)" : 'transparent');
                        var color = ((this.currentDate.format(hFormat) == (i + 12)) ? "#fff" : '#000');
 
                        var svgHourCircle = this.createSVGElement("circle", {'id': 'h-' + (i + 12), 'class': 'dtp-select-hour', 'style': 'cursor:pointer', r: '30', cx: x, cy: y, fill: fill, 'data-hour': (i + 12)});
@@ -475,7 +475,7 @@
                     var x = -(s * (Math.sin(-Math.PI * 2 * (i / 60))));
                     var y = -(s * (Math.cos(-Math.PI * 2 * (i / 60))));
 
-                    var color = ((this.currentDate.format("m") == i) ? "var(--primary)" : 'transparent');
+                    var color = ((this.currentDate.format("m") == i) ? "var(--primary-light)" : 'transparent');
 
                     var svgMinuteCircle = this.createSVGElement("circle", {'id': 'm-' + i, 'class': 'dtp-select-minute', 'style': 'cursor:pointer', r: r, cx: x, cy: y, fill: color, 'data-minute': i});
 
@@ -542,12 +542,12 @@
                  if (isHour)
                  {
                     var svgMinuteHand = this.createSVGElement("line", {class: 'minute-hand', x1: 0, y1: 0, x2: 0, y2: -150, stroke: '#bdbdbd', 'stroke-width': 2});
-					var svgHourHand = this.createSVGElement("line", {class: 'hour-hand', x1: 0, y1: 0, x2: 0, y2: hl, stroke: 'var(--primary)', 'stroke-width': 8});
+					var svgHourHand = this.createSVGElement("line", {class: 'hour-hand', x1: 0, y1: 0, x2: 0, y2: hl, stroke: 'var(--primary-light)', 'stroke-width': 8});
 
                     svgGElement.appendChild(svgMinuteHand);
                     svgGElement.appendChild(svgHourHand);
                  } else  {
-					var svgMinuteHand = this.createSVGElement("line", {class: 'minute-hand', x1: 0, y1: 0, x2: 0, y2: -150, stroke: 'var(--primary)', 'stroke-width': 2});
+					var svgMinuteHand = this.createSVGElement("line", {class: 'minute-hand', x1: 0, y1: 0, x2: 0, y2: -150, stroke: 'var(--primary-light)', 'stroke-width': 2});
                     var svgHourHand = this.createSVGElement("line", {class: 'hour-hand', x1: 0, y1: 0, x2: 0, y2: hl, stroke: '#bdbdbd', 'stroke-width': 8});
 
                     svgGElement.appendChild(svgHourHand);
@@ -1145,7 +1145,7 @@
                        $(th[i]).attr('fill', '#000');
                     }
 
-                    $(parent.find('#h-' + value)).attr('fill', 'var(--primary)');
+                    $(parent.find('#h-' + value)).attr('fill', 'var(--primary-light)');
                     $(parent.find('#th-' + value)).attr('fill', '#fff');
 
                     this.currentDate.hour(parseInt(value));
@@ -1181,7 +1181,7 @@
                        $(tm[i]).attr('fill', '#000');
                     }
 
-                    $(parent.find('#m-' + value)).attr('fill', 'var(--primary)');
+                    $(parent.find('#m-' + value)).attr('fill', 'var(--primary-light)');
                     $(parent.find('#tm-' + value)).attr('fill', '#fff');
 
                     this.currentDate.minute(parseInt(value));
