@@ -1,7 +1,7 @@
 /*!
  * Bootstrap Material DateTimePicker : https://github.com/T00rk/bootstrap-material-datetimepicker
- * Enhenced by djibe for Bootstrap 4 support
- * + basic universal theming using CSS variables. CSS fits in your project without extra work.
+ * Enhenced by djibe for Bootstrap 4 + Daemonite material UI full support
+ * + full universal theming using CSS variables. CSS fits in your project without extra work.
  * Licensed under the MIT license - http://opensource.org/licenses/MIT
  */
 
@@ -30,7 +30,7 @@
 }
 
 .dtp .dtp-date-view .dtp-header {
-    background: var(--primary);
+    background: var(--primary-dark);
     color: #fff;
     text-align: center;
     padding: 0.3em;
@@ -65,6 +65,7 @@
 
 .dtp div.dtp-actual-year {
     font-size: 1.5em;
+    color: var(--primary-light);
 	transition: color .3s;
 }
 
@@ -185,7 +186,7 @@
 }
 
 .dtp .dtp-actual-meridien a.selected {
-    background: var(--primary);
+    background: var(--primary-dark);
     color: #fff;
 }
 
@@ -200,10 +201,6 @@
 .dtp .dtp-buttons {
     padding: 0 1em 1em 1em;
     text-align: right;
-}
-
-.dtp .dtp-buttons button {
-	margin-left: .3rem;
 }
 
 .dtp.hidden,
@@ -259,13 +256,22 @@
 }
 
 .year-picker-item.active {
-    color: var(--primary);
+    color: var(--primary-dark);
 	font-weight: bold;
 }
 
-.dtp-select-year-range, .dtp-select-year-range .btn-outline-dark, .dtp-select-year-range:active, .dtp-select-year-range:focus {
-	border: none!important;
-	box-shadow: none!important;
+.dtp-year-picker::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+.dtp-year-picker::-webkit-scrollbar {
+    width: 6px;
+    background-color: #fff;
+}
+
+.dtp-year-picker::-webkit-scrollbar-thumb {
+    background-color: var(--primary-dark);
+    border-radius: 3px;
 }
 
 .dtp-select-day {
