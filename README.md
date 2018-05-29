@@ -1,12 +1,16 @@
 # bootstrap-material-datetimepicker
 Material DateTimePicker
 
-Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
+<p>Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.</p>
+<p>In the css and js folder, you'll find a different version of the files for Bootstrap 4 -ending with -bs4) and for Bootstrap 4 with Daemonite material UI (recommended, ending with -bs4daemonite).<br>
+Regular version is built for Bootstrap 3.</p>
 
 ### Updates
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2018-05-25		| djibe				| Bug fixes for Bootstrap 4
+| 2018-05-14		| djibe				| Bootstrap 4 compatibility, universal theming with CSS variables
 | 2016-04-08		| donovansolms		| Disable specific days (#60 and #97)				 	 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
 | 2016-04-08		| FoxyCorndog		| Fix PM overwrite bug	 					 	 		 |
@@ -46,7 +50,11 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 
 ### Live Example
 
-[Live example](http://t00rk.github.io/bootstrap-material-datetimepicker/)
+Bootstrap 3 : [Live example](http://t00rk.github.io/bootstrap-material-datetimepicker/)
+
+Bootstrap 4 : [Live example](https://jsfiddle.net/djibe89/qfkjg3qh/)
+
+Bootstrap 4 with Daemonite material UI : [Live example](https://jsfiddle.net/djibe89/t5sqqw8L/)
 
 ### Usage
 
@@ -78,6 +86,8 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **nowText**		| String						| Text for the Now button (default: Now)		|
 | **triggerEvent**		| String						| Event to fire the calendar (default: focus)		|
 | **monthPicker**	| Boolean						| true => Act as monthpicker (hide calendar) (default: false) |
+| **weekStart**	| Integer (0 -> 6)						| 1 => Set monday as first day of week (default: 0, sunday) |
+| **lang**	| String						| 'fr' => Set language of calendar to french (default: 'en', english. Any available language included in Moment.js) |
 
 
 
