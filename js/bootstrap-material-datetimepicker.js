@@ -3,8 +3,6 @@
    var pluginName = "bootstrapMaterialDatePicker";
    var pluginDataName = "plugin_" + pluginName;
 
-   moment.locale('en');
-
    function Plugin(element, options)
    {
       this.currentView = 0;
@@ -24,7 +22,9 @@
       this.name = "dtp_" + this.setName();
       this.$element.attr("data-dtp", this.name);
 
-      moment.locale(this.params.lang);
+      if (this.params.lang != null) {
+        moment.locale(this.params.lang);
+      }
 
       this.init();
    }
@@ -326,10 +326,6 @@
               {
                  this.currentView = 0;
 
-                 if (this.params.monthPicker === false)
-                 {
-                    this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
-                 }
                  this.$dtpElement.find('.dtp-picker-datetime').addClass('hidden');
                  this.$dtpElement.find('.dtp-picker-year').addClass('hidden');
 
@@ -1094,12 +1090,12 @@
                    this.$element.trigger("yearSelected",this.currentDate);
                },
                _closeYearPicker:function(){
-                   this.$dtpElement.find('.dtp-picker-calendar').removeClass("hidden");
                    this.$dtpElement.find('.dtp-picker-year').addClass("hidden");
+                   this._showHideCalendar();
                },
                enableYearPicker:function () {
                     this.params.year=true;
-                    this.$dtpElement.find(".dtp-actual-year").reomveClass("disabled");
+                    this.$dtpElement.find(".dtp-actual-year").removeClass("disabled");
                },
                disableYearPicker:function () {
                    this.params.year=false;
@@ -1215,8 +1211,12 @@
                  }
                  this.toggleTime((this.currentView === 1));
               },
-              _hideCalendar: function() {
-                 this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
+              _showHideCalendar() {
+                if (this.params.monthPicker === true) {
+                    this.$dtpElement.find('.dtp-picker-calendar, .dtp-header, .dtp-actual-num').addClass('hidden');
+                } else {
+                    this.$dtpElement.find('.dtp-picker-calendar, .dtp-header, .dtp-actual-num').removeClass('hidden');
+                }
               },
               convertHours: function (h)
               {
@@ -1258,10 +1258,7 @@
                  this._attachEvent($(window), 'keydown', this._onKeydown.bind(this));
                  this._centerBox();
                  this.$element.trigger('open');
-                 if (this.params.monthPicker === true)
-                 {
-                    this._hideCalendar();
-                 }
+                 this._showHideCalendar();
               },
               hide: function ()
               {
