@@ -819,7 +819,7 @@
                     var startOfYear = moment(date).locale(this.params.lang).startOf('year');
                     var endOfYear = moment(date).locale(this.params.lang).endOf('year');
 
-                    if (!this.isAfterMinDate(startOfYear, false, false))
+                    if (!this.isAfterMinDate(startOfYear, false, false) || !this.params.year)
                     {
                        this.$dtpElement.find('a.dtp-select-year-before').addClass('invisible');
                     } else
@@ -827,7 +827,7 @@
                        this.$dtpElement.find('a.dtp-select-year-before').removeClass('invisible');
                     }
 
-                    if (!this.isBeforeMaxDate(endOfYear, false, false))
+                    if (!this.isBeforeMaxDate(endOfYear, false, false) || !this.params.year)
                     {
                        this.$dtpElement.find('a.dtp-select-year-after').addClass('invisible');
                     } else
