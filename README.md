@@ -9,6 +9,7 @@ Regular version is built for Bootstrap 3.</p>
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2018-07-06		| djibe				| Fixed year when disabled, fixed color when hovering a day, added animation when picker is opening
 | 2018-05-25		| djibe				| Bug fixes for Bootstrap 4
 | 2018-05-14		| djibe				| Bootstrap 4 compatibility, universal theming with CSS variables
 | 2016-04-08		| donovansolms		| Disable specific days (#60 and #97)				 	 |
