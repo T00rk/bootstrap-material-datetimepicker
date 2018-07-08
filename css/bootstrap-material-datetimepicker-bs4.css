@@ -1,9 +1,14 @@
 /*!
  * Bootstrap Material DateTimePicker : https://github.com/T00rk/bootstrap-material-datetimepicker
- * Enhenced by djibe for Bootstrap 4 support
- * + basic universal theming using CSS variables. CSS fits in your project without extra work.
+ * Enhenced by djibe for Bootstrap 4 + Daemonite material UI full support
+ * + full universal theming using CSS variables.
+ * Version of 2018/07/06
  * Licensed under the MIT license - http://opensource.org/licenses/MIT
  */
+:root {
+  /* Set the color in rgb when hovering a day */
+  --primary-color: 83, 186, 249;
+}
 
 .dtp {
     position: fixed;
@@ -20,6 +25,30 @@
     user-select: none;
 }
 
+@-webkit-keyframes pickerFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes pickerFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
 .dtp>.dtp-content {
     background: #fff;
     max-width: 300px;
@@ -27,6 +56,16 @@
             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     position: relative;
     left: 50%;
+	max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  -webkit-animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transform-origin: center bottom 0px;
+  transform-origin: center bottom 0px;
 }
 
 .dtp .dtp-date-view .dtp-header {
@@ -65,12 +104,18 @@
 
 .dtp div.dtp-actual-year {
     font-size: 1.5em;
+	-webkit-transition: color .3s;
 	transition: color .3s;
 }
 
 .dtp div.dtp-actual-year:hover {
-	color: var(--light);
+	color: #fff;
 	cursor: pointer;
+}
+
+.dtp div.dtp-actual-year.disabled {
+  color: var(--light);
+  cursor: initial;
 }
 
 .dtp div.dtp-picker {
@@ -250,6 +295,7 @@
     text-align: center;
     padding-top: 5px;
     font-size: x-large;
+	-webkit-transition: all .3s;
 	transition: all .3s;
 }
 
@@ -265,18 +311,17 @@
 
 .dtp-select-year-range, .dtp-select-year-range .btn-outline-dark, .dtp-select-year-range:active, .dtp-select-year-range:focus {
 	border: none!important;
-	box-shadow: none!important;
+	-webkit-box-shadow: none!important;
+	        box-shadow: none!important;
 }
 
 .dtp-select-day {
     -webkit-transition: background-color 100ms linear;
-    -o-transition: background-color 100ms linear;
     transition: background-color 100ms linear;
 }
 
 .dtp-select-day:hover {
-    background-color: rgba(197, 202, 233, .6);
-    -webkit-transition: background-color 250ms linear;
-    -o-transition: background-color 250ms linear;
-    transition: background-color 250ms linear;
+  background-color: rgba(var(--primary-color), 0.6);
+  -webkit-transition: background-color 100ms linear;
+  transition: background-color 100ms linear;
 }
