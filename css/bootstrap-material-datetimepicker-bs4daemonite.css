@@ -2,7 +2,7 @@
  * Bootstrap Material DateTimePicker : https://github.com/T00rk/bootstrap-material-datetimepicker
  * Enhenced by djibe for Bootstrap 4 + Daemonite material UI full support
  * + full universal theming using CSS variables.
- * Version of 2018/07/06
+ * Version of 2018/07/19
  * Licensed under the MIT license - http://opensource.org/licenses/MIT
  */
 :root {
@@ -11,7 +11,6 @@
 }
 
 .dtp {
-  border-radius: 2px;
   position: fixed;
   top: 0;
   left: 0;
@@ -24,6 +23,11 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.dtp .btn {
+  border-radius: 4px;
+  min-width: 0;
 }
 
 @-webkit-keyframes pickerFadeIn {
@@ -50,6 +54,7 @@
 
 .dtp > .dtp-content {
   background: #fff;
+  border-radius: 4px;
   max-width: 300px;
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14),
     0 4px 5px 0 rgba(0, 0, 0, 0.12), 0 1px 10px 0 rgba(0, 0, 0, 0.2);
@@ -57,8 +62,6 @@
     0 1px 10px 0 rgba(0, 0, 0, 0.2);
   position: relative;
   left: 50%;
-
-  /* added 3/7/18 */
   max-height: calc(100vh - 32px);
   overflow-y: auto;
   -webkit-animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -72,7 +75,7 @@
 }
 
 .dtp .dtp-date-view .dtp-header {
-  background: var(--primary-dark);
+  background: var(--primary);
   color: #fff;
   text-align: center;
   padding: 0.3em;

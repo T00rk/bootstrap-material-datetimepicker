@@ -2,7 +2,7 @@
  * Bootstrap Material DateTimePicker : https://github.com/T00rk/bootstrap-material-datetimepicker
  * Enhenced by djibe for Bootstrap 4 + Daemonite material UI full support
  * + full universal theming using CSS variables.
- * Version of 2018/07/06
+ * Version of 2018/07/19
  * Licensed under the MIT license - http://opensource.org/licenses/MIT
  */
 :root {
@@ -11,18 +11,30 @@
 }
 
 .dtp {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, .4);
-    z-index: 2000;
-    font-size: 15px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dtp .btn {
+  border-radius: 4px;
+  text-transform: uppercase;
+  min-width: 0;
+}
+
+.dtp .table thead th,
+.dtp .table td,
+.table th {
+  border: none;
 }
 
 @-webkit-keyframes pickerFadeIn {
@@ -40,23 +52,25 @@
   from {
     opacity: 0;
     -webkit-transform: scale(0.8);
-            transform: scale(0.8);
+    transform: scale(0.8);
   }
   to {
     opacity: 1;
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 
-.dtp>.dtp-content {
-    background: #fff;
-    max-width: 300px;
-    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
-    position: relative;
-    left: 50%;
-	max-height: calc(100vh - 32px);
+.dtp > .dtp-content {
+  background: #fff;
+  border-radius: 4px;
+  max-width: 300px;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  position: relative;
+  left: 50%;
+  max-height: calc(100vh - 32px);
   overflow-y: auto;
   -webkit-animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -69,48 +83,48 @@
 }
 
 .dtp .dtp-date-view .dtp-header {
-    background: var(--primary);
-    color: #fff;
-    text-align: center;
-    padding: 0.3em;
+  background: var(--primary);
+  color: #fff;
+  text-align: center;
+  padding: 0.3em;
 }
 
 .dtp div.dtp-date,
 .dtp div.dtp-time {
-    background: var(--primary);
-    text-align: center;
-    color: #fff;
-    padding: 10px;
+  background: var(--primary);
+  text-align: center;
+  color: #fff;
+  padding: 10px;
 }
 
-.dtp div.dtp-date>div {
-    padding: 0;
-    margin: 0;
+.dtp div.dtp-date > div {
+  padding: 0;
+  margin: 0;
 }
 
 .dtp div.dtp-actual-month {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 .dtp div.dtp-actual-num {
-    font-size: 3em;
-    line-height: .9;
+  font-size: 3em;
+  line-height: 0.9;
 }
 
 .dtp div.dtp-actual-maxtime {
-    font-size: 3em;
-    line-height: .9;
+  font-size: 3em;
+  line-height: 0.9;
 }
 
 .dtp div.dtp-actual-year {
-    font-size: 1.5em;
-	-webkit-transition: color .3s;
-	transition: color .3s;
+  font-size: 1.5em;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 .dtp div.dtp-actual-year:hover {
-	color: #fff;
-	cursor: pointer;
+  color: #fff;
+  cursor: pointer;
 }
 
 .dtp div.dtp-actual-year.disabled {
@@ -119,205 +133,208 @@
 }
 
 .dtp div.dtp-picker {
-    padding: 1em;
-    text-align: center;
+  padding: 1em;
+  text-align: center;
 }
 
 .dtp div.dtp-picker-month,
 .dtp div.dtp-actual-time {
-    font-weight: 500;
-    text-align: center;
+  font-weight: 500;
+  text-align: center;
 }
 
 .dtp div.dtp-picker-month {
-    padding-bottom: 20px!important;
-    text-transform: uppercase!important;
+  padding-bottom: 20px !important;
+  text-transform: uppercase !important;
 }
 
 .dtp .dtp-close {
-    position: absolute;
-    top: .3rem;
-    right: 1rem;
+  position: absolute;
+  top: 0.3rem;
+  right: 1rem;
 }
 
-.dtp .dtp-close>a {
-    color: var(--light);
+.dtp .dtp-close > a {
+  color: var(--light);
 }
 
-.dtp .dtp-close>a>i {
-    font-size: 1em;
+.dtp .dtp-close > a > i {
+  font-size: 1em;
 }
 
 .dtp table.dtp-picker-days {
-    margin: 0;
-    min-height: 251px;
+  margin: 0;
+  min-height: 251px;
 }
 
 .dtp table.dtp-picker-days,
 .dtp table.dtp-picker-days tr,
-.dtp table.dtp-picker-days tr>td {
-    border: none;
+.dtp table.dtp-picker-days tr > td {
+  border: none;
 }
 
-.dtp table.dtp-picker-days tr>td {
-    font-weight: 700;
-    font-size: .8em;
-    text-align: center;
-    padding: .5em .3em;
+.dtp table.dtp-picker-days tr > td {
+  font-weight: 700;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 0.5em 0.3em;
 }
 
-.dtp table.dtp-picker-days tr>td>span.dtp-select-day {
-    color: #BDBDBD!important;
-    padding: .4em .5em .5em .6em;
+.dtp table.dtp-picker-days tr > td > span.dtp-select-day {
+  color: #bdbdbd !important;
+  padding: 0.4em 0.5em 0.5em 0.6em;
 }
 
-.dtp table.dtp-picker-days tr>td>a,
-.dtp .dtp-picker-time>a {
-    color: #212121;
-    text-decoration: none;
-    padding: .4em .5em .5em .6em;
-    border-radius: 50%!important;
+.dtp table.dtp-picker-days tr > td > a,
+.dtp .dtp-picker-time > a {
+  color: #212121;
+  text-decoration: none;
+  padding: 0.4em 0.5em 0.5em 0.6em;
+  border-radius: 50% !important;
 }
 
-.dtp table.dtp-picker-days tr>td>a.selected {
-    background: var(--primary);
-    color: #fff;
+.dtp table.dtp-picker-days tr > td > a.selected {
+  background: var(--primary);
+  color: #fff;
 }
 
-.dtp table.dtp-picker-days tr>th {
-    color: #757575;
-    text-align: center;
-    font-weight: 700;
-    padding: .4em .3em;
+.dtp table.dtp-picker-days tr > th {
+  color: #757575;
+  text-align: center;
+  font-weight: 700;
+  padding: 0.4em 0.3em;
 }
 
-.dtp .p10>a {
-    color: var(--light);
-    text-decoration: none;
+.dtp .p10 > a {
+  color: var(--light);
+  text-decoration: none;
 }
 
 .dtp .p10 {
-    width: 10%;
-    display: inline-block;
+  width: 10%;
+  display: inline-block;
 }
 
 .dtp .p20 {
-    width: 20%;
-    display: inline-block;
+  width: 20%;
+  display: inline-block;
 }
 
 .dtp .p60 {
-    width: 60%;
-    display: inline-block;
+  width: 60%;
+  display: inline-block;
 }
 
 .dtp .p80 {
-    width: 80%;
-    display: inline-block;
+  width: 80%;
+  display: inline-block;
 }
 
 .dtp a.dtp-meridien-am,
 .dtp a.dtp-meridien-pm {
-    position: relative;
-    top: 10px;
-    color: #212121;
-    font-weight: 500;
-    padding: .7em .5em;
-    border-radius: 50%!important;
-    text-decoration: none;
-    background: #eee;
-    font-size: 1em;
+  position: relative;
+  top: 10px;
+  color: #212121;
+  font-weight: 500;
+  padding: 0.7em 0.5em;
+  border-radius: 50% !important;
+  text-decoration: none;
+  background: #eee;
+  font-size: 1em;
 }
 
 .dtp .dtp-actual-meridien a.selected {
-    background: var(--primary);
-    color: #fff;
+  background: var(--primary);
+  color: #fff;
 }
 
-.dtp .dtp-picker-time>.dtp-select-hour {
-    cursor: pointer;
+.dtp .dtp-picker-time > .dtp-select-hour {
+  cursor: pointer;
 }
 
-.dtp .dtp-picker-time>.dtp-select-minute {
-    cursor: pointer;
+.dtp .dtp-picker-time > .dtp-select-minute {
+  cursor: pointer;
 }
 
 .dtp .dtp-buttons {
-    padding: 0 1em 1em 1em;
-    text-align: right;
+  padding: 0 1em 1em 1em;
+  text-align: right;
 }
 
 .dtp .dtp-buttons button {
-	margin-left: .3rem;
+  margin-left: 0.3rem;
 }
 
 .dtp.hidden,
 .dtp .hidden {
-    display: none;
+  display: none;
 }
 
 .dtp .invisible {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .dtp .left {
-    float: left;
+  float: left;
 }
 
 .dtp .right {
-    float: right;
+  float: right;
 }
 
 .dtp .clearfix {
-    clear: both;
+  clear: both;
 }
 
 .dtp .center {
-    text-align: center;
+  text-align: center;
 }
 
 .dtp-year-picker {
-    display: none;
-    overflow: auto;
-    margin-bottom: 10px;
-    max-height: 466px;
+  display: none;
+  overflow: auto;
+  margin-bottom: 10px;
+  max-height: 466px;
 }
 
 .dtp-content {
-    height: auto;
+  height: auto;
 }
 
 .dtp-buttons {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .year-picker-item {
-    text-align: center;
-    padding-top: 5px;
-    font-size: x-large;
-	-webkit-transition: all .3s;
-	transition: all .3s;
+  text-align: center;
+  padding-top: 5px;
+  font-size: x-large;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .year-picker-item:hover {
-    cursor: pointer;
-	color: var(--primary);
+  cursor: pointer;
+  color: var(--primary);
 }
 
 .year-picker-item.active {
-    color: var(--primary);
-	font-weight: bold;
+  color: var(--primary);
+  font-weight: bold;
 }
 
-.dtp-select-year-range, .dtp-select-year-range .btn-outline-dark, .dtp-select-year-range:active, .dtp-select-year-range:focus {
-	border: none!important;
-	-webkit-box-shadow: none!important;
-	        box-shadow: none!important;
+.dtp-select-year-range,
+.dtp-select-year-range .btn-outline-dark,
+.dtp-select-year-range:active,
+.dtp-select-year-range:focus {
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .dtp-select-day {
-    -webkit-transition: background-color 100ms linear;
-    transition: background-color 100ms linear;
+  -webkit-transition: background-color 100ms linear;
+  transition: background-color 100ms linear;
 }
 
 .dtp-select-day:hover {
