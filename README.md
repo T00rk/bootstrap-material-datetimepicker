@@ -2,7 +2,7 @@
 Material DateTimePicker
 
 <p>Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.</p>
-<p>In the css and js folder, you'll find a different version of the files for Bootstrap 4 -ending with -bs4) and for Bootstrap 4 with Daemonite material UI (recommended, ending with -bs4daemonite).<br>
+<p>In the css and js folder, you'll find a different version of the files for Bootstrap 4 -ending with -bs4).<br>
 Regular version is built for Bootstrap 3.</p>
 
 ### Updates
