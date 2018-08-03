@@ -1,6 +1,13 @@
 # bootstrap-material-datetimepicker
 Material DateTimePicker
 
+Below are the screens for Bootstrap 4 and Bootstrap 4 with Daemonite material UI
+
+![Bootstrap 4 material datetimepicker](/images/calendar-bs4.png?raw=true "Material design datetimepicker for Bootstrap 4")
+![Bootstrap 4 material datetimepicker](/images/year-bs4.png?raw=true "Year picker")
+![Bootstrap 4 material datetimepicker](/images/time-bs4.png?raw=true "Time picker")
+![Bootstrap 4 material datetimepicker with Daemonite material UI](/images/calendar-daemonite.png?raw=true "Material design datetimepicker for Bootstrap 4 Daemonite with material UI")
+
 <p>Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.</p>
 <p>In the css and js folder, you'll find a different version of the files for Bootstrap 4 -ending with -bs4).<br>
 Regular version is built for Bootstrap 3.</p>
