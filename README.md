@@ -7,6 +7,7 @@ Originaly designed for Bootstrap Material, the V2.0 is now completely standalone
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2018-10-29		| nikhilbhatia22    | Change Date				 	                         |
 | 2016-04-08		| donovansolms		| Disable specific days (#60 and #97)				 	 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
 | 2016-04-08		| FoxyCorndog		| Fix PM overwrite bug	 					 	 		 |
@@ -100,6 +101,7 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | Name				| Parameter					| Description					|
 | ----------------- | ------------------------- | ----------------------------- |
 | **setDate**		| (String\|Date\|Moment)	| Set initial date				|
+| **changeDate**    | (String\|Date\|Moment)	| Update/Change date after already set|
 | **setMinDate**	| (String\|Date\|Moment)	| Set minimum selectable date	|
 | **setMaxDate**	| (String\|Date\|Moment)	| Set maximum selectable date	|
 | **destroy**		| NULL						| Destroy the datepicker		|

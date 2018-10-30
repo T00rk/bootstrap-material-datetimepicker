@@ -220,6 +220,36 @@
 				</div>
 			</div>
 		</div>
+		<div class="container well">
+			<div class="row">
+				<div class="col-md-6">
+					<h2>Change Date</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-control-wrapper">
+								<input type="text" id="change-date" class="form-control floating-label" placeholder="Current preset Date">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<button id="changeDateBtn" type="button" class="btn btn-primary pull-right">Change Date to yesterday's date.</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<code>
+						<p>Code</p>
+						$('#change-date').bootstrapMaterialDatePicker('setDate',moment().add(+1,'days'));
+						$('#change-date').bootstrapMaterialDatePicker('changeDate',moment().add(-1, 'days'));
+					</code>
+				</div>
+			</div>
+		</div>
 		<script type="text/javascript">
 		$(document).ready(function()
 		{
@@ -263,6 +293,17 @@
 			});
 
 			$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+
+            $('#change-date').bootstrapMaterialDatePicker({
+                format: 'dddd, DD MMMM, YYYY',
+                clearButton: true,
+                weekStart: 1,
+                time: false
+            }).bootstrapMaterialDatePicker('setDate',moment().add(+1,'days'));
+
+            $('#changeDateBtn').click(function (){
+                $('#change-date').bootstrapMaterialDatePicker('changeDate',moment().add(-1, 'days'));
+			});
 
 			$.material.init()
 		});
