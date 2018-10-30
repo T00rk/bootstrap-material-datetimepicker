@@ -80,8 +80,13 @@
                     this.days.push(i.toString());
                  }
               },
-              initDates: function ()
+              initDates: function (change)
               {
+                 change = change === undefined ? false : change;
+                 if(change){
+                     this.$element.val('');
+                 }
+
                  if (this.$element.val().length > 0)
                  {
                     if (typeof (this.params.format) !== 'undefined' && this.params.format !== null)
@@ -1236,6 +1241,11 @@
               {
                  this.params.currentDate = date;
                  this.initDates();
+              },
+              changeDate: function (date)
+              {
+                 this.params.currentDate = date;
+                 this.initDates(true);
               },
               setMinDate: function (date)
               {
