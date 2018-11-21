@@ -3,7 +3,7 @@
     modified by jnoelEFL : https://github.com/jnoelEFL/bootstrap-material-datetimepicker
     and by djibe for Bootstrap 4.1 integration and enhenced material look
 	Using CSS variables for ready-to-use integration in your project
-	Version of 2018-08-02
+	Version of 2018-11-20
 ***/
 
 (function($, moment) {
@@ -1398,7 +1398,7 @@
     },
     enableYearPicker: function() {
       this.params.year = true;
-      this.$dtpElement.find(".dtp-actual-year").reomveClass("disabled");
+      this.$dtpElement.find(".dtp-actual-year").removeClass("disabled");
     },
     disableYearPicker: function() {
       this.params.year = false;
