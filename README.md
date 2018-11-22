@@ -16,7 +16,8 @@ Regular version is built for Bootstrap 3.</p>
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
-| 2018-11-20		| djibe				| Fixed bug reported by edelCustodio (Issue 212 on original page)
+| 2018-11-22		| djibe				| Removed top right close icon, minor visual enhencements
+| 2018-11-20		| djibe				| Fixed bug reported by edelCustodio (Issue 212 on T00rk page)
 | 2018-08-02		| djibe				| unified code for all Bootstrap 4 themes (Vanilla, Daemonite material UI, MDBootstrap) + huge work on enhenced material look
 | 2018-07-19		| djibe				| Minor enhencements
 | 2018-07-06		| djibe				| Fixed year when disabled, fixed color when hovering a day, added animation when picker is opening
