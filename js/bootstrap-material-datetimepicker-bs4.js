@@ -3,7 +3,7 @@
     modified by jnoelEFL : https://github.com/jnoelEFL/bootstrap-material-datetimepicker
     and by djibe for Bootstrap 4.1 integration and enhenced material look
 	Using CSS variables for ready-to-use integration in your project
-	Version of 2018-11-20
+	Version of 2018-11-22
 ***/
 
 (function($, moment) {
@@ -90,11 +90,6 @@
         this.$dtpElement,
         "click",
         this._onBackgroundClick.bind(this)
-      );
-      this._attachEvent(
-        this.$dtpElement.find(".dtp-close > a"),
-        "click",
-        this._onCloseClick.bind(this)
       );
       this._attachEvent(
         this.$element,
@@ -274,7 +269,6 @@
         '<div class="dtp-date-view">' +
         '<header class="dtp-header">' +
         '<div class="dtp-actual-day">Monday</div>' +
-        '<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></a></div>' +
         "</header>" +
         '<div class="dtp-date d-none">' +
         "<div>" +
