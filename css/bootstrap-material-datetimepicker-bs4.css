@@ -1,0 +1,355 @@
+/*!
+ * Bootstrap Material DateTimePicker : https://github.com/T00rk/bootstrap-material-datetimepicker
+ * Enhenced by djibe for Bootstrap 4 and its themes
+ * + full universal theming using CSS variables.
+ * Version of 2018/11/22
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ */
+
+:root {
+    /* Set your primary color in rgb */
+    --primary-color: 19, 122, 249;
+}
+
+.dtp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.38);
+    z-index: 2000;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.dtp .btn {
+    border-radius: 4px;
+    min-width: 0;
+}
+
+@-webkit-keyframes pickerFadeIn {
+    from {
+        opacity: 0;
+        -webkit-transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes pickerFadeIn {
+    from {
+        opacity: 0;
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.dtp>.dtp-content {
+    background: #fff;
+    border-radius: 4px;
+    max-width: 300px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.12), 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.12), 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    left: 50%;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    -webkit-animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 1rem;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: center bottom 0px;
+    transform-origin: center bottom 0px;
+}
+
+.dtp .dtp-date-view .dtp-header {
+    background: var(--primary);
+    color: #fff;
+    text-align: center;
+    padding: 0.3em;
+}
+
+.dtp .dtp-date,
+.dtp .dtp-time {
+    background: var(--primary);
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+}
+
+.dtp .dtp-date>div {
+    padding: 0;
+    margin: 0;
+}
+
+.dtp .dtp-actual-month {
+    font-size: 1.5em;
+}
+
+.dtp .dtp-actual-num {
+    font-size: 3em;
+    line-height: 0.9;
+}
+
+.dtp .dtp-actual-maxtime {
+    font-size: 3em;
+    line-height: 0.9;
+}
+
+.dtp .dtp-actual-year {
+    font-size: 1.5em;
+    color: var(--primary-light);
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+.dtp .dtp-actual-year:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+.dtp .dtp-actual-year.disabled {
+    color: var(--primary-light);
+    cursor: initial;
+}
+
+.dtp .dtp-picker {
+    padding: 1em;
+    text-align: center;
+}
+
+.dtp .dtp-picker-month,
+.dtp .dtp-actual-time {
+    font-weight: 500;
+    text-align: center;
+}
+
+.dtp .dtp-picker-month {
+    padding-bottom: 1.25rem;
+}
+
+.dtp table.dtp-picker-days {
+    margin: 0;
+    min-height: 251px;
+}
+
+.dtp table.dtp-picker-days,
+.dtp table.dtp-picker-days tr,
+.dtp table.dtp-picker-days tr>td {
+    border: none;
+}
+
+.dtp table.dtp-picker-days tr>td {
+    font-weight: 500;
+    font-size: 0.8em;
+    text-align: center;
+    padding: 0.5em 0.3em;
+    line-height: 1.428572;
+}
+
+.dtp table.dtp-picker-days tr>td>a,
+.dtp .dtp-picker-time>a {
+    color: rgba(0, 0, 0, 0.87);
+    text-decoration: none;
+    padding: 0.7em 0.7em 0.7em 0.8em;
+    border-radius: 50%;
+}
+
+.dtp table.dtp-picker-days tr>td>a.selected {
+    background: var(--primary);
+    color: #fff;
+}
+
+.dtp table.dtp-picker-days tr>th {
+    color: #b1b1b1;
+    text-align: center;
+    font-weight: 700;
+    padding: 0.4em 0.3em;
+    text-transform: uppercase;
+}
+
+.dtp .p10>a {
+    color: var(--light);
+    text-decoration: none;
+}
+
+.dtp .p10 {
+    width: 10%;
+    display: inline-block;
+}
+
+.dtp .p20 {
+    width: 20%;
+    display: inline-block;
+}
+
+.dtp .p60 {
+    width: 60%;
+    display: inline-block;
+}
+
+.dtp .p80 {
+    width: 80%;
+    display: inline-block;
+}
+
+.dtp a.dtp-meridien-am,
+.dtp a.dtp-meridien-pm {
+    position: relative;
+    top: 10px;
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 500;
+    padding: 0.7em 0.6em;
+    border-radius: 50%;
+    text-decoration: none;
+    background: #eee;
+    font-size: 1em;
+}
+
+.dtp .dtp-actual-meridien a.selected {
+    background: var(--primary);
+    color: #fff;
+}
+
+.dtp .dtp-picker-time>.dtp-select-hour {
+    cursor: pointer;
+}
+
+.dtp .dtp-picker-time>.dtp-select-minute {
+    cursor: pointer;
+}
+
+.dtp .dtp-buttons {
+    padding: 0 1em 1em 1em;
+    text-align: right;
+}
+
+.dtp.hidden,
+.dtp .hidden {
+    display: none;
+}
+
+.dtp .invisible {
+    visibility: hidden;
+}
+
+.dtp .left {
+    float: left;
+}
+
+.dtp .right {
+    float: right;
+}
+
+.dtp .clearfix {
+    clear: both;
+}
+
+.dtp .center {
+    text-align: center;
+}
+
+.dtp-year-picker {
+    display: none;
+    overflow: auto;
+    margin-bottom: 10px;
+    max-height: 466px;
+}
+
+.dtp-buttons {
+    overflow: hidden;
+}
+
+.year-picker-item {
+    text-align: center;
+    padding: 0.4rem 0;
+    font-size: 1.3rem;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.year-picker-item:hover {
+    cursor: pointer;
+    color: var(--primary);
+}
+
+.year-picker-item.active {
+    color: var(--primary);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/*
+.dtp-year-picker::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+.dtp-year-picker::-webkit-scrollbar {
+  width: 6px;
+  background-color: #fff;
+}
+
+.dtp-year-picker::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 3px;
+}*/
+
+/* enabled day */
+
+a.dtp-select-day {
+    -webkit-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+}
+
+a.dtp-select-day:hover {
+    background-color: rgba(var(--primary-color), 0.6);
+}
+
+/* disabled day */
+
+span.dtp-select-day {
+    color: #bdbdbd;
+    padding: 0.7em 0.7em 0.7em 0.8em;
+}
+
+circle.dtp-select-hour *:hover {
+    fill: var(--primary-color);
+}
+
+.dtp .table tbody td,
+.dtp .table tbody th {
+    height: 2.5rem;
+}
+
+.dtp .btn {
+    border: 0 !important;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.59375rem 1rem;
+    min-width: 0;
+    margin: 0;
+    margin-left: 0.25rem;
+    text-transform: uppercase;
+}
+
+.table thead th,
+.table td,
+.table th {
+    border: 0 !important;
+}

@@ -1,12 +1,28 @@
 # bootstrap-material-datetimepicker
 Material DateTimePicker
 
-Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
+Below are the screens for Bootstrap 4 and Bootstrap 4 with Daemonite material UI
+
+![Bootstrap 4 material datetimepicker](/images/calendar-bs4.png?raw=true "Material design datetimepicker for Bootstrap 4")
+![Bootstrap 4 material datetimepicker](/images/year-bs4.png?raw=true "Year picker")
+![Bootstrap 4 material datetimepicker](/images/time-bs4.png?raw=true "Time picker")
+![Bootstrap 4 material datetimepicker with Daemonite material UI](/images/calendar-daemonite.png?raw=true "Material design datetimepicker for Bootstrap 4 Daemonite with material UI")
+
+<p>Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.</p>
+<p>In the css and js folder, you'll find a different version of the files for Bootstrap 4 -ending with -bs4).<br>
+Regular version is built for Bootstrap 3.</p>
 
 ### Updates
 
 | Date				| Author			| Description											 |
 | ----------------- | ----------------- | ------------------------------------------------------ |
+| 2018-11-22		| djibe				| Removed top right close icon, minor visual enhencements
+| 2018-11-20		| djibe				| Fixed bug reported by edelCustodio (Issue 212 on T00rk page)
+| 2018-08-02		| djibe				| unified code for all Bootstrap 4 themes (Vanilla, Daemonite material UI, MDBootstrap) + huge work on enhenced material look
+| 2018-07-19		| djibe				| Minor enhencements
+| 2018-07-06		| djibe				| Fixed year when disabled, fixed color when hovering a day, added animation when picker is opening
+| 2018-05-25		| djibe				| Bug fixes for Bootstrap 4
+| 2018-05-14		| djibe				| Bootstrap 4 compatibility, universal theming with CSS variables
 | 2016-04-08		| donovansolms		| Disable specific days (#60 and #97)				 	 |
 | 2016-04-08		| T00rk				| Fixed #85	 								 	 		 |
 | 2016-04-08		| FoxyCorndog		| Fix PM overwrite bug	 					 	 		 |
@@ -46,7 +62,11 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 
 ### Live Example
 
-[Live example](http://t00rk.github.io/bootstrap-material-datetimepicker/)
+Bootstrap 3 : [Live example](http://t00rk.github.io/bootstrap-material-datetimepicker/)
+
+Bootstrap 4 : [Live example](https://jsfiddle.net/djibe89/qfkjg3qh/)
+
+Bootstrap 4 with Daemonite material UI : [Live example](https://jsfiddle.net/djibe89/t5sqqw8L/)
 
 ### Usage
 
@@ -78,6 +98,8 @@ Google Material Icon Font `<link href="https://fonts.googleapis.com/icon?family=
 | **nowText**		| String						| Text for the Now button (default: Now)		|
 | **triggerEvent**		| String						| Event to fire the calendar (default: focus)		|
 | **monthPicker**	| Boolean						| true => Act as monthpicker (hide calendar) (default: false) |
+| **weekStart**	| Integer (0 -> 6)						| 1 => Set monday as first day of week (default: 0, sunday) |
+| **lang**	| String						| 'fr' => Set language of calendar to french (default: 'en', english. Any available language included in Moment.js) |
 
 
 
