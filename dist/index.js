@@ -16,7 +16,7 @@ require("bootstrap-material-design/dist/js/ripples.min");
 require("bootstrap-material-design/dist/js/material.min.js");
 require("bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js");
 require("bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css");
-var DatePickerDirective = (function () {
+var DatePickerDirective = /** @class */ (function () {
     function DatePickerDirective(elementRef) {
         this.elementRef = elementRef;
         this.dtpFormat = 'L LT';
@@ -75,52 +75,52 @@ var DatePickerDirective = (function () {
         });
     };
     ;
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], DatePickerDirective.prototype, "dtpFormat", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], DatePickerDirective.prototype, "dtpLocale", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], DatePickerDirective.prototype, "dtpTime", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], DatePickerDirective.prototype, "dtpDate", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], DatePickerDirective.prototype, "datetimepicker", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], DatePickerDirective.prototype, "datepicker", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], DatePickerDirective.prototype, "timepicker", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Date),
+        __metadata("design:paramtypes", [Date])
+    ], DatePickerDirective.prototype, "date", null);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], DatePickerDirective.prototype, "dateChange", void 0);
+    DatePickerDirective = __decorate([
+        core_1.Directive({
+            selector: '[datepicker],[datetimepicker],[timepicker]',
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef])
+    ], DatePickerDirective);
     return DatePickerDirective;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], DatePickerDirective.prototype, "dtpFormat", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], DatePickerDirective.prototype, "dtpLocale", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], DatePickerDirective.prototype, "dtpTime", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], DatePickerDirective.prototype, "dtpDate", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], DatePickerDirective.prototype, "datetimepicker", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], DatePickerDirective.prototype, "datepicker", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], DatePickerDirective.prototype, "timepicker", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Date),
-    __metadata("design:paramtypes", [Date])
-], DatePickerDirective.prototype, "date", null);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], DatePickerDirective.prototype, "dateChange", void 0);
-DatePickerDirective = __decorate([
-    core_1.Directive({
-        selector: '[datepicker],[datetimepicker],[timepicker]',
-    }),
-    __metadata("design:paramtypes", [core_1.ElementRef])
-], DatePickerDirective);
 exports.DatePickerDirective = DatePickerDirective;
