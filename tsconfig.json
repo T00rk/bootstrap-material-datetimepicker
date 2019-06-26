@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "declaration": true,
+    "lib": [
+      "dom",
+      "es6"
+    ]
+  },
+  "sources": [
+    "src/index.ts"
+  ]
+}

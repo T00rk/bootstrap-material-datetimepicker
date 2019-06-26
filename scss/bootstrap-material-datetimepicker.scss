@@ -1,0 +1,264 @@
+.dtp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    >.dtp-content {
+        background: #fff;
+        max-width: 300px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        max-height: 520px;
+        position: relative;
+        left: 50%;
+
+        >.dtp-date-view>header.dtp-header {
+            background: #689F38;
+            color: #fff;
+            text-align: center;
+            padding: 0.3em;
+        }
+    }
+
+    div {
+
+        &.dtp-date,
+        &.dtp-time {
+            background: #8BC34A;
+            text-align: center;
+            color: #fff;
+            padding: 10px;
+        }
+
+        &.dtp-date>div {
+            padding: 0;
+            margin: 0;
+        }
+
+        &.dtp-actual-month {
+            font-size: 1.5em;
+        }
+
+        &.dtp-actual-num {
+            font-size: 3em;
+            line-height: 0.9;
+        }
+
+        &.dtp-actual-maxtime {
+            font-size: 3em;
+            line-height: 0.9;
+        }
+
+        &.dtp-actual-year {
+            font-size: 1.5em;
+            color: #DCEDC8;
+        }
+
+        &.dtp-picker {
+            padding: 1em;
+            text-align: center;
+        }
+
+        &.dtp-picker-month,
+        &.dtp-actual-time {
+            font-weight: 500;
+            text-align: center;
+        }
+
+        &.dtp-picker-month {
+            padding-bottom: 20px !important;
+            text-transform: uppercase !important;
+        }
+    }
+
+    .dtp-close {
+        position: absolute;
+        top: 0.5em;
+        right: 1em;
+
+        >a {
+            color: #fff;
+
+            >i {
+                font-size: 1em;
+            }
+        }
+    }
+
+    table.dtp-picker-days {
+        margin: 0;
+        min-height: 251px;
+        
+
+        &,
+        tr,
+        tr>td {
+            border: none;
+        }
+
+        tr {
+            >td {
+                font-weight: 700;
+                font-size: 0.8em;
+                text-align: center;
+                padding: 0.5em 0.3em;
+
+                >span.dtp-select-day {
+                    color: #BDBDBD !important;
+                    padding: 0.4em 0.5em 0.5em 0.6em;
+                }
+
+                >a.selected {
+                    background: #8BC34A;
+                    color: #fff;
+                }
+            }
+
+            >th {
+                color: #757575;
+                text-align: center;
+                font-weight: 700;
+                padding: 0.4em 0.3em;
+            }
+        }
+    }
+
+    table.dtp-picker-days tr>td>a,
+    .dtp-picker-time>a {
+        color: #212121;
+        text-decoration: none;
+        padding: 0.4em 0.5em 0.5em 0.6em;
+        border-radius: 50% !important;
+    }
+
+    table.dtp-picker-days tr .p10>a {
+        color: #689F38;
+        text-decoration: none;
+    }
+
+    .p10 {
+        width: 10%;
+        display: inline-block;
+    }
+
+    .p20 {
+        width: 20%;
+        display: inline-block;
+    }
+
+    .p60 {
+        width: 60%;
+        display: inline-block;
+    }
+
+    .p80 {
+        width: 80%;
+        display: inline-block;
+    }
+
+    a.dtp-meridien-am,
+    a.dtp-meridien-pm {
+        position: relative;
+        top: 10px;
+        color: #212121;
+        font-weight: 500;
+        padding: 0.7em 0.5em;
+        border-radius: 50% !important;
+        text-decoration: none;
+        background: #eee;
+        font-size: 1em;
+    }
+
+    .dtp-actual-meridien a.selected {
+        background: #689F38;
+        color: #fff;
+    }
+
+    .dtp-picker-time {
+        >.dtp-select-hour {
+            cursor: pointer;
+        }
+
+        >.dtp-select-minute {
+            cursor: pointer;
+        }
+    }
+
+    .dtp-buttons {
+        padding: 0 1em 1em 1em;
+        text-align: right;
+    }
+
+    .dtp.hidden,
+    .hidden {
+        display: none;
+    }
+
+    .invisible {
+        visibility: hidden;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .clearfix {
+        clear: both;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+}
+
+.dtp-picker-year {
+    margin-bottom: 1px;
+}
+
+.year-picker-item {
+    text-align: center;
+    padding-top: 5px;
+    font-size: large;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.dtp-actual-year {
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.disabled:hover {
+        cursor: inherit;
+    }
+}
+
+.year-picker-item {
+    &:hover {
+        color: #689F38;
+    }
+
+    &.active {
+        color: #689F38;
+        font-weight: bold;
+    }
+}
+
+.dtp-select-year-range {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
