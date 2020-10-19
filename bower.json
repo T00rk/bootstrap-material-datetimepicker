@@ -29,6 +29,6 @@
     "momentjs": "~2.10.2",
     "bootstrap": "~3.3.4",
     "jquery": "1.12.3",
-    "bootstrap-material-design": "~0.3.0"
+    "bootstrap-material-design": "https://github.com/mdbootstrap/bootstrap-material-design.git#^4.1.3"
   }
 }
