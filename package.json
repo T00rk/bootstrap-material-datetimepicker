@@ -1,5 +1,6 @@
 {
   "name": "bootstrap-material-datetimepicker",
+  "version": "0.1.0",
   "description": "fixed dependencies bootstrap-material-datetimepicker",
   "keywords": [
     "css",
