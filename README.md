@@ -1,4 +1,4 @@
-# bootstrap-material-datetimepicker
+# mdbootstrap-material-datetimepicker
 Material DateTimePicker
 
 Originaly designed for Bootstrap Material, the V2.0 is now completely standalone and responsive.
